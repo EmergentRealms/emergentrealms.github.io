@@ -1,30 +1,70 @@
 /**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
+ * Global theme overrides for Cobblestone Legacy
+ * Think parchment, ink, and stone: warm sepia + muted accents
  */
 
-/* You can override the default Infima variables here. */
+/* Primary theme variables */
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  /* Rich earthy accent (used for links/buttons) */
+  --ifm-color-primary: #7a4c29;          /* warm brown */
+  --ifm-color-primary-dark: #6a4022;
+  --ifm-color-primary-darker: #5d381d;
+  --ifm-color-primary-darkest: #4a2c16;
+  --ifm-color-primary-light: #8a5933;
+  --ifm-color-primary-lighter: #9b6943;
+  --ifm-color-primary-lightest: #b37f58;
+
+  /* General text readability tweaks */
+  --ifm-font-family-base: 'Merriweather', serif;
+  --ifm-heading-font-family: 'Cinzel', serif;
+  --ifm-code-font-size: 90%;
+  --ifm-line-height-base: 1.7;
+
+  /* Code blocks */
+  --docusaurus-highlighted-code-line-bg: rgba(122, 76, 41, 0.1);
+
+  /* Background and content tweaks */
+  --ifm-background-color: #fdfaf4;       /* parchment off-white */
+  --ifm-background-surface-color: #f9f5ec;
+  --ifm-footer-background-color: #2f2a24;
+  --ifm-navbar-background-color: #fdfaf4;
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
+/* Dark mode palette — more like old vellum + ink */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-color-primary: #c9a46b;          /* golden parchment accent */
+  --ifm-color-primary-dark: #b38f57;
+  --ifm-color-primary-darker: #9d7b46;
+  --ifm-color-primary-darkest: #7e6235;
+  --ifm-color-primary-light: #d1af7b;
+  --ifm-color-primary-lighter: #d8bb8e;
+  --ifm-color-primary-lightest: #e4cfae;
+
+  --docusaurus-highlighted-code-line-bg: rgba(201, 164, 107, 0.15);
+
+  --ifm-background-color: #1e1a16;       /* dark parchment */
+  --ifm-background-surface-color: #25201c;
+  --ifm-footer-background-color: #14110e;
+  --ifm-navbar-background-color: #1e1a16;
+}
+
+/* Extra flavor */
+.navbar__title {
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.footer {
+  background-image: url('/img/parchment-texture.png'); /* optional parchment texture */
+  background-size: cover;
+  color: #eee0cc;
+}
+
+.markdown h1,
+.markdown h2,
+.markdown h3 {
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  color: var(--ifm-color-primary);
 }
