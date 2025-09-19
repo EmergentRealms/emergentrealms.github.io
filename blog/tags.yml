@@ -1,19 +1,39 @@
-facebook:
-  label: Facebook
-  permalink: /facebook
-  description: Facebook tag description
+devlog:
+  label: Devlog
+  permalink: /devlog
+  description: Project development updates, progress reports, and behind-the-scenes insights.
 
-hello:
-  label: Hello
-  permalink: /hello
-  description: Hello tag description
+ai:
+  label: AI & Simulation
+  permalink: /ai
+  description: Posts about NPC brains, perception, emotions, relationships, and emergent systems.
 
-docusaurus:
-  label: Docusaurus
-  permalink: /docusaurus
-  description: Docusaurus tag description
+worldbuilding:
+  label: Worldbuilding
+  permalink: /worldbuilding
+  description: Procedural city generation, factions, economy, and narrative systems.
 
-hola:
-  label: Hola
-  permalink: /hola
-  description: Hola tag description
+art:
+  label: Art & Style
+  permalink: /art
+  description: Visual design, shaders, textures, Blender assets, and stylistic direction.
+
+design:
+  label: Game Design
+  permalink: /design
+  description: Mechanics, systems design, and balancing survival, stealth, and storytelling.
+
+release:
+  label: Releases & Announcements
+  permalink: /release
+  description: Major milestones, demo updates, launch notes, and release news.
+
+tutorial:
+  label: Tutorials
+  permalink: /tutorial
+  description: Technical how-tos, code examples, and lessons learned in Godot + GDExtension.
+
+community:
+  label: Community
+  permalink: /community
+  description: News about Emergent Realms, player engagement, and community highlights.

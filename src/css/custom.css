@@ -1,70 +1,98 @@
-/**
- * Global theme overrides for Cobblestone Legacy
- * Think parchment, ink, and stone: warm sepia + muted accents
- */
+/* -----------------------------------------------------------
+   Cobblestone Legacy — clean stone/dark theme
+   Accent: brass/amber on charcoal
+   Body font: Inter; Headings: Cinzel (subtle fantasy flavor)
+----------------------------------------------------------- */
 
-/* Primary theme variables */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@400;600;700&display=swap');
+
 :root {
-  /* Rich earthy accent (used for links/buttons) */
-  --ifm-color-primary: #7a4c29;          /* warm brown */
-  --ifm-color-primary-dark: #6a4022;
-  --ifm-color-primary-darker: #5d381d;
-  --ifm-color-primary-darkest: #4a2c16;
-  --ifm-color-primary-light: #8a5933;
-  --ifm-color-primary-lighter: #9b6943;
-  --ifm-color-primary-lightest: #b37f58;
+  /* Brand accent (used for links, buttons, highlights) */
+  --ifm-color-primary: #c9a46b;           /* brass */
+  --ifm-color-primary-dark: #b8925a;
+  --ifm-color-primary-darker: #a5814c;
+  --ifm-color-primary-darkest: #89683a;
+  --ifm-color-primary-light: #d2b27f;
+  --ifm-color-primary-lighter: #dbbe92;
+  --ifm-color-primary-lightest: #ead8b8;
 
-  /* General text readability tweaks */
-  --ifm-font-family-base: 'Merriweather', serif;
+  /* Typography */
+  --ifm-font-family-base: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji';
   --ifm-heading-font-family: 'Cinzel', serif;
-  --ifm-code-font-size: 90%;
   --ifm-line-height-base: 1.7;
+  --ifm-code-font-size: 90%;
 
-  /* Code blocks */
-  --docusaurus-highlighted-code-line-bg: rgba(122, 76, 41, 0.1);
+  /* Light mode (clean paper, no parchment) */
+  --ifm-background-color: #fafafa;
+  --ifm-background-surface-color: #ffffff;
+  --ifm-navbar-background-color: #ffffff;
+  --ifm-footer-background-color: #0f1115;
 
-  /* Background and content tweaks */
-  --ifm-background-color: #fdfaf4;       /* parchment off-white */
-  --ifm-background-surface-color: #f9f5ec;
-  --ifm-footer-background-color: #2f2a24;
-  --ifm-navbar-background-color: #fdfaf4;
+  /* Subtle UI tweaks */
+  --ifm-border-color: rgba(0,0,0,0.08);
+  --docusaurus-highlighted-code-line-bg: rgba(201,164,107,0.12);
 }
 
-/* Dark mode palette — more like old vellum + ink */
+/* ---------- Dark mode (DEFAULT) ---------- */
 [data-theme='dark'] {
-  --ifm-color-primary: #c9a46b;          /* golden parchment accent */
-  --ifm-color-primary-dark: #b38f57;
-  --ifm-color-primary-darker: #9d7b46;
-  --ifm-color-primary-darkest: #7e6235;
-  --ifm-color-primary-light: #d1af7b;
-  --ifm-color-primary-lighter: #d8bb8e;
-  --ifm-color-primary-lightest: #e4cfae;
+  --ifm-background-color: #0f1115;        /* charcoal */
+  --ifm-background-surface-color: #151821; /* slightly raised surface */
+  --ifm-navbar-background-color: #0f1115;
+  --ifm-footer-background-color: #0b0d11;
 
-  --docusaurus-highlighted-code-line-bg: rgba(201, 164, 107, 0.15);
+  --ifm-color-emphasis-100: #e8eaf0;
+  --ifm-color-emphasis-200: #cfd4df;
+  --ifm-color-emphasis-300: #b6bfce;
 
-  --ifm-background-color: #1e1a16;       /* dark parchment */
-  --ifm-background-surface-color: #25201c;
-  --ifm-footer-background-color: #14110e;
-  --ifm-navbar-background-color: #1e1a16;
+  --ifm-border-color: rgba(255,255,255,0.08);
+  --docusaurus-highlighted-code-line-bg: rgba(201,164,107,0.14);
 }
 
-/* Extra flavor */
+/* ---------- Global polish ---------- */
 .navbar__title {
-  font-family: 'Cinzel', serif;
+  font-family: var(--ifm-heading-font-family);
   font-weight: 700;
-  letter-spacing: 0.03em;
-}
-
-.footer {
-  background-image: url('/img/parchment-texture.jpg'); /* optional parchment texture */
-  background-size: cover;
-  color: #eee0cc;
+  letter-spacing: 0.02em;
 }
 
 .markdown h1,
 .markdown h2,
 .markdown h3 {
-  font-family: 'Cinzel', serif;
-  font-weight: 600;
+  font-family: var(--ifm-heading-font-family);
+  font-weight: 700;
+  letter-spacing: 0.01em;
   color: var(--ifm-color-primary);
+}
+
+/* Cards & surfaces a bit softer */
+.theme-doc-markdown .markdown,
+.card,
+.menu__list-item,
+.table-of-contents {
+  border-radius: 12px;
+}
+
+/* Buttons with a little presence */
+.button--primary {
+  border-radius: 10px;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.12);
+}
+
+/* Footer: minimal, high contrast */
+.footer {
+  color: #dcdfe6;
+}
+
+/* Link style: subtle underline on hover for clarity */
+a {
+  text-underline-offset: 2px;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* Code blocks: slightly tighter */
+.prism-code {
+  border-radius: 10px;
+  border: 1px solid var(--ifm-border-color);
 }
