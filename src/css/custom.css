@@ -56,7 +56,7 @@
 }
 
 .footer {
-  background-image: url('/img/parchment-texture.png'); /* optional parchment texture */
+  background-image: url('/img/parchment-texture.jpg'); /* optional parchment texture */
   background-size: cover;
   color: #eee0cc;
 }
