@@ -36,6 +36,34 @@
 }
 .ghost:hover { color: var(--ifm-color-emphasis-100); }
 
+/* Discord CTA — brand colors with accessible contrast */
+.discord {
+  background: #5865F2;             /* Discord blurple */
+  color: #fff;
+  border: 1px solid transparent;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.2);
+}
+
+.discord:hover,
+.discord:focus-visible {
+  background: #4752C4;             /* hover */
+  color: #fff;
+  text-decoration: none;
+}
+
+.discord:active {
+  background: #3c45a5;             /* active */
+}
+
+.discord,
+.button--primary,
+.button--secondary { border-radius: 10px; }
+
+[data-theme='light'] .discord {
+  /* Keep it vibrant on light backgrounds too */
+  border-color: #4c57d8;
+}
+
 .main {
   padding: 2rem 0 4rem;
 }

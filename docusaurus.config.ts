@@ -49,7 +49,7 @@ const config: Config = {
     image: 'img/ChatterdRealms.png',
     navbar: {
       title: 'Cobblestone Legacy',
-      logo: { alt: 'Cobblestone Legacy', src: 'img/logo.pgn' },
+      logo: { alt: 'Cobblestone Legacy', src: 'img/logo.pgn', srcDark: 'img/logo-dark.svg'},
       items: [
         { to: '/docs/overview', label: 'Docs', position: 'left' },
         { to: '/blog', label: 'Devlog', position: 'left' },
