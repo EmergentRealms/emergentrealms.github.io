@@ -1,0 +1,19 @@
+.wrap { position:relative; margin: 6px 0; }
+.item { position:relative; padding-left: 28px; margin: 14px 0; }
+.item::before {
+  content:"";
+  position:absolute; left:9px; top:0; bottom:0;
+  width:2px; background: var(--ifm-border-color);
+}
+.dot {
+  position:absolute; left:4px; top:.55rem;
+  width:12px; height:12px; border-radius:50%;
+  background: var(--ifm-color-primary);
+  box-shadow: 0 0 0 3px rgba(201,164,107,.22);
+}
+.content { background: var(--ifm-background-surface-color); border:1px solid var(--ifm-border-color); border-radius:12px; padding:10px 12px; }
+.header { display:flex; gap:8px; align-items:center; }
+.date { opacity:.85; font-size:.9rem; }
+.tag { padding:.15rem .45rem; border-radius:999px; font-size:.75rem; background:rgba(201,164,107,.18); border:1px solid rgba(201,164,107,.35); }
+.title { margin:.2rem 0 .2rem; }
+.body { opacity:.95; }

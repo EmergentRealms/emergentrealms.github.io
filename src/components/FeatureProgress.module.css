@@ -1,0 +1,110 @@
+.card {
+  padding: 1rem 1rem 1.25rem;
+  background: var(--ifm-background-surface-color);
+  border: 1px solid var(--ifm-border-color);
+  border-radius: 14px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  justify-content: space-between;
+  margin-bottom: .75rem;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.1rem;
+  letter-spacing: .01em;
+}
+
+.stagePill {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .35rem .6rem;
+  border-radius: 999px;
+  font-size: .85rem;
+  line-height: 1;
+  border: 1px solid var(--ifm-border-color);
+  color: var(--ifm-color-emphasis-800);
+  background: var(--ifm-background-color);
+}
+.pillIcon { width: 16px; height: 16px; }
+
+.stagePill.idle { opacity: .85; }
+.stagePill.active {
+  color: #fff;
+  background: var(--ifm-color-primary);
+  border-color: transparent;
+}
+.stagePill.done {
+  color: #0f1115;
+  background: #93e2a6;                /* subtle success */
+  border-color: #78c88d;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0,1fr));
+  align-items: center;
+  gap: 0;
+  position: relative;
+  margin-top: .35rem;
+}
+
+.step {
+  position: relative;
+  height: 36px; /* accommodates node + line */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* connector line to previous step */
+.line {
+  position: absolute;
+  left: -50%;
+  width: 100%;
+  height: 3px;
+  background: var(--ifm-border-color);
+  border-radius: 2px;
+}
+.lineActive {
+  background: color-mix(in srgb, var(--ifm-color-primary) 70%, #0000);
+}
+
+/* node */
+.node {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid var(--ifm-border-color);
+  background: var(--ifm-background-color);
+  color: var(--ifm-color-emphasis-800);
+  z-index: 1;
+}
+.nodeIdle { opacity: .9; }
+.nodeActive {
+  background: var(--ifm-color-primary);
+  border-color: var(--ifm-color-primary);
+  color: #fff;
+}
+
+.icon { width: 16px; height: 16px; }
+.index { font-size: .8rem; font-weight: 700; }
+
+/* sizes */
+.md .node { width: 26px; height: 26px; }
+.sm .node { width: 22px; height: 22px; }
+.sm .step { height: 30px; }
+.sm .title { font-size: 1rem; }
+
+.note {
+  margin: .6rem 0 0;
+  font-size: .9rem;
+  opacity: .85;
+}

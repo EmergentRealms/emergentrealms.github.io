@@ -1,0 +1,65 @@
+---
+id: roadmap
+title: Roadmap
+sidebar_position: 2
+---
+
+import FeatureProgress from '@site/src/components/FeatureProgress';
+import KPIStat from '@site/src/components/KPIStat';
+import MilestoneCard from '@site/src/components/MilestoneCard';
+import Timeline from '@site/src/components/Timeline';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<div style={{display:'grid',gap:12,gridTemplateColumns:'repeat(auto-fit,minmax(180px,1fr))'}}>
+  <KPIStat label="Open Issues" value={23} hint="across 5 repos" accent="warning" />
+  <KPIStat label="Build Time" value="3m 42s" delta="-12s" accent="success" />
+  <KPIStat label="Test Coverage" value="78%" delta="+3%" />
+  <KPIStat label="Weekly Devlog" value="#1" hint="posted Friday" accent="neutral" />
+</div>
+
+## Feature Status
+
+<div style={{display:'grid', gap:'12px', gridTemplateColumns:'repeat(auto-fit, minmax(280px, 1fr))', marginTop: 12}}>
+  <FeatureProgress title="Stealth/Perception" stage={2} />
+  <FeatureProgress title="Faction AI" stage={1} />
+  <FeatureProgress title="Heist Loop" stage={4} />
+  <FeatureProgress title="Economy & Prices" stage={2} />
+</div>
+
+## Milestone
+
+<MilestoneCard
+  title="Heist Loop v1"
+  stage={4}
+  percent={78}
+  target="2025-10-15"
+  note="Stakeout flow merged; guard pathing queued for QA."
+  links={[
+    {label:'Spec', href:'/docs/systems/quests'},
+    {label:'PR #42', href:'https://github.com/...'},
+  ]}
+/>
+
+:::tip
+You can grind crafting XP by tinkering during rest.
+:::
+
+## Design vs Code Notes
+
+<Tabs>
+  <TabItem value="design" label="Design">
+    Outline the intended player loop, failure states, and UX beats here.
+  </TabItem>
+  <TabItem value="code" label="Code">
+    Link to modules, PRs, and interfaces you’re iterating on.
+  </TabItem>
+</Tabs>
+
+## Flow (Mermaid)
+
+```mermaid
+flowchart TD
+  Rumors --> Stakeout --> Entry{Lockpick | Break}
+  Entry -->|Alert| Chase --> Escape
+  Entry -->|Silent| Loot --> Escape

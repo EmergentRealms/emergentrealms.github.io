@@ -1,0 +1,19 @@
+.card {
+  padding: 16px;
+  border-radius: 14px;
+  border: 1px solid var(--ifm-border-color);
+  background: var(--ifm-background-surface-color);
+  min-width: 180px;
+}
+.value { font-size: 1.8rem; font-weight: 700; }
+.label { opacity: .85; margin-top: 4px; }
+.meta { margin-top: 6px; display: flex; gap: 8px; align-items: baseline; }
+.delta { font-weight: 600; }
+.hint { opacity: .8; font-size: .9rem; }
+
+/* accents (subtle left border via box-shadow) */
+.card.primary  { box-shadow: inset 3px 0 0 var(--ifm-color-primary); }
+.card.success  { box-shadow: inset 3px 0 0 #38c976; }
+.card.warning  { box-shadow: inset 3px 0 0 #f6c445; }
+.card.danger   { box-shadow: inset 3px 0 0 #ff6b6b; }
+.card.neutral  { box-shadow: inset 3px 0 0 var(--ifm-border-color); }
