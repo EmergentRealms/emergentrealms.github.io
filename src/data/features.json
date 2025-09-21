@@ -1,0 +1,35 @@
+{
+  "quest-system": {
+    "title": "Quest System",
+    "subtitle": "Objectives, states, rewards",
+    "stage": 2,
+    "percent": 45,
+    "owner": "Denis Doiron",
+    "updatedAt": "2025-09-20",
+    "tags": ["Core", "Systems"],
+    "hero": "/img/features/quest-hero.png",
+    "summary": "State machine for objectives; rewards/rep hooks; journal UI scaffolding.",
+    "links": [
+      { "label": "Spec", "href": "/docs/systems/quests" },
+      { "label": "Design PR", "href": "https://github.com/EmergentRealms/..." }
+    ],
+    "timeline": [
+      { "date": "2025-09-10", "title": "State machine skeleton", "body": "Created objective types & transitions." },
+      { "date": "2025-09-18", "title": "Journal wireframe", "body": "Basic UI skeleton w/ filters." }
+    ]
+  },
+  "rumor-system": {
+    "title": "Rumor System",
+    "subtitle": "Propagation, decay, misinformation",
+    "stage": 3,
+    "percent": 65,
+    "owner": "Denis Doiron",
+    "updatedAt": "2025-09-19",
+    "tags": ["AI", "Systems"],
+    "summary": "Rumor graph with weighted spread, faction bias, and decay.",
+    "links": [{ "label": "Spec", "href": "/docs/systems/rumors" }],
+    "timeline": [
+      { "date": "2025-09-05", "title": "Propagation model", "body": "Edge weights by relationship & trait." }
+    ]
+  }
+}

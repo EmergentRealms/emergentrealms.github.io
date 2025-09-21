@@ -53,8 +53,10 @@ const config: Config = {
       items: [
         { to: '/docs/overview', label: 'Docs', position: 'left' },
         { to: '/blog', label: 'Devlog', position: 'left' },
+        { to: '/features', label: 'Features', position: 'left' },
         { href: 'https://discord.gg/23MyDvkW', label: 'Join Discord', position: 'right' },
         { href: 'https://github.com/EmergentRealms', label: 'GitHub', position: 'right' },
+        
       ],
     },
     footer: {
@@ -63,6 +65,7 @@ const config: Config = {
         { title: 'Docs', items: [{ label: 'Overview', to: '/docs/overview' }] },
         { title: 'Community', items: [{ label: 'Discord', href: 'https://discord.gg/23MyDvkW' }] },
         { title: 'More', items: [{ label: 'Devlog', to: '/blog' }] },
+        
       ],
       copyright: `© ${new Date().getFullYear()} Emergent Realms`,
     },
