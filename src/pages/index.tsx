@@ -5,7 +5,37 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
 
+import features from '@site/src/data/features.json';
+import FeatureProgress from '@site/src/components/FeatureProgress/FeatureProgress';
+
 import styles from './index.module.css';
+
+type Stage = 1 | 2 | 3 | 4 | 5;
+
+type FeatureCard = {
+  title: string;
+  stage: Stage;
+  summary?: string;
+  links?: {label: string; href: string}[];
+};
+
+const STAGE_LABEL: Record<Stage, string> = {
+  1: 'Not Started',
+  2: 'Ongoing',
+  3: 'In Testing',
+  4: 'Ready for QA',
+  5: 'Completed',
+};
+
+const FEATURE_SPOTLIGHT_IDS: string[] = [
+  'dynamic-health',
+  'dynamic-dialog',
+  'rumor-system',
+];
+
+const featureSpotlightEntries = FEATURE_SPOTLIGHT_IDS
+  .map((id) => [id, (features as Record<string, FeatureCard>)[id]] as const)
+  .filter((entry): entry is readonly [string, FeatureCard] => Boolean(entry[1]));
 
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
@@ -61,7 +91,63 @@ export default function Home(): ReactNode {
       description="Project hub for Emergent Realms: progress updates, roadmap, and technical docs.">
       <HomepageHeader />
       <main className={styles.main}>
-        {/* Optional: add your own sections or keep the default features component */}
+        <section className={styles.section}>
+          <Heading as="h2" className={styles.sectionTitle}>
+            Systems Spotlight
+          </Heading>
+          <p className={styles.sectionLead}>
+            Explore the latest pillars powering Grimborough. Each feature has living documentation and an interactive
+            status page for deeper dives.
+          </p>
+
+          <div className={styles.featureGrid}>
+            {featureSpotlightEntries.map(([id, feature]) => (
+              <div key={id} className={styles.featureCard}>
+                <div className={styles.cardHeader}>
+                  <Heading as="h3" className={styles.cardTitle}>
+                    {feature.title}
+                  </Heading>
+                  <span className={styles.cardStage}>{STAGE_LABEL[feature.stage]}</span>
+                </div>
+
+                <FeatureProgress title={feature.title} stage={feature.stage} size="sm" note={feature.summary} />
+
+                <div className={styles.cardFooter}>
+                  <Link className="button button--sm button--primary" to={`/features/${id}`}>
+                    View Status
+                  </Link>
+                  {!!feature.links?.length && (
+                    <Link className="button button--sm button--secondary" to={feature.links[0].href}>
+                      Read Docs
+                    </Link>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className={styles.section}>
+          <div className={styles.ctaCard}>
+            <div>
+              <Heading as="h2" className={styles.sectionTitle}>
+                Need the bigger picture?
+              </Heading>
+              <p className={styles.sectionLead}>
+                Track milestones, metrics, and timelines on the dedicated status board, or jump straight into the expanded
+                Cobblestone Legacy documentation set.
+              </p>
+            </div>
+            <div className={styles.ctaButtons}>
+              <Link className="button button--primary button--lg" to="/status">
+                Open Status Board
+              </Link>
+              <Link className="button button--secondary button--lg" to="/docs/cobblestone/concept-framework">
+                Browse Documentation
+              </Link>
+            </div>
+          </div>
+        </section>
       </main>
     </Layout>
   );

@@ -1,4 +1,105 @@
 {
+  "dynamic-health": {
+    "title": "Dynamic Health & Vitality",
+    "subtitle": "Bodies that react to every decision",
+    "stage": 2,
+    "percent": 55,
+    "owner": "Denis Doiron",
+    "updatedAt": "2025-09-21",
+    "tags": ["Systems", "Survival"],
+    "summary": "Layered vitals simulation covering energy, hydration, body composition, and aging.",
+    "links": [
+      { "label": "Design Doc", "href": "/docs/cobblestone/systems/dynamic-health-vitality" }
+    ],
+    "timeline": [
+      { "date": "2025-09-01", "title": "Metabolic model prototype", "body": "Hooked calories & hydration into vitals pipeline." },
+      { "date": "2025-09-19", "title": "Body composition tuning", "body": "Added weight, fat, and muscle adaptation rules." }
+    ]
+  },
+  "dynamic-dialog": {
+    "title": "Dynamic Dialog System",
+    "subtitle": "Memory, mood, and faction-aware conversations",
+    "stage": 3,
+    "percent": 68,
+    "owner": "Denis Doiron",
+    "updatedAt": "2025-09-20",
+    "tags": ["Narrative", "AI"],
+    "summary": "Contextual dialogue with reputation, personality, and rumor hooks.",
+    "links": [
+      { "label": "Design Doc", "href": "/docs/cobblestone/systems/dynamic-dialog" }
+    ],
+    "timeline": [
+      { "date": "2025-09-07", "title": "Conversation state machine", "body": "Established JSON schema & runtime evaluator." },
+      { "date": "2025-09-16", "title": "Reputation gates", "body": "Integrated faction reputation and personality moodlets." }
+    ]
+  },
+  "rumor-system": {
+    "title": "Dynamic Rumor System",
+    "subtitle": "Propagation, decay, misinformation",
+    "stage": 3,
+    "percent": 70,
+    "owner": "Denis Doiron",
+    "updatedAt": "2025-09-21",
+    "tags": ["AI", "Systems"],
+    "summary": "Rumor graph with weighted spread, schedules, accuracy decay, and investigation tools.",
+    "links": [
+      { "label": "Design Doc", "href": "/docs/cobblestone/systems/dynamic-rumors" }
+    ],
+    "timeline": [
+      { "date": "2025-09-05", "title": "Propagation model", "body": "Edge weights by relationship & trait." },
+      { "date": "2025-09-15", "title": "Accuracy decay", "body": "Added rumor journal, accuracy scores, and spread history." }
+    ]
+  },
+  "personality-relationships": {
+    "title": "Personality & Relationships",
+    "subtitle": "Big Five traits inform every bond",
+    "stage": 2,
+    "percent": 50,
+    "owner": "Denis Doiron",
+    "updatedAt": "2025-09-18",
+    "tags": ["AI", "Narrative"],
+    "summary": "Personality-driven greetings, affinity, trust, and dialog routing.",
+    "links": [
+      { "label": "Design Doc", "href": "/docs/cobblestone/systems/personality-relationships" }
+    ],
+    "timeline": [
+      { "date": "2025-09-04", "title": "Trait generator", "body": "Rolled Big Five profiles for NPC templates." },
+      { "date": "2025-09-13", "title": "Relationship manager", "body": "Affinity & trust deltas feed dialog context." }
+    ]
+  },
+  "dynamic-quest-goals": {
+    "title": "Dynamic Quest & Goal System",
+    "subtitle": "Intent-driven quest webs",
+    "stage": 2,
+    "percent": 40,
+    "owner": "Denis Doiron",
+    "updatedAt": "2025-09-17",
+    "tags": ["Systems", "Narrative"],
+    "summary": "Player intents spawn adaptive questlines with dependency tracking.",
+    "links": [
+      { "label": "Design Doc", "href": "/docs/cobblestone/systems/dynamic-quest-goal-system" }
+    ],
+    "timeline": [
+      { "date": "2025-09-08", "title": "Intent scaffolding", "body": "Created goal templates and sub-quest generator." }
+    ]
+  },
+  "economy-manager": {
+    "title": "Economy Manager",
+    "subtitle": "Supply, demand, and player influence",
+    "stage": 2,
+    "percent": 45,
+    "owner": "Denis Doiron",
+    "updatedAt": "2025-09-19",
+    "tags": ["Systems", "Simulation"],
+    "summary": "Supply/demand engine with queued transactions and faction hooks.",
+    "links": [
+      { "label": "Technical Guide", "href": "/docs/cobblestone/systems/economy-manager" }
+    ],
+    "timeline": [
+      { "date": "2025-09-06", "title": "Transaction queue", "body": "Added delayed shipments and events." },
+      { "date": "2025-09-14", "title": "Player influence", "body": "Hooked merchant UI and faction price modifiers." }
+    ]
+  },
   "quest-system": {
     "title": "Quest System",
     "subtitle": "Objectives, states, rewards",
@@ -10,26 +111,12 @@
     "hero": "/img/features/quest-hero.png",
     "summary": "State machine for objectives; rewards/rep hooks; journal UI scaffolding.",
     "links": [
-      { "label": "Spec", "href": "/docs/systems/quests" },
+      { "label": "Design Doc", "href": "/docs/cobblestone/systems/dynamic-quest-goal-system" },
       { "label": "Design PR", "href": "https://github.com/EmergentRealms/..." }
     ],
     "timeline": [
       { "date": "2025-09-10", "title": "State machine skeleton", "body": "Created objective types & transitions." },
       { "date": "2025-09-18", "title": "Journal wireframe", "body": "Basic UI skeleton w/ filters." }
-    ]
-  },
-  "rumor-system": {
-    "title": "Rumor System",
-    "subtitle": "Propagation, decay, misinformation",
-    "stage": 3,
-    "percent": 65,
-    "owner": "Denis Doiron",
-    "updatedAt": "2025-09-19",
-    "tags": ["AI", "Systems"],
-    "summary": "Rumor graph with weighted spread, faction bias, and decay.",
-    "links": [{ "label": "Spec", "href": "/docs/systems/rumors" }],
-    "timeline": [
-      { "date": "2025-09-05", "title": "Propagation model", "body": "Edge weights by relationship & trait." }
     ]
   }
 }
