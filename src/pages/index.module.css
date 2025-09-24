@@ -4,10 +4,9 @@
   position: relative;
   overflow: hidden;
   border-bottom: 1px solid var(--ifm-border-color);
-  /* subtle brass glow gradients, no images */
   background:
-    radial-gradient(1200px 500px at 20% -10%, rgba(201,164,107,0.20), transparent 60%),
-    radial-gradient(800px 400px at 80% 0%, rgba(201,164,107,0.12), transparent 60%),
+    radial-gradient(1200px 500px at 20% -10%, rgba(201, 164, 107, 0.2), transparent 60%),
+    radial-gradient(800px 400px at 80% 0%, rgba(201, 164, 107, 0.12), transparent 60%),
     transparent;
 }
 
@@ -20,6 +19,13 @@
   margin-top: 0.75rem;
 }
 
+.heroLead {
+  margin: 1.25rem auto 0;
+  max-width: 760px;
+  color: var(--ifm-color-emphasis-700);
+  font-size: 1.05rem;
+}
+
 .buttons {
   margin-top: 2rem;
   display: flex;
@@ -28,39 +34,31 @@
   flex-wrap: wrap;
 }
 
-/* third “ghost” button */
-.ghost {
-  background: transparent;
-  border: 1px solid var(--ifm-border-color);
-  color: var(--ifm-color-emphasis-200);
-}
-.ghost:hover { color: var(--ifm-color-emphasis-100); }
-
-/* Discord CTA — brand colors with accessible contrast */
 .discord {
-  background: #5865F2;             /* Discord blurple */
+  background: #5865f2;
   color: #fff;
   border: 1px solid transparent;
-  box-shadow: 0 1px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
 }
 
 .discord:hover,
 .discord:focus-visible {
-  background: #4752C4;             /* hover */
+  background: #4752c4;
   color: #fff;
   text-decoration: none;
 }
 
 .discord:active {
-  background: #3c45a5;             /* active */
+  background: #3c45a5;
 }
 
 .discord,
 .button--primary,
-.button--secondary { border-radius: 10px; }
+.button--secondary {
+  border-radius: 10px;
+}
 
 [data-theme='light'] .discord {
-  /* Keep it vibrant on light backgrounds too */
   border-color: #4c57d8;
 }
 
@@ -71,88 +69,42 @@
 .section {
   margin: 0 auto;
   padding: 3rem 0 0;
-  max-width: 1040px;
+  max-width: 880px;
 }
 
 .sectionTitle {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
   letter-spacing: 0.01em;
 }
 
 .sectionLead {
   margin-top: 0;
-  margin-bottom: 2rem;
+  margin-bottom: 0;
   max-width: 680px;
+  color: var(--ifm-color-emphasis-700);
+  font-size: 1.05rem;
+}
+
+.copyList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 1.5rem;
+  font-size: 1.05rem;
   color: var(--ifm-color-emphasis-700);
 }
 
-.featureGrid {
-  display: grid;
-  gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+.copyList strong {
+  color: var(--ifm-color-emphasis-900);
 }
 
-.featureCard {
-  padding: 1.25rem;
-  border-radius: 16px;
-  border: 1px solid var(--ifm-border-color);
-  background: var(--ifm-background-surface-color);
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.cardHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 0.75rem;
-}
-
-.cardTitle {
-  margin: 0;
-  font-size: 1.1rem;
-}
-
-.cardStage {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.35rem 0.75rem;
-  border-radius: 999px;
-  font-size: 0.8rem;
-  border: 1px solid var(--ifm-border-color);
-  background: var(--ifm-background-color);
-  white-space: nowrap;
-}
-
-.cardFooter {
-  display: flex;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-}
-
-.ctaCard {
-  border: 1px solid var(--ifm-border-color);
-  border-radius: 18px;
-  padding: 2.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  background:
-    radial-gradient(600px 400px at 15% 20%, rgba(201,164,107,0.18), transparent 60%),
-    var(--ifm-background-surface-color);
-}
-
-.ctaButtons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
+.exploreList {
+  gap: 1.25rem;
 }
 
 @media (min-width: 768px) {
-  .ctaCard {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+  .section {
+    max-width: 960px;
   }
 }
