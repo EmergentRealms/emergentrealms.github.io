@@ -3,6 +3,7 @@ id: concept-framework
 slug: /cobblestone/concept-framework
 title: Concept Framework
 sidebar_label: Concept Framework
+sidebar_position: 2
 ---
 
 > "From the streets, a legacy rises."
