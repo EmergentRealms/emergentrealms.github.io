@@ -3,7 +3,7 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
-  title: 'Cobblestone Legacy',
+  title: 'Emergent Realms Inc.',
   tagline: 'Devlog & docs for Emergent Realms',
   favicon: 'img/favicon.ico',
 
