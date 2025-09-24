@@ -1,0 +1,83 @@
+---
+id: godot-dataviz-ui-kit
+slug: /toolkits/godot-dataviz-ui-kit
+title: Godot DataViz UI Kit
+sidebar_label: Overview
+description: Production-ready charts, tables, tiles, and graph widgets for data-driven Godot games and tools.
+---
+
+import KPIStat from '@site/src/components/KPIStat/KPIStat';
+
+> **Tagline:** Production-ready charts, tables, tiles, and graph widgets for data-driven Godot games and tools.
+
+A reusable UI toolkit for Godot 4 that ships with polished, data-agnostic controls: BarChartView, LineChartView, HistogramView, SparklineTile, KpiTile, HeatMapView, BoxPlotView, TimelineView, VirtualTableView, FilterBar, ToolBar, DetailPanel, WaterfallView, RelationshipGraphView, and helper EntityCard nodes. Every control is theme-aware, emits hover/click signals, and plays nicely with both GDScript and C++.
+
+<section className="margin-top--md margin-bottom--lg" style={{display:'flex', flexWrap:'wrap', gap:'var(--ifm-spacing-horizontal)'}}>
+  <KPIStat label="Controls Included" value={"14+"} hint="Charts, tiles, panels" accent="success" />
+  <KPIStat label="Godot Version" value="4.x" hint="GDScript + C++" accent="primary" />
+  <KPIStat label="APIs" value="Data-agnostic" hint="Arrays, callables, variants" accent="neutral" />
+  <KPIStat label="Platforms" value="Windows / macOS / Linux" accent="warning" />
+</section>
+
+## Why ship this kit?
+
+- **Build dashboards fast.** Drop in polished widgets for analytics overlays, live operations dashboards, and tooling.
+- **Stay decoupled.** Feed controls with arrays, callables, or lightweight adapters—no database bindings required.
+- **Delight the eye.** Theme colors, typography, tooltips, and selection states match your project's look.
+- **Ship confidently.** Hover/click signals, zoom/pan, legend + labels, and virtualization features are ready for production.
+
+## What's inside
+
+The kit includes the following controls and helpers. Jump into the component docs for screenshots, data binding tips, and code snippets.
+
+| Component | Snapshot | Perfect for |
+| --- | --- | --- |
+| [BarChartView](./components/bar-chart-view) | Grouped or stacked bar charts with labels, tooltips, and palette controls. | Dashboards, comparisons, KPIs across factions or regions. |
+| [BoxPlotView](./components/box-plot-view) | Box & whisker plots with optional outliers and auto quartiles. | Simulation outputs, loot variability, balance testing. |
+| [HistogramView](./components/histogram-view) | Fast binning, density fills, and marker lines. | Damage distributions, runtime metrics, economy simulations. |
+| [HeatMapView](./components/heat-map-view) | Grid heatmaps with categorical axes and palette legends. | Pathfinding costs, supply & demand, AI affinity matrices. |
+| [LineChartView](./components/line-chart-view) | Multi-series time-series plotting with hover and segment selection. | Performance metrics, price history, health over time. |
+| [SparklineTile](./components/sparkline-tile) | Minimal sparkline for dense dashboards. | Trend badges, KPI cards, inline deltas. |
+| [KpiTile](./components/kpi-tile) | Headline metric tile with delta arrow and sparkline. | Revenue, player count, faction power. |
+| [DetailPanel](./components/detail-panel) | Labeled rows and grouped sections for quick facts. | Selected actor/item/quest overviews. |
+| [FilterBar](./components/filter-bar) | One-row action strip with normalized action signals. | Search bars, data browsers, multi-facet filters. |
+| [ToolBar](./components/tool-bar) | Godot-native action strip for primary commands. | Top-level app controls, view mode switches. |
+| [TimelineView](./components/timeline-view) | Gantt-style timeline with tracks, events, and "now" marker. | Incident timelines, quests, operations scheduling. |
+| [VirtualTableView](./components/virtual-table-view) | Virtualized grid for massive datasets. | Logs, inventories, metrics, large tables. |
+| [RelationshipGraphView](./components/relationship-graph-view) | Pan/zoom node graph with draggable cards and edges. | Quest flows, transaction graphs, faction ties. |
+| [WaterfallView](./components/waterfall-view) | Cumulative step visualization from start to finish. | Economy deltas, budgets, scoring breakdowns. |
+| [EntityCard](./components/entity-card) | Reusable card element for nodes or panels. | Graph nodes, sidebars, list entries. |
+
+## Common features
+
+- **Data-agnostic APIs:** Push arrays, Packed* data, or callables; no persistence assumptions.
+- **Signals everywhere:** Hover, click, selection, and action signals for interactive experiences.
+- **Theme aware:** Looks great out of the box; fully customizable colors and fonts.
+- **Performance first:** CanvasItem drawing, internal buffering, virtualized lists, and optimized layouts.
+- **Editor & code friendly:** Use as scene nodes or construct programmatically.
+
+## Compatibility & packaging
+
+- **Engine:** Godot 4.x (GDExtension, C++)
+- **Platforms:** Windows, macOS, Linux
+- **Examples:** GDScript demo scenes per control
+- **Docs:** Quickstart + API snippets for each control
+- **License:** MIT (bundle your own fonts/icons)
+
+## Store & SEO quick hits
+
+- **Search title:** Godot 4 Charts & Data UI (DataViz UI Kit)
+- **Slug suggestion:** `godot-dataviz-ui-kit`
+- **Tags/Keywords:** godot, godot4, ui, toolkit, charts, chart, graph, data, dataviz, visualization, dashboard, table, grid, heatmap, histogram, sparkline, kpi, timeline, waterfall, boxplot, line chart, bar chart, relationship graph, node graph, editor plugin, runtime ui, gdextension, gdscript, c++
+- **Alt keywords:** game analytics ui, dashboard ui, node graph ui, table view, plot widgets
+
+## Promo bullet ideas
+
+- Plug-and-play controls • Data-agnostic APIs
+- Beautiful defaults • Theme & font friendly
+- Hover/Click signals • Tooltips • Selection
+- Zoom/Pan (where relevant)
+- Works with GDScript & C++ (GDExtension)
+- Great for RPG sims, economy dashboards, dev tools
+
+Ready to dive deeper? Explore the component pages in this section or grab the kit on itch.io when it launches.

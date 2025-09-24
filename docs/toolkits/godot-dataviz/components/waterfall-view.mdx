@@ -1,0 +1,44 @@
+---
+id: waterfall-view
+title: WaterfallView
+sidebar_label: WaterfallView
+description: How you got from A → B — cumulative plus/minus steps with color-coded totals.
+---
+
+> **Tagline:** How you got from A → B.
+
+Visualize cumulative deltas leading to a final total. Automatically computes running sums, color-codes ups/downs, and labels every step.
+
+## Data binding
+
+- `set_steps(steps: Array)` where each step is `{ label, delta }`
+- `set_base_value(value: float)` for the starting total.
+
+## Screenshot
+
+<figure>
+  <p><em>Screenshot placeholder — add your WaterfallView example.</em></p>
+</figure>
+
+## Example usage
+
+```gdscript
+# TODO: Provide a WaterfallView usage example.
+# Demonstrate positive/negative deltas and total highlighting.
+```
+
+## Why it's great
+
+- Automatic running total calculation and labeling.
+- Color coding for increases, decreases, and totals.
+- Ideal for showing contributions to a final outcome.
+
+## Perfect for
+
+- Economy delta breakdowns.
+- Budget or scoring recaps.
+- Post-mortem analyses in tools or dashboards.
+
+---
+
+[← Back to kit overview](../..)

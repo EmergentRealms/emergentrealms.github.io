@@ -1,0 +1,45 @@
+---
+id: virtual-table-view
+title: VirtualTableView
+sidebar_label: VirtualTableView
+description: Huge datasets, still smooth — virtualized, read-only grid with precise hit testing.
+---
+
+> **Tagline:** Huge datasets, still smooth.
+
+A virtualized table that renders only what is visible. Features striped rows, header controls, and precise cell hit-testing for responsive interactions.
+
+## Data binding
+
+- `set_columns(columns: Array)`
+- `set_row_count(count: int)`
+- `set_cell_cb(func(row: int, column: int) -> Variant)` for lazy data fetch.
+
+## Screenshot
+
+<figure>
+  <p><em>Screenshot placeholder — add your VirtualTableView capture.</em></p>
+</figure>
+
+## Example usage
+
+```gdscript
+# TODO: Provide a VirtualTableView usage example.
+# Illustrate column definitions and callback-driven cell data.
+```
+
+## Why it's great
+
+- Handles millions of rows without choking.
+- Header row, striped styling, and selection support.
+- Fine-grained hover/click signals per cell.
+
+## Perfect for
+
+- Log viewers and telemetry dashboards.
+- Inventory or database browsers.
+- Any read-only dataset where performance matters.
+
+---
+
+[← Back to kit overview](../..)

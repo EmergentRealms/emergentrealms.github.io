@@ -1,0 +1,45 @@
+---
+id: timeline-view
+title: TimelineView
+sidebar_label: TimelineView
+description: Gantt-style clarity with tracks, events, tick scales, and live markers.
+---
+
+> **Tagline:** Gantt-style clarity.
+
+Track-based bars with configurable tick scales, auto label clipping, and an optional "now" marker. Great for schedules, incidents, or quest timelines.
+
+## Data binding
+
+- `set_tick_range(start: float, end: float)`
+- `add_track(name: String)`
+- `add_event(track: String, label: String, t0: float, t1: float, color := Color)`
+
+## Screenshot
+
+<figure>
+  <p><em>Screenshot placeholder — insert your TimelineView capture.</em></p>
+</figure>
+
+## Example usage
+
+```gdscript
+# TODO: Provide a TimelineView usage example.
+# Demonstrate tracks, events, and the optional "now" marker.
+```
+
+## Why it's great
+
+- Hover/click signals on events.
+- Gridlines and label management keep timelines readable.
+- Works for absolute or relative time scales.
+
+## Perfect for
+
+- Incident or quest tracking.
+- Faction operations planning.
+- Simulation or production schedules.
+
+---
+
+[← Back to kit overview](../..)
