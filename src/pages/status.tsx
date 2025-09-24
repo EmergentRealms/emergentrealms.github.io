@@ -7,7 +7,9 @@ import features from '@site/src/data/features.json';
 import FeatureProgress from '@site/src/components/FeatureProgress/FeatureProgress';
 import KPIStat from '@site/src/components/KPIStat/KPIStat';
 import MilestoneCard from '@site/src/components/MilestoneCard/MilestoneCard';
+import type {MilestoneCardProps} from '@site/src/components/MilestoneCard/MilestoneCard';
 import Timeline from '@site/src/components/Timeline/Timeline';
+import type {TimelineItem} from '@site/src/components/Timeline/Timeline';
 
 const STAGE_LABEL: Record<number, string> = {
   1: 'Not Started',
@@ -31,7 +33,7 @@ const completedFeatures = featureEntries.filter(([, f]) => f.stage === 5).length
 const activeFeatures = featureEntries.filter(([, f]) => f.stage > 1 && f.stage < 5).length;
 const docsPublished = 10; // New Cobblestone Legacy documentation pages added in this pass
 
-const milestones = [
+const milestones: MilestoneCardProps[] = [
   {
     title: 'Rumor Journal UI pass',
     target: '2025-09-27',
@@ -56,9 +58,9 @@ const milestones = [
     note: 'Expose price history graphs inside debug overlay.',
     links: [{label: 'Economy Manager', href: '/features/economy-manager'}],
   },
-] as const;
+];
 
-const timelineItems = [
+const timelineItems: TimelineItem[] = [
   {
     date: '2025-09-21',
     title: 'Health & Vitality balancing pass',
@@ -77,7 +79,7 @@ const timelineItems = [
     body: 'Merchants respond to hoarding, with transaction queues visible in the debugger.',
     tag: 'Simulation',
   },
-] as const;
+];
 
 export default function StatusPage() {
   return (

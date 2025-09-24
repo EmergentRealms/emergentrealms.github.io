@@ -1,0 +1,45 @@
+---
+id: relationship-graph-view
+title: RelationshipGraphView
+sidebar_label: RelationshipGraphView
+description: Clickable relationship maps with pan/zoom canvas, draggable cards, and arrowed links.
+---
+
+> **Tagline:** Clickable relationship maps.
+
+A pan/zoom canvas with draggable node cards and arrowed links. Includes simple layered auto-layout and emits hover/click signals for nodes and edges.
+
+## Data binding
+
+- `add_node(id: String, title: String, lines: Array, at := Vector2.ZERO)`
+- `add_edge(from_id: String, to_id: String, label := "")`
+- `layout()` to auto-position nodes when desired.
+
+## Screenshot
+
+<figure>
+  <p><em>Screenshot placeholder — add your RelationshipGraphView scene.</em></p>
+</figure>
+
+## Example usage
+
+```gdscript
+# TODO: Provide a RelationshipGraphView usage example.
+# Highlight node creation, edge wiring, and layout invocation.
+```
+
+## Why it's great
+
+- Drag-friendly cards with theme-aware EntityCard styling.
+- Zoom and pan across large graphs effortlessly.
+- Signals for hovering/clicking nodes and edges.
+
+## Perfect for
+
+- Quest flow or narrative relationship maps.
+- Transaction or document chain visualizations.
+- Faction ties and influence webs.
+
+---
+
+[← Back to kit overview](../..)

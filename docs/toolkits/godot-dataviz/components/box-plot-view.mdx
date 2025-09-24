@@ -1,0 +1,45 @@
+---
+id: box-plot-view
+title: BoxPlotView
+sidebar_label: BoxPlotView
+description: See distribution at a glance with box and whisker plots, outliers, and hover signals.
+---
+
+> **Tagline:** See distribution at a glance.
+
+Box & whisker plots with optional outliers—perfect for surfacing spreads in simulation output or balance reports. Supports both raw sample input and precomputed quartile stats.
+
+## Data binding
+
+- `set_groups([{ name, values }])` for raw sample arrays.
+- `add_box(min, q1, median, q3, max, outliers := PackedFloat32Array())` for prepared stats.
+- Toggle vertical or horizontal layout.
+
+## Screenshot
+
+<figure>
+  <p><em>Screenshot placeholder — replace with your BoxPlotView capture.</em></p>
+</figure>
+
+## Example usage
+
+```gdscript
+# TODO: Provide a BoxPlotView usage example.
+# Suggested: demonstrate raw group ingestion and optional outlier toggles.
+```
+
+## Why it's great
+
+- Automatic quartile computation for raw samples.
+- Optional outlier rendering and tooltips per element.
+- Hover/click interaction for boxes and whiskers.
+
+## Perfect for
+
+- Loot variability analysis.
+- NPC stat spreads across factions.
+- Combat or economy balance testing.
+
+---
+
+[← Back to kit overview](../..)
