@@ -1,59 +1,30 @@
 import type {ReactNode} from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
 
-import features from '@site/src/data/features.json';
-import FeatureProgress from '@site/src/components/FeatureProgress/FeatureProgress';
-
 import styles from './index.module.css';
 
-type Stage = 1 | 2 | 3 | 4 | 5;
-
-type FeatureCard = {
-  title: string;
-  stage: Stage;
-  summary?: string;
-  links?: {label: string; href: string}[];
-};
-
-const STAGE_LABEL: Record<Stage, string> = {
-  1: 'Not Started',
-  2: 'Ongoing',
-  3: 'In Testing',
-  4: 'Ready for QA',
-  5: 'Completed',
-};
-
-const FEATURE_SPOTLIGHT_IDS: string[] = [
-  'dynamic-health',
-  'dynamic-dialog',
-  'rumor-system',
-];
-
-const featureSpotlightEntries = FEATURE_SPOTLIGHT_IDS
-  .map((id) => [id, (features as Record<string, FeatureCard>)[id]] as const)
-  .filter((entry): entry is readonly [string, FeatureCard] => Boolean(entry[1]));
-
 function HomepageHeader() {
-  const {siteConfig} = useDocusaurusContext();
   return (
     <header className={clsx('hero', styles.heroBanner)}>
       <div className="container">
         <Heading as="h1" className={clsx('hero__title', styles.title)}>
-          Cobblestone Legacy
+          Emergent Realms Inc.
         </Heading>
-        <p className={clsx('hero__subtitle', styles.subtitle)}>
-          Devlog, roadmap, and systems documentation for Emergent Realms.
+        <p className={clsx('hero__subtitle', styles.subtitle)}>Worlds forged of chaos.</p>
+        <p className={styles.heroLead}>
+          Emergent Realms is an indie studio building living, breathing game worlds where every choice echoes.
+          We’re the creators of Cobblestone Legacy—a sandbox RPG with rogue-lite survival, systemic factions,
+          and emergent storytelling—built on Godot with high-performance C++ GDExtensions.
         </p>
 
         <div className={styles.buttons}>
           <Link className="button button--primary button--lg" to="/blog">
             Read the Devlog
           </Link>
-          <Link className="button button--secondary button--lg" to="/docs/overview">
+          <Link className="button button--secondary button--lg" to="/docs/cobblestone/overview">
             View Docs
           </Link>
           <Link
@@ -63,7 +34,6 @@ function HomepageHeader() {
             rel="noopener noreferrer"
             aria-label="Join our Discord server"
           >
-            {/* Inline Discord icon for crisp rendering */}
             <svg
               aria-hidden="true"
               viewBox="0 0 24 24"
@@ -87,66 +57,67 @@ function HomepageHeader() {
 export default function Home(): ReactNode {
   return (
     <Layout
-      title="Cobblestone Legacy — Devlog & Docs"
-      description="Project hub for Emergent Realms: progress updates, roadmap, and technical docs.">
+      title="Emergent Realms — Worlds forged of chaos"
+      description="Emergent Realms builds living game worlds: follow the devlog, explore docs, and grab tools."
+    >
       <HomepageHeader />
       <main className={styles.main}>
         <section className={styles.section}>
           <Heading as="h2" className={styles.sectionTitle}>
-            Systems Spotlight
+            What we do
           </Heading>
-          <p className={styles.sectionLead}>
-            Explore the latest pillars powering Grimborough. Each feature has living documentation and an interactive
-            status page for deeper dives.
-          </p>
-
-          <div className={styles.featureGrid}>
-            {featureSpotlightEntries.map(([id, feature]) => (
-              <div key={id} className={styles.featureCard}>
-                <div className={styles.cardHeader}>
-                  <Heading as="h3" className={styles.cardTitle}>
-                    {feature.title}
-                  </Heading>
-                  <span className={styles.cardStage}>{STAGE_LABEL[feature.stage]}</span>
-                </div>
-
-                <FeatureProgress title={feature.title} stage={feature.stage} size="sm" note={feature.summary} />
-
-                <div className={styles.cardFooter}>
-                  <Link className="button button--sm button--primary" to={`/features/${id}`}>
-                    View Status
-                  </Link>
-                  {!!feature.links?.length && (
-                    <Link className="button button--sm button--secondary" to={feature.links[0].href}>
-                      Read Docs
-                    </Link>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
+          <ul className={styles.copyList}>
+            <li>
+              <strong>Make games that feel alive:</strong> AI-driven NPCs with memory, routines, and relationships;
+              procedural cities; dynamic economy and heist systems.
+            </li>
+            <li>
+              <strong>Share the journey:</strong> Devlogs, technical write-ups, and design docs that open our process to
+              players and fellow developers.
+            </li>
+            <li>
+              <strong>Build tools for developers:</strong> Production-ready Godot UI components, data-viz controls, and
+              high-throughput SQLite/GDExtension backends—designed for performance, clarity, and reuse.
+            </li>
+          </ul>
         </section>
 
         <section className={styles.section}>
-          <div className={styles.ctaCard}>
-            <div>
-              <Heading as="h2" className={styles.sectionTitle}>
-                Need the bigger picture?
-              </Heading>
-              <p className={styles.sectionLead}>
-                Track milestones, metrics, and timelines on the dedicated status board, or jump straight into the expanded
-                Cobblestone Legacy documentation set.
-              </p>
-            </div>
-            <div className={styles.ctaButtons}>
-              <Link className="button button--primary button--lg" to="/status">
-                Open Status Board
-              </Link>
-              <Link className="button button--secondary button--lg" to="/docs/cobblestone/concept-framework">
-                Browse Documentation
-              </Link>
-            </div>
-          </div>
+          <Heading as="h2" className={styles.sectionTitle}>
+            Explore
+          </Heading>
+          <ul className={clsx(styles.copyList, styles.exploreList)}>
+            <li>
+              <strong>Devlogs &amp; Docs</strong> — Follow the build, from AI perception to world simulation.
+            </li>
+            <li>
+              <strong>Game Hub</strong> — Learn about Cobblestone Legacy’s survival loop, factions, and roadmap.
+            </li>
+            <li>
+              <strong>Toolkits &amp; Assets</strong> — Browse our Godot components and backend systems to accelerate your
+              project.
+            </li>
+          </ul>
+        </section>
+
+        <section className={styles.section}>
+          <Heading as="h2" className={styles.sectionTitle}>
+            How we build
+          </Heading>
+          <p className={styles.sectionLead}>
+            Performance-minded. Multithreaded where it counts. Data-driven. We favor clean APIs, predictable behavior,
+            and thorough examples—so our worlds (and your projects) scale gracefully.
+          </p>
+        </section>
+
+        <section className={styles.section}>
+          <Heading as="h2" className={styles.sectionTitle}>
+            Join us
+          </Heading>
+          <p className={styles.sectionLead}>
+            Whether you’re here to play, to learn, or to ship faster: welcome to the realm. Start with the latest devlog,
+            try a live demo (when available), or grab a toolkit and build with us.
+          </p>
         </section>
       </main>
     </Layout>

@@ -3,8 +3,8 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
-  title: 'Emergent Realms Inc.',
-  tagline: 'Devlog & docs for Emergent Realms',
+  title: 'Emergent Realms',
+  tagline: 'Worlds forged of chaos.',
   favicon: 'img/favicon.ico',
 
   future: { v4: true },
@@ -48,10 +48,10 @@ const config: Config = {
     colorMode: { defaultMode: 'dark', respectPrefersColorScheme: true },
     image: 'img/ChatterdRealms.png',
     navbar: {
-      title: 'Cobblestone Legacy',
-      logo: { alt: 'Cobblestone Legacy', src: 'img/logo.pgn', srcDark: 'img/logo-dark.svg'},
+      title: 'Emergent Realms',
+      logo: { alt: 'Emergent Realms', src: 'img/logo.pgn', srcDark: 'img/logo-dark.svg'},
       items: [
-        { to: '/docs/overview', label: 'Docs', position: 'left' },
+        { to: '/docs/cobblestone/overview', label: 'Docs', position: 'left' },
         { to: '/blog', label: 'Devlog', position: 'left' },
         { to: '/features', label: 'Features', position: 'left' },
         { href: 'https://discord.gg/23MyDvkW', label: 'Join Discord', position: 'right' },
@@ -62,7 +62,7 @@ const config: Config = {
     footer: {
       style: 'dark',
       links: [
-        { title: 'Docs', items: [{ label: 'Overview', to: '/docs/overview' }] },
+        { title: 'Docs', items: [{ label: 'Overview', to: '/docs/cobblestone/overview' }] },
         { title: 'Community', items: [{ label: 'Discord', href: 'https://discord.gg/23MyDvkW' }] },
         { title: 'More', items: [{ label: 'Devlog', to: '/blog' }] },
         

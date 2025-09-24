@@ -1,6 +1,6 @@
 {
   "label": "Toolkits & Assets",
-  "position": 50,
+  "position": 3,
   "link": {
     "type": "generated-index",
     "title": "Toolkits & Godot Assets"

@@ -1,7 +1,8 @@
 ---
-id: overview
+id: cobblestone-overview
 title: Project Overview
-sidebar_position: 3
+sidebar_position: 0
+slug: /cobblestone/overview
 ---
 
 # Cobblestone Legacy
