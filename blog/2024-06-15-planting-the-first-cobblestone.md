@@ -1,0 +1,60 @@
+---
+slug: planting-the-first-cobblestone
+title: "Planting the First Cobblestone: Inspiration and Early Prototyping"
+authors: [leaddev]
+date: 2024-06-15
+description: How a bedtime story for my kids grew into the earliest prototypes of Cobblestone Legacy.
+tags: [devlog, design, worldbuilding]
+---
+
+In the summer of 2024 I set out to build a game for my children. What started as a bedtime-story side project quickly snowballed into *Cobblestone Legacy*—a sandbox RPG about grit, survival, and hope in a procedurally generated city. This first entry looks back on the spark that ignited the project and the earliest weeks of prototyping inside Godot Engine.
+
+<!-- truncate -->
+
+## From Bedtime Stories to Design Pillars
+
+My two kids became the most enthusiastic design partners I could ask for. We sketched characters in crayon, argued over faction names at the dinner table, and drafted a tagline that still gives us chills: **“From the streets, a legacy rises.”**
+
+To keep us aligned, I distilled every idea into a handful of guiding pillars:
+
+| Pillar | What It Means In-Game | Early Notes |
+| --- | --- | --- |
+| Survival-first sandbox | Track thirst, hunger, stamina, and exhaustion like “real life.” | “If you don’t drink water, you get weaker. No food, you slow down.” |
+| Exploratory wonder | Reveal the city through fog of war as the kids uncover alleyways and hideouts. | The youngest mapped “secret stashes” on notebook paper. |
+| Reactive factions | Rival gangs, merchants, and city guards respond to the player’s choices. | A family debate decided that alliances should matter. |
+| Narrative heart | Follow a twelve-year-old orphan carving their own destiny. | I drafted short vignettes to give districts personality. |
+
+:::tip Family Insight
+Kids are honest playtesters. Their laughter, gasps, and even the occasional eye-roll became the compass for which systems deserved attention.
+:::
+
+## First Steps in Godot
+
+Late-night prototyping sessions paid off fast thanks to Godot’s approachable scene system and GDScript. The very first milestone—a tiny sprite running through a grey-box block—produced grins that lit up our living room. Within a few weeks we layered on:
+
+- A looping day/night cycle that bathed the city in warm evenings and chilly dawns.
+- Early Vitals bars that punished careless sprinting with comedic “collapse from exhaustion” animations.
+- A curious NPC wandering the street, ready to be poked, prodded, and inevitably broken by curious testers.
+
+Every playtest revealed unexpected edge cases (“Yes, sweetie, you *did* find a way to escape the map.”), but that chaos pushed the design forward faster than any spec sheet could.
+
+## Procedural Streets, Personal Stories
+
+By late summer we dared to dream bigger. I introduced procedural generation so each new save would remix the city into fresh alleys and plazas. The kids instinctively adapted, plotting routes to water sources before stamina dipped into the red.
+
+Behind the scenes, a `VitalsComponent` kept tabs on needs like hydration, energy, and stamina. If hydration dropped, status effects kicked in: **thirst** slowed sprinting, **exhaustion** eventually knocked characters out cold. Hearing my kids shout “Quick, find a tap!” was the moment I knew the simulation loop was working.
+
+## The Spark of Something Larger
+
+What began as a heartfelt gift was clearly becoming something greater. We set the story in a stylized 19th-century metropolis, recorded a gravelly narrator intro on my phone, and wrote quick lore snippets for districts and factions.
+
+One rainy October afternoon, as the kids argued over whose turn it was, inspiration struck: what if they could play together? Multiplayer felt wildly ambitious for a one-person side project—but the idea stuck. Their immediate, resounding “YES!” sealed the next milestone.
+
+:::info Developer Reflection
+Building those first prototypes taught me two enduring lessons:
+
+1. **Listen to your audience, even if they’re under ten.** The systems that made it into the core loop—survival, exploration, reactive story beats—were forged by their reactions.
+2. **Embrace the scope creep fueled by excitement.** Ambition can be scary, but it transformed a tiny hobby into a world worth sharing.
+:::
+
+The next entry explores how that spark pushed *Cobblestone Legacy* from solo sandbox to a shared adventure.
