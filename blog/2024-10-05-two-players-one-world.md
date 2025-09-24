@@ -7,7 +7,7 @@ description: Architecting, testing, and celebrating the first multiplayer build 
 tags: [devlog, design]
 ---
 
-By October 2024, *Cobblestone Legacy* no longer felt like a humble solo experiment. My kids had become fearless QA engineers, and the idea of exploring the city together refused to leave the dinner table. Turning a single-player sandbox into a shared world was daunting, but the motivation—letting my children collaborate (and occasionally compete) in the same space—made the leap irresistible.
+By October 2024, *Cobblestone Legacy* no longer felt like a humble solo experiment. The idea of exploring the city together refused to leave the dinner table. Turning a single-player sandbox into a shared world was daunting, but the motivation—letting my children collaborate (and occasionally compete) in the same space—made the leap irresistible.
 
 <!-- truncate -->
 
@@ -25,21 +25,13 @@ I sketched diagrams, annotated Godot nodes, and trimmed any feature that didn’
 Godot’s high-level multiplayer API let me focus on gameplay instead of protocol boilerplate. Remote procedure calls (RPCs) carried seeds, state changes, and even NPC alerts without forcing me to build a custom server stack.
 :::
 
-## Field Notes From the First Tests
-
-Our first living-room playtest was an unforgettable chaos reel:
-
-1. **Rubber-banding:** network jitter caused the kids’ avatars to teleport unpredictably.
-2. **Animation desync:** idles and emotes triggered on one screen but froze on the other.
-3. **World holes:** on my son’s laptop, his character fell through the ground while appearing perfectly fine on mine.
-
-Night after night I chipped away—adding client-side interpolation for movement, enforcing host authority on conflicts (like two players grabbing the same item), and teaching the game new etiquette (for example, **only one player per bed**). The moment the kids could reliably trade items, distract guards for each other, and see the same NPC reactions, the room erupted in cheers.
+Night after night I chipped away—adding client-side interpolation for movement, enforcing host authority on conflicts (like two players grabbing the same item), and teaching the game new etiquette (for example, **only one player per bed**). The moment the kids will reliably trade items, distract guards for each other, and see the same NPC reactions, the room will erupted in cheers.
 
 ## New Dynamics in a Shared Sandbox
 
 Making systems multiplayer-aware unlocked delightful emergent stories:
 
-- Survival loops encouraged teamwork. “I’m thirsty—drop me a bottle?” became a common call-out.
+- Survival loops encouraged teamwork. “I’m thirsty—drop me a bottle?”.
 - Faction reputation now tracked per player, so siblings could role-play different moral paths and see guards or gangs respond accordingly.
 - Mischief gained consequences. One child making noise in a back alley lured NPC guards for both players, forcing on-the-fly cooperation.
 

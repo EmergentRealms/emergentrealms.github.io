@@ -13,7 +13,7 @@ In the summer of 2024 I set out to build a game for my children. What started as
 
 ## From Bedtime Stories to Design Pillars
 
-My two kids became the most enthusiastic design partners I could ask for. We sketched characters in crayon, argued over faction names at the dinner table, and drafted a tagline that still gives us chills: **“From the streets, a legacy rises.”**
+My boys became the most enthusiastic design partners I could ask for. We bounced ideas off each other almost every day, with them constantly pitching new scenarios and “cool” things they wanted to see in the game. Their imaginations never stopped flowing—one moment it was daring rooftop chases, the next it was secret hideouts or rival gangs with dramatic names. Those conversations became the heartbeat of the project, each idea sparking another and pushing the game into directions I’d never have discovered alone.
 
 To keep us aligned, I distilled every idea into a handful of guiding pillars:
 
@@ -36,7 +36,7 @@ Late-night prototyping sessions paid off fast thanks to Godot’s approachable s
 - Early Vitals bars that punished careless sprinting with comedic “collapse from exhaustion” animations.
 - A curious NPC wandering the street, ready to be poked, prodded, and inevitably broken by curious testers.
 
-Every playtest revealed unexpected edge cases (“Yes, sweetie, you *did* find a way to escape the map.”), but that chaos pushed the design forward faster than any spec sheet could.
+Every playtest revealed unexpected edge cases (“Yes, son, you *did* find a way to escape the map.”), but that chaos pushed the design forward faster than any spec sheet could.
 
 ## Procedural Streets, Personal Stories
 
@@ -46,14 +46,14 @@ Behind the scenes, a `VitalsComponent` kept tabs on needs like hydration, energy
 
 ## The Spark of Something Larger
 
-What began as a heartfelt gift was clearly becoming something greater. We set the story in a stylized 19th-century metropolis, recorded a gravelly narrator intro on my phone, and wrote quick lore snippets for districts and factions.
+What began as a heartfelt gift was clearly becoming something greater. We set the story in a stylized 19th-century metropolis, wrote quick lore snippets for districts and factions.
 
-One rainy October afternoon, as the kids argued over whose turn it was, inspiration struck: what if they could play together? Multiplayer felt wildly ambitious for a one-person side project—but the idea stuck. Their immediate, resounding “YES!” sealed the next milestone.
+One rainy October afternoon, inspiration struck: what if they could play together? Multiplayer felt wildly ambitious for a one-person side project—but the idea stuck. Their immediate, resounding “YES!” sealed the next milestone.
 
 :::info Developer Reflection
 Building those first prototypes taught me two enduring lessons:
 
-1. **Listen to your audience, even if they’re under ten.** The systems that made it into the core loop—survival, exploration, reactive story beats—were forged by their reactions.
+1. **Listen to your audience, even if they’re under twelve.** The systems that made it into the core loop—survival, exploration, reactive story beats—were forged by their reactions.
 2. **Embrace the scope creep fueled by excitement.** Ambition can be scary, but it transformed a tiny hobby into a world worth sharing.
 :::
 

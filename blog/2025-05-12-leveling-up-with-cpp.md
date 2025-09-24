@@ -21,7 +21,7 @@ Setting up the toolchain felt like learning a new language with a familiar accen
 
 ## Building the New Engine Room
 
-Porting systems from GDScript to C++ demanded new habits: manual memory management, careful node ownership, and rigorous error checking. The payoff was immediate. NPCs running under the native `ActorControllerNative` sprinted through complex behaviors without stutter, even with 20+ characters active.
+Porting systems from GDScript to C++ demanded new habits: manual memory management, careful node ownership, and rigorous error checking. The payoff was immediate. NPCs running under the native `ActorController` sprinted through complex behaviors without stutter, even with 1000+ characters active.
 
 The refactor also opened the door for real multithreading. I introduced a `ThreadPoolManager` singleton to queue CPU-heavy jobs—pathfinding, AI evaluation, chunk generation—and a `SignalDispatcher` to ferry results back to the main thread safely.
 
@@ -51,6 +51,6 @@ Relearning C++ came with war stories: mismatched seeds desynced city layouts, on
 
 ## The Results: Headroom for Dreams
 
-The metrics spoke for themselves. We doubled the number of active NPCs, ran the game with players in opposite districts, and held steady frame rates. City streaming smoothed out, AI made quicker decisions, and the kids immediately noticed: “Dad, it’s not lagging anymore!”
+The metrics spoke for themselves. We 100x the number of active NPCs, ran the game with players in opposite districts, and held steady frame rates. City streaming smoothed out, AI made quicker decisions.
 
 The engine-side leap also sparked a mindset shift. *Cobblestone Legacy* was no longer “just” a hobby project; it had an architecture document, native modules, and a future-proof foundation. Next up: giving the city a true heartbeat with smarter NPCs, emergent quests, and systems that make the streets feel alive.

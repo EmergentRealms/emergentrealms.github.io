@@ -46,10 +46,10 @@ const config: Config = {
 
   themeConfig: {
     colorMode: { defaultMode: 'dark', respectPrefersColorScheme: true },
-    image: 'img/ChatterdRealms.png',
+    image: 'img/EmergentRealmLogo.png',
     navbar: {
       title: 'Emergent Realms',
-      logo: { alt: 'Emergent Realms', src: 'img/logo.pgn', srcDark: 'img/logo-dark.svg'},
+      logo: { alt: 'Emergent Realms', src: 'img/EmergentRealmLogo.png'},
       items: [
         { to: '/docs/cobblestone/overview', label: 'Docs', position: 'left' },
         { to: '/blog', label: 'Devlog', position: 'left' },

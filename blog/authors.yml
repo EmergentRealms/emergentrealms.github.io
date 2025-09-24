@@ -1,10 +1,9 @@
 leaddev:
-  name: Denis
-  title: Lead Developper / Owner
+  name: The Keeper of Chaos (Denis)
+  title: Lead Developer / Founder
   url: https://emergent-realms.com/
-  image_url: https://github.com/EmergentRealms/marketing/blob/main/profile_img.png
+  image_url: /img/Avatar_transp.png
   page: true
   socials:
     x: EmergentRealm
     github: EmergentRealmsDev
-
