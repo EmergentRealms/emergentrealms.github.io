@@ -92,8 +92,8 @@ export default function Home(): ReactNode {
           </Heading>
           <ul className={styles.copyList}>
             <li>
-              <strong>Make games that feel alive:</strong> AI-driven NPCs with memory, routines, and relationships;
-              procedural cities; dynamic economy and heist systems.
+              <strong>Make games that feel alive:</strong> Advanced NPCs with memory, emotions, needs, life-goals, and relationships;
+              procedural cities; dynamic economy and faction systems.
             </li>
             <li>
               <strong>Share the journey:</strong> Devlogs, technical write-ups, and design docs that open our process to
