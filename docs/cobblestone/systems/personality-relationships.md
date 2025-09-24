@@ -3,9 +3,18 @@ id: personality-relationships
 slug: /cobblestone/systems/personality-relationships
 title: Personality, Relationships & Dialog
 sidebar_label: Personality & Relationships
+description: How Cobblestone Legacy simulates personality-driven NPC relationships with multithreaded AI in Godot.
+keywords:
+  - emergent NPC behavior
+  - multithreaded AI in Godot
+  - personality system
+  - large scale Godot project
+  - Cobblestone Legacy
 ---
 
 ## Personality-Driven NPCs
+
+These traits are evaluated inside multithreaded C++ workers so the system scales to thousands of citizens without compromising responsiveness.
 
 - Every NPC is generated with a unique Big Five personality profile that governs openness, agreeableness, extraversion, conscientiousness, and neuroticism.
 - Personalities influence trust, affinity growth, decision making, and even greeting style.

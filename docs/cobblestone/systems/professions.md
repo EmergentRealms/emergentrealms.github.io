@@ -3,9 +3,18 @@ id: professions
 slug: /cobblestone/systems/professions
 title: Professions & Trades
 sidebar_label: Professions & Trades
+description: Profession roster for Cobblestone Legacy, detailing the systemic jobs that drive the sandbox economy.
+keywords:
+  - sandbox worldbuilding
+  - professions system
+  - rogue-lite sandbox RPG
+  - Cobblestone Legacy
+  - large scale Godot project
 ---
 
 ## Crafting Professions
+
+Crafting loops are implemented in C++ via GDExtension so the **Godot C++ RPG systems** can keep up with multiplayer demand.
 
 - Blacksmithing, Alchemy, Tailoring (implemented)
 - Carpentry — Build tools, structures, and furniture.

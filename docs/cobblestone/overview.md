@@ -3,11 +3,18 @@ id: cobblestone-overview
 title: Project Overview
 sidebar_position: 0
 slug: /cobblestone/overview
+description: High-level guide to Cobblestone Legacy, a large scale Godot 4.4 rogue-lite sandbox RPG built with C++ GDExtensions.
+keywords:
+  - Cobblestone Legacy
+  - large scale Godot project
+  - rogue-lite sandbox RPG
+  - Godot C++ RPG systems
+  - Emergent Realms devlog
 ---
 
 # Cobblestone Legacy
 
-<img src="/img/CobblestoneLegacy.png" />
+![Godot 4.4 procedural city tileset for Cobblestone Legacy RPG](/img/CobblestoneLegacy.png)
 
 **Cobblestone Legacy** is a **rogue-lite sandbox RPG** set in a sprawling, procedurally generated city where no two nights are the same. It offers a unique blend of **survival gameplay, high-stakes heists, faction dynamics, and emergent storytelling** that ensures **every choice you make echoes through the world**. Step into a living metropolis teeming with AI-driven citizens, unpredictable events, and endless opportunities to forge your own legacy.
 
@@ -30,7 +37,7 @@ There is no pre-scripted hero’s journey here – **the narrative is dynamic an
 Under the hood, Cobblestone Legacy is powered by the **Godot 4** game engine (leveraging the advanced Jolt physics system) with custom high-performance C++ GDExtensions and a robust SQLite backend. This tech backbone enables the simulation of a complex, **living world** – dozens of AI characters, a **dynamic economy**, and intricate physics – all running seamlessly to support your sandbox experience. For players, that means a richer, more responsive city that runs smoothly even as chaos unfolds.
 
 ## Join the Community
-Development of Cobblestone Legacy is an open journey, and **we invite you to be a part of it**. Join our **Discord** community (link in the navbar) to share your stories, discuss strategies, and get behind-the-scenes updates directly from the developers. We’re building this world together with our community’s feedback and ideas in mind. Don’t miss the **[Roadmap](/docs/roadmap)** to see what’s coming next, and check out the **[Devlog](/blog)** for regular insights into our progress and design thinking. 
+Development of Cobblestone Legacy is an open journey, and **we invite you to be a part of it**. Join our **Discord** community (link in the navbar) to share your stories, discuss strategies, and get behind-the-scenes updates directly from the developers. We’re building this world together with our community’s feedback and ideas in mind. Don’t miss the **[Roadmap](/docs/roadmap)** to see what’s coming next, and check out the **[Devlog](/blog)** for regular insights into our progress and design thinking—especially if you’re hunting for lessons on **Godot GDExtension performance** or real-world **Godot tutorials** for large simulations.
 
 ---
 

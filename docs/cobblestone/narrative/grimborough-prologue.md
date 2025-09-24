@@ -3,6 +3,13 @@ id: grimborough-prologue
 slug: /cobblestone/narrative/grimborough-prologue
 title: Grimborough Prologue
 sidebar_label: Prologue Narrative
+description: Narrative opening for Cobblestone Legacy, setting the tone for our family-built indie RPG.
+keywords:
+  - indie RPG devlog
+  - Cobblestone Legacy narrative
+  - sandbox worldbuilding
+  - Emergent Realms
+  - large scale Godot project
 ---
 
 ## Suggested City Names
@@ -19,7 +26,7 @@ sidebar_label: Prologue Narrative
 
 ## Opening Cinematic
 
-A black screen fades into Grimborough—an industrial city drowning in soot, gaslight, and ambition. Towers pierce the fog as smokestacks paint the sky in cinder.
+A black screen fades into Grimborough—an industrial city drowning in soot, gaslight, and ambition. Towers pierce the fog as smokestacks paint the sky in cinder. It’s the same world my kids and I explore in devlogs, now framed as a playable story.
 
 > "The year is 1847, and the city of Grimborough stands as a monument to progress... and despair. Its factories churn wealth for the fortunate few, while the downtrodden drown in its shadows. The air is thick with soot, the streets echo with the cries of merchants and the clatter of boots. It is a place of opportunity for some, and survival for most."
 

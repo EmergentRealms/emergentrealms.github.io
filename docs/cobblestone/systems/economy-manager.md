@@ -3,9 +3,18 @@ id: economy-manager
 slug: /cobblestone/systems/economy-manager
 title: Economy Manager
 sidebar_label: Economy Manager
+description: Architecture notes for the Cobblestone Legacy economy manager, a Godot C++ system backed by SQLite for large scale simulations.
+keywords:
+  - Godot economy system
+  - SQLite in Godot
+  - Cobblestone Legacy
+  - large scale Godot project
+  - Godot C++ RPG systems
 ---
 
 ## Dynamic Market Simulation
+
+The economy stack lives in C++ via GDExtension so it can juggle thousands of background transactions without blocking the main thread—an approach we call out frequently in our **large scale Godot project** devlogs.
 
 The Economy Manager keeps prices fluid based on supply, demand, and player influence.
 
@@ -35,6 +44,7 @@ EconomyManager.add_transaction("Iron", 50, "shipment", delay=15.0)
 ### Background Processing
 - Queue events with `add_transaction()` and resolve them via `process_transactions(delta)` in the main loop.
 - Invoke `random_event()` periodically to keep markets unpredictable.
+- SQLite-backed history writes batch asynchronously, mirroring the strategies documented in the [Leveling Up with C++ devlog](/blog/leveling-up-with-cpp) for sustainable **SQLite in Godot** usage.
 
 ```gdscript
 func _process(delta):

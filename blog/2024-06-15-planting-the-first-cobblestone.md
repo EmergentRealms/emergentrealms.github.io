@@ -3,11 +3,11 @@ slug: planting-the-first-cobblestone
 title: "Planting the First Cobblestone: Inspiration and Early Prototyping"
 authors: [leaddev]
 date: 2024-06-15
-description: How a bedtime story for my kids grew into the earliest prototypes of Cobblestone Legacy.
-tags: [devlog, design, worldbuilding]
+description: Kickstarting Cobblestone Legacy, a large-scale Godot 4.4 rogue-lite sandbox RPG I’m making for my kids, and charting the first prototypes that proved the vision.
+tags: [devlog, design, worldbuilding, godot, indie-rpg, sandbox-worldbuilding]
 ---
 
-In the summer of 2024 I set out to build a game for my children. What started as a bedtime-story side project quickly snowballed into *Cobblestone Legacy*—a sandbox RPG about grit, survival, and hope in a procedurally generated city. This first entry looks back on the spark that ignited the project and the earliest weeks of prototyping inside Godot Engine.
+In the summer of 2024 I set out to build a game for my children. What started as a bedtime-story side project quickly snowballed into *Cobblestone Legacy*—a rogue-lite sandbox survival RPG about grit, discovery, and hope in a procedurally generated city. This first entry looks back on the spark that ignited the project, how the earliest Godot 4.4 prototypes took shape, and why positioning the work as a **large scale Godot project** matters for the journey ahead. If you want a broader snapshot of the vision, the [Project Overview](/docs/cobblestone/overview) expands on the pillars this devlog introduces.
 
 <!-- truncate -->
 
@@ -42,7 +42,7 @@ Every playtest revealed unexpected edge cases (“Yes, son, you *did* find a way
 
 By late summer we dared to dream bigger. I introduced procedural generation so each new save would remix the city into fresh alleys and plazas. The kids instinctively adapted, plotting routes to water sources before stamina dipped into the red.
 
-Behind the scenes, a `VitalsComponent` kept tabs on needs like hydration, energy, and stamina. If hydration dropped, status effects kicked in: **thirst** slowed sprinting, **exhaustion** eventually knocked characters out cold. Hearing my kids shout “Quick, find a tap!” was the moment I knew the simulation loop was working.
+Behind the scenes, a `VitalsComponent` kept tabs on needs like hydration, energy, and stamina. If hydration dropped, status effects kicked in: **thirst** slowed sprinting, **exhaustion** eventually knocked characters out cold. Hearing my kids shout “Quick, find a tap!” was the moment I knew the simulation loop was working. Those early vitals experiments became the blueprint for the [Dynamic Health & Vitality system](/docs/cobblestone/systems/dynamic-health-vitality), and they laid the groundwork for the **emergent NPC behavior** we’re chasing in later devlogs.
 
 ## The Spark of Something Larger
 
@@ -57,4 +57,4 @@ Building those first prototypes taught me two enduring lessons:
 2. **Embrace the scope creep fueled by excitement.** Ambition can be scary, but it transformed a tiny hobby into a world worth sharing.
 :::
 
-The next entry explores how that spark pushed *Cobblestone Legacy* from solo sandbox to a shared adventure.
+The next entry explores how that spark pushed *Cobblestone Legacy* from solo sandbox to a shared adventure. If you’re hunting for **Godot tutorials** on survival loops or just curious how a parent-led studio can build a scalable world, stick around—this devlog series is about sharing the wins, the stumbles, and the heart behind making a game for my kids.

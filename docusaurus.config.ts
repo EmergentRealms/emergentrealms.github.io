@@ -45,6 +45,18 @@ const config: Config = {
   ],
 
   themeConfig: {
+    metadata: [
+      {
+        name: 'keywords',
+        content:
+          'Cobblestone Legacy, Emergent Realms, large scale Godot project, Godot GDExtension performance, multithreaded AI in Godot, Godot C++ RPG systems, SQLite in Godot, procedural city builder devlog',
+      },
+      {
+        name: 'description',
+        content:
+          'Cobblestone Legacy devlogs and docs covering our Godot 4.4 rogue-lite sandbox RPG, C++ GDExtension pipelines, and scalable simulation systems.',
+      },
+    ],
     colorMode: { defaultMode: 'dark', respectPrefersColorScheme: true },
     image: 'img/EmergentRealmLogo.png',
     navbar: {

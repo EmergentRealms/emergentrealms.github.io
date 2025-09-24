@@ -3,11 +3,18 @@ id: dynamic-rumors
 slug: /cobblestone/systems/dynamic-rumors
 title: Dynamic Rumor System
 sidebar_label: Dynamic Rumor System
+description: Documentation for the rumor network that powers emergent investigations in Cobblestone Legacy’s sandbox world.
+keywords:
+  - emergent NPC behavior
+  - rumor system Godot
+  - sandbox worldbuilding
+  - large scale Godot project
+  - Cobblestone Legacy
 ---
 
 ## Living Information Economy
 
-Rumors evolve as they travel, creating investigative gameplay and a reactive city.
+Rumors evolve as they travel, creating investigative gameplay and a reactive city. The system’s perception hooks are shared in the [Threads & Thoughts devlog](/blog/threads-and-thoughts) if you want more narrative context.
 
 - **Evolving Accuracy** — Each retelling can distort locations, witnesses, and descriptions. Accuracy ranges from 0–100% and is only guaranteed when the original source is found.
 - **Degraded Details** — NPCs misplace landmarks, forget names, or embellish events depending on their personality and relationship to the source.
