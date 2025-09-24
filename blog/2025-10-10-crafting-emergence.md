@@ -3,11 +3,11 @@ slug: crafting-emergence
 title: "Forging Ahead: Refactoring Cobblestone Legacy"
 authors: [leaddev]
 date: 2025-10-10
-description: A reflective finale covering the signature systems and takeaways from Cobblestone Legacy’s first year.
-tags: [devlog, design, worldbuilding]
+description: A reflective finale covering the signature systems and takeaways from Cobblestone Legacy’s first year as a large-scale Godot GDExtension RPG.
+tags: [devlog, design, worldbuilding, gdeextension, studio-news]
 ---
 
-I’m hard at work re-factoring the entire game world in C++ with GDExtension. This overhaul isn’t just about cleaner architecture—it’s about unlocking the performance and flexibility the project needs to truly come alive. I’m especially looking forward to rebuilding the world on top of this new foundation and seeing my kids dive back in, testing the new systems firsthand and experiencing the performance gains for themselves.  
+I’m hard at work re-factoring the entire game world in C++ with GDExtension. This overhaul isn’t just about cleaner architecture—it’s about unlocking the performance and flexibility the project needs to truly come alive. I’m especially looking forward to rebuilding the world on top of this new foundation and seeing my kids dive back in, testing the new systems firsthand and experiencing the performance gains for themselves. Refactoring at this scope is how we keep Cobblestone Legacy positioned as a flagship example of a **large scale Godot project** built on C++.
 
 I’m still a couple of months away from internal family playtests, but the progress has me hopeful for the project’s future. The idea of sitting back and watching my kids plot heists, trade supplies, and laugh their way through emergent chaos on the new systems keeps me motivated through the long refactor sessions.  
 
@@ -23,8 +23,8 @@ Lesson learned: invest in introspection. Good telemetry shortens debugging cycle
 
 ## Personal Reflections & The Road Ahead
 
-This project began as a gift for my children. It evolved into a crash course in multiplayer networking, modern C++, AI design, and data-driven worldbuilding. Along the way, we built more than a game—we built memories.  
+This project began as a gift for my children. It evolved into a crash course in multiplayer networking, modern C++, AI design, and data-driven worldbuilding. Along the way, we built more than a game—we built memories and a case study in **Godot GDExtension performance** that we’re eager to keep sharing through docs and devlogs.
 
-Looking forward, we’re exploring broader playtests, expanded regions beyond the city walls, and deeper progression arcs. Whatever comes next, the heart of *Cobblestone Legacy* remains unchanged: a family-driven adventure crafted cobblestone by cobblestone.  
+Looking forward, we’re exploring broader playtests, expanded regions beyond the city walls, and deeper progression arcs. Whatever comes next, the heart of *Cobblestone Legacy* remains unchanged: a family-driven adventure crafted cobblestone by cobblestone. Expect more deep dives into **Godot C++ RPG systems**, internal tools, and lessons learned that can double as **Godot tutorials** for other studios.
 
 Thanks for reading, cheering, and sharing the journey. Here’s to the stories still to come. 🎮❤️

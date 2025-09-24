@@ -3,11 +3,18 @@ id: dynamic-health-vitality
 slug: /cobblestone/systems/dynamic-health-vitality
 title: Dynamic Health & Vitality System
 sidebar_label: Dynamic Health & Vitality
+description: Survival stat architecture for Cobblestone Legacy, detailing how we simulate needs in a large scale Godot sandbox RPG.
+keywords:
+  - survival systems Godot
+  - dynamic vitals
+  - rogue-lite sandbox RPG
+  - large scale Godot project
+  - Cobblestone Legacy
 ---
 
 ## Survival Is More Than a Health Bar
 
-The Dynamic Health & Vitality System turns every calorie burned, sip of water, and restless night into a meaningful gameplay decision. Survival stats are modeled as interconnected resources that respond to the player's habits, environment, and long-term choices.
+The Dynamic Health & Vitality System turns every calorie burned, sip of water, and restless night into a meaningful gameplay decision. Survival stats are modeled as interconnected resources that respond to the player's habits, environment, and long-term choices, echoing the earliest experiments described in the [Planting the First Cobblestone devlog](/blog/planting-the-first-cobblestone).
 
 ### Health & Stamina Management
 - Track health, stamina, energy, hydration, and weight simultaneously.
@@ -43,6 +50,7 @@ The Dynamic Health & Vitality System turns every calorie burned, sip of water, a
 - **Adaptive Body Systems** — Weight and body fat fluctuate, altering stamina recovery and combat performance.
 - **World Pressure** — Weather and rest quality determine whether the city wears you down or lets you rebound.
 - **Energy & Stamina Loop** — Energy governs stamina regeneration, making retreats, rest, and preparation critical.
+- **Threaded Simulation** — Because every subsystem runs inside a C++ and GDExtension backend, the city can evaluate thousands of actors without sacrificing our **Godot GDExtension performance** targets.
 
 ## Unique Selling Points
 

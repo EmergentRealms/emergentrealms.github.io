@@ -3,11 +3,11 @@ slug: two-players-one-world
 title: "Two Players, One World: Taking a Solo Adventure Multiplayer"
 authors: [leaddev]
 date: 2024-10-05
-description: Architecting, testing, and celebrating the first multiplayer build of Cobblestone Legacy.
-tags: [devlog, design]
+description: Architecting, testing, and celebrating the first multiplayer build of Cobblestone Legacy, a family-made large scale Godot project.
+tags: [devlog, design, godot, multiplayer, family-devlog]
 ---
 
-By October 2024, *Cobblestone Legacy* no longer felt like a humble solo experiment. The idea of exploring the city together refused to leave the dinner table. Turning a single-player sandbox into a shared world was daunting, but the motivation—letting my children collaborate (and occasionally compete) in the same space—made the leap irresistible.
+By October 2024, *Cobblestone Legacy* no longer felt like a humble solo experiment. The idea of exploring the city together refused to leave the dinner table. Turning a single-player sandbox into a shared world was daunting, but the motivation—letting my children collaborate (and occasionally compete) in the same space—made the leap irresistible and reinforced the heart of this devlog: I’m building this large scale Godot project for my kids.
 
 <!-- truncate -->
 
@@ -19,7 +19,7 @@ Multiplayer demanded a fresh look at every system. We started with a few core pr
 - **Parallel exploration:** The `WorldTerrain` system watches each player’s position so it can stream in the right city chunks for everyone, even on opposite sides of town.
 - **One heartbeat:** A global `TickManager` keeps NPC AI, timers, and day/night cycles locked in sync across machines, so the world tells the same story to every player.
 
-I sketched diagrams, annotated Godot nodes, and trimmed any feature that didn’t serve the cooperative fantasy.
+I sketched diagrams, annotated Godot nodes, and trimmed any feature that didn’t serve the cooperative fantasy. The [Dynamic Dialog System](/docs/cobblestone/systems/dynamic-dialog) and [Quest Goals](/docs/cobblestone/systems/dynamic-quest-goal-system) docs dive deeper into how these features adapt to co-op play.
 
 :::note Why Godot’s Networking?
 Godot’s high-level multiplayer API let me focus on gameplay instead of protocol boilerplate. Remote procedure calls (RPCs) carried seeds, state changes, and even NPC alerts without forcing me to build a custom server stack.
@@ -43,4 +43,4 @@ Behind the scenes, I leaned heavily on logging and two simultaneous debugger ses
 >
 > It forced me to write more authoritative code, observe how real people interact in my systems, and constantly balance performance with clarity. The experience also planted a seed—if we wanted to keep expanding this living city, we’d eventually need more horsepower than raw GDScript could provide.
 
-The next chapter picks up there: chasing performance, embracing C++, and preparing the city for even more players, NPCs, and possibilities.
+The next chapter picks up there: chasing performance, embracing C++ GDExtensions, and preparing the city for even more players, NPCs, and possibilities. If you’re searching for **Godot tutorials** on scaling networking or curious about the realities of parenting while shipping an **indie RPG devlog**, you’re in the right place.

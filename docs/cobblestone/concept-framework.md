@@ -4,11 +4,18 @@ slug: /cobblestone/concept-framework
 title: Concept Framework
 sidebar_label: Concept Framework
 sidebar_position: 2
+description: The creative blueprint for Cobblestone Legacy, an indie rogue-lite sandbox RPG built as a large scale Godot 4.4 project.
+keywords:
+  - Cobblestone Legacy concept
+  - sandbox worldbuilding
+  - large scale Godot project
+  - indie RPG devlog
+  - Emergent Realms
 ---
 
 > "From the streets, a legacy rises."
 
-Cobblestone Legacy is a sandbox RPG with rogue-lite elements set inside a living, procedurally generated Victorian city. You begin as a 12-year-old orphan and must survive, grow, and ultimately shape the fate of Grimborough through the choices you make, the factions you court, and the risks you take.
+Cobblestone Legacy is a sandbox RPG with rogue-lite elements set inside a living, procedurally generated Victorian city. You begin as a 12-year-old orphan and must survive, grow, and ultimately shape the fate of Grimborough through the choices you make, the factions you court, and the risks you take. Everything in this concept framework ladders up to the same goal: proving that a family-built **large scale Godot project** can deliver deep systems while staying heartfelt.
 
 ## Core Pillars
 

@@ -3,11 +3,18 @@ id: dynamic-dialog
 slug: /cobblestone/systems/dynamic-dialog
 title: Dynamic Dialog System
 sidebar_label: Dynamic Dialog System
+description: How Cobblestone Legacy powers emergent NPC conversations with Godot 4.4, C++, and data-driven rules.
+keywords:
+  - emergent NPC behavior
+  - Godot dialog system
+  - large scale Godot project
+  - Cobblestone Legacy
+  - indie RPG devlog
 ---
 
 ## Adaptive Conversations
 
-The Dynamic Dialog System keeps every conversation grounded in context and memory.
+The Dynamic Dialog System keeps every conversation grounded in context and memory, proving that our **large scale Godot project** can deliver nuanced storytelling without sacrificing performance.
 
 - **Memory-Driven Exchanges** — NPCs remember prior encounters and respond accordingly.
 - **Dynamic Rumors** — Dialogue reflects rumors the player sparked or unearthed, letting information spread across the city.
@@ -24,6 +31,7 @@ The Dynamic Dialog System keeps every conversation grounded in context and memor
 - Quests begin, update, or conclude naturally inside conversations.
 - NPCs acknowledge world events—recent thefts, battles, festivals, or curfews.
 - Foresight and warnings foreshadow upcoming encounters.
+- Tight integration with the [Dynamic Quest Goal System](/docs/cobblestone/systems/dynamic-quest-goal-system) keeps narrative arcs synchronized across co-op sessions.
 
 ## Rumor System Hooks
 

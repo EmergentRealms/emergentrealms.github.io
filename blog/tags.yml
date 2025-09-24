@@ -23,6 +23,51 @@ design:
   permalink: /design
   description: Mechanics, systems design, and balancing survival, stealth, and storytelling.
 
+godot:
+  label: Godot Engine
+  permalink: /godot
+  description: Godot 4.4 devlogs, tooling tips, and lessons from building a large scale Godot project.
+
+indie-rpg:
+  label: Indie RPG Devlog
+  permalink: /indie-rpg
+  description: Personal stories about crafting Cobblestone Legacy, a rogue-lite sandbox RPG for my kids.
+
+sandbox-worldbuilding:
+  label: Sandbox Worldbuilding
+  permalink: /sandbox-worldbuilding
+  description: Procedural generation, emergent NPC behavior, and systemic storytelling in Cobblestone Legacy.
+
+multiplayer:
+  label: Multiplayer Engineering
+  permalink: /multiplayer
+  description: Networking devlogs covering co-op architecture, synchronization, and shared simulation design.
+
+family-devlog:
+  label: Family Devlog
+  permalink: /family-devlog
+  description: Building Cobblestone Legacy with my kids, sharing the heart behind Emergent Realms.
+
+gdeextension:
+  label: C++ & GDExtension
+  permalink: /gdeextension
+  description: Tutorials and case studies from porting systems to C++ and optimizing Godot GDExtension performance.
+
+performance:
+  label: Performance Engineering
+  permalink: /performance
+  description: Profiling wins, threading strategies, and optimization notes for large scale Godot projects.
+
+multithreading:
+  label: Multithreading
+  permalink: /multithreading
+  description: Techniques for multithreaded AI in Godot and parallel simulation systems.
+
+studio-news:
+  label: Studio News
+  permalink: /studio-news
+  description: Updates on Emergent Realms, business milestones, and long-term planning.
+
 release:
   label: Releases & Announcements
   permalink: /release

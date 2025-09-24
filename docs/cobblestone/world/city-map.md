@@ -3,9 +3,18 @@ id: city-map
 slug: /cobblestone/world/city-map
 title: City Map Brief
 sidebar_label: City Map
+description: Overview of Grimborough’s procedural districts for Cobblestone Legacy’s sandbox city builder.
+keywords:
+  - procedural city builder
+  - sandbox worldbuilding
+  - Cobblestone Legacy
+  - large scale Godot project
+  - Emergent Realms
 ---
 
 ## Coastal Layout
+
+City layouts are generated through layered noise maps and SQLite-backed seeds so every run feels like a handcrafted **procedural city builder** made inside Godot.
 
 - Winding shoreline with sandy beaches, rocky cliffs, and a bustling harbor.
 - Islands and outcroppings dot the bay; a lighthouse crowns a storm-battered cliff.
