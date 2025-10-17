@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="DVThemeGaugeStyle" inherits="Resource" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+        <brief_description>
+                Style resource that controls tick marks, sweep, and colors for gauge-style components.
+        </brief_description>
+        <description>
+                DVThemeGaugeStyle supplies gauge-specific defaults for components such as [DV_Gauge]. It determines how the
+                arc is drawn (sweep angle, thickness, rounded caps) and exposes options for tick label formatting. 
+                Adjusting these properties through [DVTheme] lets you keep multiple gauges visually
+                consistent without duplicating configuration.
+        </description>
+        <tutorials>
+        </tutorials>
+        <members>
+                <member name="gauge/thickness_px" type="float" setter="set_thickness_px" getter="get_thickness_px" default="26.0">
+                        Width of the gauge arc measured in pixels.
+                </member>
+                <member name="gauge/round_caps" type="bool" setter="set_round_caps" getter="get_round_caps" default="false">
+                        Chooses between flat or rounded arc end caps.
+                </member>
+                <member name="gauge/tick_len_px" type="float" setter="set_tick_len_px" getter="get_tick_len_px" default="8.0">
+                        Length (in pixels) of tick marks drawn around the gauge.
+                </member>
+                <member name="gauge/tick_thickness" type="float" setter="set_tick_thickness_px" getter="get_tick_thickness_px" default="2.0">
+                        Stroke width of tick marks.
+                </member>
+                <member name="gauge/show_zone_labels" type="bool" setter="set_show_zone_labels" getter="get_show_zone_labels" default="true">
+                        When enabled, labels describing configured zones are drawn around the arc.
+                </member>
+                <member name="gauge/show_tick_labels" type="bool" setter="set_show_tick_labels" getter="get_show_tick_labels" default="true">
+                        Toggles display of numeric tick labels.
+                </member>
+                <member name="gauge/tick_label_decimals" type="int" setter="set_tick_label_decimals" getter="get_tick_label_decimals" default="0">
+                        Number of fractional digits displayed on tick labels.
+                </member>
+                <member name="gauge/tick_label_pad_px" type="float" setter="set_tick_label_pad_px" getter="get_tick_label_pad_px" default="6.0">
+                        Padding between the tick labels and the gauge arc.
+                </member>
+                <member name="gauge/show_center_value" type="bool" setter="set_show_center_value" getter="get_show_center_value" default="true">
+                        Controls whether the numeric value is rendered in the center of the gauge.
+                </member>
+        </members>
+	<signals>
+                <signal name="theme_changed">
+                        <description>
+                                Fired after any property is modified so dependent gauges can redraw with the new style.
+                        </description>
+                </signal>
+        </signals>
+</class>

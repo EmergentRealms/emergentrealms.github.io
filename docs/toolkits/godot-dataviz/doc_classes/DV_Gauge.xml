@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="DV_Gauge" inherits="DVComponent" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+        <brief_description>
+                Radial gauge control with animated value display, colored zones, and rich tick styling.
+        </brief_description>
+        <description>
+                DV_Gauge visualizes scalar values over a configurable arc. Add named zones to communicate qualitative
+                ranges, configure tick counts, and decide how the center value is formatted. The gauge emits interaction
+                signals for clicks, live value changes, and zone transitions, making it ideal for dashboards and monitoring
+                panels.
+
+                [codeblocks]
+                [gdscript]
+                
+                extends DV_Gauge
+
+                func _ready() -> void:
+                    set_sweep_deg(180)
+                    add_zone("Cool", Color(0.589, 0.747, 0.97), 0.40)
+                    add_zone("Warm", Color(0.846, 0.775, 0.142), 0.75)
+                    add_zone("Hot", Color(0.779, 0.172, 0.23), 0.9)
+                    set_ticks(6, 3)
+                    set_min_value(0.0)
+                    set_max_value(350.0)
+                    set_value(156)
+                    set_unit("F")
+                    set_center_title("Oven")
+                    value_changed.connect(_on_value_changed)
+
+                func _on_value_changed(value: float) -> void:
+                    print("Gauge updated:", value)
+                [/gdscript]
+                [/codeblocks]
+        </description>
+        <tutorials>
+        </tutorials>
+	<methods>
+                <method name="add_zone">
+                        <return type="void" />
+                        <param index="0" name="label" type="String" />
+                        <param index="1" name="color" type="Color" />
+                        <param index="2" name="stop" type="float" />
+                        <description>
+                                Appends a zone that spans from the previous stop (or 0) to [param stop] expressed as a
+                                normalized 0..1 fraction of the gauge range.
+                        </description>
+                </method>
+                <method name="clear_zones">
+                        <return type="void" />
+                        <description>
+                                Removes all defined zones and redraws the gauge without colored segments.
+                        </description>
+                </method>
+                <method name="find_zone_at_value" qualifiers="const">
+                        <return type="int" />
+                        <param index="0" name="value" type="float" />
+                        <description>
+                                Returns the zone index containing [param value], or -1 if the value is outside all zones.
+                        </description>
+                </method>
+                <method name="find_zone_by_label" qualifiers="const">
+                        <return type="int" />
+                        <param index="0" name="label" type="String" />
+                        <description>
+                                Looks up the index of the first zone with the given [param label].
+                        </description>
+                </method>
+                <method name="get_zone" qualifiers="const">
+                        <return type="Dictionary" />
+                        <param index="0" name="index" type="int" />
+                        <description>
+                                Returns a dictionary describing the zone (keys: [code]label[/code], [code]color[/code],
+                                [code]stop[/code]).
+                        </description>
+                </method>
+                <method name="get_zone_count" qualifiers="const">
+                        <return type="int" />
+                        <description>
+                                Returns how many zones are configured.
+                        </description>
+                </method>
+                <method name="get_zones" qualifiers="const">
+                        <return type="Array" />
+                        <description>
+                                Returns all zones as an array of dictionaries.
+                        </description>
+                </method>
+                <method name="insert_zone">
+			<return type="void" />
+			<param index="0" name="index" type="int" />
+                        <param index="1" name="label" type="String" />
+                        <param index="2" name="color" type="Color" />
+                        <param index="3" name="stop" type="float" />
+                        <description>
+                                Inserts a zone at [param index], shifting later zones. [param stop] is normalized 0..1.
+                        </description>
+                </method>
+                <method name="remove_zone">
+                        <return type="void" />
+                        <param index="0" name="index" type="int" />
+                        <description>
+                                Removes the zone at [param index].
+                        </description>
+                </method>
+                <method name="set_ticks">
+                        <return type="void" />
+                        <param index="0" name="major" type="int" />
+                        <param index="1" name="minor" type="int" />
+                        <description>
+                                Configures the number of major tick marks and how many minor ticks appear between them.
+                        </description>
+                </method>
+		<method name="set_zone">
+			<return type="void" />
+			<param index="0" name="index" type="int" />
+                        <param index="1" name="label" type="String" />
+                        <param index="2" name="color" type="Color" />
+                        <param index="3" name="stop" type="float" />
+                        <description>
+                                Replaces the zone at [param index] with new data.
+                        </description>
+                </method>
+                <method name="set_zones">
+                        <return type="void" />
+                        <param index="0" name="zones" type="Array" />
+                        <description>
+                                Bulk replaces all zones. Accepts an array of dictionaries as returned by [method get_zones].
+                        </description>
+                </method>
+        </methods>
+	<members>
+                <member name="gauge/center_subtitle" type="String" setter="set_center_subtitle" getter="get_center_subtitle" default="&quot;&quot;">
+                        Secondary line of text displayed beneath the center title.
+                </member>
+                <member name="gauge/center_title" type="String" setter="set_center_title" getter="get_center_title" default="&quot;&quot;">
+                        Main label rendered in the center of the gauge.
+                </member>
+                <member name="gauge/custom_value_text" type="String" setter="set_custom_value_text" getter="get_custom_value_text" default="&quot;&quot;">
+                        Text used when [member gauge/value_format_mode] is set to [constant VALUE_FORMAT_CUSTOM].
+                </member>
+                <member name="gauge/major_ticks" type="int" setter="set_major_ticks" getter="get_major_ticks" default="0">
+                        Number of major tick marks drawn around the arc.
+                </member>
+                <member name="gauge/max" type="float" setter="set_max_value" getter="get_max_value" default="100.0">
+                        Maximum numeric value represented by the gauge.
+                </member>
+                <member name="gauge/min" type="float" setter="set_min_value" getter="get_min_value" default="0.0">
+                        Minimum numeric value represented by the gauge.
+                </member>
+                <member name="gauge/minor_ticks" type="int" setter="set_minor_ticks" getter="get_minor_ticks" default="0">
+                        Number of minor ticks inserted between each pair of major ticks.
+                </member>
+                <member name="gauge/round_caps" type="bool" setter="set_round_caps" getter="get_round_caps" default="false">
+                        Switches the gauge arc ends between flat and rounded caps.
+                </member>
+                <member name="gauge/show_center_value" type="bool" setter="set_show_center_value" getter="get_show_center_value" default="true">
+                        When enabled, the current numeric value is rendered inside the gauge.
+                </member>
+                <member name="gauge/show_zone_labels" type="bool" setter="set_show_zone_labels" getter="get_show_zone_labels" default="true">
+                        Draws labels for each configured zone when [code]true[/code].
+                </member>
+                <member name="gauge/sweep_deg" type="float" setter="set_sweep_deg" getter="get_sweep_deg" default="180.0">
+                        Total angular span of the gauge in degrees.
+                </member>
+                <member name="gauge/thickness_px" type="float" setter="set_thickness_px" getter="get_thickness_px" default="26.0">
+                        Thickness of the gauge arc measured in pixels.
+                </member>
+                <member name="gauge/tick_len_px" type="float" setter="set_tick_len_px" getter="get_tick_len_px" default="8.0">
+                        Length of tick marks in pixels.
+                </member>
+                <member name="gauge/tick_thickness" type="float" setter="set_tick_thickness" getter="get_tick_thickness" default="2.0">
+                        Thickness of tick marks in pixels.
+                </member>
+                <member name="gauge/ticks/label_decimals" type="int" setter="set_tick_label_decimals" getter="get_tick_label_decimals" default="0">
+                        Number of decimal places shown on tick labels.
+                </member>
+                <member name="gauge/ticks/label_pad_px" type="float" setter="set_tick_label_pad_px" getter="get_tick_label_pad_px" default="6.0">
+                        Padding between tick labels and the arc.
+                </member>
+                <member name="gauge/ticks/show_labels" type="bool" setter="set_show_tick_labels" getter="get_show_tick_labels" default="true">
+                        Toggles rendering of numeric tick labels.
+                </member>
+                <member name="gauge/track_color" type="Color" setter="set_track_color" getter="get_track_color" default="Color(0, 0, 0, 1)">
+                        Color of the inactive track arc.
+                </member>
+                <member name="gauge/unit" type="String" setter="set_unit" getter="get_unit" default="&quot;&quot;">
+                        Optional unit string displayed alongside the center value.
+                </member>
+                <member name="gauge/value" type="float" setter="set_value" getter="get_value" default="0.0">
+                        Current value shown by the gauge (automatically animated).
+                </member>
+                <member name="gauge/value_color" type="Color" setter="set_value_color" getter="get_value_color" default="Color(0, 0, 0, 1)">
+                        Color of the active arc that represents the current value.
+                </member>
+                <member name="gauge/value_format_mode" type="int" setter="set_value_format_mode" getter="get_value_format_mode" enum="DV_Gauge.ValueFormatMode" default="0">
+                        Selects how the center value is formatted (raw, percent, or custom text).
+                </member>
+	</members>
+	<signals>
+                <signal name="clicked">
+                        <description>
+                                Emitted when the gauge is clicked with the primary mouse button.
+                        </description>
+                </signal>
+                <signal name="value_changed">
+                        <param index="0" name="value" type="float" />
+                        <description>
+                                Emitted whenever the displayed value changes, including animated transitions.
+                        </description>
+                </signal>
+                <signal name="zone_entered">
+                        <param index="0" name="zone_index" type="int" />
+                        <description>
+                                Emitted when the value animates into a different zone. Contains the zone index.
+                        </description>
+                </signal>
+        </signals>
+        <constants>
+                <constant name="VALUE_FORMAT_VALUE" value="0" enum="ValueFormatMode">
+                        Shows the raw numeric value.
+                </constant>
+                <constant name="VALUE_FORMAT_PERCENT" value="1" enum="ValueFormatMode">
+                        Displays the current value normalized between the configured min and max.
+                </constant>
+                <constant name="VALUE_FORMAT_CUSTOM" value="2" enum="ValueFormatMode">
+                        Uses [member gauge/custom_value_text] as the center label.
+                </constant>
+        </constants>
+</class>

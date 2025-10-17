@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="DV_LineChart" inherits="DVChart" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		Line/area chart component that plots one or more series across named categories, with optional point markers and per-series fill.
+	</brief_description>
+
+	<description>
+		[code]DV_LineChart[/code] renders N series of numeric values across a shared set of categories. Each series is provided as a [code]PackedFloat32Array[/code] whose indices align to the order of [code]set_categories()[/code]. Data is added with [code]add_series()[/code] (from [code]DVChart[/code]); this class adds per-series area fill via [method set_series_filled].
+
+		Appearance is configurable through theme/palette (inherited from [code]DVChart[/code]) and members like [member line_width], [member point_radius], and [member show_points]. Use [code]set_palette()[/code] (from [code]DVChart[/code]) to override colors, and [code]set_legend_position()[/code] to change legend placement.
+
+		[codeblocks]
+		[gdscript]
+		extends DV_LineChart
+		var rng := RandomNumberGenerator.new()
+
+		func _ready() -> void:
+			# Title + axis labels + numeric formatting.
+			set_title("30 Day Price index")
+			set_y_axis_label("Price")
+			set_x_axis_label("Days")
+			set_value_format(DVComponent.DECIMAL)
+
+			# Build 30 day labels: "1" .. "30".
+			var days := 30
+			var cats := PackedStringArray()
+			for i in days:
+				cats.push_back(str(i + 1))
+			set_categories(cats)
+
+			# Generate demo prices: gentle up-trend + random noise.
+			rng.randomize()
+			var P := PackedFloat32Array()
+			var base := 150.0
+			for i in days:
+				var trend := 0.7 * i                     # linear trend
+				var noise := rng.randf_range(-6.0, 10.0) # random wiggle
+				P.push_back(max(base + trend + noise, 0.0))
+
+			# Show ~every 5th x-axis label to keep the chart readable.
+			set_x_tick_count(5)
+			
+
+			# Start the visible window at index 5 so moving averages / bands
+			# have enough prior data to look correct at the first drawn point.
+			set_index_range(5, 30)
+
+			# Enable overlays for this series: SMA, EMA, Bollinger Bands.
+			# The final four params are the overlay settings per series:
+			#   sma_window=3, ema_window=5, bb_window=3, bb_k=2.0
+			# DVChart documentation for details.
+			var mask :int = DVChart.OVL_SMA | DVChart.OVL_EMA | DVChart.OVL_BBANDS
+			var s_price := add_series_with_overlays("Price", P, mask, 3, 5, 5, 2.0)
+
+			# Fill under the price line for a cleaner read.
+			set_series_filled(s_price, true)
+
+			# Per-overlay styling (line color + width; BB adds fill color).
+			set_series_sma_style(s_price, Color(0.497, 0.62, 0.946, 1.0), 2.0)
+			set_series_ema_style(s_price, Color(0.156, 0.563, 0.332, 1.0), 2.0)
+			set_series_bbands_style(s_price, Color(0.87, 0.802, 0.133, 1.0), Color(0.87, 0.802, 0.133, 0.12), 2.0)
+
+		[/gdscript]
+		[/codeblocks]
+	</description>
+
+	<tutorials>
+	</tutorials>
+
+	<methods>
+		<method name="set_series_filled">
+			<return type="void" />
+			<param index="0" name="index" type="int" />
+			<param index="1" name="fill" type="bool" />
+			<description>
+				Enables or disables area fill under the line for the series at [code]index[/code]. When [code]fill[/code] is [code]true[/code], the series is drawn as an area chart; when [code]false[/code], only the line (and optional points) are drawn.
+			</description>
+		</method>
+	</methods>
+
+	<members>
+		<member name="line_width" type="float" setter="set_line_width" getter="get_line_width" default="2.0">
+			Stroke width (in pixels) used to render series lines.
+		</member>
+		<member name="point_radius" type="float" setter="set_point_radius" getter="get_point_radius" default="2.5">
+			Radius (in pixels) of per-vertex point markers when [member show_points] is enabled.
+		</member>
+		<member name="show_points" type="bool" setter="set_show_points" getter="get_show_points" default="true">
+			When [code]true[/code], draws circular point markers at each category value for all series.
+		</member>
+	</members>
+</class>

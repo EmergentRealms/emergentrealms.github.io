@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="DV_HeatMap" inherits="Control" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+        <brief_description>
+                2D heat map overlay that plots weighted points over a background texture.
+        </brief_description>
+        <description>
+                DV_HeatMap displays geospatial or floor-plan data by mapping world coordinates to control space. Provide a
+                background map, define the world bounds, and add points with intensities to visualize hotspots. Built-in
+                autoscaling, custom gradients, and hover/click signals make it easy to build interactive incident maps or
+                density overlays.
+
+                [codeblocks]
+                [gdscript]
+                
+                extends DV_HeatMap
+
+                const REGION_ORIGIN := Vector2(-2000, -1000)
+                const REGION_SIZE   := Vector2(4000, 3000)
+                const REGION_MAP    = preload("uid://blev7sfjwf8kg")
+
+                # Pretend this came from SQLite/logs/etc.
+                const INCIDENTS := [
+                        ["Theft",    "Wallet lifted @ market",      Vector2(  300,  200), 0.2],
+                        ["Smuggling","Crates offloaded @ pier 3",   Vector2(-1500, -180), 0.6],
+                        ["Assault",  "Brawl near tavern",           Vector2(  480,  420), 0.4],
+                        ["Theft",  "Break-in near tavern",           Vector2(  490,  410), 0.8],
+                        
+                ]
+
+                func _ready() -> void:
+                        set_background_texture(REGION_MAP)
+                        set_texture_fit_mode(DV_HeatMap.FIT_CONTAIN)
+                        set_world_region(REGION_ORIGIN, REGION_SIZE)
+                        set_point_radius(20.0)
+                        set_autoscale(true)
+
+                        for row in INCIDENTS:
+                                add_point(row[0], row[1], row[2], row[3])
+                                
+                        #Signals!
+                        point_hovered.connect(_on_point_moused_over)
+                        point_clicked.connect(_on_point_clicked)
+
+                func _on_point_moused_over(idx:int, event_type:String, tooltip:String, pos:Vector2, intesity:float):
+                        print("Point Moused over! ", tooltip, " at pos: ", pos)
+                        
+                func _on_point_clicked(idx:int, event_type:String, tooltip:String, pos:Vector2, intesity:float):
+                        print("Point Clicked! ", tooltip, " at pos: ", pos)
+
+                [/gdscript]
+                [/codeblocks]
+        </description>
+        <tutorials>
+        </tutorials>
+	<methods>
+                <method name="add_point">
+			<return type="int" />
+			<param index="0" name="event_type" type="String" />
+			<param index="1" name="tool_tip" type="String" />
+			<param index="2" name="world_position" type="Vector2" />
+			<param index="3" name="intensity" type="float" />
+                        <description>
+                                Adds a heat map point with an [param event_type] label, tooltip text, world-space position, and
+                                intensity between 0 and 1. Returns the index of the new point.
+                        </description>
+                </method>
+                <method name="clear_points">
+                        <return type="void" />
+                        <description>
+                                Removes all plotted points and resets intensity scaling.
+                        </description>
+                </method>
+                <method name="get_gradient_colors" qualifiers="const">
+                        <return type="PackedColorArray" />
+                        <description>
+                                Returns the colors used for the current gradient ramp.
+                        </description>
+                </method>
+                <method name="get_gradient_stops" qualifiers="const">
+                        <return type="PackedFloat32Array" />
+                        <description>
+                                Returns the normalized stops paired with the gradient colors.
+                        </description>
+                </method>
+                <method name="get_intensity_range" qualifiers="const">
+                        <return type="Vector2" />
+                        <description>
+                                Returns the minimum and maximum intensity currently applied (x = min, y = max).
+                        </description>
+                </method>
+                <method name="get_point_intensities" qualifiers="const">
+                        <return type="PackedFloat32Array" />
+                        <description>
+                                Returns the intensities of all plotted points.
+                        </description>
+                </method>
+                <method name="get_point_positions" qualifiers="const">
+                        <return type="PackedVector2Array" />
+                        <description>
+                                Returns the world-space positions of all points.
+                        </description>
+                </method>
+                <method name="is_autoscale" qualifiers="const">
+                        <return type="bool" />
+                        <description>
+                                Returns whether the intensity range is computed automatically from the data.
+                        </description>
+                </method>
+                <method name="set_autoscale">
+                        <return type="void" />
+                        <param index="0" name="enabled" type="bool" />
+                        <description>
+                                Enables or disables automatic scaling of intensities based on the current points.
+                        </description>
+                </method>
+                <method name="set_gradient">
+			<return type="void" />
+			<param index="0" name="colors" type="PackedColorArray" />
+			<param index="1" name="stops" type="PackedFloat32Array" />
+                        <description>
+                                Replaces the gradient ramp. [param colors] and [param stops] must have the same length.
+                        </description>
+                </method>
+                <method name="set_intensity_range">
+			<return type="void" />
+			<param index="0" name="min_value" type="float" />
+			<param index="1" name="max_value" type="float" />
+                        <description>
+                                Manually clamps intensities to the provided range when autoscale is disabled.
+                        </description>
+                </method>
+                <method name="set_points">
+			<return type="void" />
+			<param index="0" name="world_positions" type="PackedVector2Array" />
+			<param index="1" name="intensities" type="PackedFloat32Array" />
+                        <description>
+                                Bulk replaces the point cloud with aligned arrays of positions and intensities.
+                        </description>
+                </method>
+                <method name="set_texture_fit_mode">
+			<return type="void" />
+			<param index="0" name="mode" type="int" />
+                        <description>
+                                Controls how the background texture fits within the control bounds. See [enum FitMode].
+                        </description>
+                </method>
+                <method name="set_world_region">
+			<return type="void" />
+			<param index="0" name="origin" type="Vector2" />
+			<param index="1" name="size" type="Vector2" />
+                        <description>
+                                Defines the world-space origin and size mapped to the control. Points outside are clipped.
+                        </description>
+                </method>
+        </methods>
+	<members>
+                <member name="background_texture" type="Texture2D" setter="set_background_texture" getter="get_background_texture">
+                        Texture used as the map or floor-plan behind the heatmap points.
+                </member>
+                <member name="point_radius" type="float" setter="set_point_radius" getter="get_point_radius" default="32.0">
+                        Radius (in pixels) of the influence kernel for each point.
+                </member>
+	</members>
+	<signals>
+                <signal name="point_clicked">
+			<param index="0" name="hover_idx_" type="int" />
+			<param index="1" name="event_type" type="String" />
+			<param index="2" name="tool_tip" type="String" />
+			<param index="3" name="position" type="Vector2" />
+			<param index="4" name="intensity" type="float" />
+                        <description>
+                                Emitted when a point is clicked. Provides the index, labels, world position, and intensity.
+                        </description>
+                </signal>
+                <signal name="point_hovered">
+			<param index="0" name="hover_idx_" type="int" />
+			<param index="1" name="event_type" type="String" />
+			<param index="2" name="tool_tip" type="String" />
+			<param index="3" name="position" type="Vector2" />
+			<param index="4" name="intensity" type="float" />
+                        <description>
+                                Emitted while hovering a point. Shares the same payload as [signal point_clicked].
+                        </description>
+                </signal>
+        </signals>
+        <constants>
+                <constant name="FIT_STRETCH" value="0" enum="FitMode">
+                        Stretches the texture to exactly fill the control.
+                </constant>
+                <constant name="FIT_CONTAIN" value="1" enum="FitMode">
+                        Scales the texture uniformly so it fits entirely within the control.
+                </constant>
+                <constant name="FIT_COVER" value="2" enum="FitMode">
+                        Scales the texture uniformly until it covers the control, cropping if necessary.
+                </constant>
+        </constants>
+</class>

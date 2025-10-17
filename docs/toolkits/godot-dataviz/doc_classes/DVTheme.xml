@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="DVTheme" inherits="Resource" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+        <brief_description>
+                Resource that centralizes palette, typography, and component style settings for DataViz UI Kit controls.
+        </brief_description>
+        <description>
+                DVTheme packages all configurable look-and-feel data needed by [DVComponent] based controls. A theme carries
+                global colors, spacing, animation timing, and nested style resources for specific component families such as
+                charts, tiles, gauges, and grid panels. Components automatically react to the [signal theme_changed] signal
+                when connected through [DVThemeManager], enabling instant restyling across a dashboard.
+
+                Themes can be authored in the inspector or constructed in code before being applied to individual widgets.
+        </description>
+        <tutorials>
+        </tutorials>
+	<members>
+                <member name="component/frame_thickness" type="float" setter="set_frame_thickness" getter="get_frame_thickness" default="1.0">
+                        Default border thickness applied to DVComponent-derived controls.
+                </member>
+                <member name="component/corner_radius" type="float" setter="set_corner_radius" getter="get_corner_radius" default="10.0">
+                        Rounded corner radius shared by components that draw frames or backgrounds.
+                </member>
+                <member name="component_layout/padding" type="Rect2i" setter="set_padding" getter="get_padding" default="Rect2i(12, 12, 12, 12)">
+                        Standard interior padding applied to controls before they render content.
+                </member>
+                <member name="component_layout/margin" type="Rect2i" setter="set_margin" getter="get_margin" default="Rect2i(0, 0, 0, 0)">
+                        Extra space kept around components when the theme is applied.
+                </member>
+                <member name="component_layout/ui_scale" type="float" setter="set_ui_scale" getter="get_ui_scale" default="1.0">
+                        Global scale multiplier that resizes layout metrics for all themed components.
+                </member>
+                <member name="component_layout/pixel_snap" type="bool" setter="set_pixel_snap" getter="get_pixel_snap" default="true">
+                        When enabled, components snap geometry to whole pixels for crisp rendering.
+                </member>
+                <member name="palette/neutral_seed" type="Color" setter="set_neutral_seed" getter="get_neutral_seed" default="Color(0.16, 0.18, 0.21, 1)">
+                        Base hue used to derive neutral backgrounds and text ramps.
+                </member>
+                <member name="palette/primary_seed" type="Color" setter="set_primary_seed" getter="get_primary_seed" default="Color(0.21, 0.49, 0.86, 1)">
+                        Seed color for primary accents such as buttons and highlights.
+                </member>
+                <member name="palette/success_seed" type="Color" setter="set_success_seed" getter="get_success_seed" default="Color(0.31, 0.7, 0.46, 1)">
+                        Seed color used for success/positive messaging.
+                </member>
+                <member name="palette/warning_seed" type="Color" setter="set_warning_seed" getter="get_warning_seed" default="Color(0.98, 0.75, 0.16, 1)">
+                        Seed color for warning or caution indicators.
+                </member>
+                <member name="palette/error_seed" type="Color" setter="set_error_seed" getter="get_error_seed" default="Color(0.91, 0.29, 0.24, 1)">
+                        Seed color assigned to error/critical states.
+                </member>
+                <member name="palette/info_seed" type="Color" setter="set_info_seed" getter="get_info_seed" default="Color(0.2, 0.65, 0.88, 1)">
+                        Seed color for informational highlights.
+                </member>
+                <member name="palette/dark_mode" type="bool" setter="set_dark_mode" getter="is_dark_mode" default="true">
+                        Chooses between dark and light palette derivation.
+                </member>
+                <member name="palette/contrast_target" type="float" setter="set_contrast_target" getter="get_contrast_target" default="4.5">
+                        Desired contrast ratio used when generating accessible text colors.
+                </member>
+                <member name="palette/use_pallet" type="bool" setter="set_use_pallet" getter="get_use_pallet" default="false">
+                        When [code]true[/code], the custom [member palette/palette] overrides automatically generated series colors.
+                </member>
+                <member name="palette/palette" type="Color[]" setter="set_palette" getter="get_palette" default="[]">
+                        Optional custom color list applied to charts when [member palette/use_pallet] is enabled.
+                </member>
+                <member name="component_timing/animation_ms" type="int" setter="set_animation_ms" getter="get_animation_ms" default="250">
+                        Default animation duration (in milliseconds) shared by themed widgets.
+                </member>
+                <member name="component_substyle/chart" type="DVThemeChartStyle" setter="set_chart_style" getter="get_chart_style">
+                        Nested style resource that drives shared chart configuration such as legend placement and grid visibility.
+                </member>
+                <member name="component_substyle/tile" type="DVThemeTileStyle" setter="set_tile_style" getter="get_tile_style">
+                        Nested style resource that defines KPI tile accent colors.
+                </member>
+                <member name="component_substyle/grid" type="DVThemeGridStyle" setter="set_grid_style" getter="get_grid_style">
+                        Nested style resource describing table row/header colors.
+                </member>
+                <member name="component_substyle/gauge" type="DVThemeGaugeStyle" setter="set_gauge_style" getter="get_gauge_style">
+                        Nested style resource configuring default gauge ticks, sweep, and colors.
+                </member>
+                <member name="component_substyle/radar" type="DVThemeRadarStyle" setter="set_radar_style" getter="get_radar_style">
+                        Nested style resource controlling radar chart fill, outline, and grid presentation.
+                </member>
+                <member name="component_substyle/pie" type="DVThemePieStyle" setter="set_pie_style" getter="get_pie_style">
+                        Nested style resource that configures donut/pie charts (label placement, slice gap, etc.).
+                </member>
+	</members>
+	<signals>
+                <signal name="theme_changed">
+                        <description>
+                                Emitted whenever any property or nested style resource on the theme changes. Components listen
+                                for this to refresh their visuals.
+                        </description>
+                </signal>
+        </signals>
+</class>

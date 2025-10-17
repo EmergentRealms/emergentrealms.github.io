@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="DVThemeManager" inherits="Node" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+        <brief_description>
+                Autoload node that stores and distributes the active DVTheme to all components.
+        </brief_description>
+        <description>
+                DVThemeManager acts as the central theme registry for the addon. Add it as an autoload to your project to
+                make [method get_singleton] available from anywhere. Components connect to the manager to be notified when
+                [member active_theme] changes, allowing you to switch dashboards between light and dark modes instantly.
+
+                The manager can also load a default theme from disk at startup by configuring
+                [member default_theme_path], making it easy to ship curated style presets with your addon.
+        </description>
+        <tutorials>
+        </tutorials>
+	<methods>
+                <method name="load_default_theme">
+                        <return type="void" />
+                        <description>
+                                Loads and applies the theme referenced by [member default_theme_path] if it exists.
+                        </description>
+                </method>
+        </methods>
+	<members>
+                <member name="active_theme" type="DVTheme" setter="set_active_theme" getter="get_active_theme">
+                        Theme instance distributed to connected components.
+                </member>
+                <member name="default_theme_path" type="String" setter="set_default_theme_path" getter="get_default_theme_path" default="&quot;&quot;">
+                        Resource path loaded during startup when [method load_default_theme] is called automatically.
+                </member>
+	</members>
+	<signals>
+                <signal name="theme_changed">
+                        <param index="0" name="theme" type="DVTheme" />
+                        <description>
+                                Emitted after [member active_theme] is replaced. Subscribers receive the new theme instance.
+                        </description>
+                </signal>
+        </signals>
+</class>

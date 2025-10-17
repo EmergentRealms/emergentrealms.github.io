@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="DV_Waterfall" inherits="DVChart" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		Waterfall (bridge) chart for visualizing a running total from sequential positive/negative deltas, with optional total bar.
+	</brief_description>
+
+	<description>
+		[code]DV_Waterfall[/code] renders a series of additive/subtractive steps as vertical bars that accumulate into a running total. Provide category labels and a single series of deltas (use [code]add_series()[/code] inherited from [code]DVChart[/code]). The control computes the running totals internally and appends a final total bar. The first bar typically represents the opening value; the last bar shows the computed total. Colors are applied per role: rises use [member water/rise_color], falls use [member water/fall_color], and opening/total bars use [member water/total_color]. Spacing and labels can be adjusted via [member water/bar_gap_px] and [member water/show_value_labels].
+
+		[codeblocks]
+		[gdscript]
+		
+		extends DV_Waterfall
+
+		func _ready() -> void:
+			set_title("Revenue Bridge")
+			set_bar_gap_px(10)
+			
+			var deltas := PackedFloat32Array([120, 40, -35, -10, 22, 58, -18])
+			set_categories(PackedStringArray([
+				"Opening","Sales", "Refunds", "Shipping", "Ops", "New Biz", "Tax"
+			])) # labels only for the deltas (7); "Total" is appended by the chart
+
+			add_series("Δ Revenue", deltas)
+			set_value_format(DVComponent.INTEGER)
+			
+		[/gdscript]
+		[/codeblocks]
+	</description>
+
+	<tutorials>
+	</tutorials>
+
+	<members>
+		<member name="water/bar_gap_px" type="float" setter="set_bar_gap_px" getter="get_bar_gap_px" default="6.0">
+			Horizontal gap, in pixels, between adjacent bars.
+		</member>
+
+		<member name="water/fall_color" type="Color" setter="set_fall_color" getter="get_fall_color" default="Color(0.9, 0.35, 0.36, 1)">
+			Color used for negative deltas (decreases in the running total).
+		</member>
+
+		<member name="water/rise_color" type="Color" setter="set_rise_color" getter="get_rise_color" default="Color(0.2, 0.78, 0.46, 1)">
+			Color used for positive deltas (increases in the running total).
+		</member>
+
+		<member name="water/show_value_labels" type="bool" setter="set_show_value_labels" getter="get_show_value_labels" default="false">
+			When [code]true[/code], draws numeric value labels on bars (format controlled by [code]set_value_format()[/code] from [code]DVComponent[/code]).
+		</member>
+
+		<member name="water/total_color" type="Color" setter="set_total_color" getter="get_total_color" default="Color(0.6, 0.68, 0.78, 1)">
+			Color used for the opening and final total bars.
+		</member>
+	</members>
+</class>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="DVThemePieStyle" inherits="Resource" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+        <brief_description>
+                Style resource that defines defaults for pie and donut chart presentation.
+        </brief_description>
+        <description>
+                DVThemePieStyle provides per-theme defaults for [DV_PieChart] such as label alignment, center text colors,
+                and animation speed. Adjust these values once to ensure all pie charts in your UI share the same visual
+                language.
+        </description>
+        <tutorials>
+        </tutorials>
+        <methods>
+                <method name="get_show_center_value" qualifiers="const">
+                        <return type="bool" />
+                        <description>
+                                Returns whether the theme instructs pies to render the aggregate value in the center.
+                        </description>
+                </method>
+                <method name="set_show_center_value">
+                        <return type="void" />
+                        <param index="0" name="v" type="bool" />
+                        <description>
+                                Sets whether the formatted center value should be shown by default.
+                        </description>
+                </method>
+        </methods>
+        <members>
+                <member name="pie/inner_ratio" type="float" setter="set_inner_ratio" getter="get_inner_ratio" default="0.0">
+                        Fraction of the radius carved out to form a donut (0 for a solid pie).
+                </member>
+                <member name="pie/ring_thickness_px" type="float" setter="set_ring_thickness_px" getter="get_ring_thickness_px" default="0.0">
+                        Explicit ring thickness in pixels when rendering polar-area charts.
+                </member>
+                <member name="pie/start_angle_deg" type="float" setter="set_start_angle_deg" getter="get_start_angle_deg" default="90.0">
+                        Angle (in degrees) where the first slice begins.
+                </member>
+                <member name="pie/clockwise" type="bool" setter="set_clockwise" getter="get_clockwise" default="true">
+                        Chooses whether slices are laid out clockwise or counter-clockwise.
+                </member>
+                <member name="pie/polar_area" type="bool" setter="set_polar_area" getter="get_polar_area" default="false">
+                        Enables polar area mode where slice radius encodes value.
+                </member>
+                <member name="pie/min_slice_deg" type="float" setter="set_min_slice_deg" getter="get_min_slice_deg" default="1.5">
+                        Minimum angular size allowed for individual slices (degrees).
+                </member>
+                <member name="pie/group_below_pct" type="float" setter="set_group_below_pct" getter="get_group_below_pct" default="0.0">
+                        Percentage threshold below which slices are grouped into an "Other" category.
+                </member>
+                <member name="pie/label_mode" type="int" setter="set_label_mode" getter="get_label_mode" default="2">
+                        Determines whether labels show values, percentages, both, or nothing.
+                </member>
+                <member name="pie/label_inside" type="bool" setter="set_label_inside" getter="get_label_inside" default="true">
+                        Places labels inside slices when [code]true[/code]; outside when [code]false[/code].
+                </member>
+                <member name="pie/label_leader_lines" type="bool" setter="set_label_leader_lines" getter="get_label_leader_lines" default="true">
+                        Toggles leader lines for labels drawn outside the pie.
+                </member>
+                <member name="pie/donut_cap" type="int" setter="set_donut_cap" getter="get_donut_cap" default="0">
+                        Controls the cap style for donut interiors ([code]FLAT[/code] or [code]ROUNDED[/code]).
+                </member>
+                <member name="pie/hover_expand_px" type="float" setter="set_hover_expand_px" getter="get_hover_expand_px" default="6.0">
+                        Number of pixels a slice expands when hovered.
+                </member>
+                <member name="pie/sort_mode" type="int" setter="set_sort_mode" getter="get_sort_mode" default="0">
+                        Sort order applied to slices (input, ascending, or descending).
+                </member>
+                <member name="pie/slice_gap_deg" type="float" setter="set_slice_gap_deg" getter="get_slice_gap_deg" default="0.0">
+                        Angular gap inserted between adjacent slices.
+                </member>
+        </members>
+	<signals>
+                <signal name="theme_changed">
+                        <description>
+                                Emitted when a property changes to notify pie charts that their styling should be refreshed.
+                        </description>
+                </signal>
+        </signals>
+</class>

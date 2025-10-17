@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="DV_BarChart" inherits="DVChart" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+        <brief_description>
+                Column and bar chart control with stacking support, hover/click signals, and theme-aware spacing.
+        </brief_description>
+        <description>
+                DV_BarChart renders categorical data as vertical or horizontal bars (depending on
+                [member DVChart.chart/series_axis]). It supports stacked bars, theme-driven colors, and precise hit testing
+                for mouse interaction. Use [method set_gaps] to control inter-category and inter-bar spacing, and listen to
+                [signal bar_clicked] or [signal bar_hovered] to drive tooltips or drill-down behavior.
+
+                [codeblocks]
+                [gdscript]
+                
+                extends DV_BarChart
+
+                func _ready() -> void:
+                    set_categories(["Desktop", "Tablet", "Mobile"])
+                    add_series("Users", PackedFloat32Array([5204.0, 1510.0, 2490.0]))
+                    connect("bar_clicked", _on_bar_clicked)
+                    connect("bar_hovered", _on_bar_hovered)
+
+                func _on_bar_clicked(series_idx: int, category_idx: int, value: float) -> void:
+                    print("Clicked", category_idx, "=", value)
+
+                func _on_bar_hovered(series_idx: int, category_idx: int, value: float) -> void:
+                    print("Hover", category_idx, "=", value)
+                [/gdscript]
+                [/codeblocks]
+
+                Details on base class helpers such as [method DVChart.add_series] and [method DVChart.set_categories] can be accessed by following the DVChart reference.
+        </description>
+        <tutorials>
+                
+        </tutorials>
+	<methods>
+                <method name="set_gaps">
+                        <return type="void" />
+                        <param index="0" name="category_gap" type="float" />
+                        <param index="1" name="bar_gap" type="float" />
+                        <description>
+                                Sets the spacing between category bands and individual bars inside each band (in pixels).
+                        </description>
+                </method>
+        </methods>
+	<members>
+                <member name="stacked" type="bool" setter="set_stacked" getter="is_stacked" default="false">
+                        When [code]true[/code], values for each category are stacked rather than grouped side by side.
+                </member>
+	</members>
+	<signals>
+                <signal name="bar_clicked">
+			<param index="0" name="series_idx" type="int" />
+			<param index="1" name="category_idx" type="int" />
+			<param index="2" name="value" type="float" />
+                        <description>
+                                Emitted when a bar is clicked. Provides the series index, category index, and bar value.
+                        </description>
+                </signal>
+                <signal name="bar_hovered">
+			<param index="0" name="series_idx" type="int" />
+			<param index="1" name="category_idx" type="int" />
+			<param index="2" name="value" type="float" />
+                        <description>
+                                Emitted when the pointer moves over a bar. Carries the same payload as [signal bar_clicked].
+                        </description>
+                </signal>
+        </signals>
+</class>

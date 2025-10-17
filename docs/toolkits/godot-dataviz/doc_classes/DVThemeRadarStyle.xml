@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="DVThemeRadarStyle" inherits="Resource" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+        <brief_description>
+                Resource that holds default styling for radar/spider charts.
+        </brief_description>
+        <description>
+                DVThemeRadarStyle controls tailored to [DV_RadarGraph]. 
+        </description>
+        <tutorials>
+        </tutorials>
+	<members>
+                <member name="radar/grid_thickness" type="float" setter="set_grid_thickness" getter="get_grid_thickness" default="1.0">
+                        Stroke width of the grid rings.
+                </member>
+                <member name="radar/label_margin" type="float" setter="set_label_margin" getter="get_label_margin" default="28.0">
+                        Distance from the polygon to category labels (in pixels).
+                </member>
+                <member name="radar/layer_count" type="int" setter="set_layer_count" getter="get_layer_count" default="4">
+                        Number of concentric grid layers drawn behind the data polygon.
+                </member>
+                <member name="radar/outline_thickness" type="float" setter="set_outline_thickness" getter="get_outline_thickness" default="2.0">
+                        Stroke width of the polygon outline.
+                </member>
+                <member name="radar/point_radius" type="float" setter="set_point_radius" getter="get_point_radius" default="4.0">
+                        Radius of the point markers rendered on the polygon.
+                </member>
+                <member name="radar/rotate_labels" type="bool" setter="set_rotate_labels" getter="get_rotate_labels" default="false">
+                        Rotates category labels to align with their respective axes when enabled.
+                </member>
+                <member name="radar/show_grid" type="bool" setter="set_show_grid" getter="get_show_grid" default="true">
+                        Toggles display of the concentric grid.
+                </member>
+                <member name="radar/show_labels" type="bool" setter="set_show_labels" getter="get_show_labels" default="true">
+                        Controls whether category labels are drawn around the chart.
+                </member>
+                <member name="radar/show_points" type="bool" setter="set_show_points" getter="get_show_points" default="true">
+                        Toggles the vertex markers rendered on the data polygon.
+                </member>
+	</members>
+	<signals>
+                <signal name="theme_changed">
+                        <description>
+                                Issued when the radar style is updated so charts can redraw using the new defaults.
+                        </description>
+                </signal>
+        </signals>
+</class>

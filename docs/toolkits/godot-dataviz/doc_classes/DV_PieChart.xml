@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="DV_PieChart" inherits="DVChart" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		Pie and donut chart component with optional center title/value, inside/outside labels, leader lines, grouping of small slices, and per-series selection.
+	</brief_description>
+
+	<description>
+		[code]DV_PieChart[/code] renders a categorical distribution as a pie or donut. Data is provided via [code]set_categories()[/code] and [code]add_series()[/code] (inherited from [code]DVChart[/code]). The chart supports start angle, clockwise/anticlockwise direction, slice gaps, label modes, sorting, hover expansion, and donut thickness.
+
+		Enable a donut by setting [member pie/inner_ratio] above [code]0.0[/code]. The center can display custom text using [member pie/center_title], [member pie/center_subtitle], and [member pie/show_center_value] (optionally formatted by your component/theme). Label content is controlled by [member pie/label_mode]; placement can be inside the slice or outside with optional leader lines.
+
+		[codeblocks]
+		[gdscript]
+		extends DV_PieChart
+
+		func _ready() -> void:
+			set_start_angle_deg(90.0)                  # 12 o’clock
+			set_clockwise(true)
+			set_slice_gap_deg(1.5)
+			set_label_mode(DV_PieChart.LABEL_CAT_PERCENT)
+			set_label_inside(false)                    # put labels outside
+			set_label_leader_lines(true)
+			set_sort_mode(DV_PieChart.SORT_INPUT)      # INPUT, ASC, DESC
+			set_show_center_value(true)
+			set_center_title("9,204")
+			set_center_subtitle("Total Users")
+
+			# Data
+			set_categories(PackedStringArray(["Desktop", "Tablet", "Mobile"]))
+			add_series("Users", PackedFloat32Array([5204.0, 1510.0, 2490.0]))
+
+			# Signals
+			connect("slice_clicked", _on_slice_clicked)
+			connect("slice_hovered", _on_slice_hovered)
+
+		func _on_slice_clicked(index:int, category:String, value:float) -> void:
+			print("Slice Clicked! Idx:", index, " Cat:", category, " Val:", value)
+
+		func _on_slice_hovered(index:int, category:String, value:float) -> void:
+			print("Slice Hovered! Idx:", index, " Cat:", category, " Val:", value)
+		[/gdscript]
+		[/codeblocks]
+	</description>
+
+	<tutorials>
+	</tutorials>
+
+	<members>
+		<member name="chart/axes_visible" type="bool" setter="set_show_axes" getter="is_show_axese" overrides="DVChart" default="false">
+			Axes visibility toggle inherited from [code]DVChart[/code]. Not typically used for pies.
+		</member>
+
+		<member name="chart/grid_visible" type="bool" setter="set_show_grid" getter="is_show_grid" overrides="DVChart" default="false">
+			Grid visibility toggle inherited from [code]DVChart[/code]. Not typically used for pies.
+		</member>
+
+		<member name="pie/active_series_index" type="int" setter="set_active_series_index" getter="get_active_series_index" default="0">
+			Index of the series to render. Useful when multiple series are attached but only one is shown at a time.
+		</member>
+
+		<member name="pie/center_subtitle" type="String" setter="set_center_subtitle" getter="get_center_subtitle" default="&quot;&quot;">
+			Smaller text shown beneath the center title (donut style or plain pie with center text).
+		</member>
+
+		<member name="pie/center_title" type="String" setter="set_center_title" getter="get_center_title" default="&quot;&quot;">
+			Large center text, often a total or key label.
+		</member>
+
+		<member name="pie/clockwise" type="bool" setter="set_clockwise" getter="is_clockwise" default="true">
+			When [code]true[/code], slices are laid out clockwise from [member pie/start_angle].
+		</member>
+
+		<member name="pie/custom_center_value" type="String" setter="set_custom_center_value" getter="get_custom_center_value" default="&quot;&quot;">
+			Custom value string to display at the center when [member pie/show_center_value] is enabled.
+		</member>
+
+		<member name="pie/donut_cap" type="int" setter="set_donut_cap" getter="get_donut_cap" enum="DV_PieChart.DonutCap" default="0">
+			End cap style for donut arcs when using a non-zero [member pie/inner_ratio]. See [enum DonutCap].
+		</member>
+
+		<member name="pie/group_below" type="float" setter="set_group_below" getter="get_group_below" default="0.0">
+			Threshold value; slices with values below this amount may be grouped into a single "Other" slice. Set to [code]0.0[/code] to disable.
+		</member>
+
+		<member name="pie/hover_expand_px" type="float" setter="set_hover_expand_px" getter="get_hover_expand_px" default="6.0">
+			Pixels to offset a slice outward when hovered.
+		</member>
+
+		<member name="pie/inner_ratio" type="float" setter="set_inner_ratio" getter="get_inner_ratio" default="0.0">
+			Donut inner radius ratio [code]0.0..1.0[/code]. Use [code]0.0[/code] for a full pie; higher values create a donut.
+		</member>
+
+		<member name="pie/label_inside" type="bool" setter="set_label_inside" getter="get_label_inside" default="true">
+			When [code]true[/code], labels render inside the slice; otherwise they render outside.
+		</member>
+
+		<member name="pie/label_leader_lines" type="bool" setter="set_label_leader_lines" getter="get_label_leader_lines" default="true">
+			Draws leader lines from outside labels to their slices.
+		</member>
+
+		<member name="pie/label_mode" type="int" setter="set_label_mode" getter="get_label_mode" enum="DV_PieChart.LabelMode" default="2">
+			Controls label content. See [enum LabelMode] for options like value, percent, category, and combinations.
+		</member>
+
+		<member name="pie/min_slice_deg" type="float" setter="set_min_slice_deg" getter="get_min_slice_deg" default="1.5">
+			Minimum angular size (in degrees) for a slice to be drawn. Smaller slices may be clamped or grouped depending on settings.
+		</member>
+
+		<member name="pie/polar_area" type="bool" setter="set_polar_area" getter="is_polar_area" default="false">
+			When [code]true[/code], draws a polar area chart (equal angles, radius encodes value) instead of a proportional pie.
+		</member>
+
+		<member name="pie/ring_thickness_px" type="float" setter="set_ring_thickness_px" getter="get_ring_thickness_px" default="0.0">
+			Explicit ring thickness in pixels. If [code]0.0[/code], thickness is derived from [member pie/inner_ratio].
+		</member>
+
+		<member name="pie/show_center_value" type="bool" setter="set_show_center_value" getter="get_show_center_value" default="false">
+			When [code]true[/code], displays a value at the chart center (uses [member pie/custom_center_value] or a computed value depending on implementation).
+		</member>
+
+		<member name="pie/slice_gap_deg" type="float" setter="set_slice_gap_deg" getter="get_slice_gap_deg" default="0.0">
+			Gap between slices in degrees.
+		</member>
+
+		<member name="pie/sort_mode" type="int" setter="set_sort_mode" getter="get_sort_mode" enum="DV_PieChart.SortMode" default="0">
+			Slice ordering mode. See [enum SortMode] for input order, ascending, or descending by value.
+		</member>
+
+		<member name="pie/start_angle" type="float" setter="set_start_angle_deg" getter="get_start_angle_deg" default="90.0">
+			Start angle in degrees for the first slice (e.g., [code]90.0[/code] for 12 o’clock).
+		</member>
+	</members>
+
+	<signals>
+		<signal name="slice_clicked">
+			<param index="0" name="index" type="int" />
+			<param index="1" name="category" type="String" />
+			<param index="2" name="value" type="float" />
+			<description>
+				Emitted when a slice is clicked. Provides the slice index, category, and raw value.
+			</description>
+		</signal>
+
+		<signal name="slice_hovered">
+			<param index="0" name="index" type="int" />
+			<param index="1" name="category" type="String" />
+			<param index="2" name="value" type="float" />
+			<description>
+				Emitted when the pointer hovers a slice. Provides the slice index, category, and raw value.
+			</description>
+		</signal>
+	</signals>
+
+	<constants>
+		<constant name="LABEL_NONE" value="0" enum="LabelMode">
+			No labels are drawn.
+		</constant>
+		<constant name="LABEL_VALUE" value="1" enum="LabelMode">
+			Label shows the raw value.
+		</constant>
+		<constant name="LABEL_PERCENT" value="2" enum="LabelMode">
+			Label shows the percent of the series total.
+		</constant>
+		<constant name="LABEL_CAT_VALUE" value="4" enum="LabelMode">
+			Label shows category and raw value.
+		</constant>
+		<constant name="LABEL_CAT_PERCENT" value="5" enum="LabelMode">
+			Label shows category and percent.
+		</constant>
+		<constant name="LABEL_VAL_PER" value="6" enum="LabelMode">
+			Label shows raw value and percent.
+		</constant>
+		<constant name="LABEL_ALL" value="7" enum="LabelMode">
+			Label shows category, raw value, and percent.
+		</constant>
+
+		<constant name="CAP_FLAT" value="0" enum="DonutCap">
+			Flat arc ends for donut rendering.
+		</constant>
+		<constant name="CAP_ROUNDED" value="1" enum="DonutCap">
+			Rounded arc ends for donut rendering.
+		</constant>
+
+		<constant name="SORT_INPUT" value="0" enum="SortMode">
+			Keep input order of categories.
+		</constant>
+		<constant name="SORT_ASC" value="1" enum="SortMode">
+			Sort slices by ascending value.
+		</constant>
+		<constant name="SORT_DESC" value="2" enum="SortMode">
+			Sort slices by descending value.
+		</constant>
+	</constants>
+</class>

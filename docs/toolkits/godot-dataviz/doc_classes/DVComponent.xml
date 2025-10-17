@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="DVComponent" inherits="Control" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+        <brief_description>
+                Base control for DataViz UI Kit components with shared layout, theming, and formatting utilities.
+        </brief_description>
+        <description>
+                DVComponent centralizes the common behavior shared by all widgets in the DataViz UI Kit. It extends
+                [Control] to provide configurable padding, margins, frames, tooltips, and value formatting, while also
+                handling integration with [DVTheme] resources and the global [DVThemeManager]. Subclasses rely on
+                DVComponent to queue redraws efficiently, react to theme changes, and expose consistent styling
+                properties to the editor.
+
+                The class exposes helpers for formatting numbers, drawing framed backgrounds, and snapping geometry to
+                pixel boundaries, making it a solid foundation for custom data visualization controls.
+        </description>
+        <tutorials>
+        </tutorials>
+	<methods>
+                <method name="apply_theme">
+                        <return type="void" />
+                        <param index="0" name="theme" type="DVTheme" />
+                        <param index="1" name="force" type="bool" />
+                        <description>
+                                Applies [param theme] to the component, optionally forcing a refresh even if the same theme is
+                                already active. This updates cached colors, fonts, and layout metrics derived from the theme.
+                        </description>
+                </method>
+                <method name="get_pixel_snap" qualifiers="const">
+                        <return type="bool" />
+                        <description>
+                                Returns [code]true[/code] when drawing and layout should be snapped to whole pixels to avoid
+                                sub-pixel artifacts.
+                        </description>
+                </method>
+                <method name="set_pixel_snap">
+                        <return type="void" />
+                        <param index="0" name="v" type="bool" />
+                        <description>
+                                Toggles pixel snapping. Enable this when you want crisp rasterized lines; disable it for
+                                sub-pixel interpolation effects.
+                        </description>
+                </method>
+        </methods>
+	<members>
+                <member name="behavior/animation_ms" type="int" setter="set_animation_ms" getter="get_animation_ms" default="250">
+                        Duration for built-in transitions (in milliseconds). Increase for slower easing or set to 0 to disable animation.
+                </member>
+                <member name="behavior/selection_enabled" type="bool" setter="set_selection_enabled" getter="get_selection_enabled" default="false">
+                        Enables interactive selection for components that support highlighting specific data points or rows.
+                </member>
+                <member name="behavior/tooltip_enabled" type="bool" setter="set_tooltip_enabled" getter="get_tooltip_enabled" default="true">
+                        Toggles tooltip emission when the user hovers interactive elements.
+                </member>
+                <member name="layout/margin" type="Rect2i" setter="set_margin" getter="get_margin" default="Rect2i(0, 0, 0, 0)">
+                        Extra space reserved outside the component’s content rectangle before it draws its background or frame.
+                </member>
+                <member name="layout/padding" type="Rect2i" setter="set_padding" getter="get_padding" default="Rect2i(12, 12, 12, 12)">
+                        Insets applied inside the frame that determine how much space to keep between the border and child content.
+                </member>
+                <member name="layout/ui_scale" type="float" setter="set_ui_scale" getter="get_ui_scale" default="1.0">
+                        Multiplier applied to internal layout metrics so the control can scale up or down uniformly.
+                </member>
+                <member name="text/format_decimals" type="int" setter="set_format_decimals" getter="get_format_decimals" default="2">
+                        Number of fractional digits used when formatting numeric values in [constant VALUE_FORMAT] modes that support decimals.
+                </member>
+                <member name="text/value_format" type="int" setter="set_value_format" getter="get_value_format" enum="DVComponent.VALUE_FORMAT" default="0">
+                        Selects the numeric formatting style: decimal, integer, or compact.
+                </member>
+                <member name="visual/background_color" type="Color" setter="set_background_color" getter="get_background_color" default="Color(0.1, 0.11, 0.14, 1)">
+                        Fill color used behind the component’s content when [member visual/show_background] is enabled.
+                </member>
+                <member name="visual/corner_radius" type="float" setter="set_corner_radius" getter="get_corner_radius" default="10.0">
+                        Radius (in pixels) for rounding the component’s frame and background corners.
+                </member>
+                <member name="visual/dark_font" type="Color" setter="set_dark_font" getter="get_dark_font" default="Color(0.1, 0.11, 0.14, 1)">
+                        Text color picked when rendering on lighter backgrounds.
+                </member>
+                <member name="visual/frame_color" type="Color" setter="set_frame_color" getter="get_frame_color" default="Color(0.7, 0.74, 0.82, 1)">
+                        Stroke color of the component frame when [member visual/show_frame] is enabled.
+                </member>
+                <member name="visual/frame_thickness" type="float" setter="set_frame_thickness" getter="get_frame_thickness" default="1.0">
+                        Thickness (in pixels) of the frame outline.
+                </member>
+                <member name="visual/light_font" type="Color" setter="set_light_font" getter="get_light_font" default="Color(0.94, 0.96, 0.98, 1)">
+                        Text color picked when rendering on darker backgrounds.
+                </member>
+                <member name="visual/show_background" type="bool" setter="set_show_background" getter="get_show_background" default="true">
+                        Draws the themed background fill when [code]true[/code]. Disable for transparent components.
+                </member>
+                <member name="visual/show_frame" type="bool" setter="set_show_frame" getter="get_show_frame" default="true">
+                        Draws the outer frame/border when [code]true[/code].
+                </member>
+                <member name="visual/theme_connected" type="bool" setter="set_theme_connected" getter="get_theme_connected" default="true">
+                        Controls whether the component automatically follows the global [DVThemeManager] theme.
+                </member>
+	</members>
+	<signals>
+                <signal name="data_changed">
+                        <description>
+                                Emitted whenever the component's data model changes and dependent visuals should refresh.
+                        </description>
+                </signal>
+                <signal name="layout_invalidated">
+                        <description>
+                                Emitted after layout-affecting properties change so that containers can request a new layout
+                                pass.
+                        </description>
+                </signal>
+                <signal name="point_clicked">
+			<param index="0" name="series" type="int" />
+			<param index="1" name="point" type="int" />
+			<param index="2" name="x" type="float" />
+			<param index="3" name="y" type="float" />
+                        <description>
+                                Emitted when a data point is clicked. Provides the [param series] index, [param point] index,
+                                and the data-space coordinates.
+                        </description>
+                </signal>
+                <signal name="point_hovered">
+			<param index="0" name="series" type="int" />
+			<param index="1" name="point" type="int" />
+			<param index="2" name="x" type="float" />
+			<param index="3" name="y" type="float" />
+                        <description>
+                                Emitted while hovering a data point. The payload matches [signal point_clicked] for consistency
+                                across components.
+                        </description>
+                </signal>
+	</signals>
+	<constants>
+                <constant name="DECIMAL" value="0" enum="VALUE_FORMAT">
+                        Formats values with [member text/format_decimals] fractional digits.
+                </constant>
+                <constant name="INTEGER" value="1" enum="VALUE_FORMAT">
+                        Formats values as whole numbers.
+                </constant>
+                <constant name="COMPACT" value="2" enum="VALUE_FORMAT">
+                        Formats values with compact suffixes such as K/M/B.
+                </constant>
+        </constants>
+</class>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="DVThemeChartStyle" inherits="Resource" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+        <brief_description>
+                Reusable style block that defines legend, axis, grid, and palette defaults for DVChart-derived controls.
+        </brief_description>
+        <description>
+                DVThemeChartStyle encapsulates chart-specific presentation values inside [DVTheme]. By adjusting the
+                properties on this resource you can globally control legend placement, grid visibility,
+                tooltips, and the series color palette across every chart that consumes the theme.
+        </description>
+        <tutorials>
+        </tutorials>
+	<members>
+                <member name="chart/axes_visible" type="bool" setter="set_axes_visible" getter="get_axes_visible" default="true">
+                        Controls whether themed charts draw axes by default.
+                </member>
+                <member name="chart/built_in_tooltip" type="bool" setter="set_built_in_tooltip" getter="get_built_in_tooltip" default="true">
+                        Enables the stock tooltip behavior for charts when connected to the theme.
+                </member>
+                <member name="chart/grid_thickness" type="float" setter="set_grid_thickness" getter="get_grid_thickness" default="1.0">
+                        Stroke width applied to grid lines.
+                </member>
+                <member name="chart/grid_visible" type="bool" setter="set_grid_visible" getter="get_grid_visible" default="true">
+                        Determines whether charts show a background grid by default.
+                </member>
+                <member name="chart/legend_position" type="int" setter="set_legend_position" getter="get_legend_position" default="1">
+                        Default legend placement expressed using [enum DVChart.Position] values.
+                </member>
+                <member name="chart/series_palette" type="Color[]" setter="set_series_palette" getter="get_series_palette" default="[Color(0.22, 0.49, 0.87, 1), Color(0.33, 0.71, 0.61, 1), Color(0.95, 0.69, 0.2, 1), Color(0.84, 0.37, 0.34, 1), Color(0.54, 0.4, 0.74, 1), Color(0.31, 0.64, 0.89, 1)]">
+                        Fallback palette distributed to new series when the theme manages colors.
+                </member>
+                <member name="chart/value_labels" type="bool" setter="set_value_labels" getter="get_value_labels" default="true">
+                        Enables value label rendering on themed charts by default.
+                </member>
+	</members>
+	<signals>
+                <signal name="theme_changed">
+                        <description>
+                                Emitted whenever a style property changes so connected components can refresh their visuals.
+                        </description>
+                </signal>
+        </signals>
+</class>

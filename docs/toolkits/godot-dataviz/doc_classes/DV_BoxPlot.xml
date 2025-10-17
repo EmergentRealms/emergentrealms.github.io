@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="DV_BoxPlot" inherits="DVChart" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+        <brief_description>
+                Box-and-whisker chart that can derive quartiles from series data or accept manual statistics.
+        </brief_description>
+        <description>
+                DV_BoxPlot visualizes statistical distributions per category. Provide raw samples via
+                [method DVChart.add_series] or call [method add_box] with pre-computed quartiles. The control optionally
+                displays outliers, supports configurable box width and group spacing, and emits hover/click signals for
+                interactivity.
+
+                [codeblocks]
+                [gdscript]
+                
+                extends DV_BoxPlot
+
+                func _ready() -> void:
+                    set_title("Box Plot: Returns by Sector")
+                    set_y_axis_label("Return (%)")
+                    set_categories(["Tech", "Health", "Energy"])
+
+                    add_series("Tech", PackedFloat32Array([2, 5, 7, 1, 9, 4, 6, 8, 3, 10]))
+                    add_series("Health", PackedFloat32Array([1, 2, 2, 3, 4, 4, 5, 6, 7, 9]))
+                    add_series("Energy", PackedFloat32Array([-2, 0, 1, 3, 3, 4, 8]))
+
+                    set_show_outliers(true)
+                    set_gap_group(12.0)
+                    set_box_width_frac(0.55)
+
+                    box_clicked.connect(_on_box_clicked)
+                    box_hovered.connect(_on_box_hovered)
+                [/gdscript]
+                [/codeblocks]
+
+                Details on base class helpers such as [method DVChart.add_series] and [method DVChart.set_categories] are documented under [DVChart].
+        </description>
+        <tutorials>
+        </tutorials>
+	<methods>
+                <method name="get_box_rect" qualifiers="const">
+                        <return type="Rect2" />
+                        <param index="0" name="group_idx" type="int" />
+                        <description>
+                                Returns the screen-space rectangle of the box for hit testing or overlay drawing.
+                        </description>
+                </method>
+                <method name="get_group_count" qualifiers="const">
+                        <return type="int" />
+                        <description>
+                                Returns how many box groups are currently available.
+                        </description>
+                </method>
+                <method name="set_box_width_frac">
+                        <return type="void" />
+                        <param index="0" name="fraction" type="float" />
+                        <description>
+                                Sets the fraction of the category lane occupied by each box (clamped between 0 and 1).
+                        </description>
+                </method>
+                <method name="set_gap_group">
+                        <return type="void" />
+                        <param index="0" name="gap" type="float" />
+                        <description>
+                                Adjusts the spacing in pixels between neighboring box groups.
+                        </description>
+                </method>
+        </methods>
+	<members>
+                <member name="show_outliers" type="bool" setter="set_show_outliers" getter="is_show_outliers" default="true">
+                        Toggles rendering of points that fall outside the whisker range.
+                </member>
+	</members>
+	<signals>
+                <signal name="box_clicked">
+                        <param index="0" name="group_idx" type="int" />
+                        <param index="1" name="median" type="float" />
+                        <description>
+                                Emitted when a box is clicked. Provides the group index and computed median value.
+                        </description>
+                </signal>
+                <signal name="box_hovered">
+                        <param index="0" name="group_idx" type="int" />
+                        <param index="1" name="median" type="float" />
+                        <description>
+                                Emitted while the pointer hovers a box. Includes the group index and median for convenience.
+                        </description>
+                </signal>
+        </signals>
+</class>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="DV_DetailPanel" inherits="DVComponent" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+        <brief_description>
+                Flexible key-value inspector for presenting grouped records with optional progress indicators.
+        </brief_description>
+        <description>
+                DV_DetailPanel renders a stacked list of [DV_Field] entries with optional group headers, badges, and
+                progress bars. Use it to display entity profiles or drill-down detail cards alongside charts. Layout knobs
+                include label width, row spacing, and wrapping behavior, while theme integration controls badge and row
+                colors.
+
+                [codeblocks]
+                [gdscript]
+                
+                extends DV_DetailPanel
+
+                func _ready() -> void:
+                        set_title("Profile")
+
+                        var field := DV_Field.new()
+                        field.label = "First Name"
+                        field.value = "John"
+                        field.group = "Identity"
+                        add_field(field)
+
+                        var strength := DV_Field.new()
+                        strength.label = "Strength"
+                        strength.value = 24
+                        strength.progress_percent = 43
+                        strength.group = "Stats"
+                        strength.coppyable = true
+                        strength.accent = Color("54a6ed")
+                        add_field(strength)
+
+                        row_clicked.connect(_on_row_clicked)
+
+                func _on_row_clicked(row:int, key:String, label:String,value:Variant):
+                        print("Row clicked: ", row, " k:, ", key, " l:", label," value: ",value  )
+                [/gdscript]
+                [/codeblocks]
+        </description>
+        <tutorials>
+        </tutorials>
+	<methods>
+                <method name="add_field">
+                        <return type="void" />
+                        <param index="0" name="field" type="DV_Field" />
+                        <description>
+                                Appends a [DV_Field] to the panel. Fields are grouped and rendered in insertion order.
+                        </description>
+                </method>
+                <method name="get_row_count" qualifiers="const">
+                        <return type="int" />
+                        <description>
+                                Returns the number of visible rows, including group headers when enabled.
+                        </description>
+                </method>
+                <method name="get_row_rect" qualifiers="const">
+                        <return type="Rect2" />
+                        <param index="0" name="row_index" type="int" />
+                        <description>
+                                Provides the screen-space rectangle for a row, useful for custom overlays or hit testing.
+                        </description>
+                </method>
+                <method name="set_group_gap">
+                        <return type="void" />
+                        <param index="0" name="pixels" type="float" />
+                        <description>
+                                Sets the extra vertical spacing before new group headers (in pixels).
+                        </description>
+                </method>
+                <method name="set_label_width">
+                        <return type="void" />
+                        <param index="0" name="pixels" type="float" />
+                        <description>
+                                Manually assigns the width of the label column. Disable [member auto_label_width] to use it.
+                        </description>
+                </method>
+                <method name="set_row_gap">
+                        <return type="void" />
+                        <param index="0" name="pixels" type="float" />
+                        <description>
+                                Adjusts the spacing between consecutive rows (in pixels).
+                        </description>
+                </method>
+                <method name="set_show_group_headers">
+                        <return type="void" />
+                        <param index="0" name="v" type="bool" />
+                        <description>
+                                Toggles rendering of group header labels above clustered fields.
+                        </description>
+                </method>
+                <method name="set_wrap_values">
+                        <return type="void" />
+                        <param index="0" name="v" type="bool" />
+                        <description>
+                                Enables or disables multi-line wrapping for value text.
+                        </description>
+                </method>
+        </methods>
+	<members>
+                <member name="auto_label_width" type="bool" setter="set_auto_label_width" getter="get_auto_label_width" default="true">
+                        When enabled, the panel measures labels and picks a column width automatically.
+                </member>
+                <member name="badge_bg" type="Color" setter="set_badge_bg" getter="get_badge_bg" default="Color(1, 1, 1, 0.08)">
+                        Background color applied to group badges.
+                </member>
+                <member name="badge_fg" type="Color" setter="set_badge_fg" getter="get_badge_fg" default="Color(0.94, 0.96, 0.98, 1)">
+                        Text color used for badge labels.
+                </member>
+                <member name="collapsible_groups" type="bool" setter="set_collapsible_groups" getter="get_collapsible_groups" default="true">
+                        Allows group sections to collapse/expand when their header is clicked.
+                </member>
+                <member name="row_active" type="Color" setter="set_row_active" getter="get_row_active" default="Color(1, 1, 1, 0.08)">
+                        Highlight color applied to the active/selected row.
+                </member>
+                <member name="row_bg_even" type="Color" setter="set_row_bg_even" getter="get_row_bg_even" default="Color(0, 0, 0, 0)">
+                        Background color for even-numbered rows.
+                </member>
+                <member name="row_bg_odd" type="Color" setter="set_row_bg_odd" getter="get_row_bg_odd" default="Color(0, 0, 0, 0)">
+                        Background color for odd-numbered rows.
+                </member>
+                <member name="row_hover" type="Color" setter="set_row_hover" getter="get_row_hover" default="Color(1, 1, 1, 0.05)">
+                        Hover feedback color displayed when the pointer moves over a row.
+                </member>
+                <member name="title" type="String" setter="set_title" getter="get_title" default="&quot;&quot;">
+                        Header text displayed above the detail panel content.
+                </member>
+                <member name="value_align_right" type="bool" setter="set_value_align_right" getter="get_value_align_right" default="true">
+                        Aligns value text to the right edge of the column when [code]true[/code].
+                </member>
+	</members>
+	<signals>
+                <signal name="row_clicked">
+                        <param index="0" name="row" type="int" />
+                        <param index="1" name="key" type="String" />
+                        <param index="2" name="label" type="String" />
+                        <param index="3" name="value" type="Variant" />
+                        <description>
+                                Emitted when a row is clicked. Includes both the display label and the field's stable key.
+                        </description>
+                </signal>
+        </signals>
+</class>

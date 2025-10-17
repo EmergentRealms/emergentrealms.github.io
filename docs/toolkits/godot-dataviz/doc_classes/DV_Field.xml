@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="DV_Field" inherits="RefCounted" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+        <brief_description>
+                Data object representing a single row within a DV_DetailPanel.
+        </brief_description>
+        <description>
+                DV_Field stores label/value pairs with optional metadata used by [DV_DetailPanel]. Fields can belong to a
+                group, display an icon, expose a progress percentage, and mark their values as copyable. The [member accent]
+                color lets you highlight important metrics such as KPI deltas.
+        </description>
+        <tutorials>
+        </tutorials>
+	<members>
+                <member name="accent" type="Color" setter="set_accent" getter="get_accent" default="Color(0, 0, 0, 1)">
+                        Optional accent color used to tint badges or progress bars.
+                </member>
+                <member name="coppyable" type="bool" setter="set_coppyable" getter="get_coppyable" default="true">
+                        Marks whether the value can be copied to the clipboard from the UI.
+                </member>
+                <member name="group" type="String" setter="set_group" getter="get_group" default="&quot;&quot;">
+                        Logical group used to cluster fields in a [DV_DetailPanel].
+                </member>
+                <member name="icon" type="Texture2D" setter="set_icon" getter="get_icon">
+                        Optional icon displayed alongside the label.
+                </member>
+                <member name="key" type="String" setter="set_key" getter="get_key" default="&quot;&quot;">
+                        Stable identifier for the field, useful when reacting to selection events.
+                </member>
+                <member name="label" type="String" setter="set_label" getter="get_label" default="&quot;&quot;">
+                        Human-readable caption for the value.
+                </member>
+                <member name="meta" type="Dictionary" setter="set_meta" getter="get_meta" default="{}">
+                        Arbitrary metadata passed through with the field; consumers can store domain-specific data here.
+                </member>
+                <member name="progress_percent" type="float" setter="set_progress_percent" getter="get_progress_percent" default="0.0">
+                        Progress value (0-100) that draws a horizontal progress indicator when greater than zero.
+                </member>
+                <member name="tooltip" type="String" setter="set_tooltip" getter="get_tooltip" default="&quot;&quot;">
+                        Tooltip shown when hovering the row; falls back to [member value] when empty.
+                </member>
+                <member name="value" type="Variant" setter="set_value" getter="get_value" default="null">
+                        Primary payload displayed in the field.
+                </member>
+	</members>
+</class>

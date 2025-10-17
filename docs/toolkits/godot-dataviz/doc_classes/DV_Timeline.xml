@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="DV_Timeline" inherits="DVComponent" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		Multi-track timeline for visualizing time-based events with grid, autoscaling, and an optional "now" indicator.
+	</brief_description>
+
+	<description>
+		[code]DV_Timeline[/code] renders horizontal tracks, each containing one or more events with a start and end time. Use [code]add_track()[/code] to create tracks and [code]add_event()[/code] to populate them. The visible time span is controlled by [code]set_time_range()[/code] or by enabling autoscale with [code]set_time_autoscale()[/code]. A vertical "now" line can be displayed via [code]set_now_enabled()[/code] and positioned with [code]set_now_time()[/code]. The background/frame/grid and event/label colors can be set together with [code]set_colors()[/code].
+
+		[codeblocks]
+		[gdscript]
+		extends DV_Timeline
+
+		func _ready() -> void:
+			set_show_grid(true)
+			set_grid_step(2.0)
+
+			var travel := add_track("Main Story")
+			var optional := add_track("Side Jobs")
+
+			add_event(travel, 15.0, 150.0, "Meet Merchant", Color(0.32, 0.58, 0.82), Dictionary())
+			add_event(travel, 120.0, 256.5, "Escort Caravan", Color(0.28, 0.75, 0.45), Dictionary())
+			add_event(travel, 230.0, 460.0, "Ambush Battle", Color(0.82, 0.35, 0.28), Dictionary())
+
+			add_event(optional, 500.0, 650.0, "Gather Supplies", Color(0.6, 0.6, 0.85), Dictionary())
+			add_event(optional, 650.0, 900.5, "Scout Ruins", Color(0.68, 0.45, 0.80), Dictionary())
+
+			set_grid_step(60.0)
+			set_now_enabled(true)
+			set_now_time(256.0)
+
+			event_clicked.connect(_on_event_clicked)
+			event_hovered.connect(_on_event_hovered)
+
+		func _on_event_hovered(track:int, index:int, start:float, end:float, label:String, meta:Dictionary) -> void:
+			print("Event hovered! Label:", label)
+
+		func _on_event_clicked(track:int, index:int, start:float, end:float, label:String, meta:Dictionary) -> void:
+			print("Event Clicked! Label:", label)
+		[/gdscript]
+		[/codeblocks]
+	</description>
+
+	<tutorials>
+	</tutorials>
+
+	<methods>
+		<method name="add_event">
+			<return type="int" />
+			<param index="0" name="track" type="int" />
+			<param index="1" name="start" type="float" />
+			<param index="2" name="end" type="float" />
+			<param index="3" name="label" type="String" />
+			<param index="4" name="color" type="Color" />
+			<param index="5" name="meta" type="Dictionary" />
+			<description>
+				Adds an event to the track at [code]track[/code] with [code]start[/code] and [code]end[/code] times, a display [code]label[/code], a fill [code]color[/code], and optional [code]meta[/code] data for user logic. Returns the event index within that track.
+			</description>
+		</method>
+
+		<method name="add_track">
+			<return type="int" />
+			<param index="0" name="name" type="String" />
+			<description>
+				Creates a new track labeled [code]name[/code] and returns its index.
+			</description>
+		</method>
+
+		<method name="clear">
+			<return type="void" />
+			<description>
+				Removes all tracks and events.
+			</description>
+		</method>
+
+		<method name="get_grid_step" qualifiers="const">
+			<return type="float" />
+			<description>
+				Returns the spacing between grid lines in seconds.
+			</description>
+		</method>
+
+		<method name="get_now_time" qualifiers="const">
+			<return type="float" />
+			<description>
+				Returns the current "now" time, used to draw the vertical indicator when enabled.
+			</description>
+		</method>
+
+		<method name="get_time_range" qualifiers="const">
+			<return type="Vector2" />
+			<description>
+				Returns the visible time range as [code]Vector2(min, max)[/code] when autoscale is disabled. If autoscale is enabled, this returns the last configured manual range.
+			</description>
+		</method>
+
+		<method name="get_track_count" qualifiers="const">
+			<return type="int" />
+			<description>
+				Returns the number of tracks.
+			</description>
+		</method>
+
+		<method name="get_track_names" qualifiers="const">
+			<return type="PackedStringArray" />
+			<description>
+				Returns the display names for all tracks in order.
+			</description>
+		</method>
+
+		<method name="is_now_enabled" qualifiers="const">
+			<return type="bool" />
+			<description>
+				Returns [code]true[/code] if the "now" indicator is visible.
+			</description>
+		</method>
+
+		<method name="is_show_grid" qualifiers="const">
+			<return type="bool" />
+			<description>
+				Returns [code]true[/code] if the background grid is drawn.
+			</description>
+		</method>
+
+		<method name="is_time_autoscale" qualifiers="const">
+			<return type="bool" />
+			<description>
+				Returns [code]true[/code] if the time axis is automatically scaled to fit events.
+			</description>
+		</method>
+
+		<method name="set_colors">
+			<return type="void" />
+			<param index="0" name="bg" type="Color" />
+			<param index="1" name="frame" type="Color" />
+			<param index="2" name="grid" type="Color" />
+			<param index="3" name="track_fill" type="Color" />
+			<param index="4" name="event_fill" type="Color" />
+			<param index="5" name="event_text" type="Color" />
+			<param index="6" name="now_line" type="Color" />
+			<description>
+				Sets the primary colors used by the control: background, frame outline, grid lines, track background, event fill, event label text, and the "now" indicator line.
+			</description>
+		</method>
+
+		<method name="set_grid_step">
+			<return type="void" />
+			<param index="0" name="seconds" type="float" />
+			<description>
+				Sets grid spacing in seconds between vertical grid lines.
+			</description>
+		</method>
+
+		<method name="set_now_enabled">
+			<return type="void" />
+			<param index="0" name="v" type="bool" />
+			<description>
+				Shows or hides the "now" indicator line.
+			</description>
+		</method>
+
+		<method name="set_now_time">
+			<return type="void" />
+			<param index="0" name="t" type="float" />
+			<description>
+				Sets the "now" time used for the indicator line, in the same units as event times.
+			</description>
+		</method>
+
+		<method name="set_show_grid">
+			<return type="void" />
+			<param index="0" name="v" type="bool" />
+			<description>
+				Enables or disables the background grid.
+			</description>
+		</method>
+
+		<method name="set_time_autoscale">
+			<return type="void" />
+			<param index="0" name="v" type="bool" />
+			<description>
+				When [code]true[/code], the visible time range adapts to fit events; when [code]false[/code], the manual range from [code]set_time_range()[/code] is used.
+			</description>
+		</method>
+
+		<method name="set_time_range">
+			<return type="void" />
+			<param index="0" name="min" type="float" />
+			<param index="1" name="max" type="float" />
+			<description>
+				Sets the manual visible time range as [code]min..max[/code]. Effective when autoscale is disabled.
+			</description>
+		</method>
+
+		<method name="set_track_gap">
+			<return type="void" />
+			<param index="0" name="g" type="float" />
+			<description>
+				Sets the vertical gap (in pixels) between tracks.
+			</description>
+		</method>
+
+		<method name="set_track_height">
+			<return type="void" />
+			<param index="0" name="h" type="float" />
+			<description>
+				Sets the track height (in pixels) used when laying out events.
+			</description>
+		</method>
+
+		<method name="set_track_name">
+			<return type="void" />
+			<param index="0" name="idx" type="int" />
+			<param index="1" name="name" type="String" />
+			<description>
+				Renames the track at index [code]idx[/code] to [code]name[/code].
+			</description>
+		</method>
+	</methods>
+
+	<signals>
+		<signal name="event_clicked">
+			<param index="0" name="track" type="int" />
+			<param index="1" name="index" type="int" />
+			<param index="2" name="start" type="float" />
+			<param index="3" name="end" type="float" />
+			<param index="4" name="label" type="String" />
+			<param index="5" name="meta" type="Dictionary" />
+			<description>
+				Emitted when an event is clicked. Provides the track index, the event index within that track, its time span, label, and meta dictionary.
+			</description>
+		</signal>
+
+		<signal name="event_hovered">
+			<param index="0" name="track" type="int" />
+			<param index="1" name="index" type="int" />
+			<param index="2" name="start" type="float" />
+			<param index="3" name="end" type="float" />
+			<param index="4" name="label" type="String" />
+			<param index="5" name="meta" type="Dictionary" />
+			<description>
+				Emitted when the pointer hovers an event. Provides the track index, the event index within that track, its time span, label, and meta dictionary.
+			</description>
+		</signal>
+	</signals>
+</class>
