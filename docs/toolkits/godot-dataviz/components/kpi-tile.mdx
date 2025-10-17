@@ -2,7 +2,7 @@
 id: kpi-tile
 title: KpiTile
 sidebar_label: KpiTile
-description: Headline metrics that sing with delta arrows, captions, and inline sparklines.
+description: Headline KPIs with delta arrows, sparklines, and effortless theming.
 keywords:
   - Godot tutorials
   - UI toolkit
@@ -11,40 +11,28 @@ keywords:
   - Cobblestone Legacy
 ---
 
-> **Tagline:** Headline metrics that sing.
+> **Tagline:** Headlines that rally the team.
 
-A hero KPI tile with big value, delta arrow, caption, and optional sparkline. Automatically color-codes up/down states and plays nicely with icons.
+`DV_KPI_Tile` turns a single metric into a hero moment. Titles, primary values, delta arrows, subtitles, footnotes, icons, and sparklines are all part of the package—styled automatically by the active `DVTheme` and powered by DVComponent’s layout intelligence.
 
-## Data binding
+## Why it wins dashboards
 
-- `set_title(text: String)`
-- `set_value(value: Variant)`
-- `set_delta(delta_value: float)` with auto colorization.
-- `set_spark(values: PackedFloat32Array)`
-- `set_updated_ago(text: String)`
+- **Instant storytelling.** Combine `set_title`, `set_value`, `set_delta`, and `set_subtitle` to communicate performance in seconds.【F:docs/toolkits/godot-dataviz/doc_classes/DV_KPI_Tile.xml†L1-L53】【F:docs/toolkits/godot-dataviz/doc_classes/DV_KPI_Tile.xml†L91-L142】
+- **On-brand visuals.** Theme-driven typography, corner radius, animation timing, and delta colors keep every tile visually consistent across your product.【F:docs/toolkits/godot-dataviz/doc_classes/DVComponent.xml†L5-L104】【F:docs/toolkits/godot-dataviz/doc_classes/DVTheme.xml†L5-L86】
+- **Interactive by design.** Hook `tile_clicked` to open detail panels, switch scenes, or spotlight supporting charts the moment curiosity strikes.【F:docs/toolkits/godot-dataviz/doc_classes/DV_KPI_Tile.xml†L143-L150】
 
-## Screenshot
+## Ship lightning-fast KPIs
 
-<figure>
-  <p><em>Screenshot placeholder — add your KpiTile showcase.</em></p>
-</figure>
+1. **Drop the node** – DVComponent supplies padding, frames, tooltips, and pixel snapping, so the tile is visually ready from frame one.【F:docs/toolkits/godot-dataviz/doc_classes/DVComponent.xml†L25-L64】
+2. **Set the narrative** – call `set_prefix`, `set_value`, `set_suffix`, and `set_delta` to build the main headline, plus `set_subtitle` and `set_footnote` for context.【F:docs/toolkits/godot-dataviz/doc_classes/DV_KPI_Tile.xml†L91-L124】
+3. **Spark interest** – feed a `PackedFloat32Array` into `set_sparkline` and choose between autoscale or a fixed range with `set_sparkline_autoscale` / `set_sparkline_range` for perfectly framed trends.【F:docs/toolkits/godot-dataviz/doc_classes/DV_KPI_Tile.xml†L55-L90】【F:docs/toolkits/godot-dataviz/doc_classes/DV_KPI_Tile.xml†L125-L142】
+4. **Lean on theming** – adjust accent colors globally through `DVTheme` or locally via `set_col_delta_pos` / `set_col_delta_neg` and `set_title_col` when a specific hue matters.【F:docs/toolkits/godot-dataviz/doc_classes/DV_KPI_Tile.xml†L91-L142】
 
-## Example usage
+## API highlights
 
-```gdscript
-# TODO: Provide a KpiTile usage example.
-# Highlight title, value, delta arrow, and sparkline configuration.
-```
+- `set_icon(texture: Texture2D)` / `set_icon_size(px: int)` – marry metrics with brand or gameplay icons effortlessly.【F:docs/toolkits/godot-dataviz/doc_classes/DV_KPI_Tile.xml†L106-L138】
+- `set_sparkline_autoscale(enabled: bool)` – toggle between auto-normalized or consistent axes when comparing multiple tiles.【F:docs/toolkits/godot-dataviz/doc_classes/DV_KPI_Tile.xml†L55-L90】
+- `set_sparkline_range(min: float, max: float)` – align multiple sparklines to the same Y-range for trustworthy comparisons.【F:docs/toolkits/godot-dataviz/doc_classes/DV_KPI_Tile.xml†L73-L90】
+- `set_value_format(mode: int)` / `set_format_decimals(count: int)` from DVComponent ensure all numbers speak the same language across your dashboards.【F:docs/toolkits/godot-dataviz/doc_classes/DVComponent.xml†L65-L90】
 
-## Why it's great
-
-- Instant readability for headline metrics.
-- Auto color palette for positive/negative deltas.
-- Optional icon slot and responsive typography.
-
-## Perfect for
-
-- Revenue, player count, or crime rate dashboards.
-- Faction power tracking or quest KPIs.
-- Any top-level metric that needs emphasis.
-
+KpiTile delivers the kind of high-impact KPI presentation that executives, analysts, and players adore—without sacrificing speed, flexibility, or polish.
