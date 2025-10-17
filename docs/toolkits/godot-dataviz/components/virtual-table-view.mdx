@@ -1,0 +1,46 @@
+---
+id: virtual-table-view
+title: GridView
+sidebar_label: GridView
+description: High-performance data grids with theming, sorting, and precise cell events.
+keywords:
+  - Godot tutorials
+  - UI toolkit
+  - data visualization
+  - large scale Godot project
+  - Cobblestone Legacy
+---
+
+> **Tagline:** Massive tables, zero compromise.
+
+`DV_Grid` turns raw datasets into slick, scrollable tables that feel native to your dashboard. Theme-driven colors, pixel-perfect layout, keyboard navigation, and signal-rich interactions ship in one drop-in control.
+
+## Why analysts adore it
+
+- **Drop-in structure.** Define headers with `set_columns`, stream rows through `set_data`, and the grid takes care of sizing, striping, and rendering.【F:docs/toolkits/godot-dataviz/doc_classes/DV_Grid.xml†L5-L89】
+- **Tailored ergonomics.** Control header height, row height, stretch behavior, padding, and grid visibility to match any layout or device.【F:docs/toolkits/godot-dataviz/doc_classes/DV_Grid.xml†L90-L154】
+- **Actionable feedback.** `cell_clicked`, `cell_hovered`, and `header_clicked` signals give you immediate hooks for drill-downs, filters, or tooltips.【F:docs/toolkits/godot-dataviz/doc_classes/DV_Grid.xml†L155-L179】
+
+## Build your grid in four steps
+
+1. **Set the columns** – `set_columns(PackedStringArray([...]))` defines headings and resets layout automatically.【F:docs/toolkits/godot-dataviz/doc_classes/DV_Grid.xml†L62-L89】
+2. **Load the data** – `set_data(Array[…])` streams in rows (arrays per row) that snap to the column structure.【F:docs/toolkits/godot-dataviz/doc_classes/DV_Grid.xml†L80-L102】
+3. **Tune presentation** – call `set_row_height(px)`, `set_header_height(px)`, `set_cell_padding(pixels)`, and `set_grid_visible(true)` for the perfect balance of density and readability.【F:docs/toolkits/godot-dataviz/doc_classes/DV_Grid.xml†L90-L154】
+4. **Wire interactivity** – connect to `cell_clicked(row, col)` or `header_clicked(col)` to launch sorting, detail panels, or contextual actions.【F:docs/toolkits/godot-dataviz/doc_classes/DV_Grid.xml†L155-L179】
+
+## API highlights
+
+- `set_col_width(col: int, width: float)` – pin key columns while letting others stretch.【F:docs/toolkits/godot-dataviz/doc_classes/DV_Grid.xml†L44-L70】
+- `set_keyboard_nav_enabled(enabled: bool)` – empower power users with arrow-key traversal.【F:docs/toolkits/godot-dataviz/doc_classes/DV_Grid.xml†L118-L138】
+- `set_sortable(enabled: bool)` – unlock header sorting with one toggle.【F:docs/toolkits/godot-dataviz/doc_classes/DV_Grid.xml†L138-L154】
+- `set_col_grid(color: Color)` / `set_col_hover_bg(color: Color)` / `set_col_sel_bg(color: Color)` – align visuals with your DVTheme or scene-specific palette.【F:docs/toolkits/godot-dataviz/doc_classes/DV_Grid.xml†L90-L138】
+
+## DVComponent advantages out of the box
+
+GridView inherits DVComponent’s animation timing, tooltip controls, selection toggles, padding, margins, and formatting helpers. That means:
+
+- **Consistent theming** via `DVThemeManager`—swap between dark, light, or custom palettes and the grid adapts instantly.【F:docs/toolkits/godot-dataviz/doc_classes/DVComponent.xml†L16-L64】【F:docs/toolkits/godot-dataviz/doc_classes/DVThemeManager.xml†L3-L33】
+- **Crisp visuals** courtesy of pixel snapping, frame control, and padding setters baked right in.【F:docs/toolkits/godot-dataviz/doc_classes/DVComponent.xml†L25-L64】
+- **Reusable formatting** through `set_value_format` and `set_format_decimals` when you render derived metrics inside cells.【F:docs/toolkits/godot-dataviz/doc_classes/DVComponent.xml†L65-L90】
+
+GridView empowers you to ship enterprise-grade tables that feel handcrafted for your game or application—no custom engine work required.
