@@ -2,7 +2,7 @@
 id: detail-panel
 title: DetailPanel
 sidebar_label: DetailPanel
-description: Readable facts instantly — labeled rows, grouped sections, and theme-aware layout.
+description: Premium profile cards with grouped fields, progress meters, and instant theming.
 keywords:
   - Godot tutorials
   - UI toolkit
@@ -11,38 +11,36 @@ keywords:
   - Cobblestone Legacy
 ---
 
-> **Tagline:** Readable facts, instantly.
+> **Tagline:** Every record, impeccably curated.
 
-A compact information sheet component with labeled rows, optional grouped sections, and automatic layout. Great for presenting selected entity details.
+`DV_DetailPanel` is your go-to inspector for characters, items, missions, or any entity that deserves a polished spotlight. Powered by `DVComponent`, it embraces your active theme, handles padding and frames automatically, and lets you populate rich field rows in just a few lines of code. Pair it with `DV_Field` objects to inject icons, progress bars, copyable values, and accent colors that make key facts impossible to miss.
 
-## Data binding
+## Why teams love it
 
-- `clear()` to reset content.
-- `add_group(title: String)` to start grouped sections (optional).
-- `add_row(label: String, value: Variant)` for each fact.
+- **Group-savvy layouts.** Organize information with collapsible group headers, adjustable row gaps, and automatic label widths so every panel reads like a bespoke dossier.【F:docs/toolkits/godot-dataviz/doc_classes/DV_DetailPanel.xml†L5-L93】
+- **Fields that do more.** `DV_Field` entries carry labels, values, icons, tooltips, metadata, progress percentages, and highlight colors—perfect for KPIs, stats, or badges.【F:docs/toolkits/godot-dataviz/doc_classes/DV_Field.xml†L1-L47】
+- **Theme-ready instantly.** Thanks to DVComponent, you get consistent background fills, frames, typography, and tooltip behaviors straight from the active `DVTheme`.【F:docs/toolkits/godot-dataviz/doc_classes/DVComponent.xml†L5-L104】【F:docs/toolkits/godot-dataviz/doc_classes/DVTheme.xml†L5-L86】
 
-## Screenshot
+## Build a panel in minutes
 
-<figure>
-  <p><em>Screenshot placeholder — add your DetailPanel capture.</em></p>
-</figure>
+1. **Set the tone** – `set_title("Profile")` adds a hero heading while theme-driven fonts keep it on-brand.【F:docs/toolkits/godot-dataviz/doc_classes/DV_DetailPanel.xml†L5-L40】【F:docs/toolkits/godot-dataviz/doc_classes/DV_DetailPanel.xml†L94-L118】
+2. **Craft fields** – instantiate `DV_Field.new()`, populate `label`, `value`, `group`, `icon`, `progress_percent`, or `accent`, then `add_field(field)` to slot it in order.【F:docs/toolkits/godot-dataviz/doc_classes/DV_DetailPanel.xml†L23-L57】【F:docs/toolkits/godot-dataviz/doc_classes/DV_Field.xml†L9-L47】
+3. **Tune spacing** – dial in `set_label_width(px)`, `set_row_gap(px)`, and `set_group_gap(px)` or leave `auto_label_width` enabled for intelligent defaults.【F:docs/toolkits/godot-dataviz/doc_classes/DV_DetailPanel.xml†L44-L93】
+4. **Invite interaction** – connect `row_clicked(row, key, label, value)` to trigger drill-downs, context menus, or navigation transitions.【F:docs/toolkits/godot-dataviz/doc_classes/DV_DetailPanel.xml†L119-L135】
 
-## Example usage
+## API highlights
 
-```gdscript
-# TODO: Provide a DetailPanel usage example.
-# Show grouped sections, row truncation, and tooltip usage.
-```
+- `set_show_group_headers(enabled: bool)` – surface or hide section labels in one call.【F:docs/toolkits/godot-dataviz/doc_classes/DV_DetailPanel.xml†L58-L76】
+- `set_wrap_values(enabled: bool)` – let long-form lore or descriptions wrap gracefully inside the panel.【F:docs/toolkits/godot-dataviz/doc_classes/DV_DetailPanel.xml†L76-L93】
+- `set_collapsible_groups(enabled: bool)` – allow players to open and close sections for streamlined browsing.【F:docs/toolkits/godot-dataviz/doc_classes/DV_DetailPanel.xml†L94-L118】
+- `set_value_align_right(enabled: bool)` – choose between ledger-style alignment or conversational layouts.【F:docs/toolkits/godot-dataviz/doc_classes/DV_DetailPanel.xml†L94-L118】
 
-## Why it's great
+## Built on DVComponent excellence
 
-- Automatic layout and label/value spacing.
-- Handles truncation with tooltips for long content.
-- Theme-aware typography and separators.
+DetailPanel inherits animation timing, tooltip toggles, selection signals, and formatting utilities from DVComponent. That means you can:
 
-## Perfect for
+- Toggle tooltips, selection, and pixel snapping with ease (`set_tooltip_enabled`, `set_selection_enabled`, `set_pixel_snap`).【F:docs/toolkits/godot-dataviz/doc_classes/DVComponent.xml†L25-L64】
+- Format numeric values consistently using `set_value_format` and `set_format_decimals` before feeding them into fields.【F:docs/toolkits/godot-dataviz/doc_classes/DVComponent.xml†L65-L90】
+- React globally to theme swaps through `DVThemeManager.theme_changed`, keeping detail panels in lockstep with your dashboards.【F:docs/toolkits/godot-dataviz/doc_classes/DVComponent.xml†L16-L43】【F:docs/toolkits/godot-dataviz/doc_classes/DVThemeManager.xml†L3-L33】
 
-- Selected actor/item/quest details.
-- Inspector sidebars or property sheets.
-- Narrative or codex entries with quick facts.
-
+DetailPanel turns raw data into a premium experience, helping your team present lore, loadouts, or live analytics with the finesse players expect from top-tier studios.

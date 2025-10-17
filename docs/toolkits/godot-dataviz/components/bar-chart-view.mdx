@@ -2,7 +2,7 @@
 id: bar-chart-view
 title: BarChartView
 sidebar_label: BarChartView
-description: Categorical data, crystal clear. Grouped and stacked bar charts with tooltips and palette control.
+description: Punchy grouped and stacked bar charts with overlays, tooltips, and instant theming.
 keywords:
   - Godot tutorials
   - UI toolkit
@@ -11,38 +11,36 @@ keywords:
   - Cobblestone Legacy
 ---
 
-> **Tagline:** Categorical data, crystal clear.
+> **Tagline:** Turn comparisons into crowd-pleasers.
 
-A fast, theme-aware bar chart for grouped or stacked series. Supports labels, tooltips, hover/click signals, and palette customization per series.
+`DV_BarChart` turns categorical data into a story. Drop it into any dashboard and instantly deliver grouped or stacked columns, animated transitions, and built-in overlays that make trends leap off the screen. Every chart inherits the polished layout, typography, and tooltip system from `DVComponent`, so it feels right at home with the rest of the kit the moment you add it.
 
-## Data binding
+## What makes it irresistible
 
-- `set_categories([...])`
-- `add_series(name: String, values: PackedFloat32Array)`
-- Optional stacked mode toggle and per-series color overrides.
+- **One control, every comparison.** Flip between grouped and stacked reads by toggling `set_stacked(true)` and tune gaps with `set_gaps(category_gap, bar_gap)` for pixel-perfect layouts.【F:docs/toolkits/godot-dataviz/doc_classes/DV_BarChart.xml†L5-L43】【F:docs/toolkits/godot-dataviz/doc_classes/DV_BarChart.xml†L56-L76】
+- **Serious analytics on tap.** The shared `DVChart` engine powers category management, multi-series data, moving averages, and Bollinger overlays—no custom math required.【F:docs/toolkits/godot-dataviz/doc_classes/DVChart.xml†L5-L134】【F:docs/toolkits/godot-dataviz/doc_classes/DVChart.xml†L205-L317】
+- **Theme-perfect out of the box.** Colors, spacing, and formatting flow straight from your active `DVTheme`, while DVComponent guarantees consistent padding, frames, pixel snapping, and rich tooltips.【F:docs/toolkits/godot-dataviz/doc_classes/DVComponent.xml†L5-L104】【F:docs/toolkits/godot-dataviz/doc_classes/DVTheme.xml†L5-L86】
 
-## Screenshot
+## Plug-and-play workflow
 
-<figure>
-  <p><em>Screenshot placeholder — drop in your BarChartView capture here.</em></p>
-</figure>
+1. **Bind categories** – `set_categories(PackedStringArray([...]))` defines the x-axis lanes once and keeps every series aligned.【F:docs/toolkits/godot-dataviz/doc_classes/DV_BarChart.xml†L16-L33】
+2. **Stream your series** – `add_series("Revenue", PackedFloat32Array([...]))` or `add_series_with_overlays(...)` to light up SMA, EMA, and Bollinger bands in a single call.【F:docs/toolkits/godot-dataviz/doc_classes/DVChart.xml†L205-L247】
+3. **Style with intent** – rely on palette-driven colors or call `set_series_color(index, color)` when a specific brand hue matters.【F:docs/toolkits/godot-dataviz/doc_classes/DVChart.xml†L287-L296】
+4. **Delight users** – respond to `bar_clicked(series_idx, category_idx, value)` and `bar_hovered(...)` signals to launch drill-downs or reveal insights in context.【F:docs/toolkits/godot-dataviz/doc_classes/DV_BarChart.xml†L68-L76】
 
-## Example usage
+## Essential API highlights
 
-```gdscript
-# TODO: Provide a BarChartView usage example.
-# Recommended: create a scene with a BarChartView node and feed categories + series.
-```
+- `set_gaps(category_gap: float, bar_gap: float)` – fine-tune spacing for clustered dashboards or hero widgets.【F:docs/toolkits/godot-dataviz/doc_classes/DV_BarChart.xml†L48-L55】
+- `set_stacked(enabled: bool)` – swap between grouped comparisons and additive stories without touching data.【F:docs/toolkits/godot-dataviz/doc_classes/DV_BarChart.xml†L58-L62】
+- `set_index_range(start: int, end: int)` – zoom into recent periods while the chart keeps overlays in sync.【F:docs/toolkits/godot-dataviz/doc_classes/DVChart.xml†L248-L268】
+- `set_value_format(mode: int)` / `set_format_decimals(count: int)` – align numeric output with your brand voice using DVComponent formatting helpers.【F:docs/toolkits/godot-dataviz/doc_classes/DVComponent.xml†L65-L90】
 
-## Why it's great
+## Built-in polish from DVComponent & DVChart
 
-- Switch between grouped or stacked layouts with a single flag.
-- Label rendering, tooltips, and hover/click signals baked in.
-- Palette-aware with global theme colors or per-series overrides.
+Every DataViz chart comes with:
 
-## Perfect for
+- **Cohesive theming** via `DVThemeManager`—switch palettes at runtime and every bar, label, and tooltip updates instantly.【F:docs/toolkits/godot-dataviz/doc_classes/DVComponent.xml†L16-L43】【F:docs/toolkits/godot-dataviz/doc_classes/DVThemeManager.xml†L3-L33】
+- **Responsive layout controls** like `set_padding`, `set_margin`, and `set_ui_scale` to fit any container or device.【F:docs/toolkits/godot-dataviz/doc_classes/DVComponent.xml†L45-L64】
+- **Interactive overlays** powered by `set_series_overlays`, `set_series_sma_window`, `set_series_ema_window`, and `set_series_bbands_params` for pro-grade analytics without crunching numbers yourself.【F:docs/toolkits/godot-dataviz/doc_classes/DVChart.xml†L270-L317】
 
-- Dashboards comparing factions, regions, or classes.
-- KPI boards with discrete categories.
-- Progress summaries where grouped/stacked views highlight change.
-
+With BarChartView you ship comparisons that feel premium, perform flawlessly, and convert curious players into believers.

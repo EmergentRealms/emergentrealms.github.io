@@ -2,7 +2,7 @@
 id: box-plot-view
 title: BoxPlotView
 sidebar_label: BoxPlotView
-description: See distribution at a glance with box and whisker plots, outliers, and hover signals.
+description: Distribution storytelling with whiskers, outliers, and instant analytics overlays.
 keywords:
   - Godot tutorials
   - UI toolkit
@@ -11,38 +11,36 @@ keywords:
   - Cobblestone Legacy
 ---
 
-> **Tagline:** See distribution at a glance.
+> **Tagline:** Spotlight the spread, not just the average.
 
-Box & whisker plots with optional outliers—perfect for surfacing spreads in simulation output or balance reports. Supports both raw sample input and precomputed quartile stats.
+`DV_BoxPlot` transforms raw samples into compelling box-and-whisker visuals that help teams make smarter calls. Whether you feed it raw series data or precomputed quartiles, the control handles grouping, spacing, and theming automatically—leaving you free to craft the narrative.
 
-## Data binding
+## Reasons teams rely on it
 
-- `set_groups([{ name, values }])` for raw sample arrays.
-- `add_box(min, q1, median, q3, max, outliers := PackedFloat32Array())` for prepared stats.
-- Toggle vertical or horizontal layout.
+- **Effortless distribution insight.** Drop in samples with `add_series` or inject fully-formed quartiles via `add_box`; the chart renders medians, whiskers, and optional outliers without any manual math.【F:docs/toolkits/godot-dataviz/doc_classes/DV_BoxPlot.xml†L5-L53】
+- **Precision interactions.** `box_clicked` and `box_hovered` events provide group indexes and medians so you can launch tooltips, drill-downs, or cross-highlighting instantly.【F:docs/toolkits/godot-dataviz/doc_classes/DV_BoxPlot.xml†L70-L86】
+- **Theme-consistent flair.** DVComponent’s layout and DVTheme’s palettes mean every panel you ship looks intentional the moment it loads.【F:docs/toolkits/godot-dataviz/doc_classes/DVComponent.xml†L5-L104】【F:docs/toolkits/godot-dataviz/doc_classes/DVTheme.xml†L5-L86】
 
-## Screenshot
+## Quick setup
 
-<figure>
-  <p><em>Screenshot placeholder — replace with your BoxPlotView capture.</em></p>
-</figure>
+1. **Define categories** – call `set_categories(PackedStringArray([...]))` once per axis lane.【F:docs/toolkits/godot-dataviz/doc_classes/DV_BoxPlot.xml†L16-L36】
+2. **Add your data** – use `add_series(name, samples)` for automatic quartiles or mix in `add_box(...)` entries when you already have stats ready (via DVChart helpers).【F:docs/toolkits/godot-dataviz/doc_classes/DV_BoxPlot.xml†L18-L41】【F:docs/toolkits/godot-dataviz/doc_classes/DVChart.xml†L205-L247】
+3. **Style the spacing** – `set_box_width_frac(fraction)` and `set_gap_group(pixels)` tailor the density for any layout.【F:docs/toolkits/godot-dataviz/doc_classes/DV_BoxPlot.xml†L54-L69】
+4. **Toggle outliers** – `set_show_outliers(true)` instantly reveals anomalies with the right color cues.【F:docs/toolkits/godot-dataviz/doc_classes/DV_BoxPlot.xml†L62-L66】
 
-## Example usage
+## API essentials
 
-```gdscript
-# TODO: Provide a BoxPlotView usage example.
-# Suggested: demonstrate raw group ingestion and optional outlier toggles.
-```
+- `get_box_rect(group_idx: int)` – perfect for drawing overlays or synchronizing highlights with other widgets.【F:docs/toolkits/godot-dataviz/doc_classes/DV_BoxPlot.xml†L44-L53】
+- `get_group_count()` – keep UI scaffolding or legends synchronized automatically.【F:docs/toolkits/godot-dataviz/doc_classes/DV_BoxPlot.xml†L44-L53】
+- `set_value_format(mode: int)` and `set_format_decimals(count: int)` – rely on DVComponent’s formatting so medians and whiskers read exactly the way your brand expects.【F:docs/toolkits/godot-dataviz/doc_classes/DVComponent.xml†L65-L90】
+- `set_series_color(index: int, color: Color)` – blend theme defaults with accent hues for standout categories.【F:docs/toolkits/godot-dataviz/doc_classes/DVChart.xml†L287-L296】
 
-## Why it's great
+## Powered by DVChart & DVComponent
 
-- Automatic quartile computation for raw samples.
-- Optional outlier rendering and tooltips per element.
-- Hover/click interaction for boxes and whiskers.
+Like every chart in the kit, BoxPlotView inherits:
 
-## Perfect for
+- **Reusable data plumbing** – categories, legend settings, and overlays shared across all charts via DVChart.【F:docs/toolkits/godot-dataviz/doc_classes/DVChart.xml†L5-L134】
+- **Interactive signals** – `point_clicked` / `point_hovered` from DVComponent plus dedicated box events keep dashboards reactive.【F:docs/toolkits/godot-dataviz/doc_classes/DVComponent.xml†L91-L122】【F:docs/toolkits/godot-dataviz/doc_classes/DV_BoxPlot.xml†L70-L86】
+- **Runtime theming** – swap palettes using `DVThemeManager` and the control updates instantly, from frames to fonts to animation timing.【F:docs/toolkits/godot-dataviz/doc_classes/DVComponent.xml†L16-L64】【F:docs/toolkits/godot-dataviz/doc_classes/DVThemeManager.xml†L3-L33】
 
-- Loot variability analysis.
-- NPC stat spreads across factions.
-- Combat or economy balance testing.
-
+BoxPlotView makes advanced statistical storytelling as easy as dropping in a node and feeding it numbers—exactly what you need to wow stakeholders and players alike.

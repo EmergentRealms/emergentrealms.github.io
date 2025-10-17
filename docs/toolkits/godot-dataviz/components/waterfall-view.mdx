@@ -2,7 +2,7 @@
 id: waterfall-view
 title: WaterfallView
 sidebar_label: WaterfallView
-description: How you got from A → B — cumulative plus/minus steps with color-coded totals.
+description: Narrative waterfall charts with auto totals, themed colors, and overlays.
 keywords:
   - Godot tutorials
   - UI toolkit
@@ -11,37 +11,32 @@ keywords:
   - Cobblestone Legacy
 ---
 
-> **Tagline:** How you got from A → B.
+> **Tagline:** Reveal how every change stacks up.
 
-Visualize cumulative deltas leading to a final total. Automatically computes running sums, color-codes ups/downs, and labels every step.
+`DV_Waterfall` showcases the step-by-step journey from opening values to final totals. Positive and negative deltas, running totals, and optional labels are all rendered with theme-aware colors so stakeholders can see exactly where momentum shifts.
 
-## Data binding
+## Why it delivers
 
-- `set_steps(steps: Array)` where each step is `{ label, delta }`
-- `set_base_value(value: float)` for the starting total.
+- **Purpose-built storytelling.** Feed a single series of deltas via `add_series` and the control automatically computes the running total, including opening and final bars.【F:docs/toolkits/godot-dataviz/doc_classes/DV_Waterfall.xml†L1-L53】
+- **Color-coded clarity.** Customize rise, fall, and total hues with `set_rise_color`, `set_fall_color`, and `set_total_color`, or leave them to the active `DVTheme` for instant cohesion.【F:docs/toolkits/godot-dataviz/doc_classes/DV_Waterfall.xml†L53-L86】【F:docs/toolkits/godot-dataviz/doc_classes/DVTheme.xml†L5-L86】
+- **Chart-wide intelligence.** Because it inherits DVChart and DVComponent, you gain overlays, theming, tooltip toggles, and consistent formatting out of the box.【F:docs/toolkits/godot-dataviz/doc_classes/DVChart.xml†L5-L134】【F:docs/toolkits/godot-dataviz/doc_classes/DVComponent.xml†L5-L104】
 
-## Screenshot
+## Launch in minutes
 
-<figure>
-  <p><em>Screenshot placeholder — add your WaterfallView example.</em></p>
-</figure>
+1. **Name the steps** – `set_categories(PackedStringArray([...]))` lists each change in order; “Total” is appended automatically for you.【F:docs/toolkits/godot-dataviz/doc_classes/DV_Waterfall.xml†L26-L43】
+2. **Feed the deltas** – `add_series("Δ Revenue", PackedFloat32Array([...]))` handles all the math behind the scenes.【F:docs/toolkits/godot-dataviz/doc_classes/DV_Waterfall.xml†L26-L53】
+3. **Control spacing** – `set_bar_gap_px(pixels)` balances density across dashboards, while `set_show_value_labels(true)` adds on-bar storytelling.【F:docs/toolkits/godot-dataviz/doc_classes/DV_Waterfall.xml†L53-L86】
+4. **Format with flair** – `set_value_format(mode)` and DVComponent’s decimal controls keep labels crisp and on-message.【F:docs/toolkits/godot-dataviz/doc_classes/DV_Waterfall.xml†L53-L86】【F:docs/toolkits/godot-dataviz/doc_classes/DVComponent.xml†L65-L90】
 
-## Example usage
+## API highlights
 
-```gdscript
-# TODO: Provide a WaterfallView usage example.
-# Demonstrate positive/negative deltas and total highlighting.
-```
+- `set_rise_color(color: Color)` / `set_fall_color(color: Color)` / `set_total_color(color: Color)` – ensure every viewer understands wins, hits, and final impact at a glance.【F:docs/toolkits/godot-dataviz/doc_classes/DV_Waterfall.xml†L53-L86】
+- `set_show_value_labels(enabled: bool)` – overlay numeric context exactly where viewers need it.【F:docs/toolkits/godot-dataviz/doc_classes/DV_Waterfall.xml†L53-L86】
+- `set_index_range(start: int, end: int)` – zoom into specific segments while maintaining accurate totals.【F:docs/toolkits/godot-dataviz/doc_classes/DVChart.xml†L248-L268】
+- `set_series_color(index: int, color: Color)` – swap palettes on the fly to match your brand or highlight a scenario.【F:docs/toolkits/godot-dataviz/doc_classes/DVChart.xml†L287-L296】
 
-## Why it's great
+## DVComponent & DVChart advantages
 
-- Automatic running total calculation and labeling.
-- Color coding for increases, decreases, and totals.
-- Ideal for showing contributions to a final outcome.
+WaterfallView inherits animation timing, tooltip toggles, pixel snapping, and selection support, plus the overlay system shared by every DVChart. Hook `point_clicked` or `point_hovered` to cross-filter other widgets, and use `set_padding`/`set_margin` to slot the chart into any layout with zero friction.【F:docs/toolkits/godot-dataviz/doc_classes/DVComponent.xml†L25-L104】【F:docs/toolkits/godot-dataviz/doc_classes/DVChart.xml†L205-L317】
 
-## Perfect for
-
-- Economy delta breakdowns.
-- Budget or scoring recaps.
-- Post-mortem analyses in tools or dashboards.
-
+WaterfallView makes the financial, resource, or narrative journey crystal clear—perfect for executive briefings, economy dashboards, or dramatic mission recaps.
