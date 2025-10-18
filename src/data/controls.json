@@ -12,7 +12,7 @@
     ],
     "summary": "Single source of truth for palette, typography, and component styling. Change a few seeds\u2014everything updates.",
     "docsHref": "/docs/toolkits/godot-dataviz/central-theme",
-    "thumbnail": "/img/dataviz/thumbnails/theme-manager.png",
+    "thumbnail": "/img/dataviz/ThemesManager.png",
     "tutorials": [
       {
         "title": "Toggle Light and Dark Themes",
