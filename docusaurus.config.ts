@@ -29,12 +29,12 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          editUrl: 'https://github.com/EmergentRealms/emergentrealms.github.io/edit/main/',
+          //editUrl: 'https://github.com/EmergentRealms/emergentrealms.github.io/edit/main/',
         },
         blog: {
           showReadingTime: true,
           feedOptions: { type: ['rss', 'atom'], xslt: true },
-          editUrl: 'https://github.com/EmergentRealms/emergentrealms.github.io/edit/main/',
+          //editUrl: 'https://github.com/EmergentRealms/emergentrealms.github.io/edit/main/',
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
           onUntruncatedBlogPosts: 'warn',
@@ -67,7 +67,7 @@ const config: Config = {
       title: 'Emergent Realms',
       logo: { alt: 'Emergent Realms', src: 'img/EmergentRealmLogo.png'},
       items: [
-        { to: '/docs/cobblestone/overview', label: 'Docs', position: 'left' },
+        { to: '/docs', label: 'Docs', position: 'left' },
         { to: '/blog', label: 'Devlog', position: 'left' },
         { to: '/features', label: 'Features', position: 'left' },
         { href: 'https://discord.gg/23MyDvkW', label: 'Join Discord', position: 'right' },

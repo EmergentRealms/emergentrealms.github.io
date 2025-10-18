@@ -4,70 +4,94 @@ slug: /cobblestone/concept-framework
 title: Concept Framework
 sidebar_label: Concept Framework
 sidebar_position: 2
-description: The creative blueprint for Cobblestone Legacy, an indie rogue-lite sandbox RPG built as a large scale Godot 4.4 project.
+description: The creative blueprint for Cobblestone Legacy — a sandbox RPG that explores survival, choice, and consequence within a procedurally generated Victorian city.
 keywords:
   - Cobblestone Legacy concept
-  - sandbox worldbuilding
-  - large scale Godot project
-  - indie RPG devlog
+  - sandbox world simulation
+  - emergent storytelling
+  - indie RPG development
+  - Godot 4.4 GDExtension project
   - Emergent Realms
 ---
 
-> "From the streets, a legacy rises."
+> “From the streets, a legacy rises.”
 
-Cobblestone Legacy is a sandbox RPG with rogue-lite elements set inside a living, procedurally generated Victorian city. You begin as a 12-year-old orphan and must survive, grow, and ultimately shape the fate of Grimborough through the choices you make, the factions you court, and the risks you take. Everything in this concept framework ladders up to the same goal: proving that a family-built **large scale Godot project** can deliver deep systems while staying heartfelt.
+**Cobblestone Legacy** is a sandbox RPG with rogue-lite structure, set in a procedurally generated Victorian city teeming with life, danger, and opportunity.  
+You begin as a young orphan struggling to survive among strangers — and every decision, alliance, and betrayal you make slowly writes your story into the city’s memory.
+
+The project aims to show that even a small independent team can build a *living*, *breathing* world from the ground up — a simulation rich with consequence and humanity, powered entirely by Godot 4.4 and C++ GDExtensions.
+
+---
+
+## Design Vision
+
+Cobblestone Legacy is not about scripted heroes or fixed roles.  
+It’s about survival, trust, and ambition within a city that remembers everything.  
+Every NPC, faction, and business follows its own logic and history — their actions ripple outward to shape the wider world.
+
+The player is simply one life among many, trying to find meaning and belonging in an unpredictable urban sprawl.
+
+---
 
 ## Core Pillars
 
-### Survival Mechanics
-- Track stamina, energy, thirst, and hunger to stay alive in a harsh city with limited resources.
-- Rest, sleep, forage, or tinker to recover vital stats and discover new opportunities.
+### Survival
+Life in Grimborough is unforgiving. Managing hunger, thirst, and exhaustion isn’t a side system — it’s the heart of daily existence. Every moment spent scavenging, resting, or taking risks feeds into a broader story of endurance and consequence.
 
-### Exploration & Discovery
-- Fog of war obscures the city and encourages scouting.
-- Discover stashes, hideouts, and key locations through rumors, tracking NPCs, and exploration.
-- Every run is unique thanks to procedural city generation.
+### Discovery
+The city begins as a mystery — shrouded in fog and rumor.  
+You uncover it piece by piece: alley by alley, contact by contact.  
+Every playthrough brings new districts, new stories, and new dangers.
 
-### Player Progression
-- Train skills such as stealth, lockpicking, crafting, and combat.
-- Earn experience through quests, activities, and training.
-- Unlock impactful capstone abilities when maxing a skill.
+### Growth
+Skills evolve naturally through use. Stealth, crafting, persuasion, combat — each grows through lived experience rather than menus or archetypes.  
+There are no fixed classes; only the paths that choices carve.
 
-### Faction Dynamics
-- Ally with, sabotage, or betray competing factions.
-- Reputation and infamy shape access to resources, perks, and quests.
-- A reactive city economy and politics respond to player actions.
+### Influence
+Factions, merchants, and gangs form the beating heart of the city’s politics.  
+Reputation and trust shape opportunities: a favor can open doors that wealth cannot.  
+You can build alliances, spark conflicts, or walk the fragile line between them.
 
-### Narrative Depth
-- Dialogue choices, quests, and random events weave a personal narrative.
-- NPCs remember past actions, share rumors, and expose the history of Grimborough.
-- Decide whether to help clean up the city or let it descend into chaos.
+### Story & Memory
+The world reacts and remembers.  
+NPCs recall favors, betrayals, and shared events; rumors distort and spread; forgotten actions return when least expected.  
+No two stories unfold the same way, yet every one feels connected.
 
-## Key Features
+---
 
-1. **Survival & Needs Management** — Deep vitals simulation with lethal consequences for neglecting food, water, or rest.
-2. **Travel & Map Systems** — Safety-aware pathfinding, travel stances, and fog of war that reveal the city piece by piece.
-3. **Skill Progression** — Training, synergies, and capstone rewards that reinforce a chosen playstyle.
-4. **Theft & Stealth** — Scout, lockpick, or break into lucrative targets while avoiding guards through stealth or parkour.
-5. **Quests & Activities** — Organic missions tied to NPCs and factions, plus a library of ambient activities and dynamic events.
-6. **Crafting & Economy** — Craft gear, trade stolen goods, and manipulate prices in a living economy.
-7. **Dynamic World** — Procedural city layouts, evolving factions, and schedule-driven NPC behaviors.
-8. **Immersive Storytelling** — Moral choices and faction relationships reverberate throughout the city.
+## Systemic Highlights
 
-## Example Quest Hooks
+1. **Survival & Needs** — Every day demands choices between rest, risk, and reward.  
+2. **Exploration & Travel** — The fog of war reveals a city built from procedural tiles, rich with random encounters.  
+3. **Skills & Specialization** — Growth through practice, synergy, and persistence.  
+4. **Stealth & Crime** — Stakeouts, infiltration, and daring escapes across rooftops.  
+5. **Quests & Rumors** — Dynamic events seeded by relationships, faction needs, and local gossip.  
+6. **Crafting & Trade** — A player-driven economy shaped by what’s made, stolen, or destroyed.  
+7. **Dynamic Society** — NPCs with memories, routines, and ambitions that evolve across each run.  
+8. **Reactive Narrative** — Morality and consequence woven into the world’s fabric.
 
-- Find medicine for an injured ally to unlock new information or loyalty.
-- Deliver contraband across dangerous districts.
-- Stake out a wealthy home to plan a heist, or rescue a kidnapped faction member.
-- Sabotage security systems, reclaim seized goods, or recruit new allies.
-- Protect caravans, craft rare items, or spy on rival factions for leverage.
+---
 
-## Player Activities at a Glance
+## A City of Stories
 
-- Pickpocket, scavenge, and trade to stay afloat.
-- Train stealth, crafting, acrobatics, and more to specialize.
-- Follow wealthy marks, break into buildings, and stash valuable loot.
-- Craft tools and consumables, then sell them or leverage them for bigger scores.
-- Use parkour and stealth to escape guards and rival gangs.
+The city of Grimborough is more than a setting — it’s a character.  
+Its streets breathe through the people who inhabit them: beggars, craftsmen, guards, thieves, and nobles all driven by need and fear.  
+The player’s story is just one thread in a much larger tapestry.
 
-Cobblestone Legacy is designed for 3–6 hour runs with unlockable traits, gear, and world changes that keep every playthrough fresh. Endgame goals range from faction leadership to becoming a master thief or reshaping the city as a reformer or criminal kingpin.
+Every action matters. Every rumor has a source. Every loss leaves a mark.
+
+---
+
+## The Experience
+
+Cobblestone Legacy is designed for runs lasting a few hours — each a self-contained story within the city’s ongoing evolution.  
+Some runs end in triumph, others in tragedy, but all contribute to the larger legacy the player leaves behind.
+
+End goals are not scripted victories, but *personal milestones*:
+- Rise from obscurity to influence a faction.  
+- Master your craft and amass quiet wealth.  
+- Reform the city from within — or plunge it further into chaos.
+
+---
+
+**Cobblestone Legacy** is, at its core, an experiment in systemic storytelling — where survival, morality, and connection forge narratives that no designer could script.

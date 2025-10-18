@@ -44,21 +44,10 @@ The Dynamic Dialog System keeps every conversation grounded in context and memor
 - Dialogue options appear or hide based on reputation, mood, prior choices, or current objectives.
 - Logical progression keeps conversations fresh—no repeated loops unless context warrants it.
 
-## Modular Content Creation
-
-- JSON-driven conversation files make it easy to author, reuse, or customize dialogue at scale.
-- Shared templates with NPC-specific overrides accelerate content production.
-- Scales to hundreds of NPCs and thousands of branching options.
-
 ## Interactive World Features
 
 - NPCs converse in real time, exchange rumors, and react to proximity.
 - Player choices reshape relationships, trigger events, and modify the world state.
-
-## Developer Tooling
-
-- Inspect active NPCs, conversation history, and rumor propagation in debugging views.
-- Built-in validation prevents broken conditions and tracks NPC mood, reputation, and rumor knowledge live.
 
 ## Time-Aware Immersion
 

@@ -3,84 +3,54 @@ id: professions
 slug: /cobblestone/systems/professions
 title: Professions & Trades
 sidebar_label: Professions & Trades
-description: Profession roster for Cobblestone Legacy, detailing the systemic jobs that drive the sandbox economy.
+description: Early design notes on the profession and trade systems in Cobblestone Legacy, where every role in the city can be lived, learned, or lost.
 keywords:
-  - sandbox worldbuilding
+  - sandbox world simulation
   - professions system
-  - rogue-lite sandbox RPG
+  - emergent gameplay
   - Cobblestone Legacy
-  - large scale Godot project
+  - life simulation RPG
 ---
 
-## Crafting Professions
+## The Shape of Work
 
-Crafting loops are implemented in C++ via GDExtension so the **Godot C++ RPG systems** can keep up with multiplayer demand.
+The professions and trades of **Cobblestone Legacy** are not fixed classes or scripted archetypes—they are living roles that emerge naturally from the city itself.  
+The goal is to eventually represent **every occupation a real city might need**, from humble street sweepers to ambitious merchants and skilled artisans.
 
-- Blacksmithing, Alchemy, Tailoring (implemented)
-- Carpentry — Build tools, structures, and furniture.
-- Tinkering — Craft gadgets, traps, and mechanical curios.
-- Cooking & Baking — Prepare food for buffs, trade, or survival.
-- Jewelry Crafting — Create rings, necklaces, and charms with social impact.
+There are no predefined limits or class barriers.  
+An NPC—or player—can pursue any trade, provided they have the skill, the temperament, and the opportunity.
 
-## Resource Gathering
+---
 
-- Fishing, Hunting, Mining, Farming (implemented)
-- Herbalism — Collect medicinal plants and rare alchemical reagents.
-- Lumberjacking — Harvest timber for carpentry, construction, or trade.
-- Scavenging — Search ruins and alleys for salvageable materials.
+## Driven by Personality and Connection
 
-## Trade & Commerce
+Success in Cobblestone Legacy is shaped as much by **who you are** as by **who you know**.  
+Every individual has their own personality, experiences, and abilities that influence how they approach work and relationships.
 
-- Merchant — Optimize pricing, inventory, and storefront presentation.
-- Bartering — Specialize in item-for-item negotiation.
-- Innkeeper & Barkeep — Provide shelter, food, and faction gossip.
-- Banking — Manage wealth, vaults, and high-stakes loans.
-- Smuggling — Transport contraband while dodging guards and rival gangs.
+- A hardworking but cautious trader may thrive in stable markets.  
+- A reckless craftsman might take shortcuts that risk disaster.  
+- A persuasive performer could turn reputation into opportunity.  
 
-## Combat & Security
+And, as in real life, sometimes it all comes down to **trust**.  
+If a merchant believes in you, you might be offered a place in their new venture. If your reputation suffers, doors quietly close.
 
-- Weapon Mastery — Specialize in weapon families for unique moves.
-- Guarding — Earn coin as a hired protector or city guard.
-- Bounty Hunting — Track and capture wanted figures.
-- Assassination — Execute high-risk, stealth-oriented contracts.
-- Beast Taming — Command animals for combat or utility roles.
+---
 
-## Social & Support Roles
+## A City That Runs Itself
 
-- Diplomacy (implemented) — Broker peace or escalate tensions.
-- Storytelling — Influence morale or earn coin via performance.
-- Healing — Provide medical aid, triage, or spiritual comfort.
-- Teaching — Train NPCs or apprentices to spread skill trees.
-- Espionage — Gather intelligence, infiltrate factions, or forge identities.
-- Performing Arts — Music, dance, and theatre for prestige or distraction.
+There are no global scripts deciding which professions exist or how they function.  
+The city breathes on its own, each citizen making choices that sustain or disrupt its rhythm.
 
-## Mystical Pursuits
+Shops open and close.  
+Workshops hire and fire.  
+Shipments arrive—or vanish on the road.  
+The success or failure of a profession depends on the same things that shape every life: opportunity, circumstance, and the choices of others.
 
-- Runecrafting — Inscribe magical effects onto gear or architecture.
-- Enchanting — Imbue items with lasting mystical bonuses.
-- Divination — Foretell events, locate caches, and read omens.
-- Necromancy — Command spirits or raise the dead with moral consequences.
-- Herbal Alchemy — Fuse botany and magic for hybrid concoctions.
+---
 
-## City-Specific Work
+## The Vision Ahead
 
-- Chimney Sweep — Keep industry humming and uncover rooftop secrets.
-- Rat Catcher — Manage urban vermin and plague risks.
-- Street Performer — Busk for tips and gather rumors.
-- Courier — Deliver packages across dangerous districts.
-- Locksmith — Craft, pick, and secure locks throughout the city.
+The profession system is still in early development, but its long-term aim is clear:  
+a world where **every role matters**, and where the economy, politics, and stories of the city are built from the ground up by the people who inhabit it.
 
-## Underground Opportunities
-
-- Thieving — Pickpocket, burgle, and heist your way to fortune.
-- Counterfeiting — Forge currency and documents.
-- Fence — Launder stolen goods for profit.
-- Gang Leader — Command crews, territory, and protection rackets.
-- Poisoner — Brew toxins for stealthy eliminations.
-
-## Exploration & Navigation
-
-- Cartography — Map the procedural city for resale or planning.
-- Pathfinding — Escort caravans or travelers through hazards.
-- Exploration — Discover secrets, ruins, or hidden districts.
-- Sailing & Shipwright — Maintain the harbor fleet and coastal ventures.
+Players and NPCs alike will find their paths through ambition, reputation, and connection—each decision weaving another thread into the fabric of a truly simulated city.

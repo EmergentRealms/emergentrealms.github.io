@@ -1,7 +1,7 @@
 ---
 id: cobblestone-overview
 title: Project Overview
-sidebar_position: 0
+sidebar_position: 2
 slug: /cobblestone/overview
 description: High-level guide to Cobblestone Legacy, a large scale Godot 4.4 rogue-lite sandbox RPG built with C++ GDExtensions.
 keywords:

@@ -78,6 +78,15 @@
   box-shadow: 0 1px 0 rgba(0,0,0,0.12);
 }
 
+/* Center content inside full-width buttons */
+.button.button--block {
+  display: flex;               /* override inline-flex quirks */
+  align-items: center;
+  justify-content: center;     /* centers the text horizontally */
+  text-align: center;          /* safe fallback */
+}
+
+
 /* Footer: minimal, high contrast */
 .footer {
   color: #dcdfe6;
@@ -95,4 +104,39 @@ a:hover {
 .prism-code {
   border-radius: 10px;
   border: 1px solid var(--ifm-border-color);
+}
+
+
+/* Make block buttons true flex containers for perfect centering */
+.button.button--block,
+.button-group .button.button--block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* XL size with higher specificity so CSS vars apply */
+.button.button--xl {
+  --ifm-button-font-size: 1.25rem;      /* bump size (≈20px). Use 1.5rem if you want larger */
+  --ifm-button-padding-vertical: 0.9rem;
+  --ifm-button-padding-horizontal: 1.4rem;
+  line-height: 1.2;                      /* avoids baseline “floating” look */
+  font-weight: 600;
+}
+
+/* Card hero images: fixed height, keep full image */
+.card__image {
+  height: 400px;
+  display: flex;
+  align-items: center;          /* vertically center the image */
+  justify-content: center;      /* horizontally center if narrower */
+  overflow: hidden;             /* hides any accidental overflow */
+}
+
+.card__image img {
+  height: 100%;                 /* = 300px */
+  width: auto;                  /* preserve aspect ratio */
+  max-width: 100%;              /* prevent overflow on very wide images */
+  object-fit: contain;          /* never crop */
 }

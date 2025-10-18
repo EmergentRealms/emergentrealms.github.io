@@ -3,69 +3,63 @@ id: economy-manager
 slug: /cobblestone/systems/economy-manager
 title: Economy Manager
 sidebar_label: Economy Manager
-description: Architecture notes for the Cobblestone Legacy economy manager, a Godot C++ system backed by SQLite for large scale simulations.
+description: The fully simulated, player- and NPC-driven economy of Cobblestone Legacy—where every trade, theft, and fire has real consequences.
 keywords:
   - Godot economy system
-  - SQLite in Godot
+  - emergent simulation
   - Cobblestone Legacy
-  - large scale Godot project
-  - Godot C++ RPG systems
+  - player-driven economy
+  - sandbox RPG systems
 ---
 
-## Dynamic Market Simulation
+## A Living, Breathing Economy
 
-The economy stack lives in C++ via GDExtension so it can juggle thousands of background transactions without blocking the main thread—an approach we call out frequently in our **large scale Godot project** devlogs.
+The world of **Cobblestone Legacy** operates without invisible hands or abstract market rules.  
+Every coin that changes hands, every shipment that arrives or fails to, every shop that burns down or thrives — all of it is simulated in real time through the actions of players and NPCs.
 
-The Economy Manager keeps prices fluid based on supply, demand, and player influence.
+There are **no global systems** silently adjusting prices or balancing markets.  
+Instead, the economy emerges naturally from individual decisions, risks, and events.
 
-### Getting Started
+---
 
-```gdscript title="Initialize the economy"
-var base_prices = {
-    "Iron": 100,
-    "Gold": 500,
-    "Wheat": 50
-}
-EconomyManager.initialize(base_prices)
-```
+## Player and NPC Actions Define Everything
 
-### Supply, Demand & Price Updates
-- `change_supply()` and `change_demand()` automatically call `update_prices()`.
-- Price updates emit signals (`price_updated`, `supply_demand_updated`) so UI and events can react instantly.
+Merchants buy, sell, and store goods just like real participants in a living city.  
+When demand rises, prices rise. When a supply route is disrupted, shortages form. When someone floods the market with stolen goods, value collapses.
 
-### Player Agency
-- `player_influence_event()` lets player actions manipulate markets—corner a resource, sabotage supply, or flood merchants with goods.
-- Background transactions simulate shipments, embargoes, and other world events.
+- **Prosperity through success:** A merchant who makes wise trades and maintains good relationships will see their wealth and influence grow.  
+- **Loss through consequence:** If their shop is robbed or burned, they must pay to rebuild.  
+- **Risk through theft and conflict:** If a caravan is intercepted, the merchant loses the goods and others in the city feel the ripple effects.
 
-```gdscript title="Add a shipment"
-EconomyManager.add_transaction("Iron", 50, "shipment", delay=15.0)
-```
+Every transaction—honest or criminal—echoes through the web of relationships that make up the city’s economy.
 
-### Background Processing
-- Queue events with `add_transaction()` and resolve them via `process_transactions(delta)` in the main loop.
-- Invoke `random_event()` periodically to keep markets unpredictable.
-- SQLite-backed history writes batch asynchronously, mirroring the strategies documented in the [Leveling Up with C++ devlog](/blog/leveling-up-with-cpp) for sustainable **SQLite in Godot** usage.
+---
 
-```gdscript
-func _process(delta):
-    EconomyManager.process_transactions(delta)
-```
+## Cause and Effect at Every Level
 
-### Debugging & Analytics
-- `debug_economy()` prints the current state.
-- `record_price_history()` tracks trends for dashboards or merchant UIs.
+This system ensures that **every outcome is earned**, not scripted:
 
-### Integration Points
+- Prices shift based on **real availability** of goods, not arbitrary algorithms.  
+- NPCs react dynamically to changing conditions—seeking safer trade routes, raising prices, or abandoning unprofitable trades.  
+- Factions rise and fall based on the success of their economic ventures.  
+- Players can manipulate the system for profit, stability, or chaos.
 
-- **Merchants** fetch prices with `get_price()` and update UI when signals fire.
-- **Quests** can spike demand or reduce supply for targeted items.
-- **EventManager** injects global events such as wars or festivals.
-- **FactionManager** personalizes pricing based on reputation.
-- **Crafting & Stashes** use current prices to evaluate profitability.
+There are no resets or global recalculations—only consequences.
 
-### Gameplay Implications
+---
 
-1. **Dynamic Economy** — Markets react to systemic and player-driven changes.
-2. **Player Exploitation** — Players can manipulate supply chains for profit or chaos.
-3. **Interactive World** — Shipments, embargoes, and faction moves shape the market.
-4. **Meaningful Decisions** — Choose between short-term gains or long-term stability.
+## Emergent Gameplay
+
+Because everything is simulated, the economy becomes a powerful storytelling engine:
+
+- A **fire in a warehouse** can create a city-wide shortage of food or textiles.  
+- A **bandit raid** on a trade convoy might crash the local iron market.  
+- A **noble’s festival** could temporarily boost demand for luxury goods.  
+- A **player’s intervention**—through trade, theft, or sabotage—can permanently alter the flow of commerce.
+
+Every coin and resource has a history. Every price reflects the world’s state.  
+It’s not just an economy—it’s the heartbeat of a living simulation.
+
+---
+
+**In Cobblestone Legacy, wealth is earned, risk is real, and every decision leaves a mark on the world.**

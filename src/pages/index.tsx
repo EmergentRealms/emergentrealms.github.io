@@ -48,7 +48,7 @@ function HomepageHeader() {
             <Link className="button button--primary button--lg" to="/blog">
               Read the Devlog
             </Link>
-            <Link className="button button--secondary button--lg" to="/docs/cobblestone/overview">
+            <Link className="button button--secondary button--lg" to="/docs">
               View Docs
             </Link>
             <Link

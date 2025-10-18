@@ -1,0 +1,177 @@
+{
+  "theme-manager": {
+    "title": "Central Theme Manager",
+    "subtitle": "Color seeds + light/dark with auto-propagation",
+    "category": "Theme",
+    "status": "beta",
+    "updatedAt": "2025-10-18",
+    "tags": ["theming", "palette", "editor-friendly"],
+    "summary": "Single source of truth for palette, typography, and component styling. Change a few seeds—everything updates.",
+    "docsHref": "/docs/toolkits/godot-dataviz/theme/overview",
+    "thumbnail": "/img/dataviz/thumbnails/theme-manager.png",
+    "tutorials": [
+      {
+        "title": "Toggle Light/Dark in Code",
+        "description": "Switch themes at runtime and broadcast the change to all DataViz components.",
+        "codeHref": "/code/dataviz/theme/switch_theme.gd",
+        "image": "/img/tutorials/theme/switch-theme.png"
+      },
+      {
+        "title": "Seed a Custom Palette",
+        "description": "Define Primary/Success/Warning/Error/Info seeds and let the ColorSystem generate the full palette.",
+        "codeHref": "/code/dataviz/theme/custom_palette.gd",
+        "image": "/img/tutorials/theme/custom-palette.png"
+      },
+      {
+        "title": "Player Color Picker",
+        "description": "Expose a simple UI to let players choose their own accent color and persist it.",
+        "codeHref": "/code/dataviz/theme/player_color_picker.gd",
+        "image": "/img/tutorials/theme/player-picker.png"
+      }
+    ]
+  },
+  "bar-chart": {
+    "title": "Bar Chart",
+    "subtitle": "Grouped/stacked bars with labels & tooltips",
+    "category": "Charts",
+    "status": "beta",
+    "updatedAt": "2025-10-18",
+    "tags": ["categorical", "comparisons"],
+    "summary": "Fast categorical chart with legends, value labels, and hover/click signals.",
+    "docsHref": "/docs/toolkits/godot-dataviz/charts/bar-chart",
+    "thumbnail": "/img/dataviz/thumbnails/bar-chart.png",
+    "tutorials":[]
+  },
+  "line-chart": {
+    "title": "Line Chart",
+    "subtitle": "Multi-series trends with markers",
+    "category": "Charts",
+    "status": "beta",
+    "updatedAt": "2025-10-18",
+    "tags": ["time-series", "trends"],
+    "summary": "Smoothed or step lines, optional area fills, and segment hover/selection.",
+    "docsHref": "/docs/toolkits/godot-dataviz/charts/line-chart",
+    "thumbnail": "/img/dataviz/thumbnails/line-chart.png",
+    "tutorials":[]
+  },
+  "box-plot": {
+    "title": "Box Plot",
+    "subtitle": "Quartiles, whiskers, outliers",
+    "category": "Charts",
+    "status": "alpha",
+    "updatedAt": "2025-10-18",
+    "tags": ["distribution", "stats"],
+    "summary": "Visualize spread and skew with automatic quartile computation and optional outlier dots.",
+    "docsHref": "/docs/toolkits/godot-dataviz/charts/box-plot",
+    "thumbnail": "/img/dataviz/thumbnails/box-plot.png",
+    "tutorials":[]
+  },
+  "waterfall": {
+    "title": "Waterfall",
+    "subtitle": "Step-by-step deltas to a total",
+    "category": "Charts",
+    "status": "beta",
+    "updatedAt": "2025-10-18",
+    "tags": ["budget", "breakdown"],
+    "summary": "Shows how individual positives/negatives accumulate from start to finish.",
+    "docsHref": "/docs/toolkits/godot-dataviz/charts/waterfall",
+    "thumbnail": "/img/dataviz/thumbnails/waterfall.png",
+    "tutorials":[]
+  },
+  "timeline": {
+    "title": "Timeline",
+    "subtitle": "Tracks with events and 'now' marker",
+    "category": "Charts",
+    "status": "alpha",
+    "updatedAt": "2025-10-18",
+    "tags": ["scheduling", "gantt-like"],
+    "summary": "Multi-track time blocks for incidents, quests, or production schedules.",
+    "docsHref": "/docs/toolkits/godot-dataviz/charts/timeline",
+    "thumbnail": "/img/dataviz/thumbnails/timeline.png",
+    "tutorials":[]
+  },
+  "gauge": {
+    "title": "Gauge",
+    "subtitle": "Arc meter with ticks and center text",
+    "category": "Graphs",
+    "status": "beta",
+    "updatedAt": "2025-10-18",
+    "tags": ["kpi", "status"],
+    "summary": "Configurable sweep, round/square caps, and dynamic center label.",
+    "docsHref": "/docs/toolkits/godot-dataviz/graphs/gauge",
+    "thumbnail": "/img/dataviz/thumbnails/gauge.png",
+    "tutorials":[]
+  },
+  "pie-chart": {
+    "title": "Pie / Donut",
+    "subtitle": "Categories with inside/outside labels",
+    "category": "Graphs",
+    "status": "beta",
+    "updatedAt": "2025-10-18",
+    "tags": ["share", "composition"],
+    "summary": "Donut or full pie with leader lines and total-in-center option.",
+    "docsHref": "/docs/toolkits/godot-dataviz/graphs/pie-chart",
+    "thumbnail": "/img/dataviz/thumbnails/pie-chart.png",
+    "tutorials":[]
+  },
+  "kpi-tile": {
+    "title": "KPI Tile",
+    "subtitle": "Headline value with delta & sparkline",
+    "category": "Graphs",
+    "status": "beta",
+    "updatedAt": "2025-10-18",
+    "tags": ["dashboard", "summary"],
+    "summary": "Compact metric tile for quick-glance stats; supports icons and trend line.",
+    "docsHref": "/docs/toolkits/godot-dataviz/graphs/kpi-tile",
+    "thumbnail": "/img/dataviz/thumbnails/kpi-tile.png",
+    "tutorials":[]
+  },
+  "radar-graph": {
+    "title": "Radar Graph",
+    "subtitle": "Multi-axial comparison",
+    "category": "Graphs",
+    "status": "alpha",
+    "updatedAt": "2025-10-18",
+    "tags": ["profiles", "attributes"],
+    "summary": "Plot actor or faction profiles across multiple axes with fill and outline.",
+    "docsHref": "/docs/toolkits/godot-dataviz/graphs/radar-graph",
+    "thumbnail": "/img/dataviz/thumbnails/radar-graph.png",
+    "tutorials":[]
+  },
+  "table-grid": {
+    "title": "Table Grid",
+    "subtitle": "Virtualized rows for huge datasets",
+    "category": "Other",
+    "status": "beta",
+    "updatedAt": "2025-10-18",
+    "tags": ["logs", "inventory", "sqlite"],
+    "summary": "Fast scrolling table with column config, sorting, and selection.",
+    "docsHref": "/docs/toolkits/godot-dataviz/other/table-grid",
+    "thumbnail": "/img/dataviz/thumbnails/table-grid.png",
+    "tutorials":[]
+  },
+  "heat-map": {
+    "title": "Heat Map",
+    "subtitle": "Grid intensities with legend",
+    "category": "Other",
+    "status": "beta",
+    "updatedAt": "2025-10-18",
+    "tags": ["matrix", "affinity", "pathfinding"],
+    "summary": "Render weighted grids for AI costs, supply/demand, or correlation matrices.",
+    "docsHref": "/docs/toolkits/godot-dataviz/other/heat-map",
+    "thumbnail": "/img/dataviz/thumbnails/heat-map.png",
+    "tutorials":[]
+  },
+  "detail-panel": {
+    "title": "Detail Panel",
+    "subtitle": "Labeled rows, groups, and tags",
+    "category": "Other",
+    "status": "beta",
+    "updatedAt": "2025-10-18",
+    "tags": ["inspector", "entity-overview"],
+    "summary": "Flexible facts panel with icons, tooltips, and pill-style tag lists.",
+    "docsHref": "/docs/toolkits/godot-dataviz/other/detail-panel",
+    "thumbnail": "/img/dataviz/thumbnails/detail-panel.png",
+    "tutorials":[]
+  }
+}
