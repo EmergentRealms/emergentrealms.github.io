@@ -11,7 +11,7 @@ description: Start here to explore guides, components, and API references for Em
 
 Pick a Toolkit to get started:
 
-- **[Godot Data Visualization Toolkit](./godot-dataviz/index.mdx)**
+- **[Godot Data Visualization Toolkit](./godot-dataviz/index.md)**
 
 
 

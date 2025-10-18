@@ -1,0 +1,9 @@
+{
+  "label": "Other UI",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "title": "Other UI",
+    "description": "Tables, panels, and layouts that round out the toolkit."
+  }
+}

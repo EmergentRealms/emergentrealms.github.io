@@ -1,9 +1,0 @@
-{
-  "label": "Components",
-  "position": 2,
-  "link": {
-    "type": "generated-index",
-    "title": "Godot DataViz Components",
-    "description": "Drill into each chart, tile, and widget included with the Godot DataViz UI Kit."
-  }
-}

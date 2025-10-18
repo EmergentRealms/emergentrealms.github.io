@@ -1,0 +1,9 @@
+{
+  "label": "Graphs",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "title": "Graphs",
+    "description": "KPI tiles and radial indicators for dashboards."
+  }
+}
