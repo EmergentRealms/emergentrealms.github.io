@@ -3,7 +3,7 @@
     "title": "Central Theme Manager",
     "subtitle": "Color seeds + light/dark with auto-propagation",
     "category": "Theme",
-    "status": "beta",
+    "status": "stable",
     "updatedAt": "2025-10-18",
     "tags": [
       "theming",
@@ -17,17 +17,20 @@
       {
         "title": "Toggle Light and Dark Themes",
         "description": "Switch palettes at runtime and notify every control listening to the Theme Manager.",
-        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/theme_switch_theme.gd"
+        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/theme_switch_theme.gd",
+        "screenshot":"/img/dataviz/theme1.png"
       },
       {
         "title": "Seed a Custom Palette",
         "description": "Author a DVTheme in code with bespoke brand colors before broadcasting it.",
-        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/theme_custom_palette.gd"
+        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/theme_custom_palette.gd",
+        "screenshot":"/img/dataviz/theme2.png"
       },
       {
         "title": "Player Color Picker",
         "description": "Let players pick an accent color and push the update through the active theme.",
-        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/theme_player_color_picker.gd"
+        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/theme_player_color_picker.gd",
+        "screenshot":"/img/dataviz/theme3.png"
       }
     ]
   },
@@ -35,7 +38,7 @@
     "title": "Bar Chart",
     "subtitle": "Grouped/stacked bars with labels & tooltips",
     "category": "Charts",
-    "status": "beta",
+    "status": "stable",
     "updatedAt": "2025-10-18",
     "tags": [
       "categorical",
@@ -43,12 +46,13 @@
     ],
     "summary": "Fast categorical chart with legends, value labels, and hover/click signals.",
     "docsHref": "/docs/toolkits/godot-dataviz/charts/bar-chart",
-    "thumbnail": "/img/dataviz/thumbnails/bar-chart.png",
+    "thumbnail": "/img/dataviz/barchart_ex2.png",
     "tutorials": [
       {
         "title": "Track Engagement by Device",
         "description": "Populate grouped bars, customize spacing, and listen for hover/click signals.",
-        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/bar_chart_interactive.gd"
+        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/bar_chart_interactive.gd",
+        "screenshot":"/img/dataviz/barchart_ex1.png"
       }
     ]
   },
@@ -56,7 +60,7 @@
     "title": "Line Chart",
     "subtitle": "Multi-series trends with markers",
     "category": "Charts",
-    "status": "beta",
+    "status": "stable",
     "updatedAt": "2025-10-18",
     "tags": [
       "time-series",
@@ -64,12 +68,13 @@
     ],
     "summary": "Smoothed or step lines, optional area fills, and segment hover/selection.",
     "docsHref": "/docs/toolkits/godot-dataviz/charts/line-chart",
-    "thumbnail": "/img/dataviz/thumbnails/line-chart.png",
+    "thumbnail": "/img/dataviz/barchart_ex1.png",
     "tutorials": [
       {
         "title": "Add SMA/EMA Overlays",
         "description": "Generate a synthetic revenue series, enable overlays, and fill the active line.",
-        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/line_chart_overlays.gd"
+        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/line_chart_overlays.gd",
+        "screenshot":"/img/dataviz/barchart_ex1.png"
       }
     ]
   },
@@ -85,12 +90,13 @@
     ],
     "summary": "Visualize spread and skew with automatic quartile computation and optional outlier dots.",
     "docsHref": "/docs/toolkits/godot-dataviz/charts/box-plot",
-    "thumbnail": "/img/dataviz/thumbnails/box-plot.png",
+    "thumbnail": "/img/dataviz/Box_plot_ex1.png",
     "tutorials": [
       {
         "title": "Compare Quartile Spread",
         "description": "Feed sample returns per sector and inspect medians via the click signal.",
-        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/box_plot_distribution.gd"
+        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/box_plot_distribution.gd",
+        "screenshot":"/img/dataviz/Box_plot_ex1.png"
       }
     ]
   },
@@ -98,7 +104,7 @@
     "title": "Waterfall",
     "subtitle": "Step-by-step deltas to a total",
     "category": "Charts",
-    "status": "beta",
+    "status": "stable",
     "updatedAt": "2025-10-18",
     "tags": [
       "budget",
@@ -106,7 +112,7 @@
     ],
     "summary": "Shows how individual positives/negatives accumulate from start to finish.",
     "docsHref": "/docs/toolkits/godot-dataviz/charts/waterfall",
-    "thumbnail": "/img/dataviz/thumbnails/waterfall.png",
+    "thumbnail": "/img/dataviz/waterfall.png",
     "tutorials": [
       {
         "title": "Build a Cash Flow Bridge",
@@ -127,7 +133,7 @@
     ],
     "summary": "Multi-track time blocks for incidents, quests, or production schedules.",
     "docsHref": "/docs/toolkits/godot-dataviz/charts/timeline",
-    "thumbnail": "/img/dataviz/thumbnails/timeline.png",
+    "thumbnail": "/img/dataviz/timeline.png",
     "tutorials": [
       {
         "title": "Plan Story Beats Across Tracks",
@@ -140,7 +146,7 @@
     "title": "Gauge",
     "subtitle": "Arc meter with ticks and center text",
     "category": "Graphs",
-    "status": "beta",
+    "status": "stable",
     "updatedAt": "2025-10-18",
     "tags": [
       "kpi",
@@ -148,7 +154,7 @@
     ],
     "summary": "Configurable sweep, round/square caps, and dynamic center label.",
     "docsHref": "/docs/toolkits/godot-dataviz/graphs/gauge",
-    "thumbnail": "/img/dataviz/thumbnails/gauge.png",
+    "thumbnail": "/img/dataviz/gauge.png",
     "tutorials": [
       {
         "title": "Monitor Server Load",
@@ -161,7 +167,7 @@
     "title": "Pie / Donut",
     "subtitle": "Categories with inside/outside labels",
     "category": "Graphs",
-    "status": "beta",
+    "status": "stable",
     "updatedAt": "2025-10-18",
     "tags": [
       "share",
@@ -169,12 +175,19 @@
     ],
     "summary": "Donut or full pie with leader lines and total-in-center option.",
     "docsHref": "/docs/toolkits/godot-dataviz/graphs/pie-chart",
-    "thumbnail": "/img/dataviz/thumbnails/pie-chart.png",
+    "thumbnail": "/img/dataviz/Piechart_ex1.png",
     "tutorials": [
+      {
+        "title": "Render a Donut simple Pie",
+        "description": "Simple chart with labels inside, and react to slice clicks.",
+        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/pie_chart_donut.gd",
+        "screenshot":"/img/dataviz/Piechart_ex1.png"
+      },
       {
         "title": "Render a Donut with Leader Lines",
         "description": "Enable donut mode, position labels outside, and react to slice clicks.",
-        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/pie_chart_donut.gd"
+        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/pie_chart_donut_ex2.gd",
+        "screenshot":"/img/dataviz/Piechart_ex2.png"
       }
     ]
   },
@@ -182,7 +195,7 @@
     "title": "KPI Tile",
     "subtitle": "Headline value with delta & sparkline",
     "category": "Graphs",
-    "status": "beta",
+    "status": "stable",
     "updatedAt": "2025-10-18",
     "tags": [
       "dashboard",
@@ -190,7 +203,7 @@
     ],
     "summary": "Compact metric tile for quick-glance stats; supports icons and trend line.",
     "docsHref": "/docs/toolkits/godot-dataviz/graphs/kpi-tile",
-    "thumbnail": "/img/dataviz/thumbnails/kpi-tile.png",
+    "thumbnail": "/img/dataviz/kpi-tile.png",
     "tutorials": [
       {
         "title": "Summarize Revenue in a Tile",
@@ -211,7 +224,7 @@
     ],
     "summary": "Plot actor or faction profiles across multiple axes with fill and outline.",
     "docsHref": "/docs/toolkits/godot-dataviz/graphs/radar-graph",
-    "thumbnail": "/img/dataviz/thumbnails/radar-graph.png",
+    "thumbnail": "/img/dataviz/radar-graph.png",
     "tutorials": [
       {
         "title": "Profile Squad Attributes",
@@ -224,7 +237,7 @@
     "title": "Table Grid",
     "subtitle": "Virtualized rows for huge datasets",
     "category": "Other",
-    "status": "beta",
+    "status": "stable",
     "updatedAt": "2025-10-18",
     "tags": [
       "logs",
@@ -233,7 +246,7 @@
     ],
     "summary": "Fast scrolling table with column config, sorting, and selection.",
     "docsHref": "/docs/toolkits/godot-dataviz/other/table-grid",
-    "thumbnail": "/img/dataviz/thumbnails/table-grid.png",
+    "thumbnail": "/img/dataviz/table-grid.png",
     "tutorials": [
       {
         "title": "Populate a Sortable Grid",
@@ -246,7 +259,7 @@
     "title": "Heat Map",
     "subtitle": "Grid intensities with legend",
     "category": "Other",
-    "status": "beta",
+    "status": "stable",
     "updatedAt": "2025-10-18",
     "tags": [
       "matrix",
@@ -255,7 +268,7 @@
     ],
     "summary": "Render weighted grids for AI costs, supply/demand, or correlation matrices.",
     "docsHref": "/docs/toolkits/godot-dataviz/other/heat-map",
-    "thumbnail": "/img/dataviz/thumbnails/heat-map.png",
+    "thumbnail": "/img/dataviz/heat-map.png",
     "tutorials": [
       {
         "title": "Visualize Incident Density",
@@ -268,7 +281,7 @@
     "title": "Detail Panel",
     "subtitle": "Labeled rows, groups, and tags",
     "category": "Other",
-    "status": "beta",
+    "status": "stable",
     "updatedAt": "2025-10-18",
     "tags": [
       "inspector",
@@ -276,7 +289,7 @@
     ],
     "summary": "Flexible facts panel with icons, tooltips, and pill-style tag lists.",
     "docsHref": "/docs/toolkits/godot-dataviz/other/detail-panel",
-    "thumbnail": "/img/dataviz/thumbnails/detail-panel.png",
+    "thumbnail": "/img/dataviz/detail-panel.png",
     "tutorials": [
       {
         "title": "Assemble a Character Sheet",

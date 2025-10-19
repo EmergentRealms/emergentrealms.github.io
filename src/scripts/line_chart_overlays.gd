@@ -6,7 +6,7 @@ func _ready() -> void:
     set_title("Weekly Revenue")
     set_y_axis_label("Credits")
     set_x_axis_label("Week")
-    set_value_format(DVComponent.CURRENCY)
+    set_value_format(DVComponent.DECIMAL)
 
     var labels := PackedStringArray()
     for i in range(1, 13):
