@@ -16,7 +16,6 @@ const config: Config = {
   projectName: 'emergentrealms.github.io',
 
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
 
   i18n: { defaultLocale: 'en', locales: ['en'] },
 

@@ -60,13 +60,19 @@
       "time-series",
       "trends"
     ],
-    "summary": "Smoothed or step lines, optional area fills, and segment hover/selection.",
+    "summary": "Step lines, optional area fills, and segment hover/selection.",
     "docsHref": "/docs/toolkits/godot-dataviz/charts/line-chart",
     "thumbnail": "/img/dataviz/LineChart.png",
     "tutorials": [
       {
+        "title": "Simple Example",
+        "description": "Here is how easy it is to get a line grid going, and fill the active line.",
+        "codeHref": "/scripts/Linechart_Ex1.gd",
+        "screenshot":"/img/dataviz/Linechart_ex0.png"
+      },
+      {
         "title": "Add SMA/EMA Overlays",
-        "description": "Generate a synthetic revenue series, enable overlays, and fill the active line.",
+        "description": "Overlays (SMA, EMA,  Bollinger Bands) are enabled per series using an overlay mask that combines OverlayMask flags. Windows are expressed in samples (bars). You can either configure them after adding a series, or use the convenience method that sets everything in one call.",
         "codeHref": "/scripts/line_chart_overlays.gd",
         "screenshot":"/img/dataviz/Linechart_ex1.png"
       }
