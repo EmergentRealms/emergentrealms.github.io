@@ -172,3 +172,9 @@ a:hover {
   height: auto;                   /* keep aspect ratio */
   object-fit: contain;            /* no clipping */
 }
+
+.tutorial-codewrap pre {
+  white-space: pre;      /* preserve tabs & spaces */
+  overflow-x: auto;      /* scroll horizontally if needed */
+  tab-size: 4;           /* visual width for tabs when viewing */
+}

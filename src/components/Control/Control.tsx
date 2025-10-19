@@ -159,17 +159,13 @@ function TutorialRow({ item }: { item: Tutorial }) {
       {/* Right column */}
       <div className="tutorial-col tutorial-col--right" style={{ display: 'flex', flexDirection: 'column', gap: 12, minWidth: 0 }}>
         <TutorialCodeBlock href={item.codeHref} language={item.codeLanguage} />
-        <div className="tutorial-actions" style={{ display: 'flex', gap: 8 }}>
-          <a className="button button--secondary button--sm" href={item.codeHref}>View on GitHub</a>
-        </div>
+        
       </div>
     </section>
   );
 }
 
-
 /* ---------- Code loader stays the same ---------- */
-
 function TutorialCodeBlock({ href, language }: { href: string; language?: string }) {
   const [code, setCode] = React.useState<string | null>(null);
   const [error, setError] = React.useState<string | null>(null);
@@ -221,6 +217,7 @@ function TutorialCodeBlock({ href, language }: { href: string; language?: string
 
   return <CodeBlock language={lang}>{code}</CodeBlock>;
 }
+
 
 /* ---------- small utils ---------- */
 

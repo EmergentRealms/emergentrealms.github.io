@@ -17,19 +17,19 @@
       {
         "title": "Toggle Light and Dark Themes",
         "description": "Switch palettes at runtime and notify every control listening to the Theme Manager.",
-        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/theme_switch_theme.gd",
+        "codeHref": "/scripts//theme_switch_theme.gd",
         "screenshot":"/img/dataviz/theme1.png"
       },
       {
         "title": "Seed a Custom Palette",
         "description": "Author a DVTheme in code with bespoke brand colors before broadcasting it.",
-        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/theme_custom_palette.gd",
+        "codeHref": "/scripts//theme_custom_palette.gd",
         "screenshot":"/img/dataviz/theme2.png"
       },
       {
         "title": "Player Color Picker",
         "description": "Let players pick an accent color and push the update through the active theme.",
-        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/theme_player_color_picker.gd",
+        "codeHref": "/scripts//theme_player_color_picker.gd",
         "screenshot":"/img/dataviz/theme3.png"
       }
     ]
@@ -46,12 +46,12 @@
     ],
     "summary": "Fast categorical chart with legends, value labels, and hover/click signals.",
     "docsHref": "/docs/toolkits/godot-dataviz/charts/bar-chart",
-    "thumbnail": "/img/dataviz/barchart_ex2.png",
+    "thumbnail": "/img/dataviz/Barchart_ex1.png",
     "tutorials": [
       {
         "title": "Track Engagement by Device",
         "description": "Populate grouped bars, customize spacing, and listen for hover/click signals.",
-        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/bar_chart_interactive.gd",
+        "codeHref": "/scripts//bar_chart_interactive.gd",
         "screenshot":"/img/dataviz/barchart_ex1.png"
       }
     ]
@@ -73,8 +73,8 @@
       {
         "title": "Add SMA/EMA Overlays",
         "description": "Generate a synthetic revenue series, enable overlays, and fill the active line.",
-        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/line_chart_overlays.gd",
-        "screenshot":"/img/dataviz/LineChart_ex2.png"
+        "codeHref": "/scripts//line_chart_overlays.gd",
+        "screenshot":"/img/dataviz/Linechart_ex1.png"
       }
     ]
   },
@@ -82,7 +82,7 @@
     "title": "Box Plot",
     "subtitle": "Quartiles, whiskers, outliers",
     "category": "Charts",
-    "status": "alpha",
+    "status": "stable",
     "updatedAt": "2025-10-18",
     "tags": [
       "distribution",
@@ -95,7 +95,7 @@
       {
         "title": "Compare Quartile Spread",
         "description": "Feed sample returns per sector and inspect medians via the click signal.",
-        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/box_plot_distribution.gd",
+        "codeHref": "/scripts//box_plot_distribution.gd",
         "screenshot":"/img/dataviz/Box_plot_ex1.png"
       }
     ]
@@ -117,7 +117,7 @@
       {
         "title": "Build a Cash Flow Bridge",
         "description": "Convert monthly deltas into a waterfall with currency formatting and totals.",
-        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/waterfall_cash_flow.gd",
+        "codeHref": "/scripts//waterfall_cash_flow.gd",
         "screenshot":"/img/dataviz/Waterfall.png"
       }
     ]
@@ -126,7 +126,7 @@
     "title": "Timeline",
     "subtitle": "Tracks with events and 'now' marker",
     "category": "Charts",
-    "status": "alpha",
+    "status": "stable",
     "updatedAt": "2025-10-18",
     "tags": [
       "scheduling",
@@ -139,7 +139,7 @@
       {
         "title": "Plan Story Beats Across Tracks",
         "description": "Create multiple tracks, add events, and surface interactivity through signals.",
-        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/timeline_tracks.gd",
+        "codeHref": "/scripts//timeline_tracks.gd",
         "screenshot":"/img/dataviz/Timeline.png"
       }
     ]
@@ -161,7 +161,7 @@
       {
         "title": "Monitor Server Load",
         "description": "Define zones, configure ticks, and respond when the value enters a new range.",
-        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/gauge_dynamic_value.gd",
+        "codeHref": "/scripts//gauge_dynamic_value.gd",
         "screenshot":"/img/dataviz/Gauge_ex1.png"
       }
     ]
@@ -183,13 +183,13 @@
       {
         "title": "Render a Donut simple Pie",
         "description": "Simple chart with labels inside, and react to slice clicks.",
-        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/pie_chart_donut.gd",
+        "codeHref": "/scripts//pie_chart_donut.gd",
         "screenshot":"/img/dataviz/Piechart_ex1.png"
       },
       {
         "title": "Render a Donut with Leader Lines",
         "description": "Enable donut mode, position labels outside, and react to slice clicks.",
-        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/pie_chart_donut_ex2.gd",
+        "codeHref": "/scripts//pie_chart_donut_ex2.gd",
         "screenshot":"/img/dataviz/Piechart_ex2.png"
       }
     ]
@@ -211,7 +211,7 @@
       {
         "title": "Summarize Revenue in a Tile",
         "description": "Display title, value, delta, and sparkline for a dashboard metric tile.",
-        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/kpi_tile_dashboard.gd",
+        "codeHref": "/scripts//kpi_tile_dashboard.gd",
         "screenshot":"/img/dataviz/KpiTile.png"
       }
     ]
@@ -220,7 +220,7 @@
     "title": "Radar Graph",
     "subtitle": "Multi-axial comparison",
     "category": "Graphs",
-    "status": "alpha",
+    "status": "stable",
     "updatedAt": "2025-10-18",
     "tags": [
       "profiles",
@@ -233,7 +233,7 @@
       {
         "title": "Profile Squad Attributes",
         "description": "Plot five attributes with a consistent scale and readable grid.",
-        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/radar_graph_profiles.gd",
+        "codeHref": "/scripts//radar_graph_profiles.gd",
         "screenshot":"/img/dataviz/RadarGraph.png"
       }
     ]
@@ -256,7 +256,7 @@
       {
         "title": "Populate a Sortable Grid",
         "description": "Feed columns and rows, enable keyboard nav, and handle cell clicks.",
-        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/table_grid_virtualized.gd",
+        "codeHref": "/scripts//table_grid_virtualized.gd",
         "screenshot":"/img/dataviz/Grid_ex1.png"
       }
     ]
@@ -279,7 +279,7 @@
       {
         "title": "Visualize Incident Density",
         "description": "Map world-space coordinates into the heat map and respond to selections.",
-        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/heat_map_incidents.gd"
+        "codeHref": "/scripts//heat_map_incidents.gd"
       }
     ]
   },
@@ -295,12 +295,13 @@
     ],
     "summary": "Flexible facts panel with icons, tooltips, and pill-style tag lists.",
     "docsHref": "/docs/toolkits/godot-dataviz/other/detail-panel",
-    "thumbnail": "/img/dataviz/detail-panel.png",
+    "thumbnail": "/img/dataviz/DetailPanel_ex1.png",
     "tutorials": [
       {
         "title": "Assemble a Character Sheet",
         "description": "Group DV_Field entries, mix badges and progress, and capture row clicks.",
-        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/detail_panel_character.gd"
+        "codeHref": "/scripts//detail_panel_character.gd",
+        "screenshot":"/img/dataviz/DetailPanel_ex1.png"
       }
     ]
   }
