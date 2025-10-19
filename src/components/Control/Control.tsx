@@ -1,9 +1,8 @@
 import React from 'react';
-import { CodeBlock } from 'react-code-block';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import useBaseUrl from '@docusaurus/useBaseUrl';
-// import CodeBlock from '@theme/CodeBlock';
+import CodeBlock from '@theme/CodeBlock';
 import clsx from 'clsx';
 
 // Data file (adjust path if different)

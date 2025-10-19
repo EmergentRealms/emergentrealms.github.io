@@ -16,15 +16,7 @@ const config: Config = {
   projectName: 'emergentrealms.github.io',
 
   onBrokenLinks: 'throw',
-  // ❌ remove this:
-  // onBrokenMarkdownLinks: 'warn',
-
-  // ✅ add this block:
-  markdown: {
-    hooks: {
-      onBrokenMarkdownLinks: 'warn', // or 'throw' | 'ignore'
-    },
-  },
+  onBrokenMarkdownLinks: 'warn',
 
   i18n: { defaultLocale: 'en', locales: ['en'] },
 
