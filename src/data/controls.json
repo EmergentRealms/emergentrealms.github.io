@@ -68,13 +68,13 @@
     ],
     "summary": "Smoothed or step lines, optional area fills, and segment hover/selection.",
     "docsHref": "/docs/toolkits/godot-dataviz/charts/line-chart",
-    "thumbnail": "/img/dataviz/barchart_ex1.png",
+    "thumbnail": "/img/dataviz/LineChart.png",
     "tutorials": [
       {
         "title": "Add SMA/EMA Overlays",
         "description": "Generate a synthetic revenue series, enable overlays, and fill the active line.",
         "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/line_chart_overlays.gd",
-        "screenshot":"/img/dataviz/barchart_ex1.png"
+        "screenshot":"/img/dataviz/LineChart_ex2.png"
       }
     ]
   },

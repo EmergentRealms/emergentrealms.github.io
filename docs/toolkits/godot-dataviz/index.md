@@ -1,8 +1,9 @@
 ---
 id: godot-dataviz
-slug: /toolkits/godot-dataviz
 title: Godot DataViz UI Kit
-description: Production-ready charts, graphs, and tables for building data-heavy Godot experiences.
+slug: /toolkits/godot-dataviz      # <= unique; do NOT reuse /toolkits
+sidebar_label: Overview
+description: Production-ready charts, tables, and graph widgets.
 ---
 
 import React from 'react';
