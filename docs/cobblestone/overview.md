@@ -37,10 +37,10 @@ There is no pre-scripted hero’s journey here – **the narrative is dynamic an
 Under the hood, Cobblestone Legacy is powered by the **Godot 4** game engine (leveraging the advanced Jolt physics system) with custom high-performance C++ GDExtensions and a robust SQLite backend. This tech backbone enables the simulation of a complex, **living world** – dozens of AI characters, a **dynamic economy**, and intricate physics – all running seamlessly to support your sandbox experience. For players, that means a richer, more responsive city that runs smoothly even as chaos unfolds.
 
 ## Join the Community
-Development of Cobblestone Legacy is an open journey, and **we invite you to be a part of it**. Join our **Discord** community (link in the navbar) to share your stories, discuss strategies, and get behind-the-scenes updates directly from the developers. We’re building this world together with our community’s feedback and ideas in mind. Don’t miss the **[Roadmap](/docs/roadmap)** to see what’s coming next, and check out the **[Devlog](/blog)** for regular insights into our progress and design thinking—especially if you’re hunting for lessons on **Godot GDExtension performance** or real-world **Godot tutorials** for large simulations.
+Development of Cobblestone Legacy is an open journey, and **we invite you to be a part of it**. Join our **Discord** community (link in the navbar) to share your stories, discuss strategies, and get behind-the-scenes updates directly from the developers. We’re building this world together with our community’s feedback and ideas in mind. Don’t miss the **[Roadmap](/docs/cobblestone/roadmap)** to see what’s coming next, and check out the **[Devlog](/blog)** for regular insights into our progress and design thinking—especially if you’re hunting for lessons on **Godot GDExtension performance** or real-world **Godot tutorials** for large simulations.
 
 ---
 
 Gear up for adventure in a city that never plays the same way twice. **Cobblestone Legacy** promises endless possibilities in its mix of survival, stealth, and story. Whether you become the city’s most feared outlaw, a champion of the people, or something in between, one thing is certain: the streets will remember what you’ve done. **Your legacy begins now – will you survive to tell the tale?**
 
-See the **[Roadmap](/docs/roadmap)** and the **[Devlog](/blog)**.
+See the **[Roadmap](/docs/cobblestone/roadmap)** and the **[Devlog](/blog)**.

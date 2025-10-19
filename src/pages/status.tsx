@@ -169,7 +169,7 @@ export default function StatusPage() {
         <section style={{marginTop: '3rem'}}>
           <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem'}}>
             <h2 style={{margin: 0}}>Upcoming Milestones</h2>
-            <Link className="button button--sm button--link" to="/docs/roadmap">
+            <Link className="button button--sm button--link" to="/docs/cobblestone/roadmap">
               View roadmap
             </Link>
           </div>

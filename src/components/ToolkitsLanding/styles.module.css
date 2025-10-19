@@ -72,7 +72,7 @@
 }
 
 .cardImage {
-  --card-img-h: 420px;      /* tweak per design */
+  --card-img-h: 320px;      /* tweak per design */
   height: var(--card-img-h);
   display: flex;
   align-items: center;
@@ -136,11 +136,6 @@
 
 :global(html[data-theme='dark']) .cardFooter {
   background: rgba(71, 85, 105, 0.18);
-}
-
-/* Hide the default CodeBlock copy button only inside our tutorial wrapper */
-.tutorial-codewrap .theme-code-block .theme-code-block-copy-button {
-  display: none;
 }
 
 /* optional: keep pre from exploding horizontally but **don’t** change whitespace semantics */
