@@ -9,17 +9,22 @@ const config: Config = {
 
   future: { v4: true },
 
-  // Your public site URL (no trailing slash, use https)
   url: 'https://docs.emergent-realms.com',
-  // Served at the root of the subdomain
   baseUrl: '/',
 
-  // GitHub Pages info
-  organizationName: 'EmergentRealms',         // GitHub org/user
-  projectName: 'emergentrealms.github.io',    // Repo that hosts Pages
+  organizationName: 'EmergentRealms',
+  projectName: 'emergentrealms.github.io',
 
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+  // ❌ remove this:
+  // onBrokenMarkdownLinks: 'warn',
+
+  // ✅ add this block:
+  markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: 'warn', // or 'throw' | 'ignore'
+    },
+  },
 
   i18n: { defaultLocale: 'en', locales: ['en'] },
 
@@ -29,50 +34,38 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          //editUrl: 'https://github.com/EmergentRealms/emergentrealms.github.io/edit/main/',
+          // editUrl: 'https://github.com/EmergentRealms/emergentrealms.github.io/edit/main/',
         },
         blog: {
           showReadingTime: true,
           feedOptions: { type: ['rss', 'atom'], xslt: true },
-          //editUrl: 'https://github.com/EmergentRealms/emergentrealms.github.io/edit/main/',
+          // editUrl: 'https://github.com/EmergentRealms/emergentrealms.github.io/edit/main/',
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
           onUntruncatedBlogPosts: 'warn',
         },
         theme: { customCss: './src/css/custom.css' },
-        gtag: {
-          trackingID: 'G-JHR14QEHVP',
-          anonymizeIP: true
-        }
+        gtag: { trackingID: 'G-JHR14QEHVP', anonymizeIP: true },
       } satisfies Preset.Options,
     ],
   ],
 
   themeConfig: {
     metadata: [
-      {
-        name: 'keywords',
-        content:
-          'Cobblestone Legacy, Emergent Realms, large scale Godot project, Godot GDExtension performance, multithreaded AI in Godot, Godot C++ RPG systems, SQLite in Godot, procedural city builder devlog',
-      },
-      {
-        name: 'description',
-        content:
-          'Cobblestone Legacy devlogs and docs covering our Godot 4.4 rogue-lite sandbox RPG, C++ GDExtension pipelines, and scalable simulation systems.',
-      },
+      { name: 'keywords', content: 'Cobblestone Legacy, Emergent Realms, large scale Godot project, Godot GDExtension performance, multithreaded AI in Godot, Godot C++ RPG systems, SQLite in Godot, procedural city builder devlog' },
+    { name: 'description', content: 'Cobblestone Legacy devlogs and docs covering our Godot 4.4 rogue-lite sandbox RPG, C++ GDExtension pipelines, and scalable simulation systems.' },
     ],
     colorMode: { defaultMode: 'dark', respectPrefersColorScheme: true },
     image: 'img/EmergentRealmLogo.png',
     navbar: {
       title: 'Emergent Realms',
-      logo: { alt: 'Emergent Realms', src: 'img/EmergentRealmLogo.png'},
+      logo: { alt: 'Emergent Realms', src: 'img/EmergentRealmLogo.png' },
       items: [
         { to: '/docs', label: 'Docs', position: 'left' },
         { to: '/blog', label: 'Devlog', position: 'left' },
         { to: '/features', label: 'Features', position: 'left' },
         { href: 'https://discord.gg/23MyDvkW', label: 'Join Discord', position: 'right' },
         { href: 'https://github.com/EmergentRealms', label: 'GitHub', position: 'right' },
-        
       ],
     },
     footer: {
@@ -81,7 +74,6 @@ const config: Config = {
         { title: 'Docs', items: [{ label: 'Overview', to: '/docs/cobblestone/overview' }] },
         { title: 'Community', items: [{ label: 'Discord', href: 'https://discord.gg/23MyDvkW' }] },
         { title: 'More', items: [{ label: 'Devlog', to: '/blog' }] },
-        
       ],
       copyright: `© ${new Date().getFullYear()} Emergent Realms`,
     },
