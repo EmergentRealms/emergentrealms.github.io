@@ -1,9 +1,9 @@
 ---
 id: cobblestone-overview
-title: Project Overview
+title: Welcome to Cobblestone Legacy
 sidebar_position: 2
 slug: /cobblestone/overview
-description: High-level guide to Cobblestone Legacy, a large scale Godot 4.4 rogue-lite sandbox RPG built with C++ GDExtensions.
+description: Introduction and community notes for the Cobblestone Legacy, a large scale Godot 4.4 rogue-lite sandbox RPG built with C++ GDExtensions.
 keywords:
   - Cobblestone Legacy
   - large scale Godot project
@@ -15,6 +15,34 @@ keywords:
 # Cobblestone Legacy
 
 ![Godot 4.4 procedural city tileset for Cobblestone Legacy RPG](/img/CobblestoneLegacy.png)
+
+
+# Welcome to *Cobblestone Legacy*
+
+> *“From the streets, a legacy rises.”*
+
+Welcome to the **official design and development documentation** for **Cobblestone Legacy**, our flagship sandbox RPG.  
+This site is an open window into the creative process — where concepts, systems, and design philosophies are shared as they evolve.
+
+Everything you read here is **a living document**: designs, mechanics, and technical systems are actively in development and subject to change as the project matures.  
+Expect the details to shift, experiments to appear and disappear, and ideas to grow into more refined forms over time.
+
+Our goal is to make this space a **transparent record of progress** and a **platform for community feedback**.  
+If you’re following development, testing systems, or simply curious about the inner workings of our world, we welcome your thoughts and observations.
+
+---
+
+### Why We Publish Our Notes
+
+- To make development accessible and traceable for long-time supporters.  
+- To provide early insights into the simulation, AI, and storytelling systems at the heart of the project.  
+- To gather valuable community feedback before systems become finalized.
+
+---
+
+Thank you for visiting, reading, and supporting the journey of **Cobblestone Legacy** —  
+a project built with passion, iteration, and the belief that great worlds grow best in the open.
+
 
 **Cobblestone Legacy** is a **rogue-lite sandbox RPG** set in a sprawling, procedurally generated city where no two nights are the same. It offers a unique blend of **survival gameplay, high-stakes heists, faction dynamics, and emergent storytelling** that ensures **every choice you make echoes through the world**. Step into a living metropolis teeming with AI-driven citizens, unpredictable events, and endless opportunities to forge your own legacy.
 

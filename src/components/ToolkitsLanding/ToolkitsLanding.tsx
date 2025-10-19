@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { JSX } from 'react';
 import Link from '@docusaurus/Link';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import controlsData from '@site/src/data/controls.json';
 import styles from './styles.module.css';
+
+
 
 type ControlEntry = { category?: string };
 
@@ -31,7 +33,7 @@ const toolkits: ToolkitCard[] = [
     to: '/docs/toolkits/godot-dataviz',
     badge: 'GDExtension • Godot 4.x',
     stats: [`${controls.length} controls`, `${categorySet.size} categories`],
-    itch: 'https://emergentrealms.itch.io/', // point to your exact itch product page when ready
+    itch: 'https://emergent-realms.itch.io/', // point to your exact itch product page when ready
   },
 ];
 
@@ -50,7 +52,7 @@ export default function ToolkitsLanding(): JSX.Element {
           </p>
 
           <div className={styles.heroCtas}>
-            <Link className="button button--primary button--lg" to="/features">
+            <Link className="button button--primary button--lg" to="/docs/cobblestone/overview">
               See what we’re building
             </Link>
             <a className="button button--secondary button--lg" href="https://discord.gg/23MyDvkW">
@@ -118,7 +120,7 @@ export default function ToolkitsLanding(): JSX.Element {
                 Our extensions are the same ones we use to ship our games. Your feedback funds better docs, examples, and features.
               </p>
             </div>
-            <a className="button button--primary button--lg" href="https://emergentrealms.itch.io/">
+            <a className="button button--primary button--lg" href="https://emergent-realms.itch.io/">
               Browse on itch.io
             </a>
           </div>

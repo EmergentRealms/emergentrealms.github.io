@@ -15,22 +15,16 @@
     "thumbnail": "/img/dataviz/ThemesManager.png",
     "tutorials": [
       {
-        "title": "Toggle Light and Dark Themes",
-        "description": "Switch palettes at runtime and notify every control listening to the Theme Manager.",
-        "codeHref": "/scripts/theme_switch_theme.gd",
-        "screenshot":"/img/dataviz/theme1.png"
-      },
-      {
-        "title": "Seed a Custom Palette",
-        "description": "Author a DVTheme in code with bespoke brand colors before broadcasting it.",
+        "title": "Customize the default theme",
+        "description": "The theme manager uses a DVTheme Resource file found here. Each them has a Dark/light mode toggle for easy switching.",
         "codeHref": "/scripts/theme_custom_palette.gd",
-        "screenshot":"/img/dataviz/theme2.png"
+        "screenshot":"/img/dataviz/ThemeLocation.png"
       },
       {
-        "title": "Player Color Picker",
-        "description": "Let players pick an accent color and push the update through the active theme.",
-        "codeHref": "/scripts/theme_player_color_picker.gd",
-        "screenshot":"/img/dataviz/theme3.png"
+        "title": "Set the active theme",
+        "description": "The active theme can be updated through the Project settings. (Check the bottom of the list and select your custom resource file.) Or via script.",
+        "codeHref": "/scripts/theme_switch_theme.gd",
+        "screenshot":"/img/dataviz/ThemeSetting.png"
       }
     ]
   },
