@@ -159,6 +159,12 @@
     "thumbnail": "/img/dataviz/Gauge_ex1.png",
     "tutorials": [
       {
+        "title": "Simple Progressbar",
+        "description": "Nice progressbar with only a couple of lines.",
+        "codeHref": "/scripts/gauge_simple.gd",
+        "screenshot":"/img/dataviz/GaugeSimple.png"
+      },
+      {
         "title": "Monitor Server Load",
         "description": "Define zones, configure ticks, and respond when the value enters a new range.",
         "codeHref": "/scripts/gauge_dynamic_value.gd",
@@ -176,7 +182,7 @@
       "share",
       "composition"
     ],
-    "summary": "Donut or full pie with leader lines and total-in-center option.",
+    "summary": "Pie chart with leader lines and total-in-center option. And animated hover slices.",
     "docsHref": "/docs/toolkits/godot-dataviz/graphs/pie-chart",
     "thumbnail": "/img/dataviz/Piechart_ex1.png",
     "tutorials": [
@@ -274,12 +280,13 @@
     ],
     "summary": "Render weighted grids for AI costs, supply/demand, or correlation matrices.",
     "docsHref": "/docs/toolkits/godot-dataviz/other/heat-map",
-    "thumbnail": "/img/dataviz/heat-map.png",
+    "thumbnail": "/img/dataviz/heatmap.png",
     "tutorials": [
       {
         "title": "Visualize Incident Density",
         "description": "Map world-space coordinates into the heat map and respond to selections.",
-        "codeHref": "/scripts/heat_map_incidents.gd"
+        "codeHref": "/scripts/heat_map_incidents.gd",
+        "screenshot":"/img/dataviz/Heatmap_ex1.png"
       }
     ]
   },

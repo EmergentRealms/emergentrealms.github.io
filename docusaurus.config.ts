@@ -68,7 +68,11 @@ const config: Config = {
       ],
       copyright: `© ${new Date().getFullYear()} Emergent Realms`,
     },
-    prism: { theme: prismThemes.github, darkTheme: prismThemes.dracula },
+    prism: {
+      theme: prismThemes.github,        // ✅ instead of require('.../themes/github')
+      darkTheme: prismThemes.dracula,   // ✅ instead of require('.../themes/dracula')
+      additionalLanguages: ['gdscript'] // ✅ load GDScript grammar
+    },
   } satisfies Preset.ThemeConfig,
 };
 
