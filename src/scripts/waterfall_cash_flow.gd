@@ -3,7 +3,7 @@ extends DV_Waterfall
 func _ready() -> void:
     set_title("Monthly Cash Flow")
     set_bar_gap_px(8.0)
-    set_value_format(DVComponent.CURRENCY)
+    set_value_format(DVComponent.COMPACT)
 
     var labels := PackedStringArray([
         "Starting Balance",

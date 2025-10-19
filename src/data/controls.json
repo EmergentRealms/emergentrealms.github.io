@@ -112,12 +112,13 @@
     ],
     "summary": "Shows how individual positives/negatives accumulate from start to finish.",
     "docsHref": "/docs/toolkits/godot-dataviz/charts/waterfall",
-    "thumbnail": "/img/dataviz/waterfall.png",
+    "thumbnail": "/img/dataviz/Waterfall.png",
     "tutorials": [
       {
         "title": "Build a Cash Flow Bridge",
         "description": "Convert monthly deltas into a waterfall with currency formatting and totals.",
-        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/waterfall_cash_flow.gd"
+        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/waterfall_cash_flow.gd",
+        "screenshot":"/img/dataviz/Waterfall.png"
       }
     ]
   },
@@ -133,12 +134,13 @@
     ],
     "summary": "Multi-track time blocks for incidents, quests, or production schedules.",
     "docsHref": "/docs/toolkits/godot-dataviz/charts/timeline",
-    "thumbnail": "/img/dataviz/timeline.png",
+    "thumbnail": "/img/dataviz/Timeline.png",
     "tutorials": [
       {
         "title": "Plan Story Beats Across Tracks",
         "description": "Create multiple tracks, add events, and surface interactivity through signals.",
-        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/timeline_tracks.gd"
+        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/timeline_tracks.gd",
+        "screenshot":"/img/dataviz/Timeline.png"
       }
     ]
   },
@@ -154,12 +156,13 @@
     ],
     "summary": "Configurable sweep, round/square caps, and dynamic center label.",
     "docsHref": "/docs/toolkits/godot-dataviz/graphs/gauge",
-    "thumbnail": "/img/dataviz/gauge.png",
+    "thumbnail": "/img/dataviz/Gauge_ex1.png",
     "tutorials": [
       {
         "title": "Monitor Server Load",
         "description": "Define zones, configure ticks, and respond when the value enters a new range.",
-        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/gauge_dynamic_value.gd"
+        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/gauge_dynamic_value.gd",
+        "screenshot":"/img/dataviz/Gauge_ex1.png"
       }
     ]
   },
@@ -203,12 +206,13 @@
     ],
     "summary": "Compact metric tile for quick-glance stats; supports icons and trend line.",
     "docsHref": "/docs/toolkits/godot-dataviz/graphs/kpi-tile",
-    "thumbnail": "/img/dataviz/kpi-tile.png",
+    "thumbnail": "/img/dataviz/KpiTile.png",
     "tutorials": [
       {
         "title": "Summarize Revenue in a Tile",
         "description": "Display title, value, delta, and sparkline for a dashboard metric tile.",
-        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/kpi_tile_dashboard.gd"
+        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/kpi_tile_dashboard.gd",
+        "screenshot":"/img/dataviz/KpiTile.png"
       }
     ]
   },
@@ -224,12 +228,13 @@
     ],
     "summary": "Plot actor or faction profiles across multiple axes with fill and outline.",
     "docsHref": "/docs/toolkits/godot-dataviz/graphs/radar-graph",
-    "thumbnail": "/img/dataviz/radar-graph.png",
+    "thumbnail": "/img/dataviz/RadarGraph.png",
     "tutorials": [
       {
         "title": "Profile Squad Attributes",
         "description": "Plot five attributes with a consistent scale and readable grid.",
-        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/radar_graph_profiles.gd"
+        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/radar_graph_profiles.gd",
+        "screenshot":"/img/dataviz/RadarGraph.png"
       }
     ]
   },
@@ -246,12 +251,13 @@
     ],
     "summary": "Fast scrolling table with column config, sorting, and selection.",
     "docsHref": "/docs/toolkits/godot-dataviz/other/table-grid",
-    "thumbnail": "/img/dataviz/table-grid.png",
+    "thumbnail": "/img/dataviz/Grid.png",
     "tutorials": [
       {
         "title": "Populate a Sortable Grid",
         "description": "Feed columns and rows, enable keyboard nav, and handle cell clicks.",
-        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/table_grid_virtualized.gd"
+        "codeHref": "https://github.com/emergentrealms/emergentrealms.github.io/blob/main/src/scripts/table_grid_virtualized.gd",
+        "screenshot":"/img/dataviz/Grid_ex1.png"
       }
     ]
   },
