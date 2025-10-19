@@ -55,7 +55,7 @@ export default function ToolkitsLanding(): JSX.Element {
             <Link className="button button--primary button--lg" to="/docs/cobblestone/overview">
               See what we’re building
             </Link>
-            <a className="button button--secondary button--lg" href="https://discord.gg/23MyDvkW">
+            <a className="button button--secondary button--lg" href="https://discord.gg/2Rj5EVrP9e">
               Join our Discord
             </a>
           </div>

@@ -53,7 +53,7 @@ function HomepageHeader() {
             </Link>
             <Link
               className={clsx('button button--lg', styles.discord)}
-              href="https://discord.gg/23MyDvkW"
+              href="https://discord.gg/2Rj5EVrP9e"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Join our Discord server"

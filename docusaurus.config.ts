@@ -55,7 +55,7 @@ const config: Config = {
         { to: '/docs', label: 'Docs', position: 'left' },
         { to: '/blog', label: 'Devlog', position: 'left' },
         { to: '/features', label: 'Features', position: 'left' },
-        { href: 'https://discord.gg/23MyDvkW', label: 'Join Discord', position: 'right' },
+        { href: 'https://discord.gg/2Rj5EVrP9e', label: 'Join Discord', position: 'right' },
         { href: 'https://github.com/EmergentRealms', label: 'GitHub', position: 'right' },
       ],
     },
@@ -63,7 +63,7 @@ const config: Config = {
       style: 'dark',
       links: [
         { title: 'Docs', items: [{ label: 'Overview', to: '/docs/cobblestone/overview' }] },
-        { title: 'Community', items: [{ label: 'Discord', href: 'https://discord.gg/23MyDvkW' }] },
+        { title: 'Community', items: [{ label: 'Discord', href: 'https://discord.gg/2Rj5EVrP9e' }] },
         { title: 'More', items: [{ label: 'Devlog', to: '/blog' }] },
       ],
       copyright: `© ${new Date().getFullYear()} Emergent Realms`,
