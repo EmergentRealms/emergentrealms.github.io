@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { JSX } from 'react';
 import Link from '@docusaurus/Link';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import clsx from 'clsx';
@@ -78,6 +78,9 @@ export default function DataVizLanding(): JSX.Element {
             Production-ready charts, KPI tiles, graphs, and data grids that plug directly into Godot dashboards.
             Every control ships with theme-aware styles, integration tips, and runnable GDScript snippets.
           </p>
+          <div className={styles.cardImage}>
+            <img src="/img/dataviz/ChartsDashboard.png" alt="Charts Dashboard preview" loading="lazy" />
+          </div>
 
           <div className={styles.heroStats}>
             <div>
@@ -112,6 +115,9 @@ export default function DataVizLanding(): JSX.Element {
             Use the categorized gallery below to jump straight into component docs. Each card links to detailed usage guidance,
             editable code, and theme recommendations so you can compose dashboards without pixel pushing.
           </p>
+          <div className={styles.cardImage}>
+            <img src="/img/DataVis-Toolkit.png" alt="Charts Dashboard preview" loading="lazy" />
+          </div>
         </section>
 
         {sortedCategories.map(([category, items]) => (
