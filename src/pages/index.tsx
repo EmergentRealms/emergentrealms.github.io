@@ -51,6 +51,9 @@ function HomepageHeader() {
             <Link className="button button--secondary button--lg" to="/docs">
               View Docs
             </Link>
+            <Link className="button button--primary button--lg" to="/docs/toolkits">
+              View our Toolkits
+            </Link>
             <Link
               className={clsx('button button--lg', styles.discord)}
               href="https://discord.gg/2Rj5EVrP9e"

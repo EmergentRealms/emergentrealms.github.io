@@ -54,7 +54,7 @@ const config: Config = {
       items: [
         { to: '/docs', label: 'Docs', position: 'left' },
         { to: '/blog', label: 'Devlog', position: 'left' },
-        { to: '/features', label: 'Features', position: 'left' },
+        { to: '/docs/toolkits', label: 'Godot Toolkits', position: 'left' },
         { href: 'https://discord.gg/2Rj5EVrP9e', label: 'Join Discord', position: 'right' },
         { href: 'https://github.com/EmergentRealms', label: 'GitHub', position: 'right' },
       ],
