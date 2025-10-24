@@ -287,6 +287,12 @@
         "description": "Map world-space coordinates into the heat map and respond to selections.",
         "codeHref": "/scripts/heat_map_incidents.gd",
         "screenshot":"/img/dataviz/Heatmap_ex1.png"
+      },
+      {
+        "title": "Neo City",
+        "description": "Add Stickers to the map for an enhanced interaction. Stickers can be moved in realtime.",
+        "codeHref": "/scripts/neon_city.gd",
+        "screenshot":"/img/dataviz/NeonCity.png"
       }
     ]
   },

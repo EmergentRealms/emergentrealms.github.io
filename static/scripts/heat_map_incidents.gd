@@ -25,8 +25,8 @@ func _ready() -> void:
 	point_hovered.connect(_on_point_moused_over)
 	point_clicked.connect(_on_point_clicked)
 
-func _on_point_moused_over(idx:int, event_type:String, tooltip:String, pos:Vector2, intensity:float) -> void:
+func _on_point_moused_over(idx:int, id:String, event_type:String, tooltip:String, pos:Vector2, intensity:float) -> void:
 	print("Hover #", idx, " | ", event_type, " | ", tooltip, " @ ", pos, " (", "%.2f" % intensity, ")")
 
-func _on_point_clicked(idx:int, event_type:String, tooltip:String, pos:Vector2, intensity:float) -> void:
+func _on_point_clicked(idx:int, id:String,  event_type:String, tooltip:String, pos:Vector2, intensity:float) -> void:
 	print("Click  #", idx, " | ", event_type, " | ", tooltip, " @ ", pos, " (", "%.2f" % intensity, ")")
