@@ -280,7 +280,7 @@
     ],
     "summary": "Render weighted grids for AI costs, supply/demand, or correlation matrices.",
     "docsHref": "/docs/toolkits/godot-dataviz/other/heat-map",
-    "thumbnail": "/img/dataviz/heatmap.png",
+    "thumbnail": "/img/dataviz/Heatmap.png",
     "tutorials": [
       {
         "title": "Visualize Incident Density",
