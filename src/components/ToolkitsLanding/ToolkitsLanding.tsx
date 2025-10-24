@@ -119,11 +119,18 @@ export default function ToolkitsLanding(): JSX.Element {
               <p className={styles.stripText}>
                 Our extensions are the same ones we use to ship our games. Your feedback funds better docs, examples, and features.
               </p>
+              <p>
+                <iframe frameborder="0" src="https://itch.io/embed/3973773?bg_color=464646&amp;fg_color=f4f0f0&amp;border_color=b58b00" width="552" height="167">
+              <a href="https://emergent-realms.itch.io/godot-dataviz-ui">DataViz UI – Advanced Visualization Addon for Godot 4.5+ by Emergent-Realms</a>
+            </iframe>
+              </p>
             </div>
             <a className="button button--primary button--lg" href="https://emergent-realms.itch.io/godot-dataviz-ui/">
               Browse on itch.io
             </a>
+            
           </div>
+          
         </section>
       </main>
     </>

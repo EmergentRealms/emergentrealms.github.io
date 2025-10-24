@@ -82,6 +82,8 @@ export default function DataVizLanding(): JSX.Element {
             <img src="/img/dataviz/ChartsDashboard.png" alt="Charts Dashboard preview" loading="lazy" />
           </div>
 
+          <iframe frameborder="0" src="https://itch.io/embed/3973773?bg_color=464646&amp;fg_color=f4f0f0&amp;border_color=b58b00" width="552" height="167"><a href="https://emergent-realms.itch.io/godot-dataviz-ui">DataViz UI – Advanced Visualization Addon for Godot 4.5+ by Emergent-Realms</a></iframe>
+
           <div className={styles.heroStats}>
             <div>
               <strong>{controls.length}</strong>
