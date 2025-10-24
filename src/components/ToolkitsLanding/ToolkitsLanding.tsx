@@ -33,7 +33,7 @@ const toolkits: ToolkitCard[] = [
     to: '/docs/toolkits/godot-dataviz',
     badge: 'GDExtension • Godot 4.x',
     stats: [`${controls.length} controls`, `${categorySet.size} categories`],
-    itch: 'https://emergent-realms.itch.io/', // point to your exact itch product page when ready
+    itch: 'https://emergent-realms.itch.io/godot-dataviz-ui', 
   },
 ];
 
@@ -120,7 +120,7 @@ export default function ToolkitsLanding(): JSX.Element {
                 Our extensions are the same ones we use to ship our games. Your feedback funds better docs, examples, and features.
               </p>
             </div>
-            <a className="button button--primary button--lg" href="https://emergent-realms.itch.io/">
+            <a className="button button--primary button--lg" href="https://emergent-realms.itch.io/godot-dataviz-ui/">
               Browse on itch.io
             </a>
           </div>
