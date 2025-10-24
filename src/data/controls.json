@@ -46,7 +46,7 @@
         "title": "Track Engagement by Device",
         "description": "Populate grouped bars, customize spacing, and listen for hover/click signals.",
         "codeHref": "/scripts/bar_chart_interactive.gd",
-        "screenshot":"/img/dataviz/barchart_ex1.png"
+        "screenshot":"/img/dataviz/Barchart_ex1.png"
       }
     ]
   },
