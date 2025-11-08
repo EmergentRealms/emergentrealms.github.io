@@ -70,7 +70,7 @@ export default function ToolkitsLanding(): JSX.Element {
             <li><strong>Performance first.</strong> Tight C++ cores exposed via GDScript for rapid iteration.</li>
             <li><strong>Theme-aware UI.</strong> Central theme manager with light/dark and color seeds.</li>
             <li><strong>Production polish.</strong> Sensible defaults, hover/click signals, and docs with code.</li>
-            <li><strong>Cross-platform.</strong> Windows, macOS, and Linux builds in active use.</li>
+            <li><strong>Cross-platform.</strong> Windows, macOS (Coming), and Linux builds in active use.</li>
           </ul>
         </section>
 
