@@ -19,6 +19,7 @@ type ReferenceEntry = {
 export default function DataWizLanding(): JSX.Element {
   const record = references as Record<string, ReferenceEntry>;
   const entries = Object.entries(record);
+
   const handleQuickStartClick = React.useCallback(() => {
     const target = document.getElementById('quick-start');
     target?.scrollIntoView({ behavior: 'smooth' });
@@ -77,14 +78,14 @@ export default function DataWizLanding(): JSX.Element {
           <article>
             <h2>Schema automation</h2>
             <p>
-              Describe your data once with `DWRecord` or `DWAutoLoad` resources. DataWiz generates tables, unique keys, and
+              Describe your data once with <code>DWRecord</code> or <code>DWAutoLoad</code> resources. DataWiz generates tables, unique keys, and
               indices on demand, keeping the database synchronized with your exported properties.
             </p>
           </article>
           <article>
             <h2>Typed Godot ergonomics</h2>
             <p>
-              Hydrate complex dictionaries, arrays, and GUIDs without custom serializers. Helpers in `DWTypes` keep your
+              Hydrate complex dictionaries, arrays, and GUIDs without custom serializers. Helpers in <code>DWTypes</code> keep your
               resource fields strongly typed while persisting through SQLite.
             </p>
           </article>
@@ -93,29 +94,30 @@ export default function DataWizLanding(): JSX.Element {
         <section id="quick-start" className={styles.quickStart}>
           <h2>Quick start</h2>
           <p>
-            Drop the GDExtension into <code>res://addons/datawiz/</code>, add <code>DWService</code> as an Autoload, then define
-            your records. These three steps get you from install to querying live data.
+            Drop the GDExtension into <code>res://addons/datawiz/</code>, Activate the plugin, then define
+            your records. These four steps get you from install to querying live data.
           </p>
+
           <div className={styles.quickGrid}>
+            {/* 1. Boot */}
             <div className={styles.quickCard}>
               <h3>1. Boot the service</h3>
               <p>Register the singleton and open your database with a reader pool sized for your project.</p>
-              <CodeBlock language="gdscript">{
-`@onready var data_wiz: DWService = get_node("/root/DataWiz")
+              <CodeBlock language="gdscript">{`@onready var data_wiz: DWService = get_node("/root/DataWiz")
 
 func _ready() -> void:
     if data_wiz.open("user://SaveSlot1/data.dw", reader_pool_size = 6):
         await data_wiz.connected
         data_wiz.log_tuning_snapshot()
     else:
-        push_error(data_wiz.get_last_error())`
-              }</CodeBlock>
+        push_error(data_wiz.get_last_error())`}</CodeBlock>
             </div>
+
+            {/* 2. Model */}
             <div className={styles.quickCard}>
               <h3>2. Model your data</h3>
-              <p>Use `DWRecord` resources to declare columns, primary keys, and unique constraints.</p>
-              <CodeBlock language="gdscript">{
-`@tool
+              <p>Use <code>DWRecord</code> resources to declare columns, primary keys, and unique constraints.</p>
+              <CodeBlock language="gdscript">{`@tool
 class_name InventoryRecord
 extends DWRecord
 
@@ -126,22 +128,38 @@ extends DWRecord
 func _init() -> void:
     schema.table_name = "inventory"
     schema.primary_key = "slot"
-    schema.unique_keys = [["item_id"]]`
-              }</CodeBlock>
+    schema.unique_keys = [["item_id"]]`}</CodeBlock>
             </div>
+
+            {/* 3. Easy select (NEW) */}
             <div className={styles.quickCard}>
-              <h3>3. Query with helpers</h3>
-              <p>Persist and retrieve data without writing raw SQL until you need to.</p>
-              <CodeBlock language="gdscript">{
-`var record := InventoryRecord.new()
+              <h3>3. Load records with <code>select()</code></h3>
+              <p>
+                Pull rows into a typed <code>Array[T]</code> of live resource instances—no manual hydration needed.
+              </p>
+              <CodeBlock language="gdscript">{`# Load all data from db (typed arrays if your classes exist)
+var npcs: Array[NPC] = DataWiz.select(NPC.new(), "is_alive = 1")
+var factions: Array[Faction] = DataWiz.select(Faction.new())
+
+for n in npcs:
+    print(n.name, " hp:", n.hp)
+
+# With params:
+# var guards: Array[NPC] = DataWiz.select(NPC.new(), "faction = ?", ["Guard"])`}</CodeBlock>
+            </div>
+
+            {/* 4. (moved) Persist/query with helpers */}
+            <div className={styles.quickCard}>
+              <h3>4. Persist and iterate</h3>
+              <p>Save a record and fetch it back—write SQL only when you need full control.</p>
+              <CodeBlock language="gdscript">{`var record := InventoryRecord.new()
 record.slot = 1
 record.item_id = "healing_potion"
 record.save_to_db()
 
 var inventory := DataWiz.select(record, "ORDER BY slot ASC")
 for entry in inventory:
-    print(entry.slot, entry.item_id)`
-              }</CodeBlock>
+    print(entry.slot, entry.item_id)`}</CodeBlock>
             </div>
           </div>
         </section>
