@@ -33,7 +33,18 @@ const toolkits: ToolkitCard[] = [
     to: '/docs/toolkits/godot-dataviz',
     badge: 'GDExtension • Godot 4.x',
     stats: [`${controls.length} controls`, `${categorySet.size} categories`],
-    itch: 'https://emergent-realms.itch.io/godot-dataviz-ui', 
+    itch: 'https://emergent-realms.itch.io/godot-dataviz-ui',
+  },
+  {
+    id: 'godot-datawiz',
+    title: 'DataWizard SQLite Toolkit',
+    description:
+      'High-throughput SQLite bridge for Godot 4.4 (Jolt) with WAL mode, schema automation, and typed record hydration.',
+    image: '/img/datawiz-toolkit.svg',
+    to: '/docs/toolkits/godot-datawiz',
+    badge: 'GDExtension • Godot 4.4 (Jolt)',
+    stats: ['Async writer + reader pool', 'Auto-generated schemas'],
+    itch: 'https://emergent-realms.itch.io/godot-datawiz',
   },
 ];
 
@@ -120,7 +131,7 @@ export default function ToolkitsLanding(): JSX.Element {
                 Our extensions are the same ones we use to ship our games. Your feedback funds better docs, examples, and features.
               </p>
               <p>
-                <iframe frameborder="0" src="https://itch.io/embed/3973773?bg_color=464646&amp;fg_color=f4f0f0&amp;border_color=b58b00" width="552" height="167">
+                <iframe frameBorder="0" src="https://itch.io/embed/3973773?bg_color=464646&amp;fg_color=f4f0f0&amp;border_color=b58b00" width="552" height="167">
               <a href="https://emergent-realms.itch.io/godot-dataviz-ui">DataViz UI – Advanced Visualization Addon for Godot 4.5+ by Emergent-Realms</a>
             </iframe>
               </p>
