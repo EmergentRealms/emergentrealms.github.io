@@ -1,0 +1,9 @@
+{
+  "label": "DataWizard",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "title": "DataWizard SQLite Toolkit",
+    "description": "Schema-aware SQLite workflows for Godot including the DWService singleton, DWRecord resources, and supporting utilities."
+  }
+}
