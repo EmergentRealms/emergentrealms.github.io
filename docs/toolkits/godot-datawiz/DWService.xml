@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class name="DWService" inherits="Node" version="4.2">
+    <brief_description>
+        High level SQLite orchestration node that exposes asynchronous reads and writes to Godot scripts.
+    </brief_description>
+    <description>
+        `DWService` is the central access point to the DataWiz SQLite bridge. It owns a dedicated writer thread, a configurable pool of reader connections, and a schema cache that is filled from the [code]DWRecord[/code] and [code]DWAutoLoad[/code] classes registered in your project. A single instance is typically added as an Autoload named [code]DataWiz[/code].
+
+        The service expects to work with resources derived from [code]DWRecord[/code] (for persistent data tables) or nodes derived from [code]DWAutoLoad[/code] (for globally persisted state). Tables are created automatically when records are registered, but you can also build tables manually from dictionaries.
+
+        [codeblocks]
+        [gdscript]
+        @onready var data_wiz: DWService = get_node("/root/DataWiz")
+
+        func _ready() -> void:
+            if data_wiz.open("user://SaveSlot1/data.dw", 8):
+                await get_tree().physics_frame
+                var player := PlayerRecord.new()
+                player.name = "John Smith"
+                player.age = 18
+                player.save_to_db()
+
+                var records := data_wiz.select(player, "WHERE is_alive = 1", limit = 10, order_by = "age DESC")
+                for rec in records:
+                    print(rec.name, " (", rec.age, ")")
+            else:
+                push_error(data_wiz.get_last_error())
+        [/gdscript]
+        [/codeblocks]
+    </description>
+    <tutorials>
+    </tutorials>
+    <signals>
+        <signal name="connected">
+            <description>
+                Emitted after [method open] succeeds and the reader pool has been created.
+            </description>
+        </signal>
+        <signal name="disconnecting">
+            <description>
+                Emitted when [method close] is about to tear down the database connections. This is a good moment to flush pending changes by calling [method DWAutoLoad.save_to_db] with [code]wait = true[/code].
+            </description>
+        </signal>
+        <signal name="disconnected">
+            <description>
+                Emitted after the writer thread and reader pool have been shut down.
+            </description>
+        </signal>
+        <signal name="sql_error">
+            <param index="0" name="context" type="String" />
+            <param index="1" name="message" type="String" />
+            <description>
+                Emitted whenever SQLite reports an error. The [code]context[/code] describes where the failure originated while [code]message[/code] contains the raw SQLite error string.
+            </description>
+        </signal>
+    </signals>
+    <methods>
+        <method name="open">
+            <return type="bool" />
+            <param index="0" name="relative_db_path" type="String" />
+            <param index="1" name="reader_pool_size" type="int" default="4" />
+            <description>
+                Opens or reopens the database located at [code]relative_db_path[/code]. The path can target the [code]user://[/code] container and intermediate folders are created on demand. On success a writer thread is spawned and [code]reader_pool_size[/code] read-only SQLite connections are created for concurrent queries.
+
+                If the connection fails, [method get_last_error] returns the SQLite error message and [signal sql_error] is emitted.
+            </description>
+        </method>
+        <method name="close">
+            <return type="void" />
+            <description>
+                Shuts down the writer thread, drains the write queue, closes every reader connection, and emits the [signal disconnecting] and [signal disconnected] signals. Calling [method open] again after [method close] is supported.
+            </description>
+        </method>
+        <method name="db_connected">
+            <return type="bool" />
+            <description>
+                Returns [code]true[/code] once [method open] has completed successfully. This is useful in Autoload singletons that need to delay their own initialization until the database becomes available.
+            </description>
+        </method>
+        <method name="enqueue_write">
+            <return type="void" />
+            <param index="0" name="sql" type="String" />
+            <param index="1" name="params" type="Array" default="[]" />
+            <description>
+                Queues a parameterized SQL statement to be executed asynchronously on the writer thread. Placeholder parameters are bound in order using the values from [code]params[/code]. This method returns immediately; use [method write_sync] if you must wait for completion.
+            </description>
+        </method>
+        <method name="write_sync">
+            <return type="bool" />
+            <param index="0" name="sql" type="String" />
+            <description>
+                Executes a SQL statement on the writer thread and blocks until it finishes. Returns [code]true[/code] when SQLite reports [code]SQLITE_OK[/code]; otherwise the error can be retrieved via [method get_last_error].
+            </description>
+        </method>
+        <method name="log_tuning_snapshot">
+            <return type="void" />
+            <description>
+                Logs diagnostic information (WAL configuration, cache sizes, SQLite version, and similar PRAGMA values) to the Godot output using [method @GlobalScope.print]. Call this while developing to understand how the service tuned the underlying database.
+            </description>
+        </method>
+        <method name="get_last_error">
+            <return type="String" />
+            <description>
+                Returns the most recent SQLite error captured by the service. The value is cleared automatically once a new operation succeeds.
+            </description>
+        </method>
+        <method name="create_table">
+            <return type="bool" />
+            <param index="0" name="table_name" type="String" />
+            <param index="1" name="definition" type="Dictionary" />
+            <description>
+                Creates a table named [code]table_name[/code] using the provided [code]definition[/code]. The dictionary keys become column names and each value indicates the Variant type that should be persisted. The method automatically maps core Godot types (for example [code]int[/code] to [code]INTEGER[/code] and [code]String[/code] to [code]TEXT[/code]) and returns [code]true[/code] on success.
+
+                [codeblocks]
+                [gdscript]
+                var ok := DataWiz.create_table("factions", {
+                    "id": 0,            # int -&gt; INTEGER PRIMARY KEY style column
+                    "name": "",        # String -&gt; TEXT
+                    "is_hostile": false # bool -&gt; INTEGER (0 or 1)
+                })
+                [/gdscript]
+                [/codeblocks]
+            </description>
+        </method>
+        <method name="register_table">
+            <return type="void" />
+            <param index="0" name="record" type="DWRecord" />
+            <description>
+                Inspects the provided [code]record[/code] prototype, extracts its metadata (columns, indices, unique constraints), and caches the resulting schema. You rarely need to call this directly because [method DWRecord.save_to_db] and [method select] register records automatically when necessary. However, registering upfront is useful when you want to confirm a schema or run migrations during startup.
+            </description>
+        </method>
+        <method name="select">
+            <return type="Array" />
+            <param index="0" name="record" type="DWRecord" />
+            <param index="1" name="where_clause" type="String" default="&quot;&quot;" />
+            <param index="2" name="limit" type="int" default="-1" />
+            <param index="3" name="order_by" type="String" default="&quot;&quot;" />
+            <description>
+                Runs a [code]SELECT[/code] query for the table backing [code]record[/code]. The method returns an [code]Array[/code] populated with fresh instances of that record type.
+
+                The [code]where_clause[/code] string is appended directly to the generated SQL, so include the [code]WHERE[/code] keyword yourself when filtering. Optional [code]limit[/code] and [code]order_by[/code] arguments translate to [code]LIMIT[/code] and [code]ORDER BY[/code] clauses when provided.
+
+                [codeblocks]
+                [gdscript]
+                var npcs := DataWiz.select(NPC.new(), "WHERE is_alive = 1", limit = 100, order_by = "age DESC")
+                [/gdscript]
+                [/codeblocks]
+            </description>
+        </method>
+        <method name="query">
+            <return type="Array" />
+            <param index="0" name="sql" type="String" />
+            <description>
+                Executes an arbitrary read-only SQL statement and returns the results as an array of dictionaries. Each dictionary maps column names to Variant values. Use this when you need joins, aggregates, or other advanced SQL constructs that go beyond the convenience helpers.
+            </description>
+        </method>
+    </methods>
+</class>

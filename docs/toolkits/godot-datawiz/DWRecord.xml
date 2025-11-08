@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class name="DWRecord" inherits="Resource" version="4.2">
+    <brief_description>
+        Base resource that describes a single row stored in a DataWiz table.
+    </brief_description>
+    <description>
+        Extend [code]DWRecord[/code] in GDScript to describe the columns you want to persist. Each exported property becomes a SQLite column when the record is registered by [class DWService]. The class also manages unique identifiers and utility metadata such as unique keys or index definitions.
+
+        [codeblocks]
+        [gdscript]
+        @tool
+        class_name NPC
+        extends DWRecord
+
+        @export var name: String
+        @export var age: int
+        @export var is_alive := true
+        var unique_fields := ["name"]
+
+        func _init() -> void:
+            table_name = "npcs"        # Optional override; otherwise the class name is used.
+        [/gdscript]
+        [/codeblocks]
+    </description>
+    <tutorials>
+    </tutorials>
+    <methods>
+        <method name="save_to_db">
+            <return type="bool" />
+            <param index="0" name="wait" type="bool" default="false" />
+            <description>
+                Enqueues the record for persistence. When [code]wait[/code] is [code]false[/code] (the default) the instance is queued on the writer thread and the method returns immediately. Pass [code]true[/code] to block until SQLite confirms the upsert.
+            </description>
+        </method>
+        <method name="get_table_name">
+            <return type="String" />
+            <description>
+                Returns the table that backs this record. The value is resolved in the following order: the [code]table_name[/code] property if present, the global class name (from [code]class_name[/code]), the script file name, and finally the native class name.
+            </description>
+        </method>
+        <method name="get_guid">
+            <return type="PackedByteArray" />
+            <description>
+                Returns the unique identifier assigned to this record. New instances are initialized with a randomly generated UUID, but you can override the value before saving.
+            </description>
+        </method>
+        <method name="set_guid">
+            <return type="void" />
+            <param index="0" name="guid" type="PackedByteArray" />
+            <description>
+                Overrides the record identifier. Use this when you need to import data that already has stable primary keys.
+            </description>
+        </method>
+        <method name="get_owner">
+            <return type="PackedByteArray" />
+            <description>
+                Returns the [code]owner_guid[/code] used to model relationships between records. This value is not automatically managed and can be used however your project requires.
+            </description>
+        </method>
+        <method name="set_owner">
+            <return type="void" />
+            <param index="0" name="guid" type="PackedByteArray" />
+            <description>
+                Assigns a parent or owner identifier to the record. Combined with custom indices this allows you to build efficient lookups for nested data.
+            </description>
+        </method>
+    </methods>
+    <members>
+        <member name="guid" type="PackedByteArray" setter="set_guid" getter="get_guid">
+            Globally unique identifier used as the primary key when no other auto-increment field is defined.
+        </member>
+        <member name="owner_guid" type="PackedByteArray" setter="set_owner" getter="get_owner">
+            Optional relation identifier. You can store the parent record GUID here to model 1:N structures.
+        </member>
+    </members>
+</class>
