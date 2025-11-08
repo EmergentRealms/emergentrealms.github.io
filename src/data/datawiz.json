@@ -196,54 +196,5 @@
       "Call `save_to_db(wait = true)` in response to `DWService.disconnecting` to avoid losing final changes.",
       "Pair with `DWService.register_table(self)` during startup when you need deterministic schema creation."
     ]
-  },
-  "dw-types": {
-    "title": "DWTypes Helpers",
-    "subtitle": "Utility methods for DataWiz records",
-    "category": "Utilities",
-    "status": "stable",
-    "updatedAt": "2025-01-15",
-    "tags": ["guid", "serialization", "helpers"],
-    "summary": "Factory helpers and coercion utilities that make complex data types comfortable in SQLite.",
-    "highlights": [
-      "Create binary GUIDs that round-trip efficiently through SQLite BLOB columns.",
-      "Access typed dictionary/array helpers without reaching into low-level Godot APIs.",
-      "Convert timestamps and JSON payloads into formats optimized for storage."
-    ],
-    "usage": [
-      {
-        "title": "Generate identifiers",
-        "language": "gdscript",
-        "code": "var guid := DWTypes.create_guid()\nplayer.player_id = guid"
-      },
-      {
-        "title": "Normalize metadata before saving",
-        "language": "gdscript",
-        "code": "player.metadata = DWTypes.to_jsonb({\n    \"session_id\": OS.get_unique_id(),\n    \"last_seen\": Time.get_datetime_dict_from_system()\n})",
-        "description": "Store structured JSON as a compact string column without manually calling `JSON.stringify()`."
-      }
-    ],
-    "methods": [
-      {
-        "name": "create_guid() -> PackedByteArray",
-        "description": "Returns a 16-byte identifier that DataWiz treats as the default primary key format."
-      },
-      {
-        "name": "guid_to_string(guid: PackedByteArray) -> String",
-        "description": "Turns binary GUIDs into human-friendly strings for debugging or UI display."
-      },
-      {
-        "name": "to_jsonb(value: Variant) -> String",
-        "description": "Serializes dictionaries/arrays into JSON text ready for SQLite storage."
-      },
-      {
-        "name": "from_jsonb(json: String) -> Variant",
-        "description": "Parses JSON text back into Godot dictionaries/arrays with inferred typing."
-      }
-    ],
-    "tips": [
-      "Prefer binary GUIDs for primary keys—SQLite stores them efficiently and DataWiz indexes them automatically.",
-      "Use `to_jsonb` / `from_jsonb` when you need flexible metadata columns without losing type information."
-    ]
   }
 }

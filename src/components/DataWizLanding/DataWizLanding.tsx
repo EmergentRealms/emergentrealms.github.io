@@ -44,9 +44,7 @@ export default function DataWizLanding(): JSX.Element {
             <button type="button" className="button button--secondary" onClick={handleQuickStartClick}>
               Follow the quick start
             </button>
-            <Link className="button button--primary" to="https://emergent-realms.itch.io/godot-datawiz" target="_blank">
-              Download on itch.io
-            </Link>
+            
           </div>
 
           <div className={styles.heroStats}>
@@ -121,14 +119,21 @@ func _ready() -> void:
 class_name InventoryRecord
 extends DWRecord
 
+#DataWiz Fields
+#***************************************************************
+static var table_name: String = "Enemies"
+static var table_type: DWTypes.TableType = DWTypes.TableType.DATASTORE
+static var unique_fields: PackedStringArray = ["id"]
+static var index_fields: PackedStringArray = []
+#Conditional field to automatically delete from table when Runtime stops.
+static var on_exit_cleanup: String = "" 
+#***************************************************************
+
 @export var slot: int
 @export var item_id: String
 @export var quantity: int = 1
 
-func _init() -> void:
-    schema.table_name = "inventory"
-    schema.primary_key = "slot"
-    schema.unique_keys = [["item_id"]]`}</CodeBlock>
+`}</CodeBlock>
             </div>
 
             {/* 3. Easy select (NEW) */}
