@@ -1,0 +1,121 @@
+---
+id: godot-datawiz
+slug: /toolkits/godot-datawiz
+sidebar_position: 2
+title: DataWizard SQLite Toolkit for Godot 4.4 (Jolt)
+description: Integrate high-performance SQLite workflows into Godot with schema automation, typed records, and async helpers.
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# DataWizard (DataWiz) Toolkit
+
+DataWizard is a C++ GDExtension for Godot 4.4 (Jolt) that embeds SQLite and exposes a high-level workflow for structured, persistent data. It delivers an opinionated schema system that plugs into Resources and Nodes, while still letting you run raw SQL when you need to drop down to the metal.
+
+## Why ship DataWizard?
+
+- **SQLite bundled in** – ships the amalgamated `sqlite3.c`/`sqlite3.h` with a lightweight C++ wrapper designed for Godot.
+- **Performance focused** – uses Write-Ahead Logging (WAL) mode with a dedicated writer thread and a configurable pool of reader connections.
+- **Schema automation** – generates tables, indices, and constraints directly from your `DWRecord` Resources or `DWAutoLoad` Nodes.
+- **Typed data hydration** – understands `Dictionary[...]`, `Array[...]`, and binary GUIDs, making it safe to round-trip complex Godot types.
+- **First-class helpers** – includes `select`, `query`, `query_record`, and upsert helpers so you can ship production-ready persistence fast.
+
+## Quick start
+
+<Tabs>
+  <TabItem value="autoload" label="Autoload setup">
+
+  1. Add the compiled DataWiz extension to your Godot project (`res://addons/datawiz/bin/`).
+  2. Register the `DWService` singleton as an Autoload named `DataWiz`.
+  3. Call `DataWiz.open("user://SaveSlot1/data.dw", reader_pool_size)` when your game boots.
+
+  ```gdscript
+  @onready var data_wiz: DWService = get_node("/root/DataWiz")
+
+  func _ready() -> void:
+      if data_wiz.open("user://SaveSlot1/data.dw", 8):
+          await get_tree().physics_frame
+          print("Database ready")
+      else:
+          push_error(data_wiz.get_last_error())
+  ```
+
+  </TabItem>
+  <TabItem value="records" label="Define records">
+
+  1. Derive a Resource from `DWRecord` and declare your fields with property hints.
+  2. Call `register_table()` on startup (or rely on discovery via `DWService`).
+  3. Use `.save_to_db()` / `.load_from_db()` to persist instances.
+
+  ```gdscript
+  @tool
+  class_name PlayerRecord
+  extends DWRecord
+
+  @export var player_id: DWGuid
+  @export var name: String
+  @export var stats: Dictionary[String, int]
+
+  func _init() -> void:
+      schema.primary_key = "player_id"
+      schema.unique_keys = [["name"]]
+  ```
+
+  </TabItem>
+  <TabItem value="query" label="Run queries">
+
+  ```gdscript
+  var stmt_params := {
+      "team": "Cobblestone",
+      "min_level": 5,
+  }
+  var players := DataWiz.query_record(PlayerRecord, """
+      SELECT * FROM players
+      WHERE team = :team AND level >= :min_level
+      ORDER BY level DESC
+      LIMIT 16
+  """, stmt_params)
+
+  for player in players:
+      print(player.name, " (", player.level, ")")
+  ```
+
+  </TabItem>
+</Tabs>
+
+## Godot-native schema support
+
+DataWiz inspects `DWRecord` Resources and `DWAutoLoad` Nodes to generate tables automatically:
+
+- **Auto-generated migrations** – tables and indices are created on demand, and schema deltas are managed through the `DWService` cache.
+- **Unique/index helpers** – declare unique keys and indices directly on your schema definition.
+- **Typed containers** – dictionary/array fields get native typing through `Dictionary::set_typed` and `Array::set_typed` for safe hydration.
+
+## Query & persistence helpers
+
+- `DWService.select(record, where_clause, params, limit, order_by)` – hydrate resources with filtering options.
+- `DWService.query(sql, params)` – run ad-hoc queries that return arrays of dictionaries.
+- `DWService.query_record(schema, sql, params)` – hydrate Resources from custom SQL.
+- Upserts via `INSERT .. ON CONFLICT .. DO UPDATE/NOTHING` helpers, exposed through `DWRecord`.
+- Conflict handling, migration helpers, and schema inspection utilities live on the `DWService` singleton.
+
+## Class reference
+
+The generated Godot XML reference files are bundled for convenience. You can open them directly in the Godot help viewer or inspect the XML for integration details:
+
+- [DWService](./DWService.xml)
+- [DWRecord](./DWRecord.xml)
+- [DWAutoLoad](./DWAutoLoad.xml)
+- [DWTypes](./DWTypes.xml)
+
+Each file mirrors the in-editor documentation shipped with the GDExtension and includes signals, methods, and property descriptions.
+
+## Additional resources
+
+- Join the community on [Discord](https://discord.gg/2Rj5EVrP9e) for support and release notes.
+- Check out the toolkit on [itch.io](https://emergent-realms.itch.io/godot-datawiz) for binaries and changelogs.
+
+---
+
+Need a visualization companion? Pair DataWiz with the [Godot DataViz UI Kit](/docs/toolkits/godot-dataviz) for rich dashboards and HUD analytics.

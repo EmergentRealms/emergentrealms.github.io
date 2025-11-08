@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+  <title id="title">DataWizard Toolkit</title>
+  <desc id="desc">Stylized banner describing the DataWizard SQLite toolkit</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#221a45" />
+      <stop offset="100%" stop-color="#0f5e7a" />
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f2f4f" />
+      <stop offset="100%" stop-color="#164a6d" />
+    </linearGradient>
+    <style>
+      text { font-family: 'Inter', 'Segoe UI', sans-serif; }
+    </style>
+  </defs>
+  <rect width="640" height="360" fill="url(#bg)" rx="24" />
+  <g transform="translate(48 48)">
+    <rect width="544" height="264" rx="24" fill="rgba(15, 47, 79, 0.7)" stroke="rgba(255,255,255,0.08)" stroke-width="2" />
+    <rect x="24" y="32" width="240" height="200" rx="18" fill="url(#card)" stroke="rgba(255,255,255,0.12)" stroke-width="2" />
+    <g transform="translate(48 72)">
+      <rect width="32" height="32" rx="8" fill="#1fc7ff" opacity="0.9" />
+      <rect x="44" width="32" height="32" rx="8" fill="#6af9d7" opacity="0.9" />
+      <rect x="88" width="32" height="32" rx="8" fill="#ffb347" opacity="0.9" />
+      <rect x="132" width="32" height="32" rx="8" fill="#f867a6" opacity="0.9" />
+    </g>
+    <g transform="translate(312 72)">
+      <text x="0" y="0" fill="#7bdcff" font-size="14" font-weight="600" letter-spacing="0.08em">GODOT 4.4 • SQLITE</text>
+      <text x="0" y="44" fill="#f7fbff" font-size="40" font-weight="700">DataWizard Toolkit</text>
+      <text x="0" y="86" fill="#d2e7ff" font-size="18" font-weight="500">Async writer thread · Reader pool · WAL mode</text>
+      <text x="0" y="118" fill="#d2e7ff" font-size="18" font-weight="500">Schema automation for DWRecord &amp; DWAutoLoad</text>
+      <text x="0" y="150" fill="#d2e7ff" font-size="18" font-weight="500">Typed hydration for Arrays, Dictionaries, GUIDs</text>
+    </g>
+  </g>
+  <g transform="translate(40 300)">
+    <rect width="560" height="40" rx="12" fill="rgba(0,0,0,0.25)" />
+    <text x="60" y="26" font-size="18" fill="#d2f7ff">Upserts · Cached statements · JSON / Binary blobs</text>
+    <circle cx="28" cy="20" r="10" fill="#62fbd7" />
+    <circle cx="520" cy="20" r="6" fill="#1fc7ff" />
+  </g>
+</svg>
