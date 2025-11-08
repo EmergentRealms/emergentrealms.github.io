@@ -39,10 +39,10 @@ const toolkits: ToolkitCard[] = [
     id: 'godot-datawiz',
     title: 'DataWizard SQLite Toolkit',
     description:
-      'High-throughput SQLite bridge for Godot 4.4 (Jolt) with WAL mode, schema automation, and typed record hydration.',
+      'High-throughput Multi-Threaded SQLite bridge for Godot with WAL mode, schema automation, and typed record hydration.',
     image: '/img/datawiz-toolkit.svg',
     to: '/docs/toolkits/godot-datawiz',
-    badge: 'GDExtension • Godot 4.4 (Jolt)',
+    badge: 'GDExtension • Godot 4.5+',
     stats: ['Async writer + reader pool', 'Auto-generated schemas'],
     itch: 'https://emergent-realms.itch.io/godot-datawiz',
   },
