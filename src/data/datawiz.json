@@ -1,0 +1,249 @@
+{
+  "dw-service": {
+    "title": "DWService Singleton",
+    "subtitle": "Threaded SQLite orchestrator for Godot 4.4 (Jolt)",
+    "category": "Runtime Service",
+    "status": "stable",
+    "updatedAt": "2025-01-15",
+    "tags": ["autoload", "sqlite", "async"],
+    "summary": "Owns the SQLite connection pool, write queue, and schema cache that power DataWiz persistence.",
+    "highlights": [
+      "Boot once as an Autoload and reuse the same WAL-backed database across your project.",
+      "Runs writes on a dedicated thread while serving SELECTs from a configurable reader pool.",
+      "Auto-discovers DWRecord and DWAutoLoad schemas to create tables, indices, and migrations on demand."
+    ],
+    "usage": [
+      {
+        "title": "Open the database on startup",
+        "description": "Register the service as an Autoload named `DataWiz` and call `open()` before you need data.",
+        "language": "gdscript",
+        "code": "@onready var data_wiz: DWService = get_node(\"/root/DataWiz\")\n\nfunc _ready() -> void:\n    if data_wiz.open(\"user://SaveSlot1/data.dw\", reader_pool_size = 8):\n        await data_wiz.connected\n        print(\"Database ready\")\n    else:\n        push_error(data_wiz.get_last_error())"
+      },
+      {
+        "title": "Run a query with helpers",
+        "language": "gdscript",
+        "code": "var npcs := DataWiz.select(NPCRecord.new(), \"WHERE is_alive = 1\", limit = 100, order_by = \"last_seen DESC\")\nfor npc in npcs:\n    print(npc.name)",
+        "description": "`select` hydrates DWRecord resources using the cached schema definition."
+      }
+    ],
+    "signals": [
+      {
+        "name": "connected",
+        "description": "Emitted after `open()` succeeds and the reader pool is ready."
+      },
+      {
+        "name": "disconnecting",
+        "description": "Fired when `close()` begins shutting down connections—flush pending writes now."
+      },
+      {
+        "name": "disconnected",
+        "description": "Emitted after all threads stop and connections close."
+      },
+      {
+        "name": "sql_error(context: String, message: String)",
+        "description": "Raised whenever SQLite reports an error; use it for centralized logging."
+      }
+    ],
+    "methods": [
+      {
+        "name": "open(relative_db_path: String, reader_pool_size: int = 4) -> bool",
+        "description": "Creates the WAL-backed database if needed, spawns the writer thread, and builds the reader pool. Returns `true` on success."
+      },
+      {
+        "name": "close()",
+        "description": "Gracefully shuts down threads, drains queued writes, and emits `disconnecting`/`disconnected`."
+      },
+      {
+        "name": "db_connected() -> bool",
+        "description": "Quick status check for scenes that should delay initialization until the DB is online."
+      },
+      {
+        "name": "enqueue_write(sql: String, params: Array = [])",
+        "description": "Queues a parameterized statement for the writer thread to run asynchronously."
+      },
+      {
+        "name": "write_sync(sql: String) -> bool",
+        "description": "Executes a write on the writer thread and blocks until it finishes—handy for migrations and tests."
+      },
+      {
+        "name": "log_tuning_snapshot()",
+        "description": "Logs WAL/cache settings so you can audit tuning decisions in the editor output."
+      },
+      {
+        "name": "get_last_error() -> String",
+        "description": "Returns the last SQLite error encountered by the service."
+      },
+      {
+        "name": "create_table(table_name: String, definition: Dictionary) -> bool",
+        "description": "Builds a table from a dictionary of column definitions without needing a DWRecord resource."
+      },
+      {
+        "name": "register_table(record: DWRecord)",
+        "description": "Caches schema metadata extracted from a DWRecord prototype so queries and migrations can run."
+      },
+      {
+        "name": "select(record: DWRecord, where_clause: String = \"\", limit: int = -1, order_by: String = \"\") -> Array",
+        "description": "Hydrates new DWRecord instances from the backing table using optional filtering helpers."
+      },
+      {
+        "name": "query(sql: String, params: Dictionary = {}) -> Array",
+        "description": "Runs an ad-hoc SELECT and returns dictionaries; perfect for joins or aggregates."
+      },
+      {
+        "name": "query_record(schema: GDScript, sql: String, params: Dictionary = {}) -> Array",
+        "description": "Executes custom SQL and hydrates DWRecord-derived resources using the provided schema type."
+      }
+    ],
+    "tips": [
+      "Call `log_tuning_snapshot()` in development builds to see WAL, cache, and pragma values.",
+      "Use `db_connected()` inside `_ready()` when other Autoloads depend on the database before booting."
+    ]
+  },
+  "dw-record": {
+    "title": "DWRecord Resource",
+    "subtitle": "Schema-aware Resource base class",
+    "category": "Data Model",
+    "status": "stable",
+    "updatedAt": "2025-01-15",
+    "tags": ["resources", "schema", "orm"],
+    "summary": "Declarative table definitions that hydrate into strongly typed Godot Resources.",
+    "highlights": [
+      "Expose fields with `@export` to define columns, including typed Dictionaries and Arrays.",
+      "Control primary keys, unique constraints, and indices using the `schema` helper.",
+      "Call `.save_to_db()` and `.load_from_db()` to persist without writing SQL manually."
+    ],
+    "usage": [
+      {
+        "title": "Declare a player profile",
+        "language": "gdscript",
+        "code": "@tool\nclass_name PlayerRecord\nextends DWRecord\n\n@export var player_id: DWGuid\n@export var name: String\n@export var stats: Dictionary[String, int]\n\nfunc _init() -> void:\n    schema.table_name = \"players\"\n    schema.primary_key = \"player_id\"\n    schema.unique_keys = [[\"name\"]]\n    schema.indices = [[\"team\", \"level\"]]"
+      },
+      {
+        "title": "Persist an instance",
+        "language": "gdscript",
+        "code": "var player := PlayerRecord.new()\nplayer.player_id = DWTypes.create_guid()\nplayer.name = \"Edda\"\nplayer.stats = {\"level\": 12}\nplayer.save_to_db()",
+        "description": "`.save_to_db()` auto-registers the schema and upserts data by default."
+      }
+    ],
+    "methods": [
+      {
+        "name": "save_to_db(wait: bool = false) -> bool",
+        "description": "Registers the schema if needed, writes current property values, and optionally blocks until complete."
+      },
+      {
+        "name": "load_from_db(where_clause: String = \"\", params: Dictionary = {}) -> bool",
+        "description": "Loads the first row that matches the filter into the Resource and returns whether anything was found."
+      },
+      {
+        "name": "delete_from_db() -> bool",
+        "description": "Removes the current record by primary key."
+      },
+      {
+        "name": "to_dictionary() -> Dictionary",
+        "description": "Serializes exported properties into a dictionary that matches the persisted schema."
+      },
+      {
+        "name": "from_dictionary(payload: Dictionary)",
+        "description": "Hydrates the Resource from a dictionary, respecting typed Array/Dictionary hints."
+      }
+    ],
+    "tips": [
+      "Set `schema.table_name` when your Resource class name doesn't match the desired table.",
+      "Combine `unique_keys` and `indices` to enforce constraints without writing migrations manually."
+    ]
+  },
+  "dw-autoload": {
+    "title": "DWAutoLoad Node",
+    "subtitle": "Persisted singleton state with minimal boilerplate",
+    "category": "Autoload",
+    "status": "stable",
+    "updatedAt": "2025-01-15",
+    "tags": ["autoload", "state", "persistence"],
+    "summary": "Base node for global state that should round-trip through SQLite using the same schema metadata as DWRecord.",
+    "highlights": [
+      "Ideal for inventories, progression flags, or analytics caches that live in Autoload singletons.",
+      "Automatically mirrors exported properties into a backing table using the node name as the key.",
+      "Supports manual `save_to_db(wait = true)` calls when quitting or before scene transitions."
+    ],
+    "usage": [
+      {
+        "title": "Track campaign progress",
+        "language": "gdscript",
+        "code": "@tool\nclass_name CampaignState\nextends DWAutoLoad\n\n@export var slot: int\n@export var active_quest: String\n@export var milestones: Array[String]\n\nfunc _ready() -> void:\n    schema.table_name = \"campaign_state\"\n    schema.primary_key = \"slot\""
+      },
+      {
+        "title": "Flush changes when disconnecting",
+        "language": "gdscript",
+        "code": "func _on_DataWiz_disconnecting() -> void:\n    save_to_db(wait = true)",
+        "description": "Wire the signal from DWService to guarantee your singleton state hits disk before shutdown."
+      }
+    ],
+    "methods": [
+      {
+        "name": "save_to_db(wait: bool = false) -> bool",
+        "description": "Persists the node's exported properties into the associated table."
+      },
+      {
+        "name": "load_from_db(where_clause: String = \"\", params: Dictionary = {}) -> bool",
+        "description": "Reads the node's data back into exported properties using the schema metadata."
+      },
+      {
+        "name": "from_dictionary(payload: Dictionary)",
+        "description": "Hydrates the node using raw dictionary data—useful for manual query pipelines."
+      }
+    ],
+    "tips": [
+      "Call `save_to_db(wait = true)` in response to `DWService.disconnecting` to avoid losing final changes.",
+      "Pair with `DWService.register_table(self)` during startup when you need deterministic schema creation."
+    ]
+  },
+  "dw-types": {
+    "title": "DWTypes Helpers",
+    "subtitle": "Utility methods for DataWiz records",
+    "category": "Utilities",
+    "status": "stable",
+    "updatedAt": "2025-01-15",
+    "tags": ["guid", "serialization", "helpers"],
+    "summary": "Factory helpers and coercion utilities that make complex data types comfortable in SQLite.",
+    "highlights": [
+      "Create binary GUIDs that round-trip efficiently through SQLite BLOB columns.",
+      "Access typed dictionary/array helpers without reaching into low-level Godot APIs.",
+      "Convert timestamps and JSON payloads into formats optimized for storage."
+    ],
+    "usage": [
+      {
+        "title": "Generate identifiers",
+        "language": "gdscript",
+        "code": "var guid := DWTypes.create_guid()\nplayer.player_id = guid"
+      },
+      {
+        "title": "Normalize metadata before saving",
+        "language": "gdscript",
+        "code": "player.metadata = DWTypes.to_jsonb({\n    \"session_id\": OS.get_unique_id(),\n    \"last_seen\": Time.get_datetime_dict_from_system()\n})",
+        "description": "Store structured JSON as a compact string column without manually calling `JSON.stringify()`."
+      }
+    ],
+    "methods": [
+      {
+        "name": "create_guid() -> PackedByteArray",
+        "description": "Returns a 16-byte identifier that DataWiz treats as the default primary key format."
+      },
+      {
+        "name": "guid_to_string(guid: PackedByteArray) -> String",
+        "description": "Turns binary GUIDs into human-friendly strings for debugging or UI display."
+      },
+      {
+        "name": "to_jsonb(value: Variant) -> String",
+        "description": "Serializes dictionaries/arrays into JSON text ready for SQLite storage."
+      },
+      {
+        "name": "from_jsonb(json: String) -> Variant",
+        "description": "Parses JSON text back into Godot dictionaries/arrays with inferred typing."
+      }
+    ],
+    "tips": [
+      "Prefer binary GUIDs for primary keys—SQLite stores them efficiently and DataWiz indexes them automatically.",
+      "Use `to_jsonb` / `from_jsonb` when you need flexible metadata columns without losing type information."
+    ]
+  }
+}
