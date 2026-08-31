@@ -71,7 +71,8 @@ export default function DataWizLanding(): JSX.Element {
             <h2>Production-ready persistence</h2>
             <p>
               DataWiz leans on WAL mode, pragma tuning, and pooled connections so your save system keeps pace with gameplay.
-              The GDExtension ships with binaries for Godot 4.4 (Jolt) and safe fallbacks for editor previews.
+              Writes are queued on their own thread and batched into transactions; reads lease a connection from a pool.
+              Binaries ship for Windows, macOS, Linux and the web, against Godot 4.5 and newer.
             </p>
           </article>
           <article>
@@ -93,47 +94,47 @@ export default function DataWizLanding(): JSX.Element {
         <section id="quick-start" className={styles.quickStart}>
           <h2>Quick start</h2>
           <p>
-            Drop the GDExtension into <code>res://addons/datawiz/</code>, Activate the plugin, then define
-            your records. These four steps get you from install to querying live data.
+            Drop the GDExtension into <code>res://addons/datawiz/</code> and define your records. There is no plugin to
+            enable and no autoload to add &mdash; the addon registers a <code>DataWiz</code> singleton and opens the
+            database named in Project Settings the first time anything uses it.
           </p>
 
           <div className={styles.quickGrid}>
             {/* 1. Boot */}
             <div className={styles.quickCard}>
-              <h3>1. Boot the service</h3>
-              <p>Register the singleton and open your database with a reader pool sized for your project.</p>
-              <CodeBlock language="gdscript">{`@onready var data_wiz: DWService = get_node("/root/DataWiz")
+              <h3>1. Nothing to boot</h3>
+              <p>
+                The database opens by itself. Connect <code>sql_error</code> wherever you like, and open a file yourself
+                only when you want save slots.
+              </p>
+              <CodeBlock language="gdscript">{`func _ready() -> void:
+    DataWiz.sql_error.connect(func(context, message):
+        push_error("[DataWiz] %s: %s" % [context, message]))
 
-func _ready() -> void:
-    if data_wiz.open("user://SaveSlot1/data.dw", reader_pool_size = 6):
-        await data_wiz.connected
-        data_wiz.log_tuning_snapshot()
-    else:
-        push_error(data_wiz.get_last_error())`}</CodeBlock>
+    print(DataWiz.db_connected())   # already true, unless auto_open is off
+
+# Save slots: turn datawiz/database/auto_open off, then
+func load_slot(n: int) -> void:
+    DataWiz.open("user://slot_%d.db" % n, 4)   # path, reader pool size`}</CodeBlock>
             </div>
 
             {/* 2. Model */}
             <div className={styles.quickCard}>
               <h3>2. Model your data</h3>
               <p>Use <code>DWRecord</code> resources to declare columns, primary keys, and unique constraints.</p>
-              <CodeBlock language="gdscript">{`@tool
-class_name InventoryRecord
+              <CodeBlock language="gdscript">{`class_name InventoryRecord
 extends DWRecord
 
-#DataWiz Fields
-#***************************************************************
-static var table_name: String = "Enemies"
-static var table_type: DWTypes.TableType = DWTypes.TableType.DATASTORE
-static var unique_fields: PackedStringArray = ["id"]
-static var index_fields: PackedStringArray = []
-#Conditional field to automatically delete from table when Runtime stops.
-static var on_exit_cleanup: String = "" 
-#***************************************************************
+# Convention variables configure storage and are not stored as columns.
+var table_name := "inventory"
+var unique_fields := ["slot"]      # defaults to the generated guid
+var index_fields := ["item_id"]
 
-@export var slot: int
-@export var item_id: String
-@export var quantity: int = 1
-
+# Every other script variable becomes a column, exported or not.
+# Prefix one with _ to keep it out of the database.
+var slot: int = 0
+var item_id: String = ""
+var quantity: int = 1
 `}</CodeBlock>
             </div>
 
@@ -161,9 +162,10 @@ for n in npcs:
               <CodeBlock language="gdscript">{`var record := InventoryRecord.new()
 record.slot = 1
 record.item_id = "healing_potion"
-record.save_to_db()
+record.save_to_db()          # queued; pass true to wait for the commit
 
-var inventory := DataWiz.select(record, "ORDER BY slot ASC")
+# select(record, where, params, limit, order_by, offset)
+var inventory := DataWiz.select(record, "", [], -1, "slot ASC")
 for entry in inventory:
     print(entry.slot, entry.item_id)`}</CodeBlock>
             </div>

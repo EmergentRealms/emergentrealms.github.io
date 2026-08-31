@@ -131,7 +131,7 @@
   },
   "dw-record": {
     "title": "DWRecord Resource",
-    "subtitle": "Schema-aware Resource base class",
+    "subtitle": "A Resource that knows how to store itself",
     "category": "Data Model",
     "status": "beta",
     "updatedAt": "2026-08-31",
@@ -148,47 +148,55 @@
     ],
     "usage": [
       {
-        "title": "Declare a player profile",
+        "title": "Declare a record",
+        "description": "Every script variable becomes a column, exported or not. The variables listed first configure storage and are read as metadata, not stored.",
         "language": "gdscript",
-        "code": "@tool\nclass_name PlayerRecord\nextends DWRecord\n\n@export var player_id: DWGuid\n@export var name: String\n@export var stats: Dictionary[String, int]\n\nfunc _init() -> void:\n    schema.table_name = \"players\"\n    schema.primary_key = \"player_id\"\n    schema.unique_keys = [[\"name\"]]\n    schema.indices = [[\"team\", \"level\"]]"
+        "code": "class_name Npc extends DWRecord\n\nvar table_name := \"npc\"           # optional; defaults to the class name\nvar unique_fields := [\"name\"]     # optional; defaults to the generated guid\nvar index_fields := [\"faction\"]\n\nvar name: String = \"\"\nvar age: int = 0\nvar faction: String = \"neutral\"\nvar position: Vector2 = Vector2.ZERO\nvar stats: Dictionary = {}\nvar inventory: Array[Item] = []   # nested records get their own rows"
       },
       {
-        "title": "Persist an instance",
+        "title": "Save and load",
+        "description": "Writes are queued on the writer thread; pass true to block until the row is committed. Every record carries a 16-byte guid generated on construction.",
         "language": "gdscript",
-        "code": "var player := PlayerRecord.new()\nplayer.player_id = DWTypes.create_guid()\nplayer.name = \"Edda\"\nplayer.stats = {\"level\": 12}\nplayer.save_to_db()",
-        "description": "`.save_to_db()` auto-registers the schema and upserts data by default."
+        "code": "var npc := Npc.new()\nnpc.name = \"Borin\"\nnpc.age = 51\nnpc.save_to_db()          # queued, returns false only if no database is open\nnpc.save_to_db(true)      # blocks until committed\n\nvar same := Npc.new()\nsame.load_from_db(npc.get_guid())    # fills this instance in place"
+      },
+      {
+        "title": "Nested records",
+        "description": "A record held by another is written to its own table with owner_guid set, and comes back with its parent. Two references to the same row rehydrate as one instance.",
+        "language": "gdscript",
+        "code": "npc.inventory = [sword, potion]\nnpc.save_to_db(true)                       # writes npc, sword and potion\n\nvar loaded := DataWiz.select(Npc.new())    # inventory is populated\nvar kids := DataWiz.select_children(npc, Item.new())"
       }
     ],
     "methods": [
       {
         "name": "save_to_db(wait: bool = false) -> bool",
-        "description": "Registers the schema if needed, writes current property values, and optionally blocks until complete."
+        "description": "Writes this record, inserting or updating on its unique columns, and saves any nested records with it. Values are read on the calling thread, so the record is safe to modify immediately afterwards."
       },
       {
-        "name": "load_from_db(where_clause: String = \"\", params: Dictionary = {}) -> bool",
-        "description": "Loads the first row that matches the filter into the Resource and returns whether anything was found."
+        "name": "load_from_db(guid: PackedByteArray = PackedByteArray()) -> bool",
+        "description": "Loads the row with this guid into this instance, leaving your object identity intact. Omit the guid to reload the record's own."
       },
       {
-        "name": "delete_from_db() -> bool",
-        "description": "Removes the current record by primary key."
+        "name": "delete_from_db(wait: bool = false, cascade: bool = true) -> bool",
+        "description": "Deletes this record's row; with cascade, rows in every table whose owner_guid points at it go too."
       },
       {
-        "name": "to_dictionary() -> Dictionary",
-        "description": "Serializes exported properties into a dictionary that matches the persisted schema."
+        "name": "get_key() -> String",
+        "description": "The composite key built from the unique columns \u2014 the value a parent stores in its reference to a nested record."
       },
       {
-        "name": "from_dictionary(payload: Dictionary)",
-        "description": "Hydrates the Resource from a dictionary, respecting typed Array/Dictionary hints."
+        "name": "get_guid() -> PackedByteArray",
+        "description": "The 16-byte UUIDv4 assigned when the record was constructed."
       }
     ],
     "tips": [
-      "Set `schema.table_name` when your Resource class name doesn't match the desired table.",
-      "Combine `unique_keys` and `indices` to enforce constraints without writing migrations manually."
+      "Prefix a variable with an underscore to keep it out of the database.",
+      "Adding a variable to a class you have already shipped is handled: the column is added on next use and `schema_changed` tells you to backfill it.",
+      "`unique_fields` names that do not match a column are reported and dropped, so a typo does not silently change your primary key."
     ]
   },
   "dw-autoload": {
     "title": "DWAutoLoad Node",
-    "subtitle": "Persisted singleton state with minimal boilerplate",
+    "subtitle": "A Node that persists itself as a single row",
     "category": "Autoload",
     "status": "beta",
     "updatedAt": "2026-08-31",
@@ -201,38 +209,35 @@
     "highlights": [
       "Ideal for inventories, progression flags, or analytics caches that live in Autoload singletons.",
       "Automatically mirrors exported properties into a backing table using the node name as the key.",
-      "Supports manual `save_to_db(wait = true)` calls when quitting or before scene transitions."
+      "Supports manual `save_to_db(true)` calls when quitting or before scene transitions."
     ],
     "usage": [
       {
-        "title": "Track campaign progress",
+        "title": "Declare the state",
+        "description": "Same rules as DWRecord, but the table holds one row. Add it as an autoload and it loads itself when the service connects.",
         "language": "gdscript",
-        "code": "@tool\nclass_name CampaignState\nextends DWAutoLoad\n\n@export var slot: int\n@export var active_quest: String\n@export var milestones: Array[String]\n\nfunc _ready() -> void:\n    schema.table_name = \"campaign_state\"\n    schema.primary_key = \"slot\""
+        "code": "class_name GameState extends DWAutoLoad\n\nvar table_name := \"game_state\"\n\nvar chapter: int = 1\nvar flags: Dictionary = {}\nvar unlocked: Array[String] = []"
       },
       {
-        "title": "Flush changes when disconnecting",
+        "title": "It saves itself",
+        "description": "The node loads on ready (or when the service connects) and saves on `disconnecting`, so a normal shutdown persists it with no explicit call. Save by hand before anything risky.",
         "language": "gdscript",
-        "code": "func _on_DataWiz_disconnecting() -> void:\n    save_to_db(wait = true)",
-        "description": "Wire the signal from DWService to guarantee your singleton state hits disk before shutdown."
+        "code": "func _on_chapter_complete() -> void:\n    chapter += 1\n    save_to_db(true)      # wait for the commit before moving on"
       }
     ],
     "methods": [
       {
         "name": "save_to_db(wait: bool = false) -> bool",
-        "description": "Persists the node's exported properties into the associated table."
+        "description": "Persists the node's state to its single row."
       },
       {
-        "name": "load_from_db(where_clause: String = \"\", params: Dictionary = {}) -> bool",
-        "description": "Reads the node's data back into exported properties using the schema metadata."
-      },
-      {
-        "name": "from_dictionary(payload: Dictionary)",
-        "description": "Hydrates the node using raw dictionary data\u2014useful for manual query pipelines."
+        "name": "load_from_db() -> bool",
+        "description": "Loads the stored row back into this node."
       }
     ],
     "tips": [
-      "Call `save_to_db(wait = true)` in response to `DWService.disconnecting` to avoid losing final changes.",
-      "Pair with `DWService.register_table(self)` during startup when you need deterministic schema creation."
+      "Add it as an autoload; it hooks the service's connect and disconnect signals itself.",
+      "`table_type` is always AUTOLOAD for these, which is what makes the table single-row."
     ]
   }
 }
