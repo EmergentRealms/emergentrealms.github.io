@@ -32,8 +32,9 @@ export default function DataWizLanding(): JSX.Element {
           <span className="badge badge--primary">Godot Toolkit</span>
           <h1>Godot DataWizard SQLite Toolkit</h1>
           <p>
-            Ship persistent progression, inventories, and analytics without leaving Godot. DataWizard bundles SQLite with
-            a schema-aware C++ extension, async helpers, and ergonomics tailored for game teams.
+            Declare a class, call <code>save_to_db()</code>. DataWizard maps your script variables to SQLite columns,
+            creates and migrates the tables, keeps writes off the main thread, and hands the rows back as your own
+            types &mdash; no SQL, no schema file, no serialisation code. There is no autoload to add.
           </p>
 
           <div className={styles.heroIllustration}>

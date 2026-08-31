@@ -75,8 +75,9 @@ export default function DataVizLanding(): JSX.Element {
           <span className="badge badge--primary">Godot Toolkit</span>
           <h1>Godot DataViz UI Kit</h1>
           <p>
-            Production-ready charts, KPI tiles, graphs, and data grids that plug directly into Godot dashboards.
-            Every control ships with theme-aware styles, integration tips, and runnable GDScript snippets.
+            Charts, KPI tiles, gauges and data grids for Godot, written in C++ so they stay fast with real data &mdash;
+            a 100,000-point line redraws in the time a frame has to spare. Every control is themed from one resource,
+            emits the same interaction signals, and works from the keyboard or a gamepad.
           </p>
           <div className={styles.cardImage}>
             <img src="/img/dataviz/ChartsDashboard.png" alt="Charts Dashboard preview" loading="lazy" />

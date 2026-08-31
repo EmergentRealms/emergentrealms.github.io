@@ -17,9 +17,6 @@
                 <member name="chart/built_in_tooltip" type="bool" setter="set_built_in_tooltip" getter="get_built_in_tooltip" default="true">
                         Enables the stock tooltip behavior for charts when connected to the theme.
                 </member>
-                <member name="chart/grid_thickness" type="float" setter="set_grid_thickness" getter="get_grid_thickness" default="1.0">
-                        Stroke width applied to grid lines.
-                </member>
                 <member name="chart/grid_visible" type="bool" setter="set_grid_visible" getter="get_grid_visible" default="true">
                         Determines whether charts show a background grid by default.
                 </member>

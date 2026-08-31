@@ -34,6 +34,14 @@
                 
         </tutorials>
 	<methods>
+		<method name="get_bar_rect" qualifiers="const">
+			<return type="Rect2" />
+			<param index="0" name="series_idx" type="int" />
+			<param index="1" name="category_idx" type="int" />
+			<description>
+				The rectangle a bar occupies, for positioning your own overlays. Returns an empty [Rect2] for a category outside the visible index window or before the chart has drawn.
+			</description>
+		</method>
                 <method name="set_gaps">
                         <return type="void" />
                         <param index="0" name="category_gap" type="float" />

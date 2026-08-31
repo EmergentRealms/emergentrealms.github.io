@@ -7,11 +7,11 @@
 	<description>
 		[code]DV_KPI_Tile[/code] is a lightweight dashboard control for showing a single metric ("key performance indicator").
 		It renders:
-		- A [member Values/title] with optional [member Values/title_color].
-		- A formatted main value built from [member Values/prefix] + [member Values/value] + [member Values/suffix].
-		- A delta arrow/tint using [member Values/delta] and the style colors [member Style/delta_positive] / [member Style/delta_negative].
-		- An optional [member Values/subtitle] and [member Values/footnote].
-		- An optional [member Values/icon] drawn at [member Style/icon_size].
+		- A [member title] with optional [member title_color].
+		- A formatted main value built from [member prefix] + [member value] + [member suffix].
+		- A delta arrow/tint using [member delta] and the style colors [member delta_positive] / [member delta_negative].
+		- An optional [member subtitle] and [member footnote].
+		- An optional [member icon] drawn at [member icon_size].
 		- A small sparkline driven by [member sparkline]. The value scaling can be automatic
 		    ([method is_sparkline_autoscale]) or fixed via [method set_sparkline_range].
 		
@@ -81,52 +81,52 @@
 	</methods>
 
 	<members>
-		<member name="Style/delta_negative" type="Color" setter="set_col_delta_neg" getter="get_col_delta_neg" default="Color(0, 0, 0, 1)">
-			Color used to indicate a negative [member Values/delta] (e.g., down arrow or red tint).
+		<member name="delta_negative" type="Color" setter="set_col_delta_neg" getter="get_col_delta_neg" default="Color(0, 0, 0, 1)">
+			Color used to indicate a negative [member delta] (e.g., down arrow or red tint).
 		</member>
 
-		<member name="Style/delta_positive" type="Color" setter="set_col_delta_pos" getter="get_col_delta_pos" default="Color(0, 0, 0, 1)">
-			Color used to indicate a positive [member Values/delta] (e.g., up arrow or green tint).
+		<member name="delta_positive" type="Color" setter="set_col_delta_pos" getter="get_col_delta_pos" default="Color(0, 0, 0, 1)">
+			Color used to indicate a positive [member delta] (e.g., up arrow or green tint).
 		</member>
 
-		<member name="Style/icon_size" type="int" setter="set_icon_size" getter="get_icon_size" default="24">
-			Pixel size for [member Values/icon] when provided.
+		<member name="icon_size" type="int" setter="set_icon_size" getter="get_icon_size" default="24">
+			Pixel size for [member icon] when provided.
 		</member>
 
-		<member name="Values/delta" type="float" setter="set_delta" getter="get_delta" default="0.0">
+		<member name="delta" type="float" setter="set_delta" getter="get_delta" default="0.0">
 			The percentage or absolute change displayed next to the main value. The sign determines positive/negative styling.
 			Formatting is handled by the control's theme/presentation.
 		</member>
 
-		<member name="Values/footnote" type="String" setter="set_footnote" getter="get_footnote" default="&quot;&quot;">
+		<member name="footnote" type="String" setter="set_footnote" getter="get_footnote" default="&quot;&quot;">
 			Small auxiliary text rendered at the bottom of the tile (e.g., "vs. yesterday").
 		</member>
 
-		<member name="Values/icon" type="Texture2D" setter="set_icon" getter="get_icon">
+		<member name="icon" type="Texture2D" setter="set_icon" getter="get_icon">
 			Optional icon drawn in the header area of the tile.
 		</member>
 
-		<member name="Values/prefix" type="String" setter="set_prefix" getter="get_prefix" default="&quot;&quot;">
-			String placed before [member Values/value] when displayed (e.g., currency symbol).
+		<member name="prefix" type="String" setter="set_prefix" getter="get_prefix" default="&quot;&quot;">
+			String placed before [member value] when displayed (e.g., currency symbol).
 		</member>
 
-		<member name="Values/subtitle" type="String" setter="set_subtitle" getter="get_subtitle" default="&quot;&quot;">
+		<member name="subtitle" type="String" setter="set_subtitle" getter="get_subtitle" default="&quot;&quot;">
 			Secondary label beneath the main title (e.g., "Last 24h").
 		</member>
 
-		<member name="Values/suffix" type="String" setter="set_suffix" getter="get_suffix" default="&quot;&quot;">
-			String placed after [member Values/value] when displayed (e.g., units).
+		<member name="suffix" type="String" setter="set_suffix" getter="get_suffix" default="&quot;&quot;">
+			String placed after [member value] when displayed (e.g., units).
 		</member>
 
-		<member name="Values/title" type="String" setter="set_title" getter="get_title" default="&quot;&quot;">
+		<member name="title" type="String" setter="set_title" getter="get_title" default="&quot;&quot;">
 			Main heading text shown at the top of the tile.
 		</member>
 
-		<member name="Values/title_color" type="Color" setter="set_title_col" getter="get_title_col" default="Color(0, 0, 0, 0)">
+		<member name="title_color" type="Color" setter="set_title_col" getter="get_title_col" default="Color(0, 0, 0, 0)">
 			Optional override color for the title. If fully transparent, the theme default is used.
 		</member>
 
-		<member name="Values/value" type="float" setter="set_value" getter="get_value" default="0.0">
+		<member name="value" type="float" setter="set_value" getter="get_value" default="0.0">
 			The primary numeric value displayed by the tile.
 		</member>
 

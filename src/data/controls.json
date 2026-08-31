@@ -4,77 +4,77 @@
     "subtitle": "Color seeds + light/dark with auto-propagation",
     "category": "Theme",
     "status": "stable",
-    "updatedAt": "2025-10-18",
+    "updatedAt": "2026-08-31",
     "tags": [
       "theming",
       "palette",
       "editor-friendly"
     ],
-    "summary": "Single source of truth for palette, typography, and component styling. Change a few seeds\u2014everything updates.",
+    "summary": "One resource, six seed colours, every component. Series colours come from a colour-blind-safe palette and the theme can tell you the contrast ratio it achieved.",
     "docsHref": "/docs/toolkits/godot-dataviz/central-theme",
-    "thumbnail": "/img/dataviz/ThemesManager.png",
+    "thumbnail": "/img/dataviz/showcase/theming.png",
     "tutorials": [
       {
         "title": "Customize the default theme",
         "description": "The theme manager uses a DVTheme Resource file found here. Each them has a Dark/light mode toggle for easy switching.",
         "codeHref": "/scripts/theme_custom_palette.gd",
-        "screenshot":"/img/dataviz/ThemeLocation.png"
+        "screenshot": "/img/dataviz/ThemeLocation.png"
       },
       {
         "title": "Set the active theme",
         "description": "The active theme can be updated through the Project settings. (Check the bottom of the list and select your custom resource file.) Or via script.",
         "codeHref": "/scripts/theme_switch_theme.gd",
-        "screenshot":"/img/dataviz/ThemeSetting.png"
+        "screenshot": "/img/dataviz/ThemeSetting.png"
       }
     ]
   },
   "bar-chart": {
     "title": "Bar Chart",
-    "subtitle": "Grouped/stacked bars with labels & tooltips",
+    "subtitle": "Grouped or stacked bars, with a zero baseline",
     "category": "Charts",
     "status": "stable",
-    "updatedAt": "2025-10-18",
+    "updatedAt": "2026-08-31",
     "tags": [
       "categorical",
       "comparisons"
     ],
-    "summary": "Fast categorical chart with legends, value labels, and hover/click signals.",
+    "summary": "Categorical bars that read honestly: the value axis includes zero, stacks scale to the stack total, and hover, click and keyboard selection all report the same item.",
     "docsHref": "/docs/toolkits/godot-dataviz/charts/bar-chart",
-    "thumbnail": "/img/dataviz/Barchart_ex1.png",
+    "thumbnail": "/img/dataviz/showcase/charts.png",
     "tutorials": [
       {
         "title": "Track Engagement by Device",
         "description": "Populate grouped bars, customize spacing, and listen for hover/click signals.",
         "codeHref": "/scripts/bar_chart_interactive.gd",
-        "screenshot":"/img/dataviz/Barchart_ex1.png"
+        "screenshot": "/img/dataviz/Barchart_ex1.png"
       }
     ]
   },
   "line-chart": {
     "title": "Line Chart",
-    "subtitle": "Multi-series trends with markers",
+    "subtitle": "Lines, fills, and 100k points without breaking a sweat",
     "category": "Charts",
     "status": "stable",
-    "updatedAt": "2025-10-18",
+    "updatedAt": "2026-08-31",
     "tags": [
       "time-series",
       "trends"
     ],
-    "summary": "Step lines, optional area fills, and segment hover/selection.",
+    "summary": "Decimates above roughly two samples per pixel column, keeping spikes, so a 100,000-point series costs about what a 1,000-point one does.",
     "docsHref": "/docs/toolkits/godot-dataviz/charts/line-chart",
-    "thumbnail": "/img/dataviz/LineChart.png",
+    "thumbnail": "/img/dataviz/showcase/charts.png",
     "tutorials": [
       {
         "title": "Simple Example",
         "description": "Here is how easy it is to get a line grid going, and fill the active line.",
         "codeHref": "/scripts/Linechart_Ex1.gd",
-        "screenshot":"/img/dataviz/Linechart_ex0.png"
+        "screenshot": "/img/dataviz/Linechart_ex0.png"
       },
       {
         "title": "Add SMA/EMA Overlays",
         "description": "Overlays (SMA, EMA,  Bollinger Bands) are enabled per series using an overlay mask that combines OverlayMask flags. Windows are expressed in samples (bars). You can either configure them after adding a series, or use the convenience method that sets everything in one call.",
         "codeHref": "/scripts/line_chart_overlays.gd",
-        "screenshot":"/img/dataviz/Linechart_ex1.png"
+        "screenshot": "/img/dataviz/Linechart_ex1.png"
       }
     ]
   },
@@ -83,7 +83,7 @@
     "subtitle": "Quartiles, whiskers, outliers",
     "category": "Charts",
     "status": "stable",
-    "updatedAt": "2025-10-18",
+    "updatedAt": "2026-08-31",
     "tags": [
       "distribution",
       "stats"
@@ -96,7 +96,7 @@
         "title": "Compare Quartile Spread",
         "description": "Feed sample returns per sector and inspect medians via the click signal.",
         "codeHref": "/scripts/box_plot_distribution.gd",
-        "screenshot":"/img/dataviz/Box_plot_ex1.png"
+        "screenshot": "/img/dataviz/Box_plot_ex1.png"
       }
     ]
   },
@@ -105,7 +105,7 @@
     "subtitle": "Step-by-step deltas to a total",
     "category": "Charts",
     "status": "stable",
-    "updatedAt": "2025-10-18",
+    "updatedAt": "2026-08-31",
     "tags": [
       "budget",
       "breakdown"
@@ -118,7 +118,7 @@
         "title": "Build a Cash Flow Bridge",
         "description": "Convert monthly deltas into a waterfall with currency formatting and totals.",
         "codeHref": "/scripts/waterfall_cash_flow.gd",
-        "screenshot":"/img/dataviz/Waterfall.png"
+        "screenshot": "/img/dataviz/Waterfall.png"
       }
     ]
   },
@@ -127,7 +127,7 @@
     "subtitle": "Tracks with events and 'now' marker",
     "category": "Charts",
     "status": "stable",
-    "updatedAt": "2025-10-18",
+    "updatedAt": "2026-08-31",
     "tags": [
       "scheduling",
       "gantt-like"
@@ -140,7 +140,7 @@
         "title": "Plan Story Beats Across Tracks",
         "description": "Create multiple tracks, add events, and surface interactivity through signals.",
         "codeHref": "/scripts/timeline_tracks.gd",
-        "screenshot":"/img/dataviz/Timeline.png"
+        "screenshot": "/img/dataviz/Timeline.png"
       }
     ]
   },
@@ -149,7 +149,7 @@
     "subtitle": "Arc meter with ticks and center text",
     "category": "Graphs",
     "status": "stable",
-    "updatedAt": "2025-10-18",
+    "updatedAt": "2026-08-31",
     "tags": [
       "kpi",
       "status"
@@ -162,13 +162,13 @@
         "title": "Simple Progressbar",
         "description": "Nice progressbar with only a couple of lines.",
         "codeHref": "/scripts/gauge_simple.gd",
-        "screenshot":"/img/dataviz/GaugeSimple.png"
+        "screenshot": "/img/dataviz/GaugeSimple.png"
       },
       {
         "title": "Monitor Server Load",
         "description": "Define zones, configure ticks, and respond when the value enters a new range.",
         "codeHref": "/scripts/gauge_dynamic_value.gd",
-        "screenshot":"/img/dataviz/Gauge_ex1.png"
+        "screenshot": "/img/dataviz/Gauge_ex1.png"
       }
     ]
   },
@@ -177,7 +177,7 @@
     "subtitle": "Categories with inside/outside labels",
     "category": "Graphs",
     "status": "stable",
-    "updatedAt": "2025-10-18",
+    "updatedAt": "2026-08-31",
     "tags": [
       "share",
       "composition"
@@ -190,13 +190,13 @@
         "title": "Render a Donut simple Pie",
         "description": "Simple chart with labels inside, and react to slice clicks.",
         "codeHref": "/scripts/pie_chart_donut.gd",
-        "screenshot":"/img/dataviz/Piechart_ex1.png"
+        "screenshot": "/img/dataviz/Piechart_ex1.png"
       },
       {
         "title": "Render a Donut with Leader Lines",
         "description": "Enable donut mode, position labels outside, and react to slice clicks.",
         "codeHref": "/scripts/pie_chart_donut_ex2.gd",
-        "screenshot":"/img/dataviz/Piechart_ex2.png"
+        "screenshot": "/img/dataviz/Piechart_ex2.png"
       }
     ]
   },
@@ -205,7 +205,7 @@
     "subtitle": "Headline value with delta & sparkline",
     "category": "Graphs",
     "status": "stable",
-    "updatedAt": "2025-10-18",
+    "updatedAt": "2026-08-31",
     "tags": [
       "dashboard",
       "summary"
@@ -218,7 +218,7 @@
         "title": "Summarize Revenue in a Tile",
         "description": "Display title, value, delta, and sparkline for a dashboard metric tile.",
         "codeHref": "/scripts/kpi_tile_dashboard.gd",
-        "screenshot":"/img/dataviz/KpiTile.png"
+        "screenshot": "/img/dataviz/KpiTile.png"
       }
     ]
   },
@@ -227,7 +227,7 @@
     "subtitle": "Multi-axial comparison",
     "category": "Graphs",
     "status": "stable",
-    "updatedAt": "2025-10-18",
+    "updatedAt": "2026-08-31",
     "tags": [
       "profiles",
       "attributes"
@@ -240,30 +240,30 @@
         "title": "Profile Squad Attributes",
         "description": "Plot five attributes with a consistent scale and readable grid.",
         "codeHref": "/scripts/radar_graph_profiles.gd",
-        "screenshot":"/img/dataviz/RadarGraph.png"
+        "screenshot": "/img/dataviz/RadarGraph.png"
       }
     ]
   },
   "table-grid": {
     "title": "Table Grid",
-    "subtitle": "Virtualized rows for huge datasets",
+    "subtitle": "Virtualised, sortable, keyboard-navigable",
     "category": "Other",
     "status": "stable",
-    "updatedAt": "2025-10-18",
+    "updatedAt": "2026-08-31",
     "tags": [
       "logs",
       "inventory",
       "sqlite"
     ],
-    "summary": "Fast scrolling table with column config, sorting, and selection.",
+    "summary": "Only the visible rows are drawn. Click or arrow through rows, sort by header, and columns share the width instead of stranding it in the last one.",
     "docsHref": "/docs/toolkits/godot-dataviz/other/table-grid",
-    "thumbnail": "/img/dataviz/Grid.png",
+    "thumbnail": "/img/dataviz/showcase/data.png",
     "tutorials": [
       {
         "title": "Populate a Sortable Grid",
         "description": "Feed columns and rows, enable keyboard nav, and handle cell clicks.",
         "codeHref": "/scripts/table_grid_virtualized.gd",
-        "screenshot":"/img/dataviz/Grid_ex1.png"
+        "screenshot": "/img/dataviz/Grid_ex1.png"
       }
     ]
   },
@@ -272,7 +272,7 @@
     "subtitle": "Grid intensities with legend",
     "category": "Other",
     "status": "stable",
-    "updatedAt": "2025-10-18",
+    "updatedAt": "2026-08-31",
     "tags": [
       "matrix",
       "affinity",
@@ -280,42 +280,57 @@
     ],
     "summary": "Render weighted grids for AI costs, supply/demand, or correlation matrices.",
     "docsHref": "/docs/toolkits/godot-dataviz/other/heat-map",
-    "thumbnail": "/img/dataviz/Heatmap.png",
+    "thumbnail": "/img/dataviz/showcase/spatial.png",
     "tutorials": [
       {
         "title": "Visualize Incident Density",
         "description": "Map world-space coordinates into the heat map and respond to selections.",
         "codeHref": "/scripts/heat_map_incidents.gd",
-        "screenshot":"/img/dataviz/Heatmap_ex1.png"
+        "screenshot": "/img/dataviz/Heatmap_ex1.png"
       },
       {
         "title": "Neo City",
         "description": "Add Stickers to the map for an enhanced interaction. Stickers can be moved in realtime.",
         "codeHref": "/scripts/neon_city.gd",
-        "screenshot":"/img/dataviz/NeonCity.png"
+        "screenshot": "/img/dataviz/NeonCity.png"
       }
     ]
   },
   "detail-panel": {
     "title": "Detail Panel",
-    "subtitle": "Labeled rows, groups, and tags",
+    "subtitle": "Grouped key/value panel with bars, pills and inline editors",
     "category": "Other",
     "status": "stable",
-    "updatedAt": "2025-10-18",
+    "updatedAt": "2026-08-31",
     "tags": [
       "inspector",
       "entity-overview"
     ],
-    "summary": "Flexible facts panel with icons, tooltips, and pill-style tag lists.",
+    "summary": "Fields group under headings, arrays draw as pills, a percentage draws as a bar, and the panel scrolls when there is more than fits.",
     "docsHref": "/docs/toolkits/godot-dataviz/other/detail-panel",
-    "thumbnail": "/img/dataviz/DetailPanel_ex1.png",
+    "thumbnail": "/img/dataviz/showcase/persistence.png",
     "tutorials": [
       {
         "title": "Assemble a Character Sheet",
         "description": "Group DV_Field entries, mix badges and progress, and capture row clicks.",
         "codeHref": "/scripts/detail_panel_character.gd",
-        "screenshot":"/img/dataviz/DetailPanel_ex1.png"
+        "screenshot": "/img/dataviz/DetailPanel_ex1.png"
       }
     ]
+  },
+  "overlays": {
+    "title": "Moving averages & Bollinger Bands",
+    "subtitle": "SMA, EMA and BB as per-series overlays",
+    "category": "Charts",
+    "status": "stable",
+    "updatedAt": "2026-08-31",
+    "tags": [
+      "overlays",
+      "analysis",
+      "finance"
+    ],
+    "summary": "Hand a series an overlay mask and the window lengths; the chart computes the averages and bands and clips them to the visible range.",
+    "docsHref": "/docs/toolkits/godot-dataviz/charts/overlays",
+    "thumbnail": "/img/dataviz/showcase/overlays.png"
   }
 }

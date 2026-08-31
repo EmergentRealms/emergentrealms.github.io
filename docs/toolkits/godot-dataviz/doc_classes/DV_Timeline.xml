@@ -136,8 +136,7 @@
 			<param index="2" name="grid" type="Color" />
 			<param index="3" name="track_fill" type="Color" />
 			<param index="4" name="event_fill" type="Color" />
-			<param index="5" name="event_text" type="Color" />
-			<param index="6" name="now_line" type="Color" />
+			<param index="5" name="now_line" type="Color" />
 			<description>
 				Sets the primary colors used by the control: background, frame outline, grid lines, track background, event fill, event label text, and the "now" indicator line.
 			</description>
@@ -243,4 +242,45 @@
 			</description>
 		</signal>
 	</signals>
+	<members>
+		<member name="autoscale" type="bool" setter="set_time_autoscale" getter="is_time_autoscale">
+			Whether the visible time span is taken from the events. Turn it off to control the window yourself.
+		</member>
+		<member name="grid_step" type="float" setter="set_grid_step" getter="get_grid_step">
+			Seconds between gridlines. Zero picks a step from the visible span.
+		</member>
+		<member name="enabled" type="bool" setter="set_now_enabled" getter="is_now_enabled">
+			Whether the "now" marker is drawn.
+		</member>
+		<member name="time" type="float" setter="set_now_time" getter="get_now_time">
+			Where the "now" marker sits, in the same units as the events.
+		</member>
+		<member name="track_height" type="float" setter="set_track_height" getter="get_track_height">
+			Height of one track, in pixels.
+		</member>
+		<member name="track_gap" type="float" setter="set_track_gap" getter="get_track_gap">
+			Vertical gap between tracks, in pixels.
+		</member>
+		<member name="show_grid" type="bool" setter="set_show_grid" getter="get_show_grid">
+			Whether time gridlines are drawn behind the tracks.
+		</member>
+		<member name="bg_color" type="Color" setter="set_bg_color" getter="get_bg_color">
+			Background behind the tracks. Set by the theme unless [member DVComponent.theme_connected] is off.
+		</member>
+		<member name="frame_color" type="Color" setter="set_frame_color" getter="get_frame_color">
+			Colour of the border around the timeline.
+		</member>
+		<member name="grid_color" type="Color" setter="set_grid_color" getter="get_grid_color">
+			Colour of the time gridlines.
+		</member>
+		<member name="track_fill_color" type="Color" setter="set_track_fill_color" getter="get_track_fill_color">
+			Fill behind each track lane.
+		</member>
+		<member name="event_fill_color" type="Color" setter="set_event_fill_color" getter="get_event_fill_color">
+			Default fill for an event that does not carry its own colour.
+		</member>
+		<member name="now_line_color" type="Color" setter="set_now_line_color" getter="get_now_line_color">
+			Colour of the "now" marker.
+		</member>
+	</members>
 </class>

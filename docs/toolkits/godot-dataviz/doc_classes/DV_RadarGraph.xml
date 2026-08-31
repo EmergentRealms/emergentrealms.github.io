@@ -5,7 +5,7 @@
 	</brief_description>
 
 	<description>
-		[code]DV_RadarGraph[/code] plots one numeric value per category around a circular web. Provide category names with [code]set_categories()[/code] and values with [code]set_data_points()[/code]. The array lengths are expected to match. The radial scale maps from [member radar/min_value] to [member radar/max_value]. Visual details such as grid rings, outline, fill, and point markers are controlled by the [member radar_display/*] and [member radar_style/*] members.
+		[code]DV_RadarGraph[/code] plots one numeric value per category around a circular web. Provide category names with [code]set_categories()[/code] and values with [code]set_data_points()[/code]. The array lengths are expected to match. The radial scale maps from [member min_value] to [member max_value]. Visual details such as grid rings, outline, fill, and point markers are controlled by the [member *] and [member *] members.
 		
 		[codeblocks]
 		[gdscript]
@@ -52,76 +52,73 @@
 	</tutorials>
 
 	<members>
-		<member name="radar/categories" type="PackedStringArray" setter="set_categories" getter="get_categories" default="PackedStringArray()">
-			Category labels arranged around the radar. The number of categories should match [member radar/data_points].
+		<member name="categories" type="PackedStringArray" setter="set_categories" getter="get_categories" default="PackedStringArray()">
+			Category labels arranged around the radar. The number of categories should match [member data_points].
 		</member>
 
-		<member name="radar/data_points" type="PackedFloat32Array" setter="set_data_points" getter="get_data_points" default="PackedFloat32Array()">
-			One value per category. Values are plotted radially between [member radar/min_value] and [member radar/max_value].
+		<member name="data_points" type="PackedFloat32Array" setter="set_data_points" getter="get_data_points" default="PackedFloat32Array()">
+			One value per category. Values are plotted radially between [member min_value] and [member max_value].
 		</member>
 
-		<member name="radar/label_margin" type="float" setter="set_label_margin" getter="get_label_margin" default="28.0">
+		<member name="label_margin" type="float" setter="set_label_margin" getter="get_label_margin" default="28.0">
 			Pixel margin between the outer web and category labels.
 		</member>
 
-		<member name="radar/layer_count" type="int" setter="set_layer_count" getter="get_layer_count" default="4">
+		<member name="layer_count" type="int" setter="set_layer_count" getter="get_layer_count" default="4">
 			Number of concentric grid rings drawn from center to outer radius.
 		</member>
 
-		<member name="radar/max_value" type="float" setter="set_max_value" getter="get_max_value" default="1.0">
+		<member name="max_value" type="float" setter="set_max_value" getter="get_max_value" default="1.0">
 			Maximum value of the radial scale.
 		</member>
 
-		<member name="radar/min_value" type="float" setter="set_min_value" getter="get_min_value" default="0.0">
+		<member name="min_value" type="float" setter="set_min_value" getter="get_min_value" default="0.0">
 			Minimum value of the radial scale.
 		</member>
 
-		<member name="radar_display/rotate_labels" type="bool" setter="set_rotate_labels_to_center" getter="get_rotate_labels_to_center" default="false">
+		<member name="rotate_labels" type="bool" setter="set_rotate_labels_to_center" getter="get_rotate_labels_to_center" default="false">
 			When [code]true[/code], rotates each label so its baseline points toward the chart center.
 		</member>
 
-		<member name="radar_display/show_grid" type="bool" setter="set_show_grid" getter="is_show_grid" default="true">
+		<member name="show_grid" type="bool" setter="set_show_grid" getter="is_show_grid" default="true">
 			Toggles drawing of the radial grid (rings and spokes).
 		</member>
 
-		<member name="radar_display/show_labels" type="bool" setter="set_show_labels" getter="is_show_labels" default="true">
+		<member name="show_labels" type="bool" setter="set_show_labels" getter="is_show_labels" default="true">
 			Toggles drawing of category labels.
 		</member>
 
-		<member name="radar_display/show_points" type="bool" setter="set_show_points" getter="is_show_points" default="true">
+		<member name="show_points" type="bool" setter="set_show_points" getter="is_show_points" default="true">
 			Toggles drawing of point markers at each vertex.
 		</member>
 
-		<member name="radar_style/fill_color" type="Color" setter="set_fill_color" getter="get_fill_color" default="Color(0.24, 0.56, 0.88, 0.35)">
+		<member name="fill_color" type="Color" setter="set_fill_color" getter="get_fill_color" default="Color(0.24, 0.56, 0.88, 0.35)">
 			Fill color for the polygon area under the outline.
 		</member>
 
-		<member name="radar_style/grid_color" type="Color" setter="set_grid_color" getter="get_grid_color" default="Color(0.35, 0.4, 0.48, 0.35)">
+		<member name="grid_color" type="Color" setter="set_grid_color" getter="get_grid_color" default="Color(0.35, 0.4, 0.48, 0.35)">
 			Color used for grid rings and spokes.
 		</member>
 
-		<member name="radar_style/grid_thickness" type="float" setter="set_grid_thickness" getter="get_grid_thickness" default="1.0">
+		<member name="grid_thickness" type="float" setter="set_grid_thickness" getter="get_grid_thickness" default="1.0">
 			Pixel thickness of grid lines.
 		</member>
 
-		<member name="radar_style/outline_color" type="Color" setter="set_outline_color" getter="get_outline_color" default="Color(0.24, 0.56, 0.88, 0.9)">
+		<member name="outline_color" type="Color" setter="set_outline_color" getter="get_outline_color" default="Color(0.24, 0.56, 0.88, 0.9)">
 			Color of the data outline connecting category vertices.
 		</member>
 
-		<member name="radar_style/outline_thickness" type="float" setter="set_outline_thickness" getter="get_outline_thickness" default="2.0">
+		<member name="outline_thickness" type="float" setter="set_outline_thickness" getter="get_outline_thickness" default="2.0">
 			Pixel thickness of the data outline.
 		</member>
 
-		<member name="radar_style/point_color" type="Color" setter="set_point_color" getter="get_point_color" default="Color(1, 0.78, 0.28, 0.95)">
-			Color of point markers when [member radar_display/show_points] is enabled.
+		<member name="point_color" type="Color" setter="set_point_color" getter="get_point_color" default="Color(1, 0.78, 0.28, 0.95)">
+			Color of point markers when [member show_points] is enabled.
 		</member>
 
-		<member name="radar_style/point_radius" type="float" setter="set_point_radius" getter="get_point_radius" default="4.0">
+		<member name="point_radius" type="float" setter="set_point_radius" getter="get_point_radius" default="4.0">
 			Radius (in pixels) of each point marker.
 		</member>
 
-		<member name="radar_style/use_theme_colors" type="bool" setter="set_use_theme_colors" getter="is_use_theme_colors" default="true">
-			When [code]true[/code], uses theme-provided colors; when [code]false[/code], uses the explicit radar_style colors.
-		</member>
 	</members>
 </class>

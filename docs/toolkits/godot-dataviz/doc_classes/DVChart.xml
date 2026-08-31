@@ -1,82 +1,160 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <class name="DVChart" inherits="DVComponent" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
         <brief_description>
-                Base chart control that manages series data, axes, legends, and overlay calculations for DataViz UI Kit charts.
+		Base chart control that manages series data, axes, legends, and overlay calculations for DataViz UI Kit charts.
         </brief_description>
         <description>
-                DVChart builds on [DVComponent] to provide a data-series model, chart layout helpers, legends, axes, and rich
-                overlay support (simple/exp moving averages, Bollinger Bands). Concrete chart controls such as
-                [DV_LineChart] or [DV_BarChart] inherit from DVChart and focus on drawing while reusing the shared data
-                management code.
+		DVChart builds on [DVComponent] to provide a data-series model, chart layout helpers, legends, axes, and rich
+		overlay support (simple/exp moving averages, Bollinger Bands). Concrete chart controls such as
+		[DV_LineChart] or [DV_BarChart] inherit from DVChart and focus on drawing while reusing the shared data
+		management code.
 
-                Typical usage is to configure categories, add one or more numeric series, then tweak axes or legend
-                options. Overlays can be enabled per series to surface analytical bands without having to compute them in
-                user code.
+		Typical usage is to configure categories, add one or more numeric series, then tweak axes or legend
+		options. Overlays can be enabled per series to surface analytical bands without having to compute them in
+		user code.
 
 
-                [b]Overlays[/b]
+		[b]Overlays[/b]
 
-                Overlays (SMA, EMA,  Bollinger Bands) are enabled per series using an [i]overlay mask[/i] that combines [enum OverlayMask] flags. Windows are expressed in samples (bars). You can either configure them after adding a series, or use the convenience method that sets everything in one call.
+		Overlays (SMA, EMA,  Bollinger Bands) are enabled per series using an [i]overlay mask[/i] that combines [enum OverlayMask] flags. Windows are expressed in samples (bars). You can either configure them after adding a series, or use the convenience method that sets everything in one call.
 
-                [codeblocks]
-                [gdscript]
+		[codeblocks]
+		[gdscript]
 
-                #1) Configure overlays after adding a series
+		#1) Configure overlays after adding a series
 
-                var idx := add_series("Price", prices)
+		var idx := add_series("Price", prices)
 
-                #Enable multiple overlays via mask
+		#Enable multiple overlays via mask
 
-                set_series_overlays(idx, DVChart.OVL_SMA | DVChart.OVL_EMA | DVChart.OVL_BBANDS)
+		set_series_overlays(idx, DVChart.OVL_SMA | DVChart.OVL_EMA | DVChart.OVL_BBANDS)
 
-                #Per-overlay parameters (windows in bars/samples)
+		#Per-overlay parameters (windows in bars/samples)
 
-                #SMA window (3) → Simple Moving Average over the last 3 points. 
-                set_series_sma_window(idx, 3) # SMA window
-                
-                #EMA window (5) → Exponential Moving Average with smoothing factor alpha = 2/(w+1); for w=5, alpha = 2/6 ≈ 0.333…. New EMA = alpha*price + (1-alpha)*prev.
-                set_series_ema_window(idx, 5) # EMA window
-                
-                #Bollinger Bands window (3) → Rolling mean and standard deviation over the last 3 points. Bands are mid ± k * stdev. With k=2.0, that’s ±2σ around the 3-bar mean.
-                #Bollinger k (2.0) → The standard deviation multiplier used for the bands (classic choice is 2).
-                set_series_bbands_params(idx, 20, 2.0) # BB: window=20, k=2σ
+		#SMA window (3) → Simple Moving Average over the last 3 points. 
+		set_series_sma_window(idx, 3) # SMA window
+		
+		#EMA window (5) → Exponential Moving Average with smoothing factor alpha = 2/(w+1); for w=5, alpha = 2/6 ≈ 0.333…. New EMA = alpha*price + (1-alpha)*prev.
+		set_series_ema_window(idx, 5) # EMA window
+		
+		#Bollinger Bands window (3) → Rolling mean and standard deviation over the last 3 points. Bands are mid ± k * stdev. With k=2.0, that’s ±2σ around the 3-bar mean.
+		#Bollinger k (2.0) → The standard deviation multiplier used for the bands (classic choice is 2).
+		set_series_bbands_params(idx, 20, 2.0) # BB: window=20, k=2σ
 
-                #Optional styling per overlay
+		#Optional styling per overlay
 
-                set_series_sma_style(idx, Color(0.4,0.6,0.95), 2.0)
-                set_series_ema_style(idx, Color(0.15,0.56,0.33), 2.0)
-                set_series_bbands_style(idx, Color(0.87,0.80,0.13), Color(0.16,0.5,0.83,0.12), 2.0)
+		set_series_sma_style(idx, Color(0.4,0.6,0.95), 2.0)
+		set_series_ema_style(idx, Color(0.15,0.56,0.33), 2.0)
+		set_series_bbands_style(idx, Color(0.87,0.80,0.13), Color(0.16,0.5,0.83,0.12), 2.0)
 
-                
-                2) Or do it in one shot when adding the series:
-                add_series_with_overlays(name, values, overlay_mask, sma_w, ema_w, bb_w, bb_k)
+		
+		2) Or do it in one shot when adding the series:
+		add_series_with_overlays(name, values, overlay_mask, sma_w, ema_w, bb_w, bb_k)
 
-                var mask := DVChart.OVL_SMA | DVChart.OVL_EMA | DVChart.OVL_BBANDS
-                var idx2 := add_series_with_overlays("Price", prices, mask, 20, 12, 20, 2.0)
-                [/gdscript]
-                [/codeblocks]
+		var mask := DVChart.OVL_SMA | DVChart.OVL_EMA | DVChart.OVL_BBANDS
+		var idx2 := add_series_with_overlays("Price", prices, mask, 20, 12, 20, 2.0)
+		[/gdscript]
+		[/codeblocks]
 
-                [b]Notes[/b]
-                • [b]overlay_mask[/b]: bitwise-OR of [constant OVL_SMA], [constant OVL_EMA], [constant OVL_BBANDS].
-                • [b]Windows[/b]: [method set_series_sma_window], [method set_series_ema_window], and [method set_series_bbands_params] control lengths (bars) and Bollinger multiplier k.
-                • [b]Styling[/b]: use [method set_series_sma_style], [method set_series_ema_style], or [method set_series_bbands_style] to override overlay colors on a per-series basis.
-                • [b]Visibility[/b]: [method set_index_range] changes which samples are drawn; overlays are computed per series and then clipped to the visible range.
-                
+		[b]Notes[/b]
+		• [b]overlay_mask[/b]: bitwise-OR of [constant OVL_SMA], [constant OVL_EMA], [constant OVL_BBANDS].
+		• [b]Windows[/b]: [method set_series_sma_window], [method set_series_ema_window], and [method set_series_bbands_params] control lengths (bars) and Bollinger multiplier k.
+		• [b]Styling[/b]: use [method set_series_sma_style], [method set_series_ema_style], or [method set_series_bbands_style] to override overlay colors on a per-series basis.
+		• [b]Visibility[/b]: [method set_index_range] changes which samples are drawn; overlays are computed per series and then clipped to the visible range.
+		
 
-                
+		
         </description>
         <tutorials>
 
         </tutorials>
 	<methods>
+		<method name="set_y_tick_formatter">
+			<return type="void" />
+			<param index="0" name="callable" type="Callable" />
+			<description>
+				Replaces the text of the vertical axis labels. The callable receives the tick value and returns the string to draw — for currency, percentages, durations or dates.
+				[codeblocks]
+				[gdscript]
+				chart.set_y_tick_formatter(func(v): return "$%0.2f" % v)
+				chart.set_x_tick_formatter(func(v): return Time.get_date_string_from_unix_time(int(v)))
+				[/gdscript]
+				[/codeblocks]
+			</description>
+		</method>
+		<method name="set_x_tick_formatter">
+			<return type="void" />
+			<param index="0" name="callable" type="Callable" />
+			<description>
+				As [method set_y_tick_formatter], for the horizontal axis. On a category chart the labels come from [member categories] instead and this applies to numeric ticks.
+			</description>
+		</method>
+		<method name="is_animating" qualifiers="const">
+			<return type="bool" />
+			<description>
+				Whether a value tween is currently running. See [member DVComponent.animation_ms], which now animates every chart type rather than only the gauge and pie chart.
+			</description>
+		</method>
+
+		<method name="set_selected">
+			<return type="void" />
+			<param index="0" name="series" type="int" />
+			<param index="1" name="index" type="int" />
+			<description>
+				Selects an item from code, emitting [signal selection_changed] as a click would. Use it to mirror a selection made elsewhere in your game, or to restore one on load. Setting the same item twice does not re-emit.
+			</description>
+		</method>
+		<method name="clear_selection">
+			<return type="void" />
+			<description>
+				Clears the selection and emits [signal selection_changed] with [code]-1, -1[/code].
+			</description>
+		</method>
+		<method name="get_hovered_series" qualifiers="const">
+			<return type="int" />
+			<description>
+				The series currently under the pointer, or [code]-1[/code].
+			</description>
+		</method>
+		<method name="get_hovered_index" qualifiers="const">
+			<return type="int" />
+			<description>
+				The item index currently under the pointer, or [code]-1[/code].
+			</description>
+		</method>
+
+		<method name="has_palette_override" qualifiers="const">
+			<return type="bool" />
+			<description>
+				Whether series colours have been set explicitly and are therefore no longer following the theme.
+			</description>
+		</method>
+		<method name="reset_palette">
+			<return type="void" />
+			<description>
+				Drops colours set with [method set_series_color] or [method set_palette] and follows the active [DVTheme] again. Explicit colours otherwise persist across theme changes.
+			</description>
+		</method>
+		<method name="get_x_range" qualifiers="const">
+			<return type="Vector2" />
+			<description>
+				The horizontal range the chart resolved, as [code](min, max)[/code]. For category charts this is the visible index window.
+			</description>
+		</method>
+		<method name="get_y_range" qualifiers="const">
+			<return type="Vector2" />
+			<description>
+				The vertical range the chart actually resolved, as [code](min, max)[/code]. With [member autoscale] on this is the padded data range; otherwise it is what [method set_min_value] and [method set_max_value] asked for. Useful for drawing your own annotations in the same space, and for asserting behaviour in tests.
+			</description>
+		</method>
 		<method name="add_series">
 			<return type="int" />
 			<param index="0" name="name" type="String" />
 			<param index="1" name="values" type="PackedFloat32Array" />
-                        <description>
-                                Appends a data series using [param name] and [param values]. Returns the new series index so
-                                it can be configured further.
-                        </description>
+		        <description>
+		                Appends a data series using [param name] and [param values]. Returns the new series index so
+		                it can be configured further.
+		        </description>
 		</method>
 		<method name="add_series_with_overlays">
 			<return type="int" />
@@ -87,66 +165,66 @@
 			<param index="4" name="ema_window" type="int" />
 			<param index="5" name="bb_window" type="int" />
 			<param index="6" name="bb_k" type="float" />
-                        <description>
-                                Adds a series and immediately applies overlay configuration. [param overlay_mask] combines the
-                                [enum OverlayMask] flags while the other parameters configure their default windows.
-                        </description>
+		        <description>
+		                Adds a series and immediately applies overlay configuration. [param overlay_mask] combines the
+		                [enum OverlayMask] flags while the other parameters configure their default windows.
+		        </description>
 		</method>
 		<method name="clear">
 			<return type="void" />
-                        <description>
-                                Removes all categories and series data.
-                        </description>
+		        <description>
+		                Removes all categories and series data.
+		        </description>
 		</method>
 		<method name="get_series_count" qualifiers="const">
 			<return type="int" />
-                        <description>
-                                Returns the number of series currently stored.
-                        </description>
+		        <description>
+		                Returns the number of series currently stored.
+		        </description>
 		</method>
 		<method name="get_series_overlays" qualifiers="const">
 			<return type="int" />
 			<param index="0" name="series_idx" type="int" />
-                        <description>
-                                Returns the active [enum OverlayMask] flags for the series at [param series_idx].
-                        </description>
+		        <description>
+		                Returns the active [enum OverlayMask] flags for the series at [param series_idx].
+		        </description>
 		</method>
 		<method name="set_index_range">
 			<return type="void" />
 			<param index="0" name="Start" type="int" />
 			<param index="1" name="End" type="int" />
-                        <description>
-                                Limits the sample window processed by derived charts. Passing [-1, -1] clears the range so the
-                                whole dataset is rendered.
-                        </description>
+		        <description>
+		                Limits the sample window processed by derived charts. Passing [-1, -1] clears the range so the
+		                whole dataset is rendered.
+		        </description>
 		</method>
 		<method name="set_max_value">
 			<return type="void" />
 			<param index="0" name="x" type="float" />
 			<param index="1" name="y" type="float" />
-                        <description>
-                                When [member chart/autoscale] is disabled, sets the maximum values for the chart domain and
-                                value axis.
-                        </description>
+		        <description>
+		                When [member autoscale] is disabled, sets the maximum values for the chart domain and
+		                value axis.
+		        </description>
 		</method>
 		<method name="set_min_value">
 			<return type="void" />
 			<param index="0" name="x" type="float" />
 			<param index="1" name="y" type="float" />
-                        <description>
-                                When [member chart/autoscale] is disabled, sets the minimum values for the chart domain and
-                                value axis.
-                        </description>
+		        <description>
+		                When [member autoscale] is disabled, sets the minimum values for the chart domain and
+		                value axis.
+		        </description>
 		</method>
 		<method name="set_series_bbands_params">
 			<return type="void" />
 			<param index="0" name="series_idx" type="int" />
 			<param index="1" name="w" type="int" />
 			<param index="2" name="k" type="float" />
-                        <description>
-                                Configures Bollinger Band parameters for [param series_idx]. [param w] is the rolling window and
-                                [param k] is the standard-deviation multiplier.
-                        </description>
+		        <description>
+		                Configures Bollinger Band parameters for [param series_idx]. [param w] is the rolling window and
+		                [param k] is the standard-deviation multiplier.
+		        </description>
 		</method>
 		<method name="set_series_bbands_style">
 			<return type="void" />
@@ -154,164 +232,421 @@
 			<param index="1" name="line" type="Color" />
 			<param index="2" name="fill" type="Color" />
 			<param index="3" name="width" type="float" />
-                        <description>
-                                Overrides the colors and stroke width used to render Bollinger Bands for the given series.
-                        </description>
+		        <description>
+		                Overrides the colors and stroke width used to render Bollinger Bands for the given series.
+		        </description>
 		</method>
 		<method name="set_series_color">
 			<return type="void" />
 			<param index="0" name="index" type="int" />
 			<param index="1" name="c" type="Color" />
-                        <description>
-                                Sets the base color used for samples in the series at [param index]. Leave unset to rely on the
-                                palette provided by the active theme.
-                        </description>
+		        <description>
+		                Sets the base color used for samples in the series at [param index]. Leave unset to rely on the
+		                palette provided by the active theme.
+		        </description>
 		</method>
 		<method name="set_series_ema_style">
 			<return type="void" />
 			<param index="0" name="series_idx" type="int" />
 			<param index="1" name="line" type="Color" />
 			<param index="2" name="width" type="float" />
-                        <description>
-                                Customizes the EMA overlay appearance using [param line] for color and [param width] for the
-                                stroke thickness.
-                        </description>
+		        <description>
+		                Customizes the EMA overlay appearance using [param line] for color and [param width] for the
+		                stroke thickness.
+		        </description>
 		</method>
 		<method name="set_series_ema_window">
 			<return type="void" />
 			<param index="0" name="series_idx" type="int" />
 			<param index="1" name="w" type="int" />
-                        <description>
-                                Sets the exponential moving average window size for the series.
-                        </description>
+		        <description>
+		                Sets the exponential moving average window size for the series.
+		        </description>
 		</method>
 		<method name="set_series_name">
 			<return type="void" />
 			<param index="0" name="index" type="int" />
 			<param index="1" name="name" type="String" />
-                        <description>
-                                Renames the series at [param index]. Useful when the data source changes labels at runtime.
-                        </description>
+		        <description>
+		                Renames the series at [param index]. Useful when the data source changes labels at runtime.
+		        </description>
 		</method>
 		<method name="set_series_overlays">
 			<return type="void" />
 			<param index="0" name="series_idx" type="int" />
 			<param index="1" name="overlay_mask" type="int" />
-                        <description>
-                                Updates the overlay mask on [param series_idx]. Combine values from [enum OverlayMask] to enable
-                                multiple overlays.
-                        </description>
+		        <description>
+		                Updates the overlay mask on [param series_idx]. Combine values from [enum OverlayMask] to enable
+		                multiple overlays.
+		        </description>
 		</method>
 		<method name="set_series_sma_style">
 			<return type="void" />
 			<param index="0" name="series_idx" type="int" />
 			<param index="1" name="line" type="Color" />
 			<param index="2" name="width" type="float" />
-                        <description>
-                                Overrides the SMA overlay appearance using [param line] and [param width].
-                        </description>
+		        <description>
+		                Overrides the SMA overlay appearance using [param line] and [param width].
+		        </description>
 		</method>
 		<method name="set_series_sma_window">
 			<return type="void" />
 			<param index="0" name="series_idx" type="int" />
 			<param index="1" name="w" type="int" />
-                        <description>
-                                Sets the simple moving average window length for the series.
-                        </description>
+		        <description>
+		                Sets the simple moving average window length for the series.
+		        </description>
+		</method>
+		<method name="get_legend_item_rect" qualifiers="const">
+			<return type="Rect2" />
+			<param index="0" name="series" type="int" />
+			<description>
+				The rectangle the given series occupies in the legend, in this control's coordinates, or an empty [Rect2] if it has not been drawn. Useful for placing your own affordance next to a legend entry.
+			</description>
+		</method>
+		<method name="legend_click_at">
+			<return type="bool" />
+			<param index="0" name="local_position" type="Vector2" />
+			<description>
+				Applies a legend click at [param local_position], as if the user had clicked there, and returns whether it landed on a legend entry. Charts call this for you; use it to route input from your own overlay or touch control.
+				Hiding the last visible series is refused — the click is consumed but nothing changes.
+			</description>
+		</method>
+		<method name="set_series_values">
+			<return type="void" />
+			<param index="0" name="index" type="int" />
+			<param index="1" name="values" type="PackedFloat32Array" />
+			<description>
+				Replaces a series' values in place, keeping its name, colour and visibility. Before 1.1 the only way to change data was [method clear] plus a full re-add, which threw those away.
+			</description>
+		</method>
+		<method name="set_value_at">
+			<return type="void" />
+			<param index="0" name="series" type="int" />
+			<param index="1" name="index" type="int" />
+			<param index="2" name="value" type="float" />
+			<description>
+				Changes one sample. Out-of-range indices are ignored.
+			</description>
+		</method>
+		<method name="append_value">
+			<return type="void" />
+			<param index="0" name="series" type="int" />
+			<param index="1" name="value" type="float" />
+			<param index="2" name="max_points" type="int" default="0" />
+			<description>
+				Appends a sample. With [param max_points] greater than zero the series keeps only the newest N, and the categories are trimmed with it so labels stay aligned — the shape a live feed wants.
+			</description>
+		</method>
+		<method name="remove_series">
+			<return type="void" />
+			<param index="0" name="index" type="int" />
+			<description>
+				Removes a series and everything attached to it (colour override, overlays, visibility).
+			</description>
+		</method>
+		<method name="upsert_series">
+			<return type="void" />
+			<param index="0" name="name" type="String" />
+			<param index="1" name="values" type="PackedFloat32Array" />
+			<description>
+				Replaces the values of the series with this name, or adds it if there is none. Useful when the data source names its series and you do not track indices.
+			</description>
+		</method>
+		<method name="find_series" qualifiers="const">
+			<return type="int" />
+			<param index="0" name="name" type="String" />
+			<description>
+				Index of the series with this name, or [code]-1[/code].
+			</description>
+		</method>
+		<method name="get_series_values" qualifiers="const">
+			<return type="PackedFloat32Array" />
+			<param index="0" name="index" type="int" />
+			<description>
+				A copy of the series' values.
+			</description>
+		</method>
+		<method name="get_series_name" qualifiers="const">
+			<return type="String" />
+			<param index="0" name="index" type="int" />
+			<description>
+				The series' name, as shown in the legend.
+			</description>
+		</method>
+		<method name="set_series_visible">
+			<return type="void" />
+			<param index="0" name="index" type="int" />
+			<param index="1" name="visible" type="bool" />
+			<description>
+				Shows or hides a series. A hidden series is left out of the axis range as well as the drawing, so hiding an outlier rescales the chart. This is what a legend click calls; doing it from code does not emit [signal legend_item_toggled].
+			</description>
+		</method>
+		<method name="is_series_visible" qualifiers="const">
+			<return type="bool" />
+			<param index="0" name="index" type="int" />
+			<description>
+				Whether the series is currently drawn.
+			</description>
+		</method>
+		<method name="get_selected_series" qualifiers="const">
+			<return type="int" />
+			<description>
+				Series of the current selection, or [code]-1[/code] when nothing is selected.
+			</description>
+		</method>
+		<method name="get_selected_index" qualifiers="const">
+			<return type="int" />
+			<description>
+				Item index of the current selection, or [code]-1[/code].
+			</description>
+		</method>
+		<method name="get_range_min">
+			<return type="float" />
+			<description>
+				Low end of the value axis as it will next be drawn, resolving the layout first if the data changed. See also [method get_y_range], which returns both ends.
+			</description>
+		</method>
+		<method name="get_range_max">
+			<return type="float" />
+			<description>
+				High end of the value axis as it will next be drawn.
+			</description>
+		</method>
+		<method name="format_axis_y" qualifiers="const">
+			<return type="String" />
+			<param index="0" name="value" type="float" />
+			<description>
+				The label this chart would draw for a Y value: the tick formatter if one is set, otherwise the component's number formatting. Use it to label your own annotations the way the axis does.
+			</description>
+		</method>
+		<method name="format_axis_x" qualifiers="const">
+			<return type="String" />
+			<param index="0" name="value" type="float" />
+			<description>
+				As [method format_axis_y], for the X axis.
+			</description>
+		</method>
+		<method name="get_y_tick_formatter" qualifiers="const">
+			<return type="Callable" />
+			<description>
+				The callable set by [method set_y_tick_formatter], or an empty [Callable].
+			</description>
+		</method>
+		<method name="get_x_tick_formatter" qualifiers="const">
+			<return type="Callable" />
+			<description>
+				The callable set by [method set_x_tick_formatter], or an empty [Callable].
+			</description>
+		</method>
+		<method name="set_min_value">
+			<return type="void" />
+			<param index="0" name="x_min" type="float" />
+			<param index="1" name="y_min" type="float" />
+			<description>
+				Sets the low end of both axes at once, used when [member autoscale] (or [code]autoscale_x[/code]) is off. It takes both because a chart has two ranges; pass the current value for the axis you are not changing.
+			</description>
+		</method>
+		<method name="set_max_value">
+			<return type="void" />
+			<param index="0" name="x_max" type="float" />
+			<param index="1" name="y_max" type="float" />
+			<description>
+				Sets the high end of both axes. See [method set_min_value].
+			</description>
+		</method>
+		<method name="move_selection">
+			<return type="bool" />
+			<param index="0" name="series_delta" type="int" />
+			<param index="1" name="index_delta" type="int" />
+			<description>
+				Moves the selection by whole steps and returns whether it moved. Hidden series are skipped, and the index is clamped to the range the chart is currently drawing.
+				With nothing selected yet, the first call selects the first item rather than moving — the same way a list shows its cursor on the first key press.
+				This is what the arrow keys call; use it to drive a chart from a gamepad or your own focus system.
+			</description>
+		</method>
+		<method name="get_item_rect" qualifiers="const">
+			<return type="Rect2" />
+			<param index="0" name="series" type="int" />
+			<param index="1" name="index" type="int" />
+			<description>
+				Where the item was last drawn, in this control's coordinates, or an empty [Rect2] if the chart cannot place it or has not drawn yet. Pin an annotation to a data point with this; it is also what the keyboard selection outline uses.
+				[DV_Waterfall] and [DV_RadarGraph] do not report item rectangles, so a selection on those is not outlined.
+			</description>
+		</method>
+		<method name="reset_legend_position">
+			<return type="void" />
+			<description>
+				Releases the pin set by assigning [member legend_position], so the active theme's chart style controls the legend position again.
+			</description>
 		</method>
         </methods>
 	<members>
-                <member name="categories" type="PackedStringArray" setter="set_categories" getter="get_categories" default="PackedStringArray()">
-                        Ordered category labels used by axis and legend layout. Leave empty for purely numeric domains.
-                </member>
-                <member name="chart/autoscale" type="bool" setter="set_autoscale" getter="get_autoscale" default="true">
-                        When [code]true[/code], Y values are scaled to the data range automatically. Disable to honor [method set_min_value] and [method set_max_value].
-                </member>
-                <member name="chart/axes_visible" type="bool" setter="set_show_axes" getter="is_show_axese" default="true">
-                        Shows or hides chart axes and their tick labels.
-                </member>
-                <member name="chart/axis_color" type="Color" setter="set_axis_color" getter="get_axis_color" default="Color(0, 0, 0, 0.6)">
-                        Tint applied to rendered axes when [member chart/axes_visible] is enabled.
-                </member>
-                <member name="chart/built_in_tooltip" type="bool" setter="set_built_in_tooltip" getter="get_built_in_tooltip" default="false">
-                        Enables a default tooltip showing category/value details when hovering data points.
-                </member>
-                <member name="chart/grid_color" type="Color" setter="set_grid_color" getter="get_grid_color" default="Color(0, 0, 0, 0.25)">
-                        Color of the background grid lines drawn across the plot.
-                </member>
-                <member name="chart/grid_thickness" type="float" setter="set_grid_thickness" getter="get_grid_thickness" default="1.0">
-                        Stroke width in pixels for grid lines.
-                </member>
-                <member name="chart/grid_visible" type="bool" setter="set_show_grid" getter="is_show_grid" default="true">
-                        Toggles the background grid layer behind the series.
-                </member>
-                <member name="chart/legend_position" type="int" setter="set_legend_position" getter="get_legend_position" default="2">
-                        Placement of the legend using the [enum Position] values (top, bottom, left, right, inside, or hidden).
-                </member>
-                <member name="chart/series_axis" type="int" setter="set_series_axis" getter="get_series_axis" default="0">
-                        Chooses which axis represents the series values: [constant Y_AXIS] (default) or [constant X_AXIS].
-                </member>
-                <member name="chart/show_value_labels" type="bool" setter="set_show_value_labels" getter="get_show_value_labels" default="false">
-                        Draws formatted value labels on top of rendered series when enabled.
-                </member>
-                <member name="chart/x_axis_label" type="String" setter="set_x_axis_label" getter="get_x_axis_label" default="&quot;&quot;">
-                        Descriptive label rendered alongside the horizontal axis.
-                </member>
-                <member name="chart/y_axis_label" type="String" setter="set_y_axis_label" getter="get_y_axis_label" default="&quot;&quot;">
-                        Descriptive label rendered alongside the vertical axis.
-                </member>
-                <member name="theme/palette" type="Color[]" setter="set_palette" getter="get_palette" default="[]">
-                        Overrides the chart color palette with a custom list. Leave empty to fall back to theme tokens.
-                </member>
-                <member name="title" type="String" setter="set_title" getter="get_title" default="&quot;&quot;">
-                        Optional heading drawn above the chart content.
-                </member>
+		<member name="categories" type="PackedStringArray" setter="set_categories" getter="get_categories" default="PackedStringArray()">
+		        Ordered category labels used by axis and legend layout. Leave empty for purely numeric domains.
+		</member>
+		<member name="autoscale" type="bool" setter="set_autoscale" getter="get_autoscale" default="true">
+		        When [code]true[/code], Y values are scaled to the data range automatically. Disable to honor [method set_min_value] and [method set_max_value].
+		</member>
+		<member name="axes_visible" type="bool" setter="set_show_axes" getter="is_show_axese" default="true">
+		        Shows or hides chart axes and their tick labels.
+			[b]Note:[/b] the getter is spelled [code]is_show_axese[/code]. The typo shipped in 1.0 and calling code depends on it, so it stays; prefer the property.
+		</member>
+		<member name="axis_color" type="Color" setter="set_axis_color" getter="get_axis_color" default="Color(0, 0, 0, 0.6)">
+		        Tint applied to rendered axes when [member axes_visible] is enabled.
+		</member>
+		<member name="built_in_tooltip" type="bool" setter="set_built_in_tooltip" getter="get_built_in_tooltip" default="false">
+		        Enables a default tooltip showing category/value details when hovering data points.
+		</member>
+		<member name="grid_color" type="Color" setter="set_grid_color" getter="get_grid_color" default="Color(0, 0, 0, 0.25)">
+		        Color of the background grid lines drawn across the plot.
+		</member>
+		<member name="grid_thickness" type="float" setter="set_grid_thickness" getter="get_grid_thickness" default="1.0">
+		        Stroke width in pixels for grid lines.
+		</member>
+		<member name="grid_visible" type="bool" setter="set_show_grid" getter="is_show_grid" default="true">
+		        Toggles the background grid layer behind the series.
+		</member>
+		<member name="animation_easing" type="int" setter="set_animation_easing" getter="get_animation_easing" enum="DVChart.Easing">
+			How a value change is tweened: [constant EASE_LINEAR], [constant EASE_IN], [constant EASE_OUT] or [constant EASE_IN_OUT]. Set [code]animation_ms[/code] to 0 to draw new values immediately.
+		</member>
+		<member name="y_ticks" type="int" setter="set_y_tick_count" getter="get_y_tick_count">
+			How many gridlines and labels the value axis aims for. On a log axis this is a budget: decades are thinned to fit rather than subdivided arbitrarily.
+		</member>
+		<member name="x_ticks" type="int" setter="set_x_tick_count" getter="get_x_tick_count">
+			Labels on the category axis. Zero (the default) thins them to whatever fits the width; [code]1[/code] forces one label per category, [code]N[/code] every Nth.
+		</member>
+		<member name="y_scale" type="int" setter="set_y_scale" getter="get_y_scale" default="0" enum="DVChart.ScaleType">
+		        [constant SCALE_LINEAR] (the default) or [constant SCALE_LOG]. A log axis makes several orders of magnitude readable in one chart, and turns exponential data into a straight line.
+		        On a log axis the range snaps outward to whole decades and the gridlines land on them (with 2x and 5x filled in when the range is narrow). Values at or below zero cannot be placed on one: they are clamped to the axis floor, and bars grow from that floor rather than from zero. A chart whose visible data has no positive value at all keeps its linear range instead of drawing nothing.
+		</member>
+		<member name="legend_position" type="int" setter="set_legend_position" getter="get_legend_position" default="2">
+		        Where the legend sits: [constant NONE], [constant TOP], [constant BOTTOM], [constant LEFT] or [constant RIGHT]. Setting this pins the choice — the active theme's chart style no longer overrides it until [method reset_legend_position] is called.
+		</member>
+		<member name="legend_interactive" type="bool" setter="set_legend_interactive" getter="get_legend_interactive" default="true">
+		        Whether clicking a legend entry hides or shows that series. The last visible series cannot be hidden this way.
+		</member>
+		<member name="series_axis" type="int" setter="set_series_axis" getter="get_series_axis" default="0">
+		        Chooses which axis represents the series values: [constant Y_AXIS] (default) or [constant X_AXIS].
+		</member>
+		<member name="show_value_labels" type="bool" setter="set_show_value_labels" getter="get_show_value_labels" default="false">
+		        Draws formatted value labels on top of rendered series when enabled.
+		</member>
+		<member name="x_axis_label" type="String" setter="set_x_axis_label" getter="get_x_axis_label" default="&quot;&quot;">
+		        Descriptive label rendered alongside the horizontal axis.
+		</member>
+		<member name="y_axis_label" type="String" setter="set_y_axis_label" getter="get_y_axis_label" default="&quot;&quot;">
+		        Descriptive label rendered alongside the vertical axis.
+		</member>
+		<member name="theme/palette" type="Color[]" setter="set_palette" getter="get_palette" default="[]">
+		        Overrides the chart color palette with a custom list. Leave empty to fall back to theme tokens.
+		</member>
+		<member name="title" type="String" setter="set_title" getter="get_title" default="&quot;&quot;">
+		        Optional heading drawn above the chart content.
+		</member>
 	</members>
+
+        <signals>
+		<signal name="item_hovered">
+			<param index="0" name="series" type="int" />
+			<param index="1" name="index" type="int" />
+			<param index="2" name="value" type="float" />
+			<description>
+				Emitted when the item under the pointer changes — not once per mouse-move — so it is safe to drive UI from directly. Every chart emits it, so one handler covers all of them. [signal DVComponent.hover_exited] says when to clear that UI.
+			</description>
+		</signal>
+		<signal name="item_clicked">
+			<param index="0" name="series" type="int" />
+			<param index="1" name="index" type="int" />
+			<param index="2" name="value" type="float" />
+			<description>
+				Emitted when an item is clicked, or when [code]ui_accept[/code] is pressed with a keyboard selection. The chart-specific signals still fire alongside it.
+			</description>
+		</signal>
+		<signal name="selection_changed">
+			<param index="0" name="series" type="int" />
+			<param index="1" name="index" type="int" />
+			<description>
+				Emitted when the selection moves, by click, by key or by [method set_selected]. Both values are [code]-1[/code] when the selection was cleared.
+			</description>
+		</signal>
+		<signal name="legend_item_toggled">
+		        <param index="0" name="series" type="int" />
+		        <param index="1" name="visible" type="bool" />
+		        <description>
+		                Emitted when a legend click showed or hid a series. Not emitted for [method set_series_visible] called from code.
+		        </description>
+		</signal>
+		<signal name="point_clicked">
+			<param index="0" name="series" type="int" />
+			<param index="1" name="point" type="int" />
+			<param index="2" name="x" type="float" />
+			<param index="3" name="y" type="float" />
+		        <description>
+		                Emitted when a data point is clicked. Provides the [param series] index, [param point] index,
+		                and the data-space coordinates.
+		        </description>
+		</signal>
+		<signal name="point_hovered">
+			<param index="0" name="series" type="int" />
+			<param index="1" name="point" type="int" />
+			<param index="2" name="x" type="float" />
+			<param index="3" name="y" type="float" />
+		        <description>
+		                Emitted while hovering a data point. The payload matches [signal point_clicked] for consistency
+		                across components.
+		        </description>
+		</signal>
+	</signals>
+
 	<constants>
-                <constant name="OVL_NONE" value="0" enum="OverlayMask" is_bitfield="true">
-                        Disables all analytical overlays for a series.
-                </constant>
-                <constant name="OVL_SMA" value="1" enum="OverlayMask" is_bitfield="true">
-                        Enables the simple moving average overlay.
-                </constant>
-                <constant name="OVL_EMA" value="2" enum="OverlayMask" is_bitfield="true">
-                        Enables the exponential moving average overlay.
-                </constant>
-                <constant name="OVL_BBANDS" value="4" enum="OverlayMask" is_bitfield="true">
-                        Enables Bollinger Bands for the series.
-                </constant>
-                <constant name="NONE" value="0" enum="Position">
-                        Hides the legend.
-                </constant>
-                <constant name="TOP" value="2" enum="Position">
-                        Places the legend above the plot area.
-                </constant>
-                <constant name="BOTTOM" value="1" enum="Position">
-                        Places the legend below the plot area.
-                </constant>
-                <constant name="LEFT" value="3" enum="Position">
-                        Places the legend to the left of the plot area.
-                </constant>
-                <constant name="RIGHT" value="4" enum="Position">
-                        Places the legend to the right of the plot area.
-                </constant>
-                <constant name="INSIDE" value="5" enum="Position">
-                        Renders the legend within the plot bounds.
-                </constant>
-                <constant name="Y_AXIS" value="0" enum="SeriesAxis">
-                        Series values map to the Y axis (default for vertical charts).
-                </constant>
-                <constant name="X_AXIS" value="1" enum="SeriesAxis">
-                        Series values map to the X axis (useful for horizontal charts).
-                </constant>
-                <constant name="OVERLAY_SMA" value="0" enum="OverlayType">
-                        Identifies the simple moving average overlay.
-                </constant>
-                <constant name="OVERLAY_EMA" value="1" enum="OverlayType">
-                        Identifies the exponential moving average overlay.
-                </constant>
-                <constant name="OVERLAY_BBANDS" value="2" enum="OverlayType">
-                        Identifies the Bollinger Bands overlay.
-                </constant>
+		<constant name="OVL_NONE" value="0" enum="OverlayMask" is_bitfield="true">
+		        Disables all analytical overlays for a series.
+		</constant>
+		<constant name="OVL_SMA" value="1" enum="OverlayMask" is_bitfield="true">
+		        Enables the simple moving average overlay.
+		</constant>
+		<constant name="OVL_EMA" value="2" enum="OverlayMask" is_bitfield="true">
+		        Enables the exponential moving average overlay.
+		</constant>
+		<constant name="OVL_BBANDS" value="4" enum="OverlayMask" is_bitfield="true">
+		        Enables Bollinger Bands for the series.
+		</constant>
+		<constant name="NONE" value="0" enum="Position">
+		        Hides the legend.
+		</constant>
+		<constant name="TOP" value="2" enum="Position">
+		        Places the legend above the plot area.
+		</constant>
+		<constant name="BOTTOM" value="1" enum="Position">
+		        Places the legend below the plot area.
+		</constant>
+		<constant name="SCALE_LINEAR" value="0" enum="ScaleType">
+		        Values map to the axis in proportion to their difference. The default.
+		</constant>
+		<constant name="SCALE_LOG" value="1" enum="ScaleType">
+		        Values map by their base-10 logarithm, so equal ratios cover equal distance.
+		</constant>
+		<constant name="LEFT" value="3" enum="Position">
+		        Places the legend in a column to the left of the plot area, taking at most half the chart's width.
+		</constant>
+		<constant name="RIGHT" value="4" enum="Position">
+		        Places the legend in a column to the right of the plot area, taking at most half the chart's width.
+		</constant>
+		<constant name="Y_AXIS" value="0" enum="SeriesAxis">
+		        Series values map to the Y axis (default for vertical charts).
+		</constant>
+		<constant name="X_AXIS" value="1" enum="SeriesAxis">
+		        Series values map to the X axis (useful for horizontal charts).
+		</constant>
+		<constant name="OVERLAY_SMA" value="0" enum="OverlayType">
+		        Identifies the simple moving average overlay.
+		</constant>
+		<constant name="OVERLAY_EMA" value="1" enum="OverlayType">
+		        Identifies the exponential moving average overlay.
+		</constant>
+		<constant name="OVERLAY_BBANDS" value="2" enum="OverlayType">
+		        Identifies the Bollinger Bands overlay.
+		</constant>
         </constants>
 </class>

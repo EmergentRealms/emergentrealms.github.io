@@ -14,13 +14,25 @@
         <tutorials>
         </tutorials>
 	<methods>
+		<method name="get_version" qualifiers="static">
+			<return type="String" />
+			<description>
+				The DataViz-UI version this binary was built from, e.g. [code]"1.1.0"[/code]. Worth quoting in a bug report, along with your Godot version and platform.
+			</description>
+		</method>
                 <method name="load_default_theme">
                         <return type="void" />
                         <description>
                                 Loads and applies the theme referenced by [member default_theme_path] if it exists.
                         </description>
                 </method>
-        </methods>
+        		<method name="connect_components">
+			<return type="void" />
+			<description>
+				Subscribes every [DVComponent] currently in the tree to this manager. Runs on its own after the manager is ready and after a theme change; call it if you instantiated widgets in an unusual order and one did not pick up the theme.
+			</description>
+		</method>
+	</methods>
 	<members>
                 <member name="active_theme" type="DVTheme" setter="set_active_theme" getter="get_active_theme">
                         Theme instance distributed to connected components.

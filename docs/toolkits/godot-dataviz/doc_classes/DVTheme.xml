@@ -56,23 +56,17 @@
                 <member name="palette/contrast_target" type="float" setter="set_contrast_target" getter="get_contrast_target" default="4.5">
                         Desired contrast ratio used when generating accessible text colors.
                 </member>
-                <member name="palette/use_pallet" type="bool" setter="set_use_pallet" getter="get_use_pallet" default="false">
+                <member name="palette/use_pallet" type="bool" setter="set_use_pallet" getter="get_use_pallet" default="false" deprecated="Misspelling kept so themes saved by 1.0 still load. Use [member palette/use_palette].">
                         When [code]true[/code], the custom [member palette/palette] overrides automatically generated series colors.
                 </member>
                 <member name="palette/palette" type="Color[]" setter="set_palette" getter="get_palette" default="[]">
-                        Optional custom color list applied to charts when [member palette/use_pallet] is enabled.
+                        Optional custom colour list applied to charts when [member palette/use_palette] is enabled.
                 </member>
                 <member name="component_timing/animation_ms" type="int" setter="set_animation_ms" getter="get_animation_ms" default="250">
                         Default animation duration (in milliseconds) shared by themed widgets.
                 </member>
                 <member name="component_substyle/chart" type="DVThemeChartStyle" setter="set_chart_style" getter="get_chart_style">
                         Nested style resource that drives shared chart configuration such as legend placement and grid visibility.
-                </member>
-                <member name="component_substyle/tile" type="DVThemeTileStyle" setter="set_tile_style" getter="get_tile_style">
-                        Nested style resource that defines KPI tile accent colors.
-                </member>
-                <member name="component_substyle/grid" type="DVThemeGridStyle" setter="set_grid_style" getter="get_grid_style">
-                        Nested style resource describing table row/header colors.
                 </member>
                 <member name="component_substyle/gauge" type="DVThemeGaugeStyle" setter="set_gauge_style" getter="get_gauge_style">
                         Nested style resource configuring default gauge ticks, sweep, and colors.
@@ -83,6 +77,18 @@
                 <member name="component_substyle/pie" type="DVThemePieStyle" setter="set_pie_style" getter="get_pie_style">
                         Nested style resource that configures donut/pie charts (label placement, slice gap, etc.).
                 </member>
+			<member name="palette/use_palette" type="bool" setter="set_use_palette" getter="get_use_palette">
+			Whether charts take their series colours from [member palette/palette] instead of the generated series tokens. Spelled [code]palette/use_pallet[/code] before 1.1; both names load, and old theme resources keep working.
+		</member>
+		<member name="palette/generate_from_seed_hues" type="bool" setter="set_generate_from_seed_hues" getter="get_generate_from_seed_hues">
+			When on, status and accent tokens are derived from the seed hues rather than the built-in defaults, so a restyle carries through the whole palette.
+		</member>
+		<member name="palette/text_mode" type="int" setter="set_text_mode" getter="get_text_mode" enum="DVColorScale.TextMode">
+			Where text colour comes from: [code]Neutral[/code] (contrast against the background), [code]CustomSeed[/code] ([member palette/text_seed]) or [code]UsePrimary[/code] (tinted with the primary seed).
+		</member>
+		<member name="palette/text_seed" type="Color" setter="set_text_seed" getter="get_text_seed">
+			The base text colour used when [member palette/text_mode] is [code]CustomSeed[/code]. It is still adjusted to meet the contrast target.
+		</member>
 	</members>
 	<signals>
                 <signal name="theme_changed">
@@ -92,4 +98,37 @@
                         </description>
                 </signal>
         </signals>
+	<methods>
+		<method name="get_token_color" qualifiers="const">
+			<return type="Color" />
+			<param index="0" name="domain" type="int" enum="DVColorScale.DVDomain" />
+			<param index="1" name="sub" type="int" default="0" />
+			<param index="2" name="variant" type="int" default="0" />
+			<description>
+				One colour from the theme's generated palette: a [enum DVColorScale.DVDomain] (background, border, text, graph, accent, status, series), a sub-index within it, and a variant. This is what the components draw with, so use it to make your own UI match them.
+				For [constant DVColorScale.Series] the [param variant] selects the series — [code]get_token_color(DVColorScale.Series, 0, 3)[/code] is the colour the fourth series is drawn in. [constant DVColorScale.Status] uses [param sub] for success, warning, error and info.
+			</description>
+		</method>
+		<method name="get_contrast_ratio" qualifiers="const">
+			<return type="float" />
+			<param index="0" name="a" type="Color" />
+			<param index="1" name="b" type="Color" />
+			<description>
+				The WCAG contrast ratio between two colours, from 1.0 (identical) to 21.0 (black on white). The same rule the theme applies to its own text: 4.5 is the readable-text threshold, 3.0 the one for large text and graphical marks.
+			</description>
+		</method>
+		<method name="get_text_color_for_bg" qualifiers="const">
+			<return type="Color" />
+			<param index="0" name="background" type="Color" />
+			<description>
+				A text colour that meets the theme's contrast target against [param background]. Label your own overlays with this rather than guessing black or white.
+			</description>
+		</method>
+		<method name="rebuild_colors">
+			<return type="void" />
+			<description>
+				Regenerates every token from the seed colours and emits [signal theme_changed]. Called for you when a seed or flag changes; call it after editing several at once to repaint only once.
+			</description>
+		</method>
+	</methods>
 </class>

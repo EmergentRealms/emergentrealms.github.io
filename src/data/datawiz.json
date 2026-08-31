@@ -1,29 +1,51 @@
 {
   "dw-service": {
     "title": "DWService Singleton",
-    "subtitle": "Threaded SQLite orchestrator for Godot 4.4 (Jolt)",
+    "subtitle": "Threaded SQLite for Godot 4.5+, registered for you",
     "category": "Runtime Service",
-    "status": "stable",
-    "updatedAt": "2025-01-15",
-    "tags": ["autoload", "sqlite", "async"],
-    "summary": "Owns the SQLite connection pool, write queue, and schema cache that power DataWiz persistence.",
+    "status": "beta",
+    "updatedAt": "2026-08-31",
+    "tags": [
+      "autoload",
+      "sqlite",
+      "async"
+    ],
+    "summary": "Owns the SQLite connection pool, the write queue and the schema cache. The addon registers it as the DataWiz singleton, so there is no autoload to add.",
     "highlights": [
-      "Boot once as an Autoload and reuse the same WAL-backed database across your project.",
-      "Runs writes on a dedicated thread while serving SELECTs from a configurable reader pool.",
-      "Auto-discovers DWRecord and DWAutoLoad schemas to create tables, indices, and migrations on demand."
+      "No setup: the extension registers a DataWiz singleton and opens the database named in Project Settings the first time anything uses it.",
+      "Writes are queued on one thread and batched into transactions; values are read from your objects on the calling thread, so the writer never touches a Godot object.",
+      "Reads lease a connection from a pool, and nested records are rehydrated in batches \u2014 one query per table per level, not one per reference."
     ],
     "usage": [
       {
-        "title": "Open the database on startup",
-        "description": "Register the service as an Autoload named `DataWiz` and call `open()` before you need data.",
+        "title": "There is no step one",
+        "description": "Drop `addons/datawiz/` into the project. `DataWiz` resolves from any script, and the database at `datawiz/database/path` opens on first use.",
         "language": "gdscript",
-        "code": "@onready var data_wiz: DWService = get_node(\"/root/DataWiz\")\n\nfunc _ready() -> void:\n    if data_wiz.open(\"user://SaveSlot1/data.dw\", reader_pool_size = 8):\n        await data_wiz.connected\n        print(\"Database ready\")\n    else:\n        push_error(data_wiz.get_last_error())"
+        "code": "func _ready() -> void:\n    DataWiz.sql_error.connect(func(context, message):\n        push_error(\"[DataWiz] %s: %s\" % [context, message]))\n    print(DataWiz.db_connected())   # already true, unless auto_open is off"
       },
       {
-        "title": "Run a query with helpers",
+        "title": "Save slots, when you want control",
+        "description": "Turn `datawiz/database/auto_open` off and open the file yourself.",
         "language": "gdscript",
-        "code": "var npcs := DataWiz.select(NPCRecord.new(), \"WHERE is_alive = 1\", limit = 100, order_by = \"last_seen DESC\")\nfor npc in npcs:\n    print(npc.name)",
-        "description": "`select` hydrates DWRecord resources using the cached schema definition."
+        "code": "func load_slot(n: int) -> void:\n    DataWiz.open(\"user://slot_%d.db\" % n, 4)   # path, reader pool size"
+      },
+      {
+        "title": "Reads bind their values",
+        "description": "The WHERE clause is raw SQL by design, but it takes `?` placeholders \u2014 player input never reaches the statement text. ORDER BY is checked against the table's own columns.",
+        "language": "gdscript",
+        "code": "var alive := DataWiz.select(Npc.new(), \"is_alive = 1 AND age > ?\", [30], 10, \"age DESC\")\nvar page2 := DataWiz.select(Npc.new(), \"\", [], 20, \"name\", 20)   # limit 20, offset 20\nvar borin := DataWiz.find_by(Npc.new(), {\"name\": \"Borin\"})"
+      },
+      {
+        "title": "Big reads off the main thread",
+        "description": "`select_async` runs on a worker thread against a pooled connection and delivers the rows back on the main thread.",
+        "language": "gdscript",
+        "code": "DataWiz.select_async(Npc.new(), \"age > ?\", [30], -1, \"age DESC\",\n    func(request_id, rows): populate_list(rows))"
+      },
+      {
+        "title": "Batches and durability",
+        "language": "gdscript",
+        "code": "DataWiz.save_many(party, true)   # one transaction, one wait\nDataWiz.flush()                  # wait for everything queued\nDataWiz.checkpoint()             # flush, then fold the WAL back into the file",
+        "description": "Waiting per record would put each one in its own transaction."
       }
     ],
     "signals": [
@@ -33,15 +55,23 @@
       },
       {
         "name": "disconnecting",
-        "description": "Fired when `close()` begins shutting down connections—flush pending writes now."
+        "description": "Fired when `close()` begins; autoloads save here, and SCRATCH tables are emptied just after."
       },
       {
         "name": "disconnected",
-        "description": "Emitted after all threads stop and connections close."
+        "description": "Emitted once every connection has closed."
       },
       {
-        "name": "sql_error(context: String, message: String)",
-        "description": "Raised whenever SQLite reports an error; use it for centralized logging."
+        "name": "sql_error",
+        "description": "Any SQL failure, marshalled to the main thread as (context, message)."
+      },
+      {
+        "name": "schema_changed",
+        "description": "A migration added columns to an existing table: (table, added_columns). Connect this to backfill them."
+      },
+      {
+        "name": "select_completed",
+        "description": "A select_async finished: (request_id, rows), on the main thread."
       }
     ],
     "methods": [
@@ -63,7 +93,7 @@
       },
       {
         "name": "write_sync(sql: String) -> bool",
-        "description": "Executes a write on the writer thread and blocks until it finishes—handy for migrations and tests."
+        "description": "Executes a write on the writer thread and blocks until it finishes\u2014handy for migrations and tests."
       },
       {
         "name": "log_tuning_snapshot()",
@@ -103,14 +133,18 @@
     "title": "DWRecord Resource",
     "subtitle": "Schema-aware Resource base class",
     "category": "Data Model",
-    "status": "stable",
-    "updatedAt": "2025-01-15",
-    "tags": ["resources", "schema", "orm"],
-    "summary": "Declarative table definitions that hydrate into strongly typed Godot Resources.",
+    "status": "beta",
+    "updatedAt": "2026-08-31",
+    "tags": [
+      "resources",
+      "schema",
+      "orm"
+    ],
+    "summary": "Subclass it and every script variable becomes a column. Nested records are stored in their own table and come back with their parent.",
     "highlights": [
-      "Expose fields with `@export` to define columns, including typed Dictionaries and Arrays.",
-      "Control primary keys, unique constraints, and indices using the `schema` helper.",
-      "Call `.save_to_db()` and `.load_from_db()` to persist without writing SQL manually."
+      "Every script variable becomes a column; prefix one with an underscore to keep it out of the database.",
+      "Adding a variable to a class you have already shipped is handled: the table is diffed and the column added, then schema_changed tells you to backfill it.",
+      "A record held by another is saved as its own row linked by owner_guid, and two references to the same row rehydrate as one instance."
     ],
     "usage": [
       {
@@ -156,9 +190,13 @@
     "title": "DWAutoLoad Node",
     "subtitle": "Persisted singleton state with minimal boilerplate",
     "category": "Autoload",
-    "status": "stable",
-    "updatedAt": "2025-01-15",
-    "tags": ["autoload", "state", "persistence"],
+    "status": "beta",
+    "updatedAt": "2026-08-31",
+    "tags": [
+      "autoload",
+      "state",
+      "persistence"
+    ],
     "summary": "Base node for global state that should round-trip through SQLite using the same schema metadata as DWRecord.",
     "highlights": [
       "Ideal for inventories, progression flags, or analytics caches that live in Autoload singletons.",
@@ -189,7 +227,7 @@
       },
       {
         "name": "from_dictionary(payload: Dictionary)",
-        "description": "Hydrates the node using raw dictionary data—useful for manual query pipelines."
+        "description": "Hydrates the node using raw dictionary data\u2014useful for manual query pipelines."
       }
     ],
     "tips": [

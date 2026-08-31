@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="DVColorScale" inherits="Resource" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../doc/class.xsd">
+	<brief_description>
+		One seed colour expanded into an ordered ladder of steps.
+	</brief_description>
+	<description>
+		A supporting resource for [DVColorSystem]. A scale holds the steps generated from a single seed colour, from which surfaces, borders and text colours are picked. Together with the domain enums it is what lets a theme be described by a handful of seeds rather than dozens of individual colours.
+	</description>
+	<tutorials>
+	</tutorials>
+	<constants>
+		<constant name="Background" value="0" enum="DVDomain">
+			Surfaces: the plot ground, panel fills, row stripes.
+		</constant>
+		<constant name="Border" value="1" enum="DVDomain">
+			Frames and dividers.
+		</constant>
+		<constant name="Text" value="2" enum="DVDomain">
+			Labels and values. Sub-index 0 is primary text, 1 secondary.
+		</constant>
+		<constant name="Graph" value="3" enum="DVDomain">
+			Chart furniture: gridlines, axis lines, tick marks.
+		</constant>
+		<constant name="Accent" value="4" enum="DVDomain">
+			Highlights, selection and the keyboard focus ring.
+		</constant>
+		<constant name="Status" value="5" enum="DVDomain">
+			Success, warning, error and info, by sub-index.
+		</constant>
+		<constant name="Series" value="6" enum="DVDomain">
+			The categorical palette charts colour their series from. Sub-index is the series number.
+		</constant>
+		<constant name="Neutral" value="0" enum="TextMode">
+			Text colour is derived from the background, for contrast alone.
+		</constant>
+		<constant name="CustomSeed" value="1" enum="TextMode">
+			Text colour comes from [member DVTheme.palette/text_seed], adjusted to meet the contrast target.
+		</constant>
+		<constant name="UsePrimary" value="2" enum="TextMode">
+			Text colour is tinted with the primary seed.
+		</constant>
+	</constants>
+</class>

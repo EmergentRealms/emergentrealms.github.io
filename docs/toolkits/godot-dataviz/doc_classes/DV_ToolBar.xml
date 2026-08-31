@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="DV_ToolBar" inherits="DVComponent" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		A lightweight, programmatic toolbar for DataViz UIs. Add buttons, toggles, menus, option lists, text inputs, separators, and flexible spacers—then listen to high-level signals.
+	</brief_description>
+
+	<description>
+		[b]DV_ToolBar[/b] is a compact toolbar widget that builds its UI from a simple item model at runtime.
+		Items are identified by a stable [code]id[/code] string and can be enabled/disabled or queried later.
+
+		[b]Supported item types:[/b]
+		
+		* [b]Button[/b] – labeled button with optional icon/tooltip.
+		* [b]Toggle[/b] – on/off checkbox-style button.
+		* [b]Menu[/b] – [code]MenuButton[/code] with a [code]PopupMenu[/code] of items.
+		* [b]Option[/b] – [code]OptionButton[/code] with items and a selected index.
+		* [b]Input[/b] – single-line [code]LineEdit[/code] (emits on Enter).
+		* [b]Separator[/b] – visual divider.
+		* [b]Spacer[/b] – flexible gap that expands to fill remaining space.
+
+		The toolbar automatically rebuilds its UI after each [code]add_*[/code] call and wires signals to
+		high-level notifications: [code]action_triggered[/code], [code]toggle_changed[/code],
+		[code]menu_picked[/code], [code]option_selected[/code], and [code]input_submitted[/code]. See signals below.
+
+		[codeblocks]
+		[gdscript]
+		extends DV_ToolBar
+
+		func _ready() -> void:
+			add_button("new","New")
+			add_toggle("grid","Grid", true, "Show/Hide grid")
+			add_separator()
+			add_menu("export","Export", PackedStringArray(["PNG","SVG","CSV"]))
+			add_option("quality", PackedStringArray(["Low","Med","High"]), 1)
+			add_spacer()
+			add_input("search", "Search…")
+
+			action_triggered.connect(func(id):
+				if id == "new":
+					print("new")
+			)
+
+			menu_picked.connect(func(id, idx, text):
+				if id == "export":
+					print("Export")
+			)
+
+			toggle_changed.connect(func(id, checked):
+				if id == "grid":
+					print("Show grid")
+			)
+
+			option_selected.connect(func(id, idx, text):
+				if id == "quality":
+					print("Set Quality")
+			)
+
+			input_submitted.connect(func(id, text):
+				if id == "search":
+					print("Search")
+			)
+		[/gdscript]
+		[/codeblocks]
+	</description>
+
+	<tutorials>
+	</tutorials>
+
+	<methods>
+		<method name="clear_items">
+			<return type="void" />
+			<description>
+				Removes all items and rebuilds the toolbar.
+			</description>
+		</method>
+
+		<method name="add_button">
+			<return type="int" />
+			<param index="0" name="id" type="String" />
+			<param index="1" name="text" type="String" />
+			<param index="2" name="icon" type="Texture2D" default="null" />
+			<param index="3" name="tooltip" type="String" default="&quot;&quot;" />
+			<description>
+				Adds a push [b]Button[/b]. Returns the item index.
+				Emits [code]action_triggered(id)[/code] when pressed.
+			</description>
+		</method>
+
+		<method name="add_toggle">
+			<return type="int" />
+			<param index="0" name="id" type="String" />
+			<param index="1" name="text" type="String" />
+			<param index="2" name="checked" type="bool" default="false" />
+			<param index="3" name="tooltip" type="String" default="&quot;&quot;" />
+			<description>
+				Adds a [b]Toggle[/b] (checkbox-like). Returns the item index.
+				Emits [code]toggle_changed(id, checked)[/code] when toggled.
+			</description>
+		</method>
+
+		<method name="add_menu">
+			<return type="int" />
+			<param index="0" name="id" type="String" />
+			<param index="1" name="text" type="String" />
+			<param index="2" name="items" type="PackedStringArray" />
+			<param index="3" name="icon" type="Texture2D" default="null" />
+			<param index="4" name="tooltip" type="String" default="&quot;&quot;" />
+			
+			<description>
+				Adds a [b]Menu[/b] with the given [code]items[/code]. Returns the item index.
+				When a popup item is chosen, emits:
+				
+				* [code]menu_picked(id, index, text, 100)[/code]
+				
+				* [code]action_triggered(id)[/code] (generic action hook)
+			</description>
+		</method>
+
+		<method name="add_label">
+			<return type="int" />
+			<param index="0" name="id" type="String" />
+			<param index="1" name="text" type="String" />
+			<param index="2" name="tooltip" type="String" default="&quot;&quot;" />
+			
+			<description>
+				Adds a [b]Label[/b]. Returns the item index.
+			</description>
+		</method>
+
+		<method name="add_option">
+			<return type="int" />
+			<param index="0" name="id" type="String" />
+			<param index="1" name="items" type="PackedStringArray" />
+			<param index="2" name="selected" type="int" default="-1" />
+			<description>
+				Adds an [b]Option[/b] list ([code]OptionButton[/code]) with entries and optional default selection.
+				Returns the item index. Emits [code]option_selected(id, index, text)[/code].
+			</description>
+		</method>
+
+		<method name="add_input">
+			<return type="int" />
+			<param index="0" name="id" type="String" />
+			<param index="1" name="placeholder" type="String" default="&quot;&quot;" />
+			<param index="2" name="text" type="String" default="&quot;&quot;" />
+			<param index="3" name="width" type="int" default="200" />
+			<param index="4" name="editable" type="bool" default="true" />
+			<description>
+				Adds a single-line [b]Input[/b] ([code]LineEdit[/code]) with optional placeholder and initial text.
+				Returns the item index. Emits [code]input_submitted(id, text)[/code] on Enter.
+			</description>
+		</method>
+
+		<method name="add_separator">
+			<return type="int" />
+			<description>
+				Adds a vertical separator for grouping.
+			</description>
+		</method>
+
+		<method name="add_spacer">
+			<return type="int" />
+			<description>
+				Adds an expanding spacer that pushes subsequent items to the right.
+			</description>
+		</method>
+
+		<method name="set_enabled">
+			<return type="void" />
+			<param index="0" name="id" type="String" />
+			<param index="1" name="enabled" type="bool" />
+			<description>
+				Enables or disables an item by [code]id[/code]. For buttons/options this toggles [code]disabled[/code];
+				for inputs it toggles [code]editable[/code]; otherwise visibility is used as a fallback.
+			</description>
+		</method>
+
+		<method name="set_checked">
+			<return type="void" />
+			<param index="0" name="id" type="String" />
+			<param index="1" name="value" type="bool" />
+			<description>
+				Sets a toggle’s checked state.
+			</description>
+		</method>
+
+		<method name="set_option_selected">
+			<return type="void" />
+			<param index="0" name="id" type="String" />
+			<param index="1" name="index" type="int" />
+			<description>
+				Sets the selected index of an option list.
+			</description>
+		</method>
+
+		<method name="set_input_text">
+			<return type="void" />
+			<param index="0" name="id" type="String" />
+			<param index="1" name="text" type="String" />
+			<description>
+				Programmatically sets the text of an input field.
+			</description>
+		</method>
+
+		<method name="get_input_text" qualifiers="const">
+			<return type="String" />
+			<param index="0" name="id" type="String" />
+			<description>
+				Gets the current text of an input field, or an empty string if the [code]id[/code] is not an input.
+			</description>
+		</method>
+			<method name="set_option">
+			<return type="void" />
+			<param index="0" name="id" type="String" />
+			<param index="1" name="items" type="PackedStringArray" />
+			<description>
+				Replaces the entries of an existing option control, keeping its position in the bar. Use it when the choices depend on game state rather than rebuilding the toolbar.
+			</description>
+		</method>
+	</methods>
+
+	<signals>
+		<signal name="action_triggered">
+			<param index="0" name="id" type="String" />
+			<description>
+				Emitted when a [b]Button[/b] is pressed or a [b]Menu[/b] item is chosen (generic action hook).
+			</description>
+		</signal>
+
+		<signal name="toggle_changed">
+			<param index="0" name="id" type="String" />
+			<param index="1" name="checked" type="bool" />
+			<description>
+				Emitted when a [b]Toggle[/b] changes state.
+			</description>
+		</signal>
+
+		<signal name="menu_picked">
+			<param index="0" name="id" type="String" />
+			<param index="1" name="index" type="int" />
+			<param index="2" name="text" type="String" />
+			<description>
+				Emitted when a [b]Menu[/b] item is selected, providing both index and text.
+			</description>
+		</signal>
+
+		<signal name="option_selected">
+			<param index="0" name="id" type="String" />
+			<param index="1" name="index" type="int" />
+			<param index="2" name="text" type="String" />
+			<description>
+				Emitted when an [b]Option[/b] item is selected.
+			</description>
+		</signal>
+
+		<signal name="input_submitted">
+			<param index="0" name="id" type="String" />
+			<param index="1" name="text" type="String" />
+			<description>
+				Emitted when Enter is pressed in an [b]Input[/b] field.
+			</description>
+		</signal>
+	</signals>
+</class>

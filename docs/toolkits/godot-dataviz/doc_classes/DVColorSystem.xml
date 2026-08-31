@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="DVColorSystem" inherits="Resource" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../doc/class.xsd">
+	<brief_description>
+		Expands a [DVTheme]'s seed colours into the tokens components draw with.
+	</brief_description>
+	<description>
+		Owned by a [DVTheme]; you rarely touch it directly. Each seed colour (primary, neutral, success, warning, error, info) is expanded into a ladder of steps, and semantic tokens — background, border, text, graph, accent, status and series — are resolved from those ladders with contrast taken into account, so text stays legible against whatever surface it lands on.
+		Series colours are drawn from this system unless a chart overrides them with [method DVChart.set_series_color] or a palette is supplied through [member DVTheme.palette] with [member DVTheme.use_palette] enabled.
+	</description>
+	<tutorials>
+	</tutorials>
+</class>

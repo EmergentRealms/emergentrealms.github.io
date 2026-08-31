@@ -15,9 +15,6 @@
                 <member name="gauge/thickness_px" type="float" setter="set_thickness_px" getter="get_thickness_px" default="26.0">
                         Width of the gauge arc measured in pixels.
                 </member>
-                <member name="gauge/round_caps" type="bool" setter="set_round_caps" getter="get_round_caps" default="false">
-                        Chooses between flat or rounded arc end caps.
-                </member>
                 <member name="gauge/tick_len_px" type="float" setter="set_tick_len_px" getter="get_tick_len_px" default="8.0">
                         Length (in pixels) of tick marks drawn around the gauge.
                 </member>

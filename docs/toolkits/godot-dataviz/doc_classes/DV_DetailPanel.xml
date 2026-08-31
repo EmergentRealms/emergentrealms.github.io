@@ -1,47 +1,93 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <class name="DV_DetailPanel" inherits="DVComponent" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
         <brief_description>
-                Flexible key-value inspector for presenting grouped records with optional progress indicators.
-        </brief_description>
-        <description>
-                DV_DetailPanel renders a stacked list of [DV_Field] entries with optional group headers, badges, and
-                progress bars. Use it to display entity profiles or drill-down detail cards alongside charts. Layout knobs
-                include label width, row spacing, and wrapping behavior, while theme integration controls badge and row
-                colors.
+		Flexible key-value inspector for presenting grouped records and interactive forms.
+	</brief_description>
+	<description>
+		DV_DetailPanel renders a stacked list of [DV_Field] entries. It supports two modes: **Display Mode** (labels, badges, and progress bars) and **Interactive Mode** (LineEdits, Sliders, Checkboxes, and Dropdowns). 
+		
+		The panel automatically handles layout, grouping, and signal routing. Use it for character sheets, world settings, or complex data entry forms.
+		When the fields do not fit, the panel scrolls: a vertical scrollbar appears and the mouse wheel moves it. Content is clipped to the panel's frame, so a long list never draws over what sits below it.
+	</description>
+	<tutorials>
+		<link title="Basic Profile View">
+			[codeblocks]
+			[gdscript]
+			extends DV_DetailPanel
 
-                [codeblocks]
-                [gdscript]
-                
-                extends DV_DetailPanel
+			func _ready() -> void:
+				set_title("Character Profile")
 
-                func _ready() -> void:
-                        set_title("Profile")
+				var name_field := DV_Field.new()
+				name_field.label = "Name"
+				name_field.value = "Kaelen"
+				name_field.group = "Identity"
+				add_field(name_field)
 
-                        var field := DV_Field.new()
-                        field.label = "First Name"
-                        field.value = "John"
-                        field.group = "Identity"
-                        add_field(field)
+				var hp := DV_Field.new()
+				hp.label = "Health"
+				hp.value = "75/100"
+				hp.progress_percent = 75
+				hp.group = "Stats"
+				hp.accent = Color.DARK_GREEN
+				add_field(hp)
+			[/gdscript]
+			[/codeblocks]
+		</link>
+		<link title="Configuration Form">
+			[codeblocks]
+			[gdscript]
+			extends DV_DetailPanel
 
-                        var strength := DV_Field.new()
-                        strength.label = "Strength"
-                        strength.value = 24
-                        strength.progress_percent = 43
-                        strength.group = "Stats"
-                        strength.coppyable = true
-                        strength.accent = Color("54a6ed")
-                        add_field(strength)
+			func _ready() -> void:
+				set_title("World Settings")
+				
+				# 1. Text Input
+				var world_name := DV_Field.new()
+				world_name.label = "Server Name"
+				world_name.key = "srv_name"
+				world_name.set_control_type(DV_Field.TYPE_INPUT)
+				add_field(world_name)
 
-                        row_clicked.connect(_on_row_clicked)
+				# 2. Slider with Auto-Readout
+				var volume := DV_Field.new()
+				volume.label = "Ambient Volume"
+				volume.key = "vol_ambient"
+				volume.set_control_type(DV_Field.TYPE_SLIDER)
+				volume.min_value = 0
+				volume.max_value = 100
+				volume.value = 50
+				add_field(volume)
 
-                func _on_row_clicked(row:int, key:String, label:String,value:Variant):
-                        print("Row clicked: ", row, " k:, ", key, " l:", label," value: ",value  )
-                [/gdscript]
-                [/codeblocks]
-        </description>
-        <tutorials>
-        </tutorials>
+				# 3. ComboList / Dropdown
+				var region := DV_Field.new()
+				region.label = "Region"
+				region.key = "srv_region"
+				region.set_control_type(DV_Field.TYPE_DROPDOWN)
+				region.list_values = ["North America", "Europe", "Asia"]
+				add_field(region)
+
+				data_changed.connect(_on_data_changed)
+
+			func _on_data_changed(key: String, value: Variant, field: DV_Field):
+				print("Setting Updated: ", key, " -> ", value)
+			[/gdscript]
+			[/codeblocks]
+		</link>
+	</tutorials>
 	<methods>
+		<method name="get_field_count" qualifiers="const">
+			<return type="int" />
+			<description>
+				How many fields the panel currently holds.
+			</description>
+		</method>
+		<method name="clear">
+			<return type="void" />
+			<description>
+				Removes every field and frees any inline editor widgets the panel created. Call this before repopulating so editors are not left behind.
+			</description>
+		</method>
                 <method name="add_field">
                         <return type="void" />
                         <param index="0" name="field" type="DV_Field" />
@@ -53,6 +99,18 @@
                         <return type="int" />
                         <description>
                                 Returns the number of visible rows, including group headers when enabled.
+                        </description>
+                </method>
+                <method name="get_selected_row" qualifiers="const">
+                        <return type="int" />
+                        <description>
+                                Returns the selected row index. -1 if none selected.
+                        </description>
+                </method>
+                 <method name="clear_selection">
+                        <return type="void" />
+                        <description>
+                                Clears selected row index.
                         </description>
                 </method>
                 <method name="get_row_rect" qualifiers="const">
@@ -99,36 +157,12 @@
                 </method>
         </methods>
 	<members>
-                <member name="auto_label_width" type="bool" setter="set_auto_label_width" getter="get_auto_label_width" default="true">
-                        When enabled, the panel measures labels and picks a column width automatically.
-                </member>
-                <member name="badge_bg" type="Color" setter="set_badge_bg" getter="get_badge_bg" default="Color(1, 1, 1, 0.08)">
-                        Background color applied to group badges.
-                </member>
-                <member name="badge_fg" type="Color" setter="set_badge_fg" getter="get_badge_fg" default="Color(0.94, 0.96, 0.98, 1)">
-                        Text color used for badge labels.
-                </member>
-                <member name="collapsible_groups" type="bool" setter="set_collapsible_groups" getter="get_collapsible_groups" default="true">
-                        Allows group sections to collapse/expand when their header is clicked.
-                </member>
-                <member name="row_active" type="Color" setter="set_row_active" getter="get_row_active" default="Color(1, 1, 1, 0.08)">
-                        Highlight color applied to the active/selected row.
-                </member>
-                <member name="row_bg_even" type="Color" setter="set_row_bg_even" getter="get_row_bg_even" default="Color(0, 0, 0, 0)">
-                        Background color for even-numbered rows.
-                </member>
-                <member name="row_bg_odd" type="Color" setter="set_row_bg_odd" getter="get_row_bg_odd" default="Color(0, 0, 0, 0)">
-                        Background color for odd-numbered rows.
-                </member>
-                <member name="row_hover" type="Color" setter="set_row_hover" getter="get_row_hover" default="Color(1, 1, 1, 0.05)">
-                        Hover feedback color displayed when the pointer moves over a row.
-                </member>
                 <member name="title" type="String" setter="set_title" getter="get_title" default="&quot;&quot;">
                         Header text displayed above the detail panel content.
                 </member>
-                <member name="value_align_right" type="bool" setter="set_value_align_right" getter="get_value_align_right" default="true">
-                        Aligns value text to the right edge of the column when [code]true[/code].
-                </member>
+			<member name="selected_row" type="int" setter="" getter="get_selected_row">
+			Index of the selected row, or [code]-1[/code]. Read-only; selection follows clicks.
+		</member>
 	</members>
 	<signals>
                 <signal name="row_clicked">
@@ -140,5 +174,13 @@
                                 Emitted when a row is clicked. Includes both the display label and the field's stable key.
                         </description>
                 </signal>
+                <signal name="value_changed">
+			<param index="0" name="key" type="String" />
+			<param index="1" name="value" type="Variant" />
+			<param index="2" name="field" type="DV_Field" />
+			<description>
+				Emitted when an interactive control (LineEdit, Slider, etc.) modifies the field's value.
+			</description>
+		</signal>
         </signals>
 </class>

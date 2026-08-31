@@ -1,45 +1,74 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <class name="DV_Field" inherits="RefCounted" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
-        <brief_description>
-                Data object representing a single row within a DV_DetailPanel.
-        </brief_description>
-        <description>
-                DV_Field stores label/value pairs with optional metadata used by [DV_DetailPanel]. Fields can belong to a
-                group, display an icon, expose a progress percentage, and mark their values as copyable. The [member accent]
-                color lets you highlight important metrics such as KPI deltas.
-        </description>
-        <tutorials>
-        </tutorials>
+	<brief_description>
+		Data object representing a single row and its interaction logic within a DV_DetailPanel.
+	</brief_description>
+	<description>
+		DV_Field stores label/value pairs and defines how they should be rendered and edited. Beyond static display, it supports various [enum ControlType] variants, allowing the field to act as a slider, text input, or dropdown menu. 
+		
+		Fields can be grouped, styled with an [member accent] color, or displayed as progress bars via [member progress_percent].
+	</description>
+	<tutorials>
+	</tutorials>
 	<members>
-                <member name="accent" type="Color" setter="set_accent" getter="get_accent" default="Color(0, 0, 0, 1)">
-                        Optional accent color used to tint badges or progress bars.
-                </member>
-                <member name="coppyable" type="bool" setter="set_coppyable" getter="get_coppyable" default="true">
-                        Marks whether the value can be copied to the clipboard from the UI.
-                </member>
-                <member name="group" type="String" setter="set_group" getter="get_group" default="&quot;&quot;">
-                        Logical group used to cluster fields in a [DV_DetailPanel].
-                </member>
-                <member name="icon" type="Texture2D" setter="set_icon" getter="get_icon">
-                        Optional icon displayed alongside the label.
-                </member>
-                <member name="key" type="String" setter="set_key" getter="get_key" default="&quot;&quot;">
-                        Stable identifier for the field, useful when reacting to selection events.
-                </member>
-                <member name="label" type="String" setter="set_label" getter="get_label" default="&quot;&quot;">
-                        Human-readable caption for the value.
-                </member>
-                <member name="meta" type="Dictionary" setter="set_meta" getter="get_meta" default="{}">
-                        Arbitrary metadata passed through with the field; consumers can store domain-specific data here.
-                </member>
-                <member name="progress_percent" type="float" setter="set_progress_percent" getter="get_progress_percent" default="0.0">
-                        Progress value (0-100) that draws a horizontal progress indicator when greater than zero.
-                </member>
-                <member name="tooltip" type="String" setter="set_tooltip" getter="get_tooltip" default="&quot;&quot;">
-                        Tooltip shown when hovering the row; falls back to [member value] when empty.
-                </member>
-                <member name="value" type="Variant" setter="set_value" getter="get_value" default="null">
-                        Primary payload displayed in the field.
-                </member>
+		<member name="accent" type="Color" setter="set_accent" getter="get_accent" default="Color(0, 0, 0, 1)">
+			Optional accent color used to tint badges, progress bars, or slider fills.
+		</member>
+		<member name="control_type" type="int" setter="set_control_type" getter="get_control_type" enum="DV_Field.ControlType" default="0">
+			Determines which UI widget is used for this field (e.g., Slider, LineEdit, or Checkbox).
+		</member>
+		<member name="coppyable" type="bool" setter="set_coppyable" getter="get_coppyable" default="true">
+			Marks whether the value can be copied to the clipboard from the UI.
+		</member>
+		<member name="group" type="String" setter="set_group" getter="get_group" default="&quot;&quot;">
+			Logical group used to cluster fields under a common header in a [DV_DetailPanel].
+		</member>
+		<member name="key" type="String" setter="set_key" getter="get_key" default="&quot;&quot;">
+			Stable programmatic identifier for the field.
+		</member>
+		<member name="label" type="String" setter="set_label" getter="get_label" default="&quot;&quot;">
+			Human-readable caption displayed on the left side of the row.
+		</member>
+		<member name="list_values" type="Array" setter="set_list_values" getter="get_list_values" default="[]">
+			The list of options available when [member control_type] is set to [constant TYPE_DROPDOWN].
+		</member>
+		<member name="max_value" type="Variant" setter="set_max_value" getter="get_max_value" default="100.0">
+			The maximum value allowed when using [constant TYPE_SLIDER].
+		</member>
+		<member name="min_value" type="Variant" setter="set_min_value" getter="get_min_value" default="0.0">
+			The minimum value allowed when using [constant TYPE_SLIDER].
+		</member>
+		<member name="progress_percent" type="float" setter="set_progress_percent" getter="get_progress_percent" default="0.0">
+			When non-zero, renders the field as a progress bar using this percentage (0-100).
+		</member>
+		<member name="value" type="Variant" setter="set_value" getter="get_value" default="null">
+			The current data payload. For interactive fields, this is updated automatically when the user interacts with the UI.
+		</member>
+			<member name="tooltip" type="String" setter="set_tooltip" getter="get_tooltip">
+			Text shown when the pointer rests on this field's row.
+		</member>
+		<member name="meta" type="Dictionary" setter="set_meta" getter="get_meta">
+			Arbitrary data carried with the field and handed back in the panel's signals — an id, a source record, whatever the game needs to act on the row.
+		</member>
+		<member name="icon" type="Texture2D" setter="set_icon" getter="get_icon">
+			Optional icon drawn before the label.
+		</member>
 	</members>
+	<constants>
+		<constant name="TYPE_LABEL" value="0" enum="ControlType">
+			Default read-only text display.
+		</constant>
+		<constant name="TYPE_INPUT" value="1" enum="ControlType">
+			Uses a LineEdit for text entry.
+		</constant>
+		<constant name="TYPE_SLIDER" value="2" enum="ControlType">
+			Uses an HSlider with an optional numeric readout.
+		</constant>
+		<constant name="TYPE_DROPDOWN" value="3" enum="ControlType">
+			Uses an OptionButton populated by [member list_values].
+		</constant>
+		<constant name="TYPE_CHECKBOX" value="4" enum="ControlType">
+			Uses a CheckButton for boolean values.
+		</constant>
+	</constants>
 </class>
