@@ -159,3 +159,109 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+/* --- hero subline ------------------------------------------------------ */
+.heroSub {
+  font-size: 1.05rem;
+  opacity: 0.75;
+  margin-top: -0.35rem;
+}
+
+/* --- "the code you do not write" --------------------------------------- */
+.contrast {
+  margin-bottom: 3rem;
+}
+
+.contrastLede {
+  opacity: 0.8;
+  margin-bottom: 1.25rem;
+}
+
+.contrastGrid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  align-items: start;
+}
+
+.contrastGrid > div {
+  padding: 1.25rem;
+  border-radius: 16px;
+  border: 1px solid var(--ifm-toc-border-color);
+  background: var(--ifm-background-surface-color);
+}
+
+/* The second column is the point of the section, so let it carry the accent. */
+.contrastGrid > div:last-child {
+  border-color: var(--ifm-color-primary);
+}
+
+.contrastGrid h3 {
+  margin-bottom: 0.75rem;
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+}
+
+.contrastNote {
+  font-size: 0.95rem;
+  opacity: 0.85;
+  margin-top: 0.9rem;
+}
+
+/* --- measured numbers --------------------------------------------------- */
+.numbers {
+  margin-bottom: 3rem;
+  padding: 1.75rem;
+  border-radius: 16px;
+  border: 1px solid var(--ifm-toc-border-color);
+  background: var(--ifm-background-surface-color);
+}
+
+.numberGrid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  margin: 1.5rem 0 1rem;
+}
+
+.numberGrid > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 1rem;
+  border-radius: 12px;
+  background: var(--ifm-background-color);
+  border: 1px solid var(--ifm-toc-border-color);
+}
+
+.numberGrid strong {
+  font-size: 1.5rem;
+  line-height: 1.1;
+  color: var(--ifm-color-primary);
+}
+
+.numberGrid span {
+  font-size: 0.85rem;
+  opacity: 0.75;
+}
+
+.numbersFoot {
+  font-size: 0.95rem;
+  opacity: 0.85;
+  margin-bottom: 0;
+}
+
+/* --- platforms ---------------------------------------------------------- */
+.platforms {
+  margin-bottom: 3rem;
+  padding: 1.75rem;
+  border-radius: 16px;
+  border: 1px solid var(--ifm-toc-border-color);
+  background: var(--ifm-background-surface-color);
+}
+
+.platforms p:last-child {
+  margin-bottom: 0;
+}

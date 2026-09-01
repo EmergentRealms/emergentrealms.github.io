@@ -34,7 +34,11 @@ export default function DataWizLanding(): JSX.Element {
           <p>
             Declare a class, call <code>save_to_db()</code>. DataWizard maps your script variables to SQLite columns,
             creates and migrates the tables, keeps writes off the main thread, and hands the rows back as your own
-            types &mdash; no SQL, no schema file, no serialisation code. There is no autoload to add.
+            types &mdash; no SQL, no schema file, no serialisation code. There is no autoload to add and no plugin to
+            enable.
+          </p>
+          <p className={styles.heroSub}>
+            It is a real SQLite database, not a save format. Windows, macOS, Linux and the browser.
           </p>
 
           <div className={styles.heroIllustration}>
@@ -58,37 +62,115 @@ export default function DataWizLanding(): JSX.Element {
               <span>writer thread + reader pool</span>
             </div>
             <div>
-              <strong>{entries.length}</strong>
-              <span>core building blocks</span>
+              <strong>0 lines</strong>
+              <span>of SQL required</span>
             </div>
           </div>
         </div>
       </header>
 
       <main className={clsx('container', styles.main)}>
+        <section className={styles.contrast}>
+          <h2>The code you do not write</h2>
+          <p className={styles.contrastLede}>
+            Saving an NPC and its inventory, by hand and with DataWizard. Both do the same thing.
+          </p>
+          <div className={styles.contrastGrid}>
+            <div>
+              <h3>By hand</h3>
+              <CodeBlock language="gdscript">{`# Open, and hope the schema matches what shipped last patch
+db.query("CREATE TABLE IF NOT EXISTS npc (...)")
+db.query("CREATE TABLE IF NOT EXISTS item (...)")
+
+# Flatten the object yourself
+var row := {
+	"name": npc.name,
+	"age": npc.age,
+	"pos": var_to_str(npc.position),
+	"stats": JSON.stringify(npc.stats),
+}
+db.insert_or_update("npc", row, "name")
+
+# Now the children, and the link back to the parent
+for it in npc.inventory:
+	db.insert_or_update("item", {
+		"owner": npc.name, "name": it.name, "qty": it.qty
+	}, "name")
+
+# ...then all of it again, backwards, to load.
+# ...on the main thread, so the frame waits.
+# ...and again next patch, when you add a field.`}</CodeBlock>
+            </div>
+            <div>
+              <h3>With DataWizard</h3>
+              <CodeBlock language="gdscript">{`npc.save_to_db()`}</CodeBlock>
+              <p className={styles.contrastNote}>
+                Every script variable is a column. Nested records go to their own table and come back with their
+                parent. The write is queued on a background thread, so the call returns in microseconds and your
+                frame never waits on the disk.
+              </p>
+              <p className={styles.contrastNote}>
+                Loading is the mirror image:
+              </p>
+              <CodeBlock language="gdscript">{`var npcs := DataWiz.select(Npc.new())
+# inventory is already populated`}</CodeBlock>
+            </div>
+          </div>
+        </section>
+
         <section className={styles.highlights}>
           <article>
-            <h2>Production-ready persistence</h2>
+            <h2>It never stalls your frame</h2>
             <p>
-              DataWiz leans on WAL mode, pragma tuning, and pooled connections so your save system keeps pace with gameplay.
-              Writes are queued on their own thread and batched into transactions; reads lease a connection from a pool.
-              Binaries ship for Windows, macOS, Linux and the web, against Godot 4.5 and newer.
+              Writes go to a dedicated writer thread and are batched into transactions. Reads lease a connection
+              from a pool. Values are copied off your object on the calling thread, so the writer never touches a
+              Godot object and you can keep mutating it the moment the call returns.
+            </p>
+            <p>
+              When a read is big enough to matter, <code>select_async()</code> moves it off the main thread and hands
+              the rows to a callback: in our benchmark a 2,000-row load that blocked for 28&nbsp;ms returned in
+              0.03&nbsp;ms and delivered six frames later, with the game still running underneath.
             </p>
           </article>
           <article>
-            <h2>Schema automation</h2>
+            <h2>It survives your next patch</h2>
             <p>
-              Describe your data once with <code>DWRecord</code> or <code>DWAutoLoad</code> resources. DataWiz generates tables, unique keys, and
-              indices on demand, keeping the database synchronized with your exported properties.
+              The hard part of shipping a save system is not the first version &mdash; it is the second. Add a field to
+              a class players already have data for and DataWizard adds the column on next use, then tells you through
+              a <code>schema_changed</code> signal so you can backfill a default.
+            </p>
+            <p>
+              For anything bigger there is a versioned migration hook: <code>get_user_version()</code>,{' '}
+              <code>set_user_version()</code> and <code>migrate(target, step)</code>.
             </p>
           </article>
           <article>
-            <h2>Typed Godot ergonomics</h2>
+            <h2>It is a real database</h2>
             <p>
-              Hydrate complex dictionaries, arrays, and GUIDs without custom serializers. Helpers in <code>DWTypes</code> keep your
-              resource fields strongly typed while persisting through SQLite.
+              SQLite 3, bundled and tuned &mdash; WAL journaling, prepared-statement caching, pragma tuning. Not an
+              opaque save blob.
+            </p>
+            <p>
+              That means you can open the file in any SQLite browser, write a tool against it, query it with{' '}
+              <code>DataWiz.query()</code> when you want the full power of SQL, and hand a support ticket's save file
+              to a script instead of a debugger.
             </p>
           </article>
+        </section>
+
+        <section className={styles.numbers}>
+          <h2>Measured, not claimed</h2>
+          <p>2,000 records, 500 of them carrying two nested children each, on a desktop Linux build.</p>
+          <div className={styles.numberGrid}>
+            <div><strong>~5.5&nbsp;&micro;s</strong><span>per row loaded</span></div>
+            <div><strong>~27&nbsp;&micro;s</strong><span>per row with 2 nested records</span></div>
+            <div><strong>0.03&nbsp;ms</strong><span>to fire an async select</span></div>
+            <div><strong>0.01&nbsp;ms</strong><span>to fetch one row by key</span></div>
+          </div>
+          <p className={styles.numbersFoot}>
+            Rule of thumb: a few hundred records is free, and past a few thousand &mdash; or a few hundred with nested
+            children &mdash; reach for <code>select_async()</code> so the load never shows.
+          </p>
         </section>
 
         <section id="quick-start" className={styles.quickStart}>
@@ -172,6 +254,18 @@ for entry in inventory:
     print(entry.slot, entry.item_id)`}</CodeBlock>
             </div>
           </div>
+        </section>
+
+        <section className={styles.platforms}>
+          <h2>Everywhere your game goes</h2>
+          <p>
+            Windows, Linux, macOS (universal) and WebAssembly, against the Godot 4.5 extension API and every later 4.x.
+          </p>
+          <p>
+            The browser build is real: threads, WAL journaling and a persistent database in a tab. It needs
+            cross-origin isolation headers and one extra line to flush the browser filesystem after a save &mdash;{' '}
+            <Link to="/docs/toolkits/platforms">the platforms page covers both</Link>.
+          </p>
         </section>
 
         <section className={styles.referenceSection}>

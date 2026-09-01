@@ -24,12 +24,20 @@ compares signal arity to the handler that connects to it. `run.gd` compiles each
 snippet and runs `_ready()` on a real node, which is what catches wrong argument
 types — a static pass cannot tell that `Color.hex()` wants an int.
 
+Fragments (snippets with no `extends`) skip the `self.*` resolution, since there is
+no self, but still get the class-member, constant and indentation checks. Autoloads
+and engine singletons are invisible to ClassDB, so `check.gd` carries a small
+`GLOBALS` map — `DV_ThemeManager` → `DVThemeManager`, `DataWiz` → `DWService`. Add
+to it when a new one appears.
+
+A canary is worth running when you touch `check.gd`: paste a snippet with a made-up
+method, property, constant and signal, plus a handler with the wrong argument count,
+and confirm all five are reported. A checker that has quietly stopped checking looks
+exactly like a clean run.
+
 ## Known false positives
 
-- `DV_ThemeManager` is an autoload the plugin registers, not a class, so ClassDB
-  does not know it. Its members are on `DVThemeManager`.
 - `run.gd` replaces every `preload()` with `null`, so a snippet that calls a method
   on a preloaded resource aborts. Check those by hand.
 - Fragments that reference a class the reader is assumed to have written (`Npc`,
-  `Item`) will not resolve. Only whole-file snippets under `static/scripts/` are
-  expected to pass cleanly.
+  `Item`) cannot be compiled by `run.gd`. `check.gd` still covers them.
