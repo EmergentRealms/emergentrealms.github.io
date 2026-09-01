@@ -22,7 +22,7 @@ import Link from '@docusaurus/Link';
 >
   <div className="row">
     {/* Card 1 */}
-    <div className="col col--6">
+    <div className="col col--4">
       <div className="card">
         <div className="card__image">
           <img src="/img/CobblestoneLegacy.png" alt="Cobblestone Legacy" />
@@ -41,18 +41,36 @@ import Link from '@docusaurus/Link';
     </div>
 
     {/* Card 2 */}
-    <div className="col col--6">
+    <div className="col col--4">
       <div className="card">
         <div className="card__image">
           <img src="/img/DataVis-Toolkit.png" alt="DataViz UI Kit" />
         </div>
         <div className="card__body">
           <h3>DataViz UI Kit</h3>
-          <p>Charts, tables, and graph widgets for data-driven Godot games and tools.</p>
+          <p>Charts, gauges, KPI tiles, a virtualised grid and a heat map — themed from one resource, fast with real data.</p>
         </div>
         <div className="card__footer">
           <div className="button-group button-group--block">
             <Link className="button button--primary button--xl button--block" to="/docs/toolkits/godot-dataviz">Open Overview</Link>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* Card 3 */}
+    <div className="col col--4">
+      <div className="card">
+        <div className="card__image">
+          <img src="/img/datawiz-toolkit.svg" alt="DataWizard SQLite Toolkit" />
+        </div>
+        <div className="card__body">
+          <h3>DataWizard</h3>
+          <p>SQLite persistence for Godot. Declare a class, call <code>save_to_db()</code> — no SQL, no schema file, nothing on the main thread.</p>
+        </div>
+        <div className="card__footer">
+          <div className="button-group button-group--block">
+            <Link className="button button--primary button--xl button--block" to="/docs/toolkits/godot-datawiz">Open Overview</Link>
           </div>
         </div>
       </div>
