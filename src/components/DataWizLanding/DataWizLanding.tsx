@@ -45,11 +45,24 @@ export default function DataWizLanding(): JSX.Element {
             <img src="/img/datawiz-toolkit.svg" alt="DataWiz workflow overview" loading="lazy" />
           </div>
 
+          <iframe
+            frameBorder="0"
+            src="https://itch.io/embed/4961964?bg_color=464646&amp;fg_color=f4f0f0&amp;border_color=b58b00"
+            width="552"
+            height="167"
+          >
+            <a href="https://emergent-realms.itch.io/godot-datawiz">
+              DataWizard – SQLite Save System &amp; Database Addon for Godot 4.5+ by Emergent-Realms
+            </a>
+          </iframe>
+
           <div className={styles.heroActions}>
+            <a className="button button--primary" href="https://emergent-realms.itch.io/godot-datawiz">
+              Get it on itch.io
+            </a>
             <button type="button" className="button button--secondary" onClick={handleQuickStartClick}>
               Follow the quick start
             </button>
-            
           </div>
 
           <div className={styles.heroStats}>

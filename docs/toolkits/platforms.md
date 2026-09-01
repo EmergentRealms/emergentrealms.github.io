@@ -20,10 +20,9 @@ run, or sign them with your own certificate when you ship.
 
 ## The browser
 
-Both toolkits compile to WebAssembly, and the [showcase demo](https://emergent-realms.itch.io/godot-dataviz-ui)
-runs the whole thing — charts, grids, heat map, and a live SQLite database — in a
-browser tab. It is worth stating plainly, because "C++ GDExtension" and "runs on
-the web" have not historically gone together.
+Both toolkits compile to WebAssembly. Charts, grids, the heat map and a live
+SQLite database all run in a browser tab — worth stating plainly, because "C++
+GDExtension" and "runs on the web" have not historically gone together.
 
 There are four things to get right, and one of them is not obvious.
 
