@@ -37,9 +37,9 @@ Overlays are drawn in their own colours so they read against the series:
 chart.set_series_sma_style(idx, Color(0.34, 0.71, 0.91), 2.0)
 chart.set_series_ema_style(idx, Color(0.0, 0.62, 0.45), 2.0)
 chart.set_series_bbands_style(idx,
-    Color(0.94, 0.89, 0.26),          # band lines
-    Color(0.94, 0.89, 0.26, 0.10),    # fill between them
-    1.5)                              # line width
+	Color(0.94, 0.89, 0.26),          # band lines
+	Color(0.94, 0.89, 0.26, 0.10),    # fill between them
+	1.5)                              # line width
 ```
 
 ## Notes

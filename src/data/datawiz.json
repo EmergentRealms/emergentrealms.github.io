@@ -21,13 +21,13 @@
         "title": "There is no step one",
         "description": "Drop `addons/datawiz/` into the project. `DataWiz` resolves from any script, and the database at `datawiz/database/path` opens on first use.",
         "language": "gdscript",
-        "code": "func _ready() -> void:\n    DataWiz.sql_error.connect(func(context, message):\n        push_error(\"[DataWiz] %s: %s\" % [context, message]))\n    print(DataWiz.db_connected())   # already true, unless auto_open is off"
+        "code": "func _ready() -> void:\n\tDataWiz.sql_error.connect(func(context, message):\n\t\tpush_error(\"[DataWiz] %s: %s\" % [context, message]))\n\tprint(DataWiz.db_connected())   # already true, unless auto_open is off"
       },
       {
         "title": "Save slots, when you want control",
         "description": "Turn `datawiz/database/auto_open` off and open the file yourself.",
         "language": "gdscript",
-        "code": "func load_slot(n: int) -> void:\n    DataWiz.open(\"user://slot_%d.db\" % n, 4)   # path, reader pool size"
+        "code": "func load_slot(n: int) -> void:\n\tDataWiz.open(\"user://slot_%d.db\" % n, 4)   # path, reader pool size"
       },
       {
         "title": "Reads bind their values",
@@ -39,7 +39,7 @@
         "title": "Big reads off the main thread",
         "description": "`select_async` runs on a worker thread against a pooled connection and delivers the rows back on the main thread.",
         "language": "gdscript",
-        "code": "DataWiz.select_async(Npc.new(), \"age > ?\", [30], -1, \"age DESC\",\n    func(request_id, rows): populate_list(rows))"
+        "code": "DataWiz.select_async(Npc.new(), \"age > ?\", [30], -1, \"age DESC\",\n\tfunc(request_id, rows): populate_list(rows))"
       },
       {
         "title": "Batches and durability",
@@ -161,7 +161,7 @@
       },
       {
         "title": "Nested records",
-        "description": "A record held by another is written to its own table with owner_guid set, and comes back with its parent. Two references to the same row rehydrate as one instance.",
+        "description": "A record held by another is written to its own table with owner_guid set, and comes back with its parent. Two references to the same row rehydrate as one instance. Loaded arrays carry the element type DWRecord; the objects in them are your class.",
         "language": "gdscript",
         "code": "npc.inventory = [sword, potion]\nnpc.save_to_db(true)                       # writes npc, sword and potion\n\nvar loaded := DataWiz.select(Npc.new())    # inventory is populated\nvar kids := DataWiz.select_children(npc, Item.new())"
       }
@@ -222,7 +222,7 @@
         "title": "It saves itself",
         "description": "The node loads on ready (or when the service connects) and saves on `disconnecting`, so a normal shutdown persists it with no explicit call. Save by hand before anything risky.",
         "language": "gdscript",
-        "code": "func _on_chapter_complete() -> void:\n    chapter += 1\n    save_to_db(true)      # wait for the commit before moving on"
+        "code": "func _on_chapter_complete() -> void:\n\tchapter += 1\n\tsave_to_db(true)      # wait for the commit before moving on"
       }
     ],
     "methods": [

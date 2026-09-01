@@ -142,17 +142,19 @@ var quantity: int = 1
             <div className={styles.quickCard}>
               <h3>3. Load records with <code>select()</code></h3>
               <p>
-                Pull rows into a typed <code>Array[T]</code> of live resource instances—no manual hydration needed.
+                Pull rows back as live resource instances, nested records and all—no manual hydration needed.
               </p>
-              <CodeBlock language="gdscript">{`# Load all data from db (typed arrays if your classes exist)
-var npcs: Array[NPC] = DataWiz.select(NPC.new(), "is_alive = 1")
-var factions: Array[Faction] = DataWiz.select(Faction.new())
-
+              <CodeBlock language="gdscript">{`# select() hands back Array[DWRecord]; the objects in it are your class.
+var npcs := DataWiz.select(NPC.new(), "is_alive = 1")
 for n in npcs:
-    print(n.name, " hp:", n.hp)
+	print(n.name, " hp:", n.hp)
 
-# With params:
-# var guards: Array[NPC] = DataWiz.select(NPC.new(), "faction = ?", ["Guard"])`}</CodeBlock>
+# Bind your values, never format them into the string.
+var guards := DataWiz.select(NPC.new(), "faction = ?", ["Guard"])
+
+# Want a statically typed array? assign() converts it.
+var typed: Array[NPC] = []
+typed.assign(DataWiz.select(NPC.new()))`}</CodeBlock>
             </div>
 
             {/* 4. (moved) Persist/query with helpers */}

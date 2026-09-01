@@ -26,11 +26,22 @@ var npc := Npc.new()
 npc.name = "Borin"
 npc.age = 51
 npc.save_to_db()                          # queued on a writer thread
-var everyone := DataWiz.select(Npc.new()) # Array[Npc], nested items included
+var everyone := DataWiz.select(Npc.new())  # Array[DWRecord] of Npc, nested items included
 ```
 
 Every script variable becomes a column, exported or not. Prefix one with `_` to keep
 it out of the database.
+
+:::note Typed arrays
+`select()` and nested-record loading both hand back `Array[DWRecord]` — the objects
+inside are your class, but the array's element type is the base. Iterate it, index it
+and `is`-check it as normal; if you need a statically typed array, convert it:
+
+```gdscript
+var npcs: Array[Npc] = []
+npcs.assign(DataWiz.select(Npc.new()))
+```
+:::
 
 ## Project settings
 
@@ -50,10 +61,10 @@ the column, then emits `schema_changed(table, added_columns)`. Added columns are
 
 ```gdscript
 DataWiz.schema_changed.connect(func(table, added):
-    if table == "hero" and "skills" in added:
-        for h in DataWiz.select(Hero.new()):
-            h.skills = default_skills_for(h)
-            h.save_to_db()
+	if table == "hero" and "skills" in added:
+		for h in DataWiz.select(Hero.new()):
+			h.skills = default_skills_for(h)
+			h.save_to_db()
 )
 ```
 
@@ -61,9 +72,9 @@ For data migrations tied to a version, use the hook:
 
 ```gdscript
 DataWiz.migrate(3, func(from_version):
-    match from_version:
-        0: DataWiz.enqueue_write("UPDATE npc SET faction = 'neutral' WHERE faction IS NULL")
-        1: ...
+	match from_version:
+		0: DataWiz.enqueue_write("UPDATE npc SET faction = 'neutral' WHERE faction IS NULL")
+		1: ...
 )
 ```
 
