@@ -57,43 +57,41 @@ itch.io does this for you — tick **SharedArrayBuffer support** in the project'
 embed settings. On your own host you set the headers yourself. Godot's export
 preset also has a service-worker option that adds them, for hosts that will not.
 
-### 4. Flush the filesystem after you save — DataWizard only
+### 4. Nothing, if you are using DataWizard
 
-This is the one that will catch you, so it is worth understanding.
+This one is worth explaining, because it will bite you with anything else that
+writes files from C++.
 
-In a browser your `user://` directory lives in memory, backed by IndexedDB. It is
-only written to IndexedDB when something calls a sync, and **Godot triggers that
-sync when Godot writes a file** — not when a GDExtension does. DataWizard's
-SQLite writes go straight through to the filesystem underneath Godot's file API,
-so they never trip the sync.
+In a browser your `user://` directory lives in memory, backed by IndexedDB. It
+only reaches IndexedDB when something asks the browser to persist it, and Godot
+asks whenever *Godot* writes a file. A GDExtension writing through the C library
+— which is what SQLite does — never triggers that. The symptom is nasty: saves
+report success, reads come back correct, and the player's data is gone the moment
+they reload the page.
 
-The visible symptom: everything works perfectly, saves report success, reads come
-back correctly — and then the player reloads the page and their save is gone.
+DataWizard handles this for you. The database is pushed to browser storage at the
+points where you have already said durability matters:
 
-The fix is one line. After a save that matters, write anything at all through
-Godot's own `FileAccess`:
+- `save_to_db(true)` — a waited save
+- `DataWiz.flush()`
+- `DataWiz.checkpoint()`
+- `DataWiz.close()`
+
+A queued `save_to_db()` does not sync on its own, the same way it is not committed
+on its own. If it matters, wait for it.
 
 ```gdscript
 func save_game() -> void:
-	player.save_to_db(true)
-	DataWiz.checkpoint()
-
-	if OS.get_name() == "Web":
-		# SQLite writes bypass Godot's file layer, so nothing has asked the
-		# browser to persist them yet. Any Godot-side write syncs the whole
-		# mount, this database included.
-		var f := FileAccess.open("user://.flush", FileAccess.WRITE)
-		f.store_64(Time.get_unix_time_from_system())
-		f.close()
+	player.save_to_db(true)      # committed, and persisted on web
 ```
 
-Verified across three consecutive page loads in a fresh browser profile: without
-the flush the database is empty every time; with it, the row count keeps
-climbing.
+Verified across three consecutive page loads in a clean browser profile, with no
+application-side workaround: the row count goes 1, 2, 3.
 
-:::note
-This is a rough edge, and it is on our list to handle inside the addon so you do
-not have to think about it. Until then, the line above is the whole workaround.
+:::note Writing your own files?
+The same trap applies to any C++ extension, and to anything writing through a
+library that bypasses Godot's `FileAccess`. Godot's own `FileAccess` is fine — it
+syncs on its own.
 :::
 
 ## Building from source

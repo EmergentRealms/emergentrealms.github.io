@@ -262,9 +262,10 @@ for entry in inventory:
             Windows, Linux, macOS (universal) and WebAssembly, against the Godot 4.5 extension API and every later 4.x.
           </p>
           <p>
-            The browser build is real: threads, WAL journaling and a persistent database in a tab. It needs
-            cross-origin isolation headers and one extra line to flush the browser filesystem after a save &mdash;{' '}
-            <Link to="/docs/toolkits/platforms">the platforms page covers both</Link>.
+            The browser build is real: threads, WAL journaling and a database that survives a page reload. It needs
+            cross-origin isolation headers so the browser will hand out threads; persistence to browser storage is
+            handled for you &mdash;{' '}
+            <Link to="/docs/toolkits/platforms">the platforms page has the details</Link>.
           </p>
         </section>
 
