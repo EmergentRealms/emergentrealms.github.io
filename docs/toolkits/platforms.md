@@ -15,8 +15,48 @@ has to exist for every platform you ship to. Here is what exists.
 | **DataWizard** | x86_64 | x86_64 | universal (Intel + Apple Silicon) | wasm32 |
 
 Built against the Godot 4.5 extension API, so they load on 4.5 and every later
-4.x. macOS binaries are ad-hoc signed; you may need to allow them once on first
-run, or sign them with your own certificate when you ship.
+4.x. macOS binaries are ad-hoc signed; see
+[macOS: "Apple could not verify…"](#macos-apple-could-not-verify) for the
+one-time step Gatekeeper may ask of you.
+
+## macOS: "Apple could not verify…" {#macos-apple-could-not-verify}
+
+On first load of the addon, macOS may show, once per library:
+
+> Apple could not verify "libdataviz.macos.template_release.dylib" is free of
+> malware that may harm your Mac or compromise your privacy.
+
+This is Gatekeeper, and it is expected. When you download a zip in a browser,
+macOS stamps every extracted file with a quarantine attribute. On first use of a
+quarantined library it checks for an Apple-notarized Developer ID signature; the
+toolkit binaries are ad-hoc signed, not notarized, so the check fails. Nothing
+is wrong with the files — macOS simply cannot vouch for them.
+
+The fix is to remove the quarantine attribute from the addon folder. In
+Terminal, from your project directory:
+
+```bash
+xattr -dr com.apple.quarantine addons/
+```
+
+That is the whole fix — the attribute is only ever set at download time, so this
+is once per download, not once per launch. It also beats the
+`codesign --force --deep --sign -` advice you may find online: it addresses the
+actual trigger instead of re-signing binaries that are already signed, and
+Apple has deprecated `--deep`.
+
+Two alternatives, if you prefer:
+
+- **Privacy & Security** — dismiss the dialog, open *System Settings → Privacy &
+  Security*, and click **Allow Anyway**. Works, but you will be clicking it once
+  per `.dylib`.
+- **The itch.io app** — installs through the itch desktop app are not
+  quarantined, so the dialog never appears.
+
+When you ship your own game to Mac players, sign and notarize the export with
+your own Developer ID as usual — the toolkit libraries are covered by your
+signature like every other binary in your app, and your players never see this
+dialog.
 
 ## The browser
 
