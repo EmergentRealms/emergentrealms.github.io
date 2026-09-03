@@ -133,20 +133,3 @@ library that bypasses Godot's `FileAccess`. Godot's own `FileAccess` is fine —
 syncs on its own.
 :::
 
-## Building from source
-
-If you would rather build the binaries yourself, both repositories use SCons and
-carry godot-cpp as a pinned submodule:
-
-```bash
-git submodule update --init --recursive
-scons platform=linux target=template_release -j8
-```
-
-For the web target you need the **exact** Emscripten version the engine's export
-templates were built with — a mismatch fails inside the browser with an
-unhelpful `resolved is not a function`. Godot 4.7.x wants Emscripten 4.0.11.
-
-```bash
-scons platform=web target=template_release arch=wasm32 threads=yes
-```
